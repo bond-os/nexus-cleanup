@@ -1,0 +1,3134 @@
+{
+  "items": [
+    {
+      "id": "cHlwaS1wcm94eTo0ZjFiYmNkZA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "dataclasses",
+      "version": "0.8",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/dataclasses/0.8/dataclasses-0.8-py3-none-any.whl",
+          "path": "/packages/dataclasses/0.8/dataclasses-0.8-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo3OGRkZTZlOA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "0d6e5bb7adcc8fb0de3ef1ace1b32999",
+            "sha1": "1935b8c204f4783c63def2d7edc5352e45cd47c3",
+            "sha256": "0201d89fa866f68c8ebd9d08ee6ff50c0b255f8ec63a71c16fda7af82bb887bf"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.232+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 19041,
+          "blobCreated": "2025-12-09T11:21:32.235+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.232+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "dataclasses",
+            "version": "0.8",
+            "platform": "UNKNOWN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo5ZTM3NzliYQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "iniparse",
+      "version": "0.5",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/iniparse/0.5/iniparse-0.5-py3-none-any.whl",
+          "path": "/packages/iniparse/0.5/iniparse-0.5-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpkYWE2NmQyZQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "a7ecf8d239f179235be3480b3adfe6ed",
+            "sha1": "6e548f2e913cc90703faf35c424cede72c4795e9",
+            "sha256": "db6ef1d8a02395448e0e7b17ac0aa28b8d338b632bbd1ffca08c02ddae32cf97"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.223+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 24445,
+          "blobCreated": "2025-12-09T11:21:32.224+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.223+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "iniparse",
+            "version": "0.5",
+            "platform": "UNKNOWN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTplZDUzMzY5Nw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "GitPython",
+      "version": "3.1.45",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/gitpython/3.1.45/gitpython-3.1.45-py3-none-any.whl",
+          "path": "/packages/gitpython/3.1.45/gitpython-3.1.45-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToyOWMyMmEwYg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "eb9e8967c822a69e300f2de4b85ff13f",
+            "sha1": "0e0dfdf7aceb951e668dddc8f7238bb409e60392",
+            "sha256": "8908cb2e02fb3b93b7eb0f2827125cb699869470432cc885f019b8fd0fccff77"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.226+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 208168,
+          "blobCreated": "2025-12-09T11:21:32.227+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.226+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "GitPython",
+            "version": "3.1.45"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTozYzZlZjM3NA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pylddwrap",
+      "version": "1.2.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pylddwrap/1.2.2/pylddwrap-1.2.2.tar.gz",
+          "path": "/packages/pylddwrap/1.2.2/pylddwrap-1.2.2.tar.gz",
+          "id": "cHlwaS1wcm94eTpjN2Y5YTNjNQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "6a74f78afbc1c6492fe7b86e6848de61",
+            "sha1": "035006b314de41bd983a859dfc95a4a2a8cb02ac",
+            "sha256": "a70437fea7bca647c0e98161e1006ef49970267999c571b499760f1c43c6ba10"
+          },
+          "contentType": "application/x-gzip",
+          "lastModified": "2025-12-09T11:21:32.234+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 22962,
+          "blobCreated": "2025-12-09T11:21:32.235+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.234+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pylddwrap",
+            "version": "1.2.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4YjhhYjA1MQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "setuptools",
+      "version": "80.9.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/setuptools/80.9.0/setuptools-80.9.0-py3-none-any.whl",
+          "path": "/packages/setuptools/80.9.0/setuptools-80.9.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToxNzE1NjBhMg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "51e62d1ca39b0e1b44385c363a9cef55",
+            "sha1": "f82aabaab9ae429e91d2b0d748ecd2c0b07c5de8",
+            "sha256": "062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.296+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1201486,
+          "blobCreated": "2025-12-09T11:21:32.297+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.296+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "setuptools",
+            "version": "80.9.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkYWE2NmQyZQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "gitdb",
+      "version": "4.0.12",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/gitdb/4.0.12/gitdb-4.0.12-py3-none-any.whl",
+          "path": "/packages/gitdb/4.0.12/gitdb-4.0.12-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo0Njg5NzM5",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "662e9c84460d11983aba4b49c3354549",
+            "sha1": "c8bbc0aeafd6493651e03764b7193800967117db",
+            "sha256": "67073e15955400952c6565cc3e707c554a4eea2e428946f7a4c162fab9bd9bcf"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.390+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 62794,
+          "blobCreated": "2025-12-09T11:21:32.391+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.390+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "gitdb",
+            "version": "4.0.12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToyOWMyMmEwYg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "six",
+      "version": "1.17.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/six/1.17.0/six-1.17.0-py2.py3-none-any.whl",
+          "path": "/packages/six/1.17.0/six-1.17.0-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1Mzg0NTQxNg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "090bac7d568f9c1f64b671de641ccdee",
+            "sha1": "6e8f2653019f7cfb05196f8f08b9a905eab3d8dd",
+            "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.403+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 11050,
+          "blobCreated": "2025-12-09T11:21:32.404+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.403+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "six",
+            "version": "1.17.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo3OGRkZTZlOA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "typing_extensions",
+      "version": "4.15.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/typing-extensions/4.15.0/typing_extensions-4.15.0-py3-none-any.whl",
+          "path": "/packages/typing-extensions/4.15.0/typing_extensions-4.15.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpkZjBmMDQ2Nw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "1394f56d85d87540f7907680572797e1",
+            "sha1": "807e4d7ccad443949cbe10eae99937fd71c2b0c8",
+            "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.879+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 44614,
+          "blobCreated": "2025-12-09T11:21:32.880+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.879+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "typing_extensions",
+            "version": "4.15.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpjN2Y5YTNjNQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "smmap",
+      "version": "5.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/smmap/5.0.2/smmap-5.0.2-py3-none-any.whl",
+          "path": "/packages/smmap/5.0.2/smmap-5.0.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4ZmYzNDc4YQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "1a8eaba35da37e91943659f5cb7f2787",
+            "sha1": "cf5ba495ae740067de11bc380b2e0229596475ed",
+            "sha256": "b30115f0def7d7531d22a0fb6502488d879e75b260a9db4d0819cfb25403af5e"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.880+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 24303,
+          "blobCreated": "2025-12-09T11:21:32.881+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.880+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "smmap",
+            "version": "5.0.2",
+            "platform": "any"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToxNzE1NjBhMg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "icontract",
+      "version": "2.7.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/icontract/2.7.2/icontract-2.7.2-py3-none-any.whl",
+          "path": "/packages/icontract/2.7.2/icontract-2.7.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToyZTJhYzE0NA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "855d76bb1f55f58d72afba163ba64a29",
+            "sha1": "33fc5b877b5d048c72c666a0851c303d8c375acf",
+            "sha256": "2eb86290ef1d2d8c7af157361d419f178b3eb5b4c72a292c5722fa6fd40a1e0a"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:32.986+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 40794,
+          "blobCreated": "2025-12-09T11:21:32.987+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:32.986+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "icontract",
+            "version": "2.7.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo2NjMxMWQ3Zg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "asttokens",
+      "version": "2.4.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/asttokens/2.4.1/asttokens-2.4.1-py2.py3-none-any.whl",
+          "path": "/packages/asttokens/2.4.1/asttokens-2.4.1-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpjYzYyM2FmZQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "bbb66ba09cc57fb86efffc3164ed238b",
+            "sha1": "69a9448cd7fad3007a66f464f9daa35dd28183a6",
+            "sha256": "051ed49c3dcae8913ea7cd08e46a606dba30b79993209636c4875bc1d637bc24"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2025-12-09T11:21:33.123+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 27764,
+          "blobCreated": "2025-12-09T11:21:33.124+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-12-09T11:21:33.123+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "asttokens",
+            "version": "2.4.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpiNTRjZGE1Yw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-dev-tools",
+      "version": "26.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-dev-tools/26.1.0/ansible_dev_tools-26.1.0-py3-none-any.whl",
+          "path": "/packages/ansible-dev-tools/26.1.0/ansible_dev_tools-26.1.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiOWI1NzE5NQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "577a09ab2cb416d63429175111861c03",
+            "sha1": "6921224c10b0f721836e64a68b5cdb071711be47",
+            "sha256": "c2ae23b2d7806e7181f1d905b569734ed7c40f202d82000ca582d83a8ddba7d3"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:23.700+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 46096,
+          "blobCreated": "2026-01-19T11:35:23.701+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:23.700+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-dev-tools",
+            "version": "26.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo0Njg5NzM5",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible",
+      "version": "13.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible/13.2.0/ansible-13.2.0-py3-none-any.whl",
+          "path": "/packages/ansible/13.2.0/ansible-13.2.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4ZDEyZTcy",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "e6d136ed21cb4f3a66be5a72951725e5",
+            "sha1": "acda23b9160d27fc0c145240257d0f52383eec8b",
+            "sha256": "8a7f536542d4b18118200b8eaba40aa62ed990bd0e7b7622368b656b67db056f"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:24.471+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 54530175,
+          "blobCreated": "2026-01-19T11:35:24.472+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:24.471+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible",
+            "version": "13.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo1Mzg0NTQxNg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-sign",
+      "version": "0.1.4",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-sign/0.1.4/ansible_sign-0.1.4-py3-none-any.whl",
+          "path": "/packages/ansible-sign/0.1.4/ansible_sign-0.1.4-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpkMzljNWFi",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "72c1f4661aa6021d7aaa20ad06e6dbe7",
+            "sha1": "72aad33e748ddf6ae59f14fb25d492b40a54e618",
+            "sha256": "b387f568ba61e92bccb61a9277da88a5b2ad2795c47fde10e59713c81522c938"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.026+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 16976,
+          "blobCreated": "2026-01-19T11:35:26.027+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.026+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-sign",
+            "version": "0.1.4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTphMmEwMTBmMw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-dev-environment",
+      "version": "25.12.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-dev-environment/25.12.2/ansible_dev_environment-25.12.2-py3-none-any.whl",
+          "path": "/packages/ansible-dev-environment/25.12.2/ansible_dev_environment-25.12.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiZTFlMDhjZQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "d803c5645545a99bc922473d03129ee9",
+            "sha1": "ae5a495f3c000f68a72706d38f7a242ed9d8d43c",
+            "sha256": "4752e966b14e85a80d770d42741448f0ae32bd113f21f5ac942bb5c073ff0128"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.014+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 53052,
+          "blobCreated": "2026-01-19T11:35:26.027+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.014+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-dev-environment",
+            "version": "25.12.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpmMWJiY2RkMA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-compat",
+      "version": "25.12.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-compat/25.12.0/ansible_compat-25.12.0-py3-none-any.whl",
+          "path": "/packages/ansible-compat/25.12.0/ansible_compat-25.12.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1YzU1ODI4OA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "934358865f19c3b71162bd2390f59d8d",
+            "sha1": "13bd5afc475b8c2975ae5e1b1a332003551447e8",
+            "sha256": "322ccc7002030a91588d1fdba21e934703d64736f0e483dc6afe8ecd93a75614"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.069+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 27731,
+          "blobCreated": "2026-01-19T11:35:26.072+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.069+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-compat",
+            "version": "25.12.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo0MGQ3OGFhZA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-navigator",
+      "version": "26.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-navigator/26.1.1/ansible_navigator-26.1.1-py3-none-any.whl",
+          "path": "/packages/ansible-navigator/26.1.1/ansible_navigator-26.1.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTphYjcxM2Y2NQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "500ad56911c43e477ed5dfbd28c7e84e",
+            "sha1": "81f40ae71219d7353a67c9c36a029ca95edbc359",
+            "sha256": "60ecbff10b938929773a8093d7e9f07532cd3c96ebf1bfa509bd56de24a8d4dd"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.087+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 304815,
+          "blobCreated": "2026-01-19T11:35:26.091+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.087+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-navigator",
+            "version": "26.1.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4ZmYzNDc4YQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-builder",
+      "version": "3.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-builder/3.1.1/ansible_builder-3.1.1-py3-none-any.whl",
+          "path": "/packages/ansible-builder/3.1.1/ansible_builder-3.1.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpmYThjZmM0Mg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "81d2c05acb4bf5aac05bf78bc9433178",
+            "sha1": "2a3a28caa693f899c654eb03d060ec7969d575b4",
+            "sha256": "a8246022edb92ca27ea95e87c7af30bcb2752f108dcc75fbf96e77196dff1072"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.102+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 46517,
+          "blobCreated": "2026-01-19T11:35:26.106+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.102+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-builder",
+            "version": "3.1.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkZjBmMDQ2Nw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-creator",
+      "version": "25.12.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-creator/25.12.0/ansible_creator-25.12.0-py3-none-any.whl",
+          "path": "/packages/ansible-creator/25.12.0/ansible_creator-25.12.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo0OWE4YjkxZg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "0377f4ba503e53e34eb779994091b7e0",
+            "sha1": "e9c4e0ea3c00c70d2f3c0f12063e80e648874b74",
+            "sha256": "d34e5d90c3bd482018bf6f166180da034b8eced038a45d0aec6a7baebf73ed1d"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.141+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 97951,
+          "blobCreated": "2026-01-19T11:35:26.142+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.141+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-creator",
+            "version": "25.12.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToyZTJhYzE0NA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pytest-ansible",
+      "version": "25.12.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pytest-ansible/25.12.0/pytest_ansible-25.12.0-py3-none-any.whl",
+          "path": "/packages/pytest-ansible/25.12.0/pytest_ansible-25.12.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo5OGM0NzVmYw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "c28032d08cf032eeba74d9b3fa03b56d",
+            "sha1": "deb793b07b6844160271119d35ad2f2fd39bc3e5",
+            "sha256": "c7ebf507eea6cb97949e0bae5e015d892bae6c461d0c7f526cce4c961560990c"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.257+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 31219,
+          "blobCreated": "2026-01-19T11:35:26.258+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.257+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pytest-ansible",
+            "version": "25.12.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo3ZDQ2N2UyMQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "tox-ansible",
+      "version": "26.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/tox-ansible/26.1.0/tox_ansible-26.1.0-py3-none-any.whl",
+          "path": "/packages/tox-ansible/26.1.0/tox_ansible-26.1.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTplN2UwMzJkOQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "99ac2b1ca7726575897236f51e5a7c85",
+            "sha1": "057d826c878696c6a26db4130e5db09a330b4aa6",
+            "sha256": "b362aafaadd04d70642cba44f28cf43d15f8a3927c030a71d14b6849c4871375"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.258+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10918,
+          "blobCreated": "2026-01-19T11:35:26.263+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.258+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "tox-ansible",
+            "version": "26.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpjYzYyM2FmZQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "molecule",
+      "version": "25.12.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/molecule/25.12.0/molecule-25.12.0-py3-none-any.whl",
+          "path": "/packages/molecule/25.12.0/molecule-25.12.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTozNmZiZWZiNg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "87d1b621773bf6036550ee9edba7797d",
+            "sha1": "df184b50656b376b2a684a44a66973181835ab28",
+            "sha256": "3df4fc034f3204efce7247b5b1087b2a7e411e27374a05fe96c6c676656e82bd"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.263+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 152787,
+          "blobCreated": "2026-01-19T11:35:26.265+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.263+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "molecule",
+            "version": "25.12.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToxYjdkZjdkYg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-lint",
+      "version": "26.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-lint/26.1.1/ansible_lint-26.1.1-py3-none-any.whl",
+          "path": "/packages/ansible-lint/26.1.1/ansible_lint-26.1.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4NjE3YWM5Mw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "a7d451164684281a36716f9b625cb867",
+            "sha1": "ea4b5173f7fa74a6b3565a206f9335ac2d88646a",
+            "sha256": "1ee6f472f1516fbbc86784f0046a9042cbcded87dba4e31e4611f6b62103f340"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.341+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 324941,
+          "blobCreated": "2026-01-19T11:35:26.345+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.341+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-lint",
+            "version": "26.1.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo2YTk5YjRiOA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-core",
+      "version": "2.20.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-core/2.20.1/ansible_core-2.20.1-py3-none-any.whl",
+          "path": "/packages/ansible-core/2.20.1/ansible_core-2.20.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpkNTMzNjk3MA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "6f30fe4c08094fdde9868bfc0939d6e2",
+            "sha1": "63afd18ec34ab6c6e7b50886c8eeb85246c4eead",
+            "sha256": "2a66825b4a53f130b62515e7e2a3d811d544b19b6e8a22d9ef88c55896384cb3"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:26.452+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2412350,
+          "blobCreated": "2026-01-19T11:35:26.453+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:26.452+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-core",
+            "version": "2.20.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpiOWI1NzE5NQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "resolvelib",
+      "version": "1.2.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/resolvelib/1.2.1/resolvelib-1.2.1-py3-none-any.whl",
+          "path": "/packages/resolvelib/1.2.1/resolvelib-1.2.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToxYTczOGI1Ng",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "8dace661c3ed0d532a091d9d69d27ab5",
+            "sha1": "d91c9b66e7b18ab9acc6b3927d7acd981113c725",
+            "sha256": "fb06b66c8da04172d9e72a21d7d06186d8919e32ae5ab5cdf5b9d920be805ac2"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.091+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 18737,
+          "blobCreated": "2026-01-19T11:35:27.092+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.091+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "resolvelib",
+            "version": "1.2.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4ZDEyZTcy",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "subprocess-tee",
+      "version": "0.4.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/subprocess-tee/0.4.2/subprocess_tee-0.4.2-py3-none-any.whl",
+          "path": "/packages/subprocess-tee/0.4.2/subprocess_tee-0.4.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiOGFiMDUxMA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "dde686d9ccf7c85a95623fff0d09f306",
+            "sha1": "dd553c4a3bdd2bf0e0e14d56d1a2d0174fb4e1c4",
+            "sha256": "21942e976715af4a19a526918adb03a8a27a8edab959f2d075b777e3d78f532d"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.139+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5249,
+          "blobCreated": "2026-01-19T11:35:27.140+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.139+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "subprocess-tee",
+            "version": "0.4.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo1N2VjZWI0Zg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "wcmatch",
+      "version": "10.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/wcmatch/10.1/wcmatch-10.1-py3-none-any.whl",
+          "path": "/packages/wcmatch/10.1/wcmatch-10.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1NmUyN2VjYQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "fdeeeb417c40ea88dfc4b39b95026eb2",
+            "sha1": "349710eac271fed9cf3c36c922b6172f23fef5eb",
+            "sha256": "5848ace7dbb0476e5e55ab63c6bbd529745089343427caa5537f230cc01beb8a"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.188+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 39854,
+          "blobCreated": "2026-01-19T11:35:27.229+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.188+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "wcmatch",
+            "version": "10.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTphNzA4YTgyYw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "bindep",
+      "version": "2.13.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/bindep/2.13.0/bindep-2.13.0-py3-none-any.whl",
+          "path": "/packages/bindep/2.13.0/bindep-2.13.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTplMjZkMmYxYg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "ccf3cd71260fb23e67f3e2aaac66ab78",
+            "sha1": "42d83fbe544a1120ef07d39afe5200d845fcdcce",
+            "sha256": "c0e6cc626be2cc84f447fbaaa9d4b6cfbd92b11e8738d29d7a15df2d07fb45de"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.189+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 34282,
+          "blobCreated": "2026-01-19T11:35:27.241+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.189+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "bindep",
+            "version": "2.13.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpmNjI0NjUwOQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "distro",
+      "version": "1.9.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/distro/1.9.0/distro-1.9.0-py3-none-any.whl",
+          "path": "/packages/distro/1.9.0/distro-1.9.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTphNWZlM2JhNw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "e2b4993079a16ee01c267fec7f79053d",
+            "sha1": "3e17370ee46be571cd9f858d53d1f2c9838df2e0",
+            "sha256": "7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.214+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 20277,
+          "blobCreated": "2026-01-19T11:35:27.246+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.214+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "distro",
+            "version": "1.9.0",
+            "platform": "All"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo0NTQwMjFlNg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "packaging",
+      "version": "25.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/packaging/25.0/packaging-25.0-py3-none-any.whl",
+          "path": "/packages/packaging/25.0/packaging-25.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpmNTE5Zjg4NA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "5fa4842e2eb0d7883b4b0e7c42d6229e",
+            "sha1": "e218b5c44c84d06630100f7414550f7f4d8baa2c",
+            "sha256": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.225+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 66469,
+          "blobCreated": "2026-01-19T11:35:27.248+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.225+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "packaging",
+            "version": "25.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo5NDViZGVjMw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "python-gnupg",
+      "version": "0.5.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/python-gnupg/0.5.6/python_gnupg-0.5.6-py2.py3-none-any.whl",
+          "path": "/packages/python-gnupg/0.5.6/python_gnupg-0.5.6-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo0NDM1YjU2MQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "83bc4aadc3db577d1af67c8a019a101d",
+            "sha1": "37ee1059ff72cbf43a32f2f45033c3777c6cdec9",
+            "sha256": "b5050a55663d8ab9fcc8d97556d229af337a87a3ebebd7054cbd8b7e2043394a"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.279+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 22082,
+          "blobCreated": "2026-01-19T11:35:27.284+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.279+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "python-gnupg",
+            "version": "0.5.6",
+            "platform": "any"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTplMzc3OWJhMA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "click",
+      "version": "8.3.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/click/8.3.1/click-8.3.1-py3-none-any.whl",
+          "path": "/packages/click/8.3.1/click-8.3.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTozMTg4ZWJmOA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "f032502934a5979330da77e3f09d889c",
+            "sha1": "4645f956db291ad4bdb38a84f1e27ea87ca19a37",
+            "sha256": "981153a64e25f12d547d3426c367a4857371575ee7ad18df2a6183ab0545b2a6"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.364+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 108274,
+          "blobCreated": "2026-01-19T11:35:27.373+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.364+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "click",
+            "version": "8.3.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTozMjkzNTg3ZA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "referencing",
+      "version": "0.37.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/referencing/0.37.0/referencing-0.37.0-py3-none-any.whl",
+          "path": "/packages/referencing/0.37.0/referencing-0.37.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4MGE0YThkNQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "0be0d0a9f3691df1a295018982a60ce9",
+            "sha1": "d38a45a8772a997bf4e14a52bc1745e6a8458f68",
+            "sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.377+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 26766,
+          "blobCreated": "2026-01-19T11:35:27.409+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.377+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "referencing",
+            "version": "0.37.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4MWFmMTU1YQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pluggy",
+      "version": "1.6.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pluggy/1.6.0/pluggy-1.6.0-py3-none-any.whl",
+          "path": "/packages/pluggy/1.6.0/pluggy-1.6.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpjZmMwNjViMg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "e107bd9fd0c26746617d74bac26fa0c5",
+            "sha1": "f6feb824b295dc575d64ae4d235ecf01bc70796f",
+            "sha256": "e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.386+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 20538,
+          "blobCreated": "2026-01-19T11:35:27.387+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.386+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pluggy",
+            "version": "1.6.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkMGNhZDIzNw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "click-help-colors",
+      "version": "0.9.4",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/click-help-colors/0.9.4/click_help_colors-0.9.4-py3-none-any.whl",
+          "path": "/packages/click-help-colors/0.9.4/click_help_colors-0.9.4-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToxZWRjMjI4Zg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "1a10ef7b5c51e069f4734a2249648011",
+            "sha1": "a00078384abd2273532f04390c44dd6fdb18cc94",
+            "sha256": "b33c5803eeaeb084393b1ab5899dc5476c7196b87a18713045afe76f840b42db"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.453+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6437,
+          "blobCreated": "2026-01-19T11:35:27.464+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.453+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "click-help-colors",
+            "version": "0.9.4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToxZmU2OGYxNA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pytest-sugar",
+      "version": "1.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pytest-sugar/1.1.1/pytest_sugar-1.1.1-py3-none-any.whl",
+          "path": "/packages/pytest-sugar/1.1.1/pytest_sugar-1.1.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo2ZGY3ZGY2Yw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "552fbdf7c12530ba2bc9569458068124",
+            "sha1": "daa107507ac5ec6ca6399d17dde9498a7394690e",
+            "sha256": "2f8319b907548d5b9d03a171515c1d43d2e38e32bd8182a1781eb20b43344cc8"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.472+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 11440,
+          "blobCreated": "2026-01-19T11:35:27.475+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.472+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pytest-sugar",
+            "version": "1.1.1",
+            "platform": "any"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo2ZjAyNGJmMQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "enrich",
+      "version": "1.2.7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/enrich/1.2.7/enrich-1.2.7-py3-none-any.whl",
+          "path": "/packages/enrich/1.2.7/enrich-1.2.7-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiZDEzOWM0OQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "8c64e63731fb9dc9862b7b8a53f5c1a2",
+            "sha1": "382fe1903f820e7b78ebda78bb726ef5f1030fa7",
+            "sha256": "f29b2c8c124b4dbd7c975ab5c3568f6c7a47938ea3b7d2106c8a3bd346545e4f"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.459+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 8717,
+          "blobCreated": "2026-01-19T11:35:27.471+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.459+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "enrich",
+            "version": "1.2.7",
+            "platform": "UNKNOWN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpiZTFlMDhjZQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/jinja2/3.1.6/jinja2-3.1.6-py3-none-any.whl",
+          "path": "/packages/jinja2/3.1.6/jinja2-3.1.6-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1YjRiMTYwMw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "845b37cea56edd0f4dbd949244e9d798",
+            "sha1": "65a4983e02ace6506cc5fc4b4abd5a992da4e786",
+            "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.522+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 134899,
+          "blobCreated": "2026-01-19T11:35:27.530+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.522+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "Jinja2",
+            "version": "3.1.6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkMzljNWFi",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ansible-runner",
+      "version": "2.4.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ansible-runner/2.4.2/ansible_runner-2.4.2-py3-none-any.whl",
+          "path": "/packages/ansible-runner/2.4.2/ansible_runner-2.4.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpjMmY1OTI2",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "82015f086b04ff4937d679e56aa1a180",
+            "sha1": "25667336d34b664f694b034e3c96aa131ebd6ebc",
+            "sha256": "0bde6cb39224770ff49ccdc6027288f6a98f4ed2ea0c64688b31217033221893"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.514+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 79758,
+          "blobCreated": "2026-01-19T11:35:27.520+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.514+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ansible-runner",
+            "version": "2.4.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo1YzU1ODI4OA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pathspec",
+      "version": "1.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pathspec/1.0.3/pathspec-1.0.3-py3-none-any.whl",
+          "path": "/packages/pathspec/1.0.3/pathspec-1.0.3-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpmOTgyOGZiZA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "279468e95273b557a602c4e788b261a7",
+            "sha1": "54de2bc2340e1e16938720195228ce4e833454a7",
+            "sha256": "e80767021c1cc524aa3fb14bedda9c34406591343cc42797b386ce7b9354fb6c"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.547+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 55021,
+          "blobCreated": "2026-01-19T11:35:27.581+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.547+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pathspec",
+            "version": "1.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTphYjcxM2Y2NQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "onigurumacffi",
+      "version": "1.4.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/onigurumacffi/1.4.1/onigurumacffi-1.4.1-cp39-abi3-macosx_13_0_x86_64.whl",
+          "path": "/packages/onigurumacffi/1.4.1/onigurumacffi-1.4.1-cp39-abi3-macosx_13_0_x86_64.whl",
+          "id": "cHlwaS1wcm94eTo0ODllNGM5YQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "73d9a2bb1a482ecb4b059e401faa4892",
+            "sha1": "1e580ea5da913f6be8b531bd33cca12749852516",
+            "sha256": "40f587bb4eaabcc0dadfcd6bc56ac2f8db0966e16c90588748410b3e14761715"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.568+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 238030,
+          "blobCreated": "2026-01-19T11:35:27.582+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.568+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "onigurumacffi",
+            "version": "1.4.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpmYThjZmM0Mg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pytest-xdist",
+      "version": "3.8.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pytest-xdist/3.8.0/pytest_xdist-3.8.0-py3-none-any.whl",
+          "path": "/packages/pytest-xdist/3.8.0/pytest_xdist-3.8.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpkNDI4ZmNlYg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "3864dd9f3061eae26e895b4e455f2acc",
+            "sha1": "81fb5296b517b102faa45922c087a90db5672845",
+            "sha256": "202ca578cfeb7370784a8c33d6d05bc6e13b4f25b5053c30a152269fd10f0b88"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.650+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 46396,
+          "blobCreated": "2026-01-19T11:35:27.657+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.650+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pytest-xdist",
+            "version": "3.8.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo0OWE4YjkxZg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "tzdata",
+      "version": "2025.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/tzdata/2025.3/tzdata-2025.3-py2.py3-none-any.whl",
+          "path": "/packages/tzdata/2025.3/tzdata-2025.3-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTphYTY2ZDJlMA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "9d76c813df519e04a29c3b30fa6f9c0d",
+            "sha1": "75ce3befc94a44610dc60f339162d2bbd3fe9e79",
+            "sha256": "06a47e5700f3081aab02b2e513160914ff0694bce9947d6b76ebd6bf57cfc5d1"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.576+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 348521,
+          "blobCreated": "2026-01-19T11:35:27.579+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.576+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "tzdata",
+            "version": "2025.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo5OGM0NzVmYw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "yamllint",
+      "version": "1.38.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/yamllint/1.38.0/yamllint-1.38.0-py3-none-any.whl",
+          "path": "/packages/yamllint/1.38.0/yamllint-1.38.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTplNmQ1YzY1NA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "931433d55d12bdfa00a37b114a4a9d13",
+            "sha1": "f5e6067d59f752ce5f97b7afe0a6e900b95c13f1",
+            "sha256": "fc394a5b3be980a4062607b8fdddc0843f4fa394152b6da21722f5d59013c220"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.621+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 68940,
+          "blobCreated": "2026-01-19T11:35:27.650+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.621+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "yamllint",
+            "version": "1.38.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTplN2UwMzJkOQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "rich",
+      "version": "14.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/rich/14.2.0/rich-14.2.0-py3-none-any.whl",
+          "path": "/packages/rich/14.2.0/rich-14.2.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo5N2JhMDk3Nw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "674956a9658c21afdf19464bb226822f",
+            "sha1": "0a3ab0654e0ec2ed502666fc131874e22efc32e2",
+            "sha256": "76bc51fe2e57d2b1be1f96c524b890b816e334ab4c1e45888799bfaab0021edd"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.631+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 243393,
+          "blobCreated": "2026-01-19T11:35:27.637+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.631+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "rich",
+            "version": "14.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTozNmZiZWZiNg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "distlib",
+      "version": "0.4.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/distlib/0.4.0/distlib-0.4.0-py2.py3-none-any.whl",
+          "path": "/packages/distlib/0.4.0/distlib-0.4.0-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTozNWYxODMzMQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "c9ed9b3efc22acb9f2d43441eb6d64f0",
+            "sha1": "4b0c016c012a3701835eed402535ccb4026fb74b",
+            "sha256": "9659f7d87e46584a30b5780e43ac7a2143098441670ff0a49d5f9034c54a6c16"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.636+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 469047,
+          "blobCreated": "2026-01-19T11:35:27.657+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.636+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "distlib",
+            "version": "0.4.0",
+            "platform": "any"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4NjE3YWM5Mw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pytest-plus",
+      "version": "0.8.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pytest-plus/0.8.1/pytest_plus-0.8.1-py3-none-any.whl",
+          "path": "/packages/pytest-plus/0.8.1/pytest_plus-0.8.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToyMzQ0YjljOA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "ca9320875d2fd8f776bba0f96b690b01",
+            "sha1": "6b3842afe5405fa4e7dfea8dbf9bf9cfed54d098",
+            "sha256": "2b8e9037716c9d7b708074863933897681f86d852d9c4e9717271be143dbdfb6"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.655+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6235,
+          "blobCreated": "2026-01-19T11:35:27.656+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.655+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pytest-plus",
+            "version": "0.8.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkNTMzNjk3MA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "filelock",
+      "version": "3.20.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/filelock/3.20.3/filelock-3.20.3-py3-none-any.whl",
+          "path": "/packages/filelock/3.20.3/filelock-3.20.3-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo3MjYwNzZhNQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "4f9196d2fae003bfa91eb88503e0ee5a",
+            "sha1": "5a2bb761ac0468035bd652faa836c23922bade1c",
+            "sha256": "4b0dda527ee31078689fc205ec4f1c1bf7d56cf88b6dc9426c4f230e46c2dce1"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.681+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 16701,
+          "blobCreated": "2026-01-19T11:35:27.686+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.681+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "filelock",
+            "version": "3.20.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToyNDRmMjY0ZA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/jsonschema/4.26.0/jsonschema-4.26.0-py3-none-any.whl",
+          "path": "/packages/jsonschema/4.26.0/jsonschema-4.26.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpjMTdjMzM4Mg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "2b7e04c1ca5e5c280087b9765d9f3970",
+            "sha1": "6930315c45b54c0e68d7a3d039a533c8b8e7b3f1",
+            "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.693+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 90630,
+          "blobCreated": "2026-01-19T11:35:27.717+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.693+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "jsonschema",
+            "version": "4.26.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo3MzZhZTMyYQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "tox",
+      "version": "4.34.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/tox/4.34.1/tox-4.34.1-py3-none-any.whl",
+          "path": "/packages/tox/4.34.1/tox-4.34.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4NTBkNDAwZQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "dc10dc43989fc4a4900f4d488a744bf6",
+            "sha1": "c6fb359ebd2a947547d2e842f0edc8f5a67a95f4",
+            "sha256": "5610d69708bab578d618959b023f8d7d5d3386ed14a2392aeebf9c583615af60"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.665+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 176812,
+          "blobCreated": "2026-01-19T11:35:27.666+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.665+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "tox",
+            "version": "4.34.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpjMjg2YTAwNw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "cffi",
+      "version": "2.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/cffi/2.0.0/cffi-2.0.0-cp314-cp314-macosx_10_13_x86_64.whl",
+          "path": "/packages/cffi/2.0.0/cffi-2.0.0-cp314-cp314-macosx_10_13_x86_64.whl",
+          "id": "cHlwaS1wcm94eToxMDk3ZjA1Zg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "ca64206a82449b861f173d291f16834c",
+            "sha1": "902337d3115322f5def2deb812d07362817559e8",
+            "sha256": "fc33c5141b55ed366cfaad382df24fe7dcbc686de5be719b207bb248e3053dc5"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.766+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 185320,
+          "blobCreated": "2026-01-19T11:35:27.770+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.766+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "cffi",
+            "version": "2.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToxMWEyNWNlNA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pytest",
+      "version": "9.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pytest/9.0.2/pytest-9.0.2-py3-none-any.whl",
+          "path": "/packages/pytest/9.0.2/pytest-9.0.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1ZmIzYWQzYw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "600448842054deb501e95a70d7be737a",
+            "sha1": "b7c084fc0f4e59fba2e8046315eb9f2dd2d71f22",
+            "sha256": "711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.814+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 374801,
+          "blobCreated": "2026-01-19T11:35:27.815+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.814+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pytest",
+            "version": "9.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo2MGJlMTljMQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "PyYAML",
+      "version": "6.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp314-cp314-macosx_10_13_x86_64.whl",
+          "path": "/packages/pyyaml/6.0.3/pyyaml-6.0.3-cp314-cp314-macosx_10_13_x86_64.whl",
+          "id": "cHlwaS1wcm94eTphZWNmNmExOQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "0a67eca94806a3576ea7dfefe55d0d79",
+            "sha1": "5c112409019747887bd9e694f2ba2fc99fe74548",
+            "sha256": "8d1fab6bb153a416f9aeb4b8763bc0f22a5586065f86f7664fc23339fc1c1fac"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.818+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 181814,
+          "blobCreated": "2026-01-19T11:35:27.821+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.818+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "PyYAML",
+            "version": "6.0.3",
+            "platform": "Any"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTphZmQ5ZDY5ZQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "black",
+      "version": "25.12.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/black/25.12.0/black-25.12.0-cp314-cp314-macosx_10_15_x86_64.whl",
+          "path": "/packages/black/25.12.0/black-25.12.0-cp314-cp314-macosx_10_15_x86_64.whl",
+          "id": "cHlwaS1wcm94eTpmZGViMjZmNg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "ee3e153731040f2a4af3eac1ecf0e2c0",
+            "sha1": "87d3077a84990ef9721421c9b2ef09052e229c1b",
+            "sha256": "0a0953b134f9335c2434864a643c842c44fba562155c738a2a37a4d61f00cad5"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:27.910+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1917015,
+          "blobCreated": "2026-01-19T11:35:27.925+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:27.910+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "black",
+            "version": "25.12.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpmZWY1OTM3Yg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ruamel.yaml",
+      "version": "0.19.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ruamel-yaml/0.19.1/ruamel_yaml-0.19.1-py3-none-any.whl",
+          "path": "/packages/ruamel-yaml/0.19.1/ruamel_yaml-0.19.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo0ZDA2ZTNkMw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "db65f7e375cd4b465fce6bfad13174e0",
+            "sha1": "ae3a320d24376f40aa4c60aae2d07c016de933c5",
+            "sha256": "27592957fedf6e0b62f281e96effd28043345e0e66001f97683aa9a40c667c93"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.083+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 118102,
+          "blobCreated": "2026-01-19T11:35:28.085+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.083+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ruamel.yaml",
+            "version": "0.19.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo0ZTExNTA1OA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "cryptography",
+      "version": "46.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/cryptography/46.0.3/cryptography-46.0.3-cp311-abi3-macosx_10_9_universal2.whl",
+          "path": "/packages/cryptography/46.0.3/cryptography-46.0.3-cp311-abi3-macosx_10_9_universal2.whl",
+          "id": "cHlwaS1wcm94eTo5YzIyYTBiMA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "a5d1f150087d7aadf14b30db4c74c38b",
+            "sha1": "d08ad18e4c8ee228e851263f5ad5037207dcc542",
+            "sha256": "109d4ddfadf17e8e7779c39f9b18111a09efb969a301a31e987416a0191ed93a"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.173+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7225004,
+          "blobCreated": "2026-01-19T11:35:28.174+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.173+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "cryptography",
+            "version": "46.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo5ZDJkMGQzNQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "Parsley",
+      "version": "1.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/parsley/1.3/Parsley-1.3-py2.py3-none-any.whl",
+          "path": "/packages/parsley/1.3/Parsley-1.3-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiMzM4MDE1Mg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "d1caebe2e580d91cc153d50327c2bef7",
+            "sha1": "d49b7a9427bf160d53da3bfaf49e4512739e3ca0",
+            "sha256": "c3bc417b8c7e3a96c87c0f2f751bfd784ed5156ffccebe2f84330df5685f8dc3"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.424+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 88932,
+          "blobCreated": "2026-01-19T11:35:28.436+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.424+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "Parsley",
+            "version": "1.3",
+            "platform": "UNKNOWN"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTplYzQ4Y2ExMg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pycparser",
+      "version": "2.23",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pycparser/2.23/pycparser-2.23-py3-none-any.whl",
+          "path": "/packages/pycparser/2.23/pycparser-2.23-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1MTZmN2IwYw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "961daf0e0910747590f8a0101322bcd3",
+            "sha1": "f8543329f87f96652f63b85deeb96b1f664c8da8",
+            "sha256": "e5c6e8d3fbad53479cab09ac03729e0a9faf2bee3db8208a550daf5af81a5934"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.434+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 118140,
+          "blobCreated": "2026-01-19T11:35:28.435+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.434+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pycparser",
+            "version": "2.23",
+            "platform": "Cross Platform"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTozYjY0ODZlZg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/jsonschema-specifications/2025.9.1/jsonschema_specifications-2025.9.1-py3-none-any.whl",
+          "path": "/packages/jsonschema-specifications/2025.9.1/jsonschema_specifications-2025.9.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToyNTNiZTJm",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "3bc19f16b4b7bf78e337a39664d3d7ac",
+            "sha1": "b29d2abe8b96411a3c94d66d0da327ea1a30978a",
+            "sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.436+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 18437,
+          "blobCreated": "2026-01-19T11:35:28.443+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.436+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "jsonschema-specifications",
+            "version": "2025.9.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4YTgwNDNjYw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "attrs",
+      "version": "25.4.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/attrs/25.4.0/attrs-25.4.0-py3-none-any.whl",
+          "path": "/packages/attrs/25.4.0/attrs-25.4.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTphMDhiMzdlOQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "7b7fab960686d9e318a640d5ddce32f7",
+            "sha1": "0f44b024e556094358b37aa227f07cdd70baffa9",
+            "sha256": "adcf7e2a1fb3b36ac48d97835bb6d8ade15b8dcce26aba8bf1d14847b57a3373"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.444+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 67615,
+          "blobCreated": "2026-01-19T11:35:28.449+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.444+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "attrs",
+            "version": "25.4.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkOTljMDBhOQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pbr",
+      "version": "7.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pbr/7.0.3/pbr-7.0.3-py2.py3-none-any.whl",
+          "path": "/packages/pbr/7.0.3/pbr-7.0.3-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTplZmE2ZjRjNg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "eb8eb130d09d468a039f3d0456f5bf10",
+            "sha1": "4c3f7367f2a511ce5ee8d69c7a96aa918d66becd",
+            "sha256": "ff223894eb1cd271a98076b13d3badff3bb36c424074d26334cd25aebeecea6b"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.454+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 131898,
+          "blobCreated": "2026-01-19T11:35:28.455+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.454+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pbr",
+            "version": "7.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToyOGI3YmQ4Ng",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "mypy_extensions",
+      "version": "1.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/mypy-extensions/1.1.0/mypy_extensions-1.1.0-py3-none-any.whl",
+          "path": "/packages/mypy-extensions/1.1.0/mypy_extensions-1.1.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTozZWMyYjFhMw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "625a3dc37151717cabf87b13a0b152b9",
+            "sha1": "b7f0865aa37ff715c7d1814ebece42ce3c2cc804",
+            "sha256": "1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.457+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4963,
+          "blobCreated": "2026-01-19T11:35:28.465+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.457+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "mypy_extensions",
+            "version": "1.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo3N2QzN2E2Mw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "platformdirs",
+      "version": "4.5.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/platformdirs/4.5.1/platformdirs-4.5.1-py3-none-any.whl",
+          "path": "/packages/platformdirs/4.5.1/platformdirs-4.5.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4ZGRlNmU4MA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "b0b0a77fedf76f115d11f9fe940fdc34",
+            "sha1": "9e14f0ff26463f5630f078aaa77457ed004b8aa5",
+            "sha256": "d03afa3963c806a9bed9d5125c8f4cb2fdaf74a55ab60e5d59b3fde758104d31"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.483+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 18731,
+          "blobCreated": "2026-01-19T11:35:28.484+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.483+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "platformdirs",
+            "version": "4.5.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpjNmVmMzc0MA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pytokens",
+      "version": "0.3.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pytokens/0.3.0/pytokens-0.3.0-py3-none-any.whl",
+          "path": "/packages/pytokens/0.3.0/pytokens-0.3.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpkY2ZhMmI1ZA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "9126507e40bbfd8d98f84e9ba235ff28",
+            "sha1": "8b96079e7a28556ca63be3b2e31bf46f4596e8ad",
+            "sha256": "95b2b5eaf832e469d141a378872480ede3f251a5a5041b8ec6e581d3ac71bbf3"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.497+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 12195,
+          "blobCreated": "2026-01-19T11:35:28.507+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.497+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pytokens",
+            "version": "0.3.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToxNjBhZjQxZA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/markupsafe/3.0.3/markupsafe-3.0.3-cp314-cp314-macosx_10_13_x86_64.whl",
+          "path": "/packages/markupsafe/3.0.3/markupsafe-3.0.3-cp314-cp314-macosx_10_13_x86_64.whl",
+          "id": "cHlwaS1wcm94eToyYzE1ZTgzYQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "06528f1b515460dc49b8b829e408acff",
+            "sha1": "b4adb4c85812a2dd8660afd7039251069884debd",
+            "sha256": "eaa9599de571d72e2daf60164784109f19978b327a3910d3e9de8c97b5b70cfe"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.516+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 11619,
+          "blobCreated": "2026-01-19T11:35:28.520+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.516+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "MarkupSafe",
+            "version": "3.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo2NTI2YjBmYQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "python-daemon",
+      "version": "3.1.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/python-daemon/3.1.2/python_daemon-3.1.2-py3-none-any.whl",
+          "path": "/packages/python-daemon/3.1.2/python_daemon-3.1.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiYzA5MmZjNA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "3c898fd63dc363b9a4261c1855ffe762",
+            "sha1": "0ebf83765f5441c47ad7b87e7715cc375381bef4",
+            "sha256": "b906833cef63502994ad48e2eab213259ed9bb18d54fa8774dcba2ff7864cec6"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.854+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 30872,
+          "blobCreated": "2026-01-19T11:35:28.856+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.854+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "python-daemon",
+            "version": "3.1.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpiNDQyNmRkNw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "bracex",
+      "version": "2.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/bracex/2.6/bracex-2.6-py3-none-any.whl",
+          "path": "/packages/bracex/2.6/bracex-2.6-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo2Y2VkNzJlNw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "b3a71e8173ff8e33c204cf7f987ba9f7",
+            "sha1": "1d452e359f057ddea1082328fd0490811e5a3a06",
+            "sha256": "0b0049264e7340b3ec782b5cb99beb325f36c3782a32e36e876452fd49a09952"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.835+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 11508,
+          "blobCreated": "2026-01-19T11:35:28.857+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.835+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "bracex",
+            "version": "2.6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTozNWUyYWI0",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "markdown-it-py",
+      "version": "4.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/markdown-it-py/4.0.0/markdown_it_py-4.0.0-py3-none-any.whl",
+          "path": "/packages/markdown-it-py/4.0.0/markdown_it_py-4.0.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpjZWI1ZjkyZA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "181b28678354490622ff96eab5d27841",
+            "sha1": "3360edf60bd5795e500889570828d50ef60befe4",
+            "sha256": "87327c59b172c5011896038353a81343b6754500a08cd7a4973bb48c6d578147"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.800+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 87321,
+          "blobCreated": "2026-01-19T11:35:28.801+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.800+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "markdown-it-py",
+            "version": "4.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo1Mjc5ZTc5MQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "colorama",
+      "version": "0.4.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/colorama/0.4.6/colorama-0.4.6-py2.py3-none-any.whl",
+          "path": "/packages/colorama/0.4.6/colorama-0.4.6-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eToxZGQxYjYwYQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "3fc7a89530d68d7ea231ebe779c0db9c",
+            "sha1": "d6ab1608850fecfc0e1cf50bf93d743695c04027",
+            "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.824+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 25335,
+          "blobCreated": "2026-01-19T11:35:28.826+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.824+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "colorama",
+            "version": "0.4.6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTphMTk1YTQ2ZQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pexpect",
+      "version": "4.9.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pexpect/4.9.0/pexpect-4.9.0-py2.py3-none-any.whl",
+          "path": "/packages/pexpect/4.9.0/pexpect-4.9.0-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpiMjRlY2Ex",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "cf02fc20a67a1cc8b6fbabdeb6d3c0bf",
+            "sha1": "19d74dbac2dba69e40e23d15c9e8fd0aae8739ba",
+            "sha256": "7236d1e080e4936be2dc3e326cec0af72acf9212a7e1d060210e70a47e253523"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.930+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 63772,
+          "blobCreated": "2026-01-19T11:35:28.943+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.930+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pexpect",
+            "version": "4.9.0",
+            "platform": "UNIX"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpmMGIxNjE0Yg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "pyproject-REDACTED",
+      "version": "1.10.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pyproject-REDACTED/1.10.0/pyproject_REDACTED-1.10.0-py3-none-any.whl",
+          "path": "/packages/pyproject-REDACTED/1.10.0/pyproject_REDACTED-1.10.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTphOTVjNjY1Yg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "8812ca36c45984ae1f026ff3065e2246",
+            "sha1": "80407734ddda68cd98d42fd096160577de0b9e62",
+            "sha256": "8757c41a79c0f4ab71b99abed52b97ecf66bd20b04fa59da43b5840bac105a09"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.931+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13218,
+          "blobCreated": "2026-01-19T11:35:28.953+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.931+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "pyproject-REDACTED",
+            "version": "1.10.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTozZmNkMWUyOA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "cachetools",
+      "version": "6.2.4",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/cachetools/6.2.4/cachetools-6.2.4-py3-none-any.whl",
+          "path": "/packages/cachetools/6.2.4/cachetools-6.2.4-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1YTQwYTk3ZQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "e1b1b278bd4469d46a9c664961492fd5",
+            "sha1": "6f58fa3b1b0daa88676287b49278f3a11c6bc2e4",
+            "sha256": "69a7a52634fed8b8bf6e24a050fb60bff1c9bd8f6d24572b99c32d4e71e62a51"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.936+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 11551,
+          "blobCreated": "2026-01-19T11:35:28.952+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.936+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "cachetools",
+            "version": "6.2.4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo4ZWU4ZGIwNQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "iniconfig",
+      "version": "2.3.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/iniconfig/2.3.0/iniconfig-2.3.0-py3-none-any.whl",
+          "path": "/packages/iniconfig/2.3.0/iniconfig-2.3.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpmODc4MjMzOA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "d3e156a9abd59ac8b5eb0c2e8b1c5dad",
+            "sha1": "87199ba5ce174e2f5a727786e1e8e7bd6d1ef138",
+            "sha256": "f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.976+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7484,
+          "blobCreated": "2026-01-19T11:35:28.981+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.976+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "iniconfig",
+            "version": "2.3.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpkZTA0OTdlMg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "termcolor",
+      "version": "3.3.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/termcolor/3.3.0/termcolor-3.3.0-py3-none-any.whl",
+          "path": "/packages/termcolor/3.3.0/termcolor-3.3.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo0NzkzZTAxNQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "69248b73629b266b79113efa41ec173c",
+            "sha1": "640e5aa427ba7b14cd3a8c83c061fa0d074e2a17",
+            "sha256": "cf642efadaf0a8ebbbf4bc7a31cec2f9b5f21a9f726f4ccbb08192c9c26f43a5"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:28.989+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7734,
+          "blobCreated": "2026-01-19T11:35:28.989+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:28.989+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "termcolor",
+            "version": "3.3.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToyZDIwNTRiZg",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "chardet",
+      "version": "5.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/chardet/5.2.0/chardet-5.2.0-py3-none-any.whl",
+          "path": "/packages/chardet/5.2.0/chardet-5.2.0-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo5NmFmOWNmMg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "b9eda7cd7d1582e269bd8eb7ffc4fcad",
+            "sha1": "2facc0387556aa8a2956ef682d49fc3eae56d30a",
+            "sha256": "e1cf59446890a00105fe7b7912492ea04b6e6f06d4b742b2c788469e34c82970"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.006+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 199385,
+          "blobCreated": "2026-01-19T11:35:29.007+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.006+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "chardet",
+            "version": "5.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo3YzNjMTE5Yw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "execnet",
+      "version": "2.1.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/execnet/2.1.2/execnet-2.1.2-py3-none-any.whl",
+          "path": "/packages/execnet/2.1.2/execnet-2.1.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTplNWNiNTljZg",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "d2dd795604b192dae2cc033757da2ab6",
+            "sha1": "287658581bd054a7746e6b871361ae95aa08723c",
+            "sha256": "67fba928dd5a544b783f6056f449e5e3931a5c378b128bc18501f7ea79e296ec"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.029+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 40708,
+          "blobCreated": "2026-01-19T11:35:29.057+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.029+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "execnet",
+            "version": "2.1.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpjYjU3Y2U3OQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "Pygments",
+      "version": "2.19.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/pygments/2.19.2/pygments-2.19.2-py3-none-any.whl",
+          "path": "/packages/pygments/2.19.2/pygments-2.19.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTozNGU3MTZhYw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "c6f882e4a4ffd8543f245d4f7ce0d7fa",
+            "sha1": "fb332536df6375a902c4e703be1cfaf9b119a5e2",
+            "sha256": "86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.119+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1225217,
+          "blobCreated": "2026-01-19T11:35:29.123+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.119+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "Pygments",
+            "version": "2.19.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eToxYTczOGI1Ng",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "virtualenv",
+      "version": "20.36.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/virtualenv/20.36.1/virtualenv-20.36.1-py3-none-any.whl",
+          "path": "/packages/virtualenv/20.36.1/virtualenv-20.36.1-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo4NDAyZDM4OQ",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "bf38b0eab68732abfe26513aa53204cc",
+            "sha1": "8ab3c9f086680d5319053b7fe29d2e32bcd66bff",
+            "sha256": "575a8d6b124ef88f6f51d56d656132389f961062a9177016a50e4f507bbcc19f"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.189+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6008258,
+          "blobCreated": "2026-01-19T11:35:29.190+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.189+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "virtualenv",
+            "version": "20.36.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo2OThmNDgzMw",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "rpds-py",
+      "version": "0.30.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/rpds-py/0.30.0/rpds_py-0.30.0-cp314-cp314-macosx_10_12_x86_64.whl",
+          "path": "/packages/rpds-py/0.30.0/rpds_py-0.30.0-cp314-cp314-macosx_10_12_x86_64.whl",
+          "id": "cHlwaS1wcm94eTpkMzFlOTA2Ng",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "94d10736b976f612a6572e6e1ce27740",
+            "sha1": "cd1eaf3fbfbf0f379effe2878d0ec9e1002ed863",
+            "sha256": "68f19c879420aa08f61203801423f6cd5ac5f0ac4ac82a2368a9fcd6a9a075e0"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.454+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 362099,
+          "blobCreated": "2026-01-19T11:35:29.455+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.454+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "rpds-py",
+            "version": "0.30.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTpiOGFiMDUxMA",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "mdurl",
+      "version": "0.1.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/mdurl/0.1.2/mdurl-0.1.2-py3-none-any.whl",
+          "path": "/packages/mdurl/0.1.2/mdurl-0.1.2-py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTo1ZWE5NDBiNw",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "7db14dc5d739bfca141f035953620659",
+            "sha1": "a26cf93cb2fe37f85fee4ea2f1c372cde26dd8b9",
+            "sha256": "84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.581+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 9979,
+          "blobCreated": "2026-01-19T11:35:29.582+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.581+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "mdurl",
+            "version": "0.1.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo3YzZjMWVk",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "ptyprocess",
+      "version": "0.7.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/ptyprocess/0.7.0/ptyprocess-0.7.0-py2.py3-none-any.whl",
+          "path": "/packages/ptyprocess/0.7.0/ptyprocess-0.7.0-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTpmOGQ4M2Rh",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "99ec04989f767cb72ac82ce671b561b0",
+            "sha1": "0827aaa6fdc3dc4256e06fa1c3991fb4ed20a693",
+            "sha256": "4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.581+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13993,
+          "blobCreated": "2026-01-19T11:35:29.582+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.581+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "ptyprocess",
+            "version": "0.7.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "cHlwaS1wcm94eTo1NmUyN2VjYQ",
+      "repository": "pypi-proxy",
+      "format": "pypi",
+      "group": "",
+      "name": "lockfile",
+      "version": "0.12.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/pypi-proxy/packages/lockfile/0.12.2/lockfile-0.12.2-py2.py3-none-any.whl",
+          "path": "/packages/lockfile/0.12.2/lockfile-0.12.2-py2.py3-none-any.whl",
+          "id": "cHlwaS1wcm94eTphZGM0ZmQ5NA",
+          "repository": "pypi-proxy",
+          "format": "pypi",
+          "checksum": {
+            "md5": "07b04864472c90cdf4452cf250687334",
+            "sha1": "2908c27019a78330d4d07df2a6099e3847710946",
+            "sha256": "6c3cb24f344923d30b2785d5ad75182c8ea7ac1b6171b08657258ec7429d50fa"
+          },
+          "contentType": "application/zip",
+          "lastModified": "2026-01-19T11:35:29.597+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13564,
+          "blobCreated": "2026-01-19T11:35:29.600+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-01-19T11:35:29.597+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "pypi": {
+            "name": "lockfile",
+            "version": "0.12.2",
+            "platform": "UNKNOWN"
+          }
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

@@ -1,0 +1,16 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # Pinned to match the version floor in AGENTS.md. Nushell breaks
+    # compatibility between minor releases, so this moves deliberately.
+    container: ghcr.io/nushell/nushell:0.115.1-alpine
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the test suite
+        run: nu tests/run-tests.nu
