@@ -35,6 +35,10 @@ nexus-cleanup/
   report.nu               # record schema, aggregate, json/csv encoding
 tools/
   record-fixtures.nu      # development only; records redacted fixtures from a live Nexus
+examples/                 # CI pipelines: dry run on schedule, deletion only by hand
+  gitlab-ci/
+  forgejo/
+  jenkins/                # Docker Pipeline plugin and plain `sh` variants
 tests/
   fixtures/<format>/      # recorded, redacted Nexus API responses
   test-*.nu               # std assert tests

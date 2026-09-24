@@ -25,13 +25,25 @@ nu nexus-cleanup.nu --pattern 'yum-proxy-*'
 nu nexus-cleanup.nu --pattern 'yum-proxy-*' --keep 2 --max-deletions 500 --execute
 ```
 
-In a container:
+In a container, built from the `Containerfile` — its entrypoint is the tool, so flags follow the
+image name directly:
 
 ```bash
+docker build -f Containerfile -t nexus-cleanup .
 docker run --rm -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/nushell/nushell:0.115.1-alpine \
-  nu /work/nexus-cleanup.nu --pattern 'yum-proxy-*'
+  nexus-cleanup --pattern 'yum-proxy-*'
 ```
+
+Or with the stock Nushell image and the checkout mounted — that image's entrypoint is `nu`, so
+the script path comes first:
+
+```bash
+docker run --rm -v "$PWD:/work" -w /work -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
+  ghcr.io/nushell/nushell:0.115.1-alpine \
+  nexus-cleanup.nu --pattern 'yum-proxy-*'
+```
+
+Either way, do not pass `-t`: a TTY merges stderr into stdout, and stdout is the report.
 
 ## Configuration
 
@@ -189,31 +201,32 @@ report shows which happened.
 
 ## CI
 
-A scheduled dry run that keeps the report as an artifact:
+Complete pipelines live in `examples/`. They share one shape:
 
-```yaml
-nexus-cleanup-report:
-  schedule: "0 3 * * *"
-  container: ghcr.io/nushell/nushell:0.115.1-alpine
-  script:
-    - nu nexus-cleanup.nu --pattern 'yum-proxy-*' --keep 2 --format csv --summary-out summary.json > cleanup.csv
-  artifacts:
-    paths: [cleanup.csv, summary.json]
-```
+- **Every run is a dry run first**, on a nightly schedule, and keeps the report and summary as
+  build artifacts.
+- **Deletion needs a person.** Only a run started by hand with an explicit execute switch
+  deletes, and only with a positive `--max-deletions`. A scheduled run never deletes.
+- **Credentials come from the CI system's secret store** as `NEXUS_USERNAME` and
+  `NEXUS_PASSWORD`, never from a command line.
 
-A separate, manually gated job that actually deletes, with a cap:
+Keep the dry run and the deletion separate. A job that deletes on a schedule is a job nobody
+reads the output of.
 
-```yaml
-nexus-cleanup-execute:
-  when: manual
-  container: ghcr.io/nushell/nushell:0.115.1-alpine
-  script:
-    - nu nexus-cleanup.nu --pattern 'yum-proxy-*' --keep 2 --max-deletions 500 --execute > cleanup.json
-  artifacts:
-    paths: [cleanup.json]
-```
+| CI system | File | Runs in | Approval before deleting |
+|---|---|---|---|
+| GitLab CI | `examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml` | the pinned Nushell image | a blocked manual job |
+| Forgejo Actions | `examples/forgejo/nexus-cleanup.yml` | a node image with Nushell installed by checksum | none; the cap is the guard |
+| Jenkins, Docker Pipeline plugin | `examples/jenkins/Jenkinsfile.docker-plugin` | the pinned Nushell image | an `input` step |
+| Jenkins, plain `sh` | `examples/jenkins/Jenkinsfile.sh` | the pinned Nushell image via `docker run` | an `input` step |
 
-Keep the two separate. A job that deletes on a schedule is a job nobody reads the output of.
+Two container details matter everywhere. The Nushell image's entrypoint is `nu`, so a CI system
+that runs a shell script in the container needs it cleared (`entrypoint: [""]` in GitLab,
+`args '--entrypoint='` for the Jenkins plugin). And Forgejo runs JavaScript actions such as
+checkout inside the job container, which the Nushell image cannot do because it has no node.
+
+Skipped groups (exit 4, with `--fail-on-skip`) and failed deletions (exit 1) are surfaced as
+warnings where the CI system has them: allowed failure in GitLab, unstable in Jenkins.
 
 ## Development
 
