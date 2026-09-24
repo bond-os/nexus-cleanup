@@ -236,3 +236,7 @@ nu tools/record-fixtures.nu --max-pages 1 …  # re-record fixtures from a live 
 ```
 
 See `AGENTS.md` for conventions and for the standing decisions behind the design.
+
+## License
+
+MIT; see `LICENSE`.
