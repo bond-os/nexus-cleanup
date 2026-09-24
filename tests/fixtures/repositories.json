@@ -1,0 +1,604 @@
+[
+  {
+    "name": "nuget-hosted",
+    "format": "nuget",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/nuget-hosted",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "yum-splunk-vendor",
+    "format": "yum",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/yum-splunk-vendor",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "raw-proxy-download.proxmox.com",
+    "format": "raw",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/raw-proxy-download.proxmox.com",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "http://download.proxmox.com/"
+      }
+    }
+  },
+  {
+    "name": "raw-iso",
+    "format": "raw",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/raw-iso",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "nuget.org-proxy",
+    "format": "nuget",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/nuget.org-proxy",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://REDACTED.nuget.org/v3/index.json"
+      }
+    }
+  },
+  {
+    "name": "nuget-group",
+    "format": "nuget",
+    "type": "group",
+    "url": "https://nexus.example.invalid/repository/nuget-group",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "maven-public",
+    "format": "maven2",
+    "type": "group",
+    "url": "https://nexus.example.invalid/repository/maven-public",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "maven-releases",
+    "format": "maven2",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/maven-releases",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "maven-snapshots",
+    "format": "maven2",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/maven-snapshots",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "maven-central",
+    "format": "maven2",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/maven-central",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://repo1.maven.org/maven2/"
+      }
+    }
+  },
+  {
+    "name": "docker-ghcr.io",
+    "format": "docker",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/docker-ghcr.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://ghcr.io"
+      }
+    }
+  },
+  {
+    "name": "docker-proxy-hub",
+    "format": "docker",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/docker-proxy-hub",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://registry-1.docker.io"
+      }
+    }
+  },
+  {
+    "name": "docker-group-public",
+    "format": "docker",
+    "type": "group",
+    "url": "https://nexus.example.invalid/repository/docker-group-public",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "docker-proxy-lscr.io",
+    "format": "docker",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/docker-proxy-lscr.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://lscr.io"
+      }
+    }
+  },
+  {
+    "name": "fedora-proxy",
+    "format": "yum",
+    "type": "group",
+    "url": "https://nexus.example.invalid/repository/fedora-proxy",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "fedora-current-proxy",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/fedora-current-proxy",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://dl.fedoraproject.org/pub/fedora/linux/"
+      }
+    }
+  },
+  {
+    "name": "fedora-archive-proxy",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/fedora-archive-proxy",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://archives.fedoraproject.org/pub/archive/fedora/linux/"
+      }
+    }
+  },
+  {
+    "name": "raw-download.fedoraproject.org",
+    "format": "raw",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/raw-download.fedoraproject.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://download.fedoraproject.org/"
+      }
+    }
+  },
+  {
+    "name": "raw-proxy_cloud-images.ubuntu.com",
+    "format": "raw",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/raw-proxy_cloud-images.ubuntu.com",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "http://cloud-images.ubuntu.com"
+      }
+    }
+  },
+  {
+    "name": "yum.puppetlabs.com-puppet7-el-9-x86_64",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum.puppetlabs.com-puppet7-el-9-x86_64",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://yum.puppetlabs.com/puppet7/el/9/x86_64/"
+      }
+    }
+  },
+  {
+    "name": "yum.puppetlabs.com",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum.puppetlabs.com",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://yum.puppetlabs.com/"
+      }
+    }
+  },
+  {
+    "name": "helm-traefik.github.io",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-traefik.github.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://traefik.github.io/charts"
+      }
+    }
+  },
+  {
+    "name": "helm-tailscale",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-tailscale",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://pkgs.tailscale.com/helmcharts"
+      }
+    }
+  },
+  {
+    "name": "helm-argoproj-github.io",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-argoproj-github.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://argoproj.github.io/argo-helm"
+      }
+    }
+  },
+  {
+    "name": "helm-jetstack.io",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-jetstack.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://charts.jetstack.io"
+      }
+    }
+  },
+  {
+    "name": "helm-jenkins-operator",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-jenkins-operator",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://raw.githubusercontent.com/jenkinsci/kubernetes-operator/master/chart"
+      }
+    }
+  },
+  {
+    "name": "helm-aureq-cert-manager-webhook-ovh",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-aureq-cert-manager-webhook-ovh",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://aureq.github.io/cert-manager-webhook-ovh/"
+      }
+    }
+  },
+  {
+    "name": "helm-jenkins",
+    "format": "helm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/helm-jenkins",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://charts.jenkins.io"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-download.vscodium.com",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-download.vscodium.com",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://download.vscodium.com/rpms/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-codecs.fedoraproject.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-codecs.fedoraproject.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://codecs.fedoraproject.org"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-packages.adoptium.net",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-packages.adoptium.net",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://packages.adoptium.net/artifactory/rpm/fedora/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-rpmfusion-nonfree-nvidia-driver",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-rpmfusion-nonfree-nvidia-driver",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "http://ftp.icm.edu.pl/pub/Linux/dist/rpmfusion/nonfree/fedora/nvidia-driver/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-rpmfusion-nonfree-steam",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-rpmfusion-nonfree-steam",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "http://ftp.icm.edu.pl/pub/Linux/dist/rpmfusion/nonfree/fedora/steam/"
+      }
+    }
+  },
+  {
+    "name": "pypi-proxy",
+    "format": "pypi",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/pypi-proxy",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://pypi.org"
+      }
+    }
+  },
+  {
+    "name": "docker-hosted-dev",
+    "format": "docker",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/docker-hosted-dev",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "conan-proxy-conan.io",
+    "format": "conan",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/conan-proxy-conan.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://center2.conan.io"
+      }
+    }
+  },
+  {
+    "name": "conan-hosted-internal",
+    "format": "conan",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/conan-hosted-internal",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "npm-proxy-npm",
+    "format": "npm",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/npm-proxy-npm",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://registry.npmjs.org"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-repo.almalinux.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-repo.almalinux.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://repo.almalinux.org/almalinux/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-resources.ovirt.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://resources.ovirt.org/pub/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-mirror.stream.centos.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-mirror.stream.centos.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://mirror.stream.centos.org/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-dl.fedoraproject.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-dl.fedoraproject.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://dl.fedoraproject.org/"
+      }
+    }
+  },
+  {
+    "name": "proxy-hg",
+    "format": "huggingface",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/proxy-hg",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://huggingface.co/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-fedora-epel",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-fedora-epel",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://ftp.icm.edu.pl/pub/Linux/dist/epel"
+      }
+    }
+  },
+  {
+    "name": "raw-proxy-repo.almalinux.org",
+    "format": "raw",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/raw-proxy-repo.almalinux.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://repo.almalinux.org/almalinux/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-vault.centos.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-vault.centos.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://vault.centos.org/"
+      }
+    }
+  },
+  {
+    "name": "raw-proxy-cloud.centos.org",
+    "format": "raw",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/raw-proxy-cloud.centos.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://cloud.centos.org/"
+      }
+    }
+  },
+  {
+    "name": "yum-proxy-archives.fedoraproject.org",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://archives.fedoraproject.org/"
+      }
+    }
+  },
+  {
+    "name": "apt-proxy-deb.debian.org",
+    "format": "apt",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "http://deb.debian.org/debian"
+      }
+    }
+  },
+  {
+    "name": "packer-bases",
+    "format": "raw",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/packer-bases",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  }
+]

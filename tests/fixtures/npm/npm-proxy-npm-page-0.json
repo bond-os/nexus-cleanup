@@ -1,0 +1,3705 @@
+{
+  "items": [
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0ZjFiYmNkZA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "json-schema-traverse",
+      "version": "1.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz",
+          "path": "/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbToxZmU2OGYxNA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "43285d29d54e81532440dc7482abf5b3",
+            "sha1": "ae7bcb3656ab77a73ba5c49bf654f38e6b6860e2"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.571+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6074,
+          "blobCreated": "2026-05-25T16:23:56.575+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.571+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "json-schema-traverse",
+            "version": "1.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo5ZTM3NzliYQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "inherits",
+      "version": "2.0.4",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/inherits/-/inherits-2.0.4.tgz",
+          "path": "/inherits/-/inherits-2.0.4.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkMGNhZDIzNw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "bf725b87e6485c1d9db0279cce76a4a7",
+            "sha1": "0fa2c64f932917c3433a0ded55363aae37416b7c"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.558+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2030,
+          "blobCreated": "2026-05-25T16:23:56.575+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.558+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "inherits",
+            "version": "2.0.4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTplZDUzMzY5Nw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "ajv-cli",
+      "version": "5.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/ajv-cli/-/ajv-cli-5.0.0.tgz",
+          "path": "/ajv-cli/-/ajv-cli-5.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo4MWFmMTU1YQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "4ccf34ec5b25c74e8488fd45357242d1",
+            "sha1": "78956ed2934e6dde4c9e696b587be1c2998862e8"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.564+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 35281,
+          "blobCreated": "2026-05-25T16:23:56.569+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.564+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "ajv-cli",
+            "version": "5.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozYzZlZjM3NA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "concat-map",
+      "version": "0.0.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/concat-map/-/concat-map-0.0.1.tgz",
+          "path": "/concat-map/-/concat-map-0.0.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozMjkzNTg3ZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "d11d2d19ce6c3d9326cb3e987e8bcd23",
+            "sha1": "d8a96bd77fd68df7793a73036a3ba0d5405d477b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.565+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2263,
+          "blobCreated": "2026-05-25T16:23:56.572+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.565+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "concat-map",
+            "version": "0.0.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4YjhhYjA1MQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "wrappy",
+      "version": "1.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/wrappy/-/wrappy-1.0.2.tgz",
+          "path": "/wrappy/-/wrappy-1.0.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo2ZjAyNGJmMQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "567b1699cfae49cb20f598571a6c90c7",
+            "sha1": "b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.562+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1676,
+          "blobCreated": "2026-05-25T16:23:56.605+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.562+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "wrappy",
+            "version": "1.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkYWE2NmQyZQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "path-is-absolute",
+      "version": "1.0.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/path-is-absolute/-/path-is-absolute-1.0.1.tgz",
+          "path": "/path-is-absolute/-/path-is-absolute-1.0.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplMzc3OWJhMA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "18bfccb10294ae19e7eb616ed1c05176",
+            "sha1": "174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.562+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1882,
+          "blobCreated": "2026-05-25T16:23:56.570+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.562+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "path-is-absolute",
+            "version": "1.0.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToyOWMyMmEwYg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fs.realpath",
+      "version": "1.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fs.realpath/-/fs.realpath-1.0.0.tgz",
+          "path": "/fs.realpath/-/fs.realpath-1.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1YzU1ODI4OA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9f790d7180667e1d8d1110f2cf321b62",
+            "sha1": "1504ad2523158caa40db4a2787cb01411994ea4f"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.573+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4434,
+          "blobCreated": "2026-05-25T16:23:56.611+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.573+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fs.realpath",
+            "version": "1.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo3OGRkZTZlOA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "once",
+      "version": "1.4.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/once/-/once-1.4.0.tgz",
+          "path": "/once/-/once-1.4.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpiZTFlMDhjZQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "fac2afc3cbe5e133d7a5c34ec3f862ac",
+            "sha1": "583b1aa775961d4b113ac17d9c50baef9dd76bd1"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.576+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1979,
+          "blobCreated": "2026-05-25T16:23:56.605+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.576+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "once",
+            "version": "1.4.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjN2Y5YTNjNQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "brace-expansion",
+      "version": "1.1.14",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/brace-expansion/-/brace-expansion-1.1.14.tgz",
+          "path": "/brace-expansion/-/brace-expansion-1.1.14.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5OGM0NzVmYw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9bc651e6838086fa154fe05b69154ab7",
+            "sha1": "d9de602370d91347cd9ddad1224d4fd701eb348b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.613+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4301,
+          "blobCreated": "2026-05-25T16:23:56.626+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.613+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "brace-expansion",
+            "version": "1.1.14"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxNzE1NjBhMg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "inflight",
+      "version": "1.0.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/inflight/-/inflight-1.0.6.tgz",
+          "path": "/inflight/-/inflight-1.0.6.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmYThjZmM0Mg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "dd31215ede2e0da80f8e31c9f93d8ace",
+            "sha1": "49bd6331d7d02d0c09bc910a1075ba8165b56df9"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.610+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2041,
+          "blobCreated": "2026-05-25T16:23:56.611+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.610+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "inflight",
+            "version": "1.0.6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2NjMxMWQ3Zg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "balanced-match",
+      "version": "1.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/balanced-match/-/balanced-match-1.0.2.tgz",
+          "path": "/balanced-match/-/balanced-match-1.0.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkMzljNWFi",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "eaa5cad5807df26bd8eb05ea4af19001",
+            "sha1": "e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.577+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2668,
+          "blobCreated": "2026-05-25T16:23:56.588+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.577+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "balanced-match",
+            "version": "1.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpiNTRjZGE1Yw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "argparse",
+      "version": "1.0.10",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/argparse/-/argparse-1.0.10.tgz",
+          "path": "/argparse/-/argparse-1.0.10.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphYjcxM2Y2NQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "d96ffb030eff598e8f3eb48b6257bdaf",
+            "sha1": "bcd6791ea5ae09725e17e5ad988134cd40b3d911"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.588+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 29761,
+          "blobCreated": "2026-05-25T16:23:56.608+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.588+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "argparse",
+            "version": "1.0.10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0Njg5NzM5",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "minimatch",
+      "version": "3.1.5",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/minimatch/-/minimatch-3.1.5.tgz",
+          "path": "/minimatch/-/minimatch-3.1.5.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0OWE4YjkxZg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "8175bf5c67629e7cd3bdc771458e4b5f",
+            "sha1": "580c88f8d5445f2bd6aa8f3cadefa0de79fbd69e"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.577+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 12860,
+          "blobCreated": "2026-05-25T16:23:56.619+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.577+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "minimatch",
+            "version": "3.1.5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo1Mzg0NTQxNg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "sprintf-js",
+      "version": "1.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/sprintf-js/-/sprintf-js-1.0.3.tgz",
+          "path": "/sprintf-js/-/sprintf-js-1.0.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplN2UwMzJkOQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "8e6b31a052754055683e4a35a317feab",
+            "sha1": "04e6926f662895354f3dd015203633b857297e2c"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.611+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10330,
+          "blobCreated": "2026-05-25T16:23:56.622+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.611+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "sprintf-js",
+            "version": "1.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphMmEwMTBmMw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "esprima",
+      "version": "4.0.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/esprima/-/esprima-4.0.1.tgz",
+          "path": "/esprima/-/esprima-4.0.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozNmZiZWZiNg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c9d44a818c324d707a81b08dd36cd079",
+            "sha1": "13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.627+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 52078,
+          "blobCreated": "2026-05-25T16:23:56.628+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.627+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "esprima",
+            "version": "4.0.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmMWJiY2RkMA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fast-deep-equal",
+      "version": "3.1.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz",
+          "path": "/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkNTMzNjk3MA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "3eb7d86abccbf3ebe982f49c602d3a3b",
+            "sha1": "3a7d56b559d6cbc3eb512325244e619a65c6c525"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.775+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3656,
+          "blobCreated": "2026-05-25T16:23:56.788+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.775+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fast-deep-equal",
+            "version": "3.1.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0MGQ3OGFhZA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "json-schema-migrate",
+      "version": "2.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/json-schema-migrate/-/json-schema-migrate-2.0.0.tgz",
+          "path": "/json-schema-migrate/-/json-schema-migrate-2.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo4NjE3YWM5Mw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "1912bae243bfa793a82b3280e9530b76",
+            "sha1": "335ef5218cd32fcc96c1ddce66c71ba586224496"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.790+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 8109,
+          "blobCreated": "2026-05-25T16:23:56.791+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.790+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "json-schema-migrate",
+            "version": "2.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4ZmYzNDc4YQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fast-json-patch",
+      "version": "2.2.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fast-json-patch/-/fast-json-patch-2.2.1.tgz",
+          "path": "/fast-json-patch/-/fast-json-patch-2.2.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbToyNDRmMjY0ZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9116e225d861d65f11cc84cac16c8ba2",
+            "sha1": "18150d36c9ab65c7209e7d4eb113f4f8eaabe6d9"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.796+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 26537,
+          "blobCreated": "2026-05-25T16:23:56.797+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.796+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fast-json-patch",
+            "version": "2.2.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkZjBmMDQ2Nw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fast-deep-equal",
+      "version": "2.0.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz",
+          "path": "/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo3MzZhZTMyYQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "214c8887f4f3082d8eabf58851071703",
+            "sha1": "7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.799+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2530,
+          "blobCreated": "2026-05-25T16:23:56.800+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.799+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fast-deep-equal",
+            "version": "2.0.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToyZTJhYzE0NA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "require-from-string",
+      "version": "2.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/require-from-string/-/require-from-string-2.0.2.tgz",
+          "path": "/require-from-string/-/require-from-string-2.0.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpjMjg2YTAwNw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "e9d1c952d6ae6a5eefc4ecc7f2a97f1a",
+            "sha1": "89a7fdd938261267318eafe14f9c32e598c36909"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.807+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1816,
+          "blobCreated": "2026-05-25T16:23:56.809+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.807+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "require-from-string",
+            "version": "2.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo3ZDQ2N2UyMQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fast-uri",
+      "version": "3.1.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fast-uri/-/fast-uri-3.1.2.tgz",
+          "path": "/fast-uri/-/fast-uri-3.1.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbToxMWEyNWNlNA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "8cfb96f22e6ccee489e07688f49f1307",
+            "sha1": "8af3d4fc9d3e71b11572cc2673b514a7d1a8c8ec"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.830+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 29039,
+          "blobCreated": "2026-05-25T16:23:56.833+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.830+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fast-uri",
+            "version": "3.1.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjYzYyM2FmZQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "minimist",
+      "version": "1.2.8",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/minimist/-/minimist-1.2.8.tgz",
+          "path": "/minimist/-/minimist-1.2.8.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo2MGJlMTljMQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "2085c7e50bb7d472def05c96d8c1c6dd",
+            "sha1": "c1a464e7693302e082a075cee0c057741ac4772c"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.832+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 15520,
+          "blobCreated": "2026-05-25T16:23:56.838+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.832+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "minimist",
+            "version": "1.2.8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxYjdkZjdkYg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "json5",
+      "version": "2.2.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/json5/-/json5-2.2.3.tgz",
+          "path": "/json5/-/json5-2.2.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphZmQ5ZDY5ZQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "fbd3e2521fc7e158e52ebcd27bd0dd96",
+            "sha1": "78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.855+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 50318,
+          "blobCreated": "2026-05-25T16:23:56.856+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.855+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "json5",
+            "version": "2.2.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2YTk5YjRiOA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "js-yaml",
+      "version": "3.14.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/js-yaml/-/js-yaml-3.14.2.tgz",
+          "path": "/js-yaml/-/js-yaml-3.14.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmZWY1OTM3Yg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "74800ce620c9ed521f5270c5d8e882aa",
+            "sha1": "77485ce1dd7f33c061fd1b16ecea23b55fcb04b0"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.853+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 72708,
+          "blobCreated": "2026-05-25T16:23:56.854+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.853+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "js-yaml",
+            "version": "3.14.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpiOWI1NzE5NQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "glob",
+      "version": "7.2.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/glob/-/glob-7.2.3.tgz",
+          "path": "/glob/-/glob-7.2.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0ZTExNTA1OA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "16222090f290ce18931eb40cec43fa2a",
+            "sha1": "b8df0fb802bbfa8e89bd1d938b4e16578ed44f2b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.873+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 15444,
+          "blobCreated": "2026-05-25T16:23:56.874+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.873+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "glob",
+            "version": "7.2.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4ZDEyZTcy",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "ajv",
+      "version": "8.20.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/ajv/-/ajv-8.20.0.tgz",
+          "path": "/ajv/-/ajv-8.20.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5ZDJkMGQzNQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "cbff484acc116050e02a5fa79f3520ae",
+            "sha1": "304b3636add88ba7d936760dd50ece006dea95f9"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:23:56.889+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 217611,
+          "blobCreated": "2026-05-25T16:23:56.890+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:23:56.889+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "ajv",
+            "version": "8.20.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo1N2VjZWI0Zg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "shebang-regex",
+      "version": "3.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/shebang-regex/-/shebang-regex-3.0.0.tgz",
+          "path": "/shebang-regex/-/shebang-regex-3.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpiZDEzOWM0OQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "800d00b53670160a44fa6116b1cbb6e5",
+            "sha1": "ae16f1644d873ecad843b0307b143362d4c42172"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.523+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1503,
+          "blobCreated": "2026-05-25T16:27:05.531+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.523+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "shebang-regex",
+            "version": "3.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphNzA4YTgyYw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "uuid",
+      "version": "13.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/uuid/-/uuid-13.0.2.tgz",
+          "path": "/uuid/-/uuid-13.0.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1YjRiMTYwMw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "8348de87e3438f90186cb40835c5a7de",
+            "sha1": "41bc9c07b12f665089c205f6507976adbdf84ff8"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.617+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 15677,
+          "blobCreated": "2026-05-25T16:27:05.662+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.617+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "uuid",
+            "version": "13.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmNjI0NjUwOQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "isexe",
+      "version": "2.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/isexe/-/isexe-2.0.0.tgz",
+          "path": "/isexe/-/isexe-2.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpjMmY1OTI2",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "02bf57881fa200bcd6501e4ded2b1b3a",
+            "sha1": "e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.585+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3756,
+          "blobCreated": "2026-05-25T16:27:05.590+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.585+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "isexe",
+            "version": "2.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0NTQwMjFlNg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "standard-schema",
+      "name": "spec",
+      "version": "1.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@standard-schema/spec/-/spec-1.1.0.tgz",
+          "path": "/@standard-schema/spec/-/spec-1.1.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphYTY2ZDJlMA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "27fc3dea240ff539f9c15d30f5b00c59",
+            "sha1": "a79b55dbaf8604812f52d140b2c9ab41bc150bb8"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.682+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4178,
+          "blobCreated": "2026-05-25T16:27:05.683+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.682+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@standard-schema/spec",
+            "version": "1.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo5NDViZGVjMw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "ini",
+      "version": "6.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/ini/-/ini-6.0.0.tgz",
+          "path": "/ini/-/ini-6.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmOTgyOGZiZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "5c301204ff073afd4db232719f75bc81",
+            "sha1": "efc7642b276f6a37d22fdf56ef50889d7146bf30"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.722+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4910,
+          "blobCreated": "2026-05-25T16:27:05.737+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.722+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "ini",
+            "version": "6.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTplMzc3OWJhMA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "toml",
+      "version": "4.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/toml/-/toml-4.1.1.tgz",
+          "path": "/toml/-/toml-4.1.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplNmQ1YzY1NA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "37597af349589c5c38444f23ef804574",
+            "sha1": "ab8248d0403ba2c02ffcf8515b42f0dcf0d6d1b5"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.736+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 15997,
+          "blobCreated": "2026-05-25T16:27:05.755+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.736+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "toml",
+            "version": "4.1.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozMjkzNTg3ZA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "detect-libc",
+      "version": "2.1.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/detect-libc/-/detect-libc-2.1.2.tgz",
+          "path": "/detect-libc/-/detect-libc-2.1.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5N2JhMDk3Nw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "61645d5d2151068dd2678c31c1c30bd3",
+            "sha1": "689c5dcdc1900ef5583a4cb9f6d7b473742074ad"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.726+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7776,
+          "blobCreated": "2026-05-25T16:27:05.766+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.726+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "detect-libc",
+            "version": "2.1.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4MWFmMTU1YQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "path-key",
+      "version": "3.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/path-key/-/path-key-3.1.1.tgz",
+          "path": "/path-key/-/path-key-3.1.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0ODllNGM5YQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "4f4b9beb2d53481341e16133a8570dc5",
+            "sha1": "581f6ade658cbba65a0d3380de7753295054f375"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.694+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2258,
+          "blobCreated": "2026-05-25T16:27:05.699+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.694+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "path-key",
+            "version": "3.1.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkMGNhZDIzNw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "msgpackr-extract",
+      "name": "msgpackr-extract-win32-x64",
+      "version": "3.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz",
+          "path": "/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo4NTBkNDAwZQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "f31a9271b1dfc0a725a39627a9a77cc8",
+            "sha1": "0aa5502d547b57abfc4ac492de68e2006e417242"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.794+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 116212,
+          "blobCreated": "2026-05-25T16:27:05.816+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.794+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@msgpackr-extract/msgpackr-extract-win32-x64",
+            "version": "3.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxZmU2OGYxNA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "msgpackr",
+      "version": "1.11.12",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/msgpackr/-/msgpackr-1.11.12.tgz",
+          "path": "/msgpackr/-/msgpackr-1.11.12.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkNDI4ZmNlYg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "3a537d0bc82f37cb6826b7f373e346cb",
+            "sha1": "52ca309b13a66f05443413794ab37bb6217a4425"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.796+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 432614,
+          "blobCreated": "2026-05-25T16:27:05.829+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.796+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "msgpackr",
+            "version": "1.11.12"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2ZjAyNGJmMQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "find-my-way-ts",
+      "version": "0.1.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/find-my-way-ts/-/find-my-way-ts-0.1.6.tgz",
+          "path": "/find-my-way-ts/-/find-my-way-ts-0.1.6.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo3MjYwNzZhNQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "050effcf7394f2b2b461d078f2e21c50",
+            "sha1": "37f7b8433d0f61e7fe7290772240b0c133b0ebf2"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.798+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 30903,
+          "blobCreated": "2026-05-25T16:27:05.807+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.798+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "find-my-way-ts",
+            "version": "0.1.6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpiZTFlMDhjZQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "kubernetes-types",
+      "version": "1.30.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/kubernetes-types/-/kubernetes-types-1.30.0.tgz",
+          "path": "/kubernetes-types/-/kubernetes-types-1.30.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozNWYxODMzMQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "4dae38627d906774c93724a531c0b7a4",
+            "sha1": "f686cacb08ffc5f7e89254899c2153c723420116"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.799+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 159130,
+          "blobCreated": "2026-05-25T16:27:05.813+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.799+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "kubernetes-types",
+            "version": "1.30.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkMzljNWFi",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "cross-spawn",
+      "version": "7.0.6",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/cross-spawn/-/cross-spawn-7.0.6.tgz",
+          "path": "/cross-spawn/-/cross-spawn-7.0.6.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpjMTdjMzM4Mg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "b76f050df520bf00e6b77a6298f27f36",
+            "sha1": "8a58fe78f00dcd70c370451759dfbfaf03e8ee9f"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.839+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6255,
+          "blobCreated": "2026-05-25T16:27:05.847+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.839+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "cross-spawn",
+            "version": "7.0.6"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo1YzU1ODI4OA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "node-gyp-build-optional-packages",
+      "version": "5.2.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/node-gyp-build-optional-packages/-/node-gyp-build-optional-packages-5.2.2.tgz",
+          "path": "/node-gyp-build-optional-packages/-/node-gyp-build-optional-packages-5.2.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbToxMDk3ZjA1Zg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c8df298b94a2ec3173ebc651c9d82d77",
+            "sha1": "522f50c2d53134d7f3a76cd7255de4ab6c96a3a4"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.845+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5710,
+          "blobCreated": "2026-05-25T16:27:05.848+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.845+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "node-gyp-build-optional-packages",
+            "version": "5.2.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphYjcxM2Y2NQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "which",
+      "version": "2.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/which/-/which-2.0.2.tgz",
+          "path": "/which/-/which-2.0.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbToyMzQ0YjljOA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9556a736013ff5223cc9731d9f32b55f",
+            "sha1": "7c6a8dd0a636a0327e10b59c9286eee93f3f51b1"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.843+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4496,
+          "blobCreated": "2026-05-25T16:27:05.844+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.843+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "which",
+            "version": "2.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmYThjZmM0Mg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "multipasta",
+      "version": "0.2.7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/multipasta/-/multipasta-0.2.7.tgz",
+          "path": "/multipasta/-/multipasta-0.2.7.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1ZmIzYWQzYw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "e88e5d88f0dd012f050919e6a04aeca0",
+            "sha1": "fa8fb38be65eb951fa57cad9e8e758107946eee9"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.905+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 29225,
+          "blobCreated": "2026-05-25T16:27:05.906+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.905+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "multipasta",
+            "version": "0.2.7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0OWE4YjkxZg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "pure-rand",
+      "version": "8.4.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/pure-rand/-/pure-rand-8.4.0.tgz",
+          "path": "/pure-rand/-/pure-rand-8.4.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphZWNmNmExOQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "483757ee7267fe7fed09117242071da7",
+            "sha1": "1d9e26e9c0555486e08ae300d02796af8dec1cd0"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.954+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 14795,
+          "blobCreated": "2026-05-25T16:27:05.956+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.954+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "pure-rand",
+            "version": "8.4.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo5OGM0NzVmYw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fast-check",
+      "version": "4.8.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fast-check/-/fast-check-4.8.0.tgz",
+          "path": "/fast-check/-/fast-check-4.8.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmZGViMjZmNg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "7a9ed01e8c24189e043f1292b55eb1e7",
+            "sha1": "75687d3c8059441fee4a58a8acc9be09b85aff78"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.963+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 311786,
+          "blobCreated": "2026-05-25T16:27:05.968+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.963+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fast-check",
+            "version": "4.8.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTplN2UwMzJkOQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "shebang-command",
+      "version": "2.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/shebang-command/-/shebang-command-2.0.0.tgz",
+          "path": "/shebang-command/-/shebang-command-2.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0ZDA2ZTNkMw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "aa7675df57afd8404d9aaa55e659f7a8",
+            "sha1": "ccd0af4f8835fbdc265b82461aaf0c36663f34ea"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.967+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1506,
+          "blobCreated": "2026-05-25T16:27:05.975+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.967+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "shebang-command",
+            "version": "2.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozNmZiZWZiNg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "kilocode",
+      "name": "plugin",
+      "version": "7.3.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@kilocode/plugin/-/plugin-7.3.0.tgz",
+          "path": "/@kilocode/plugin/-/plugin-7.3.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplYjNlNWQ4ZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "d64feef76eb7d14152bbd205eecbc022",
+            "sha1": "a12cc8f272d75cb592fada12148ac6575c1a62c5"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.989+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7453,
+          "blobCreated": "2026-05-25T16:27:05.992+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.989+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@kilocode/plugin",
+            "version": "7.3.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4NjE3YWM5Mw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "msgpackr-extract",
+      "version": "3.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/msgpackr-extract/-/msgpackr-extract-3.0.3.tgz",
+          "path": "/msgpackr-extract/-/msgpackr-extract-3.0.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5YzIyYTBiMA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "1d5892900c46e5247cfb758cb67f799d",
+            "sha1": "e9d87023de39ce714872f9e9504e3c1996d61012"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:05.983+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5000,
+          "blobCreated": "2026-05-25T16:27:05.985+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:05.983+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "msgpackr-extract",
+            "version": "3.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkNTMzNjk3MA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "kilocode",
+      "name": "sdk",
+      "version": "7.3.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@kilocode/sdk/-/sdk-7.3.0.tgz",
+          "path": "/@kilocode/sdk/-/sdk-7.3.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozYTVhMWE2YQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "0c670ca528bf5fcaefde81d2bbd51bd9",
+            "sha1": "1f24382b0614dd7c59d57617eca5f5f8299bf95f"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:06.063+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 92202,
+          "blobCreated": "2026-05-25T16:27:06.093+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:06.063+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@kilocode/sdk",
+            "version": "7.3.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToyNDRmMjY0ZA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "zod",
+      "version": "4.1.8",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/zod/-/zod-4.1.8.tgz",
+          "path": "/zod/-/zod-4.1.8.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo4OTc1ZDc0Nw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "71fbbd0645f048b691e97eb67e9d3393",
+            "sha1": "54f024adc634dd185006a8415da2bdd495b9d92b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:06.132+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 639838,
+          "blobCreated": "2026-05-25T16:27:06.134+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:06.132+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "zod",
+            "version": "4.1.8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo3MzZhZTMyYQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "effect",
+      "version": "4.0.0-beta.57",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/effect/-/effect-4.0.0-beta.57.tgz",
+          "path": "/effect/-/effect-4.0.0-beta.57.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkODkxOTQyNA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "d397dde84a1447ddc4913501d378d21d",
+            "sha1": "6083946072368a075cedc7be9272f00838ca5deb"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T16:27:06.593+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7656633,
+          "blobCreated": "2026-05-25T16:27:06.594+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T16:27:06.593+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "effect",
+            "version": "4.0.0-beta.57"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjMjg2YTAwNw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "emoji-regex",
+      "version": "10.6.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/emoji-regex/-/emoji-regex-10.6.0.tgz",
+          "path": "/emoji-regex/-/emoji-regex-10.6.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpjOTQyZjU2Zg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c3ff2fc21db06211834bacfbb2447ee4",
+            "sha1": "bf3d6e8f7f8fd22a65d9703475bc0147357a6b0d"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.219+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5610,
+          "blobCreated": "2026-05-25T19:12:11.219+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.219+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "emoji-regex",
+            "version": "10.6.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxMWEyNWNlNA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "get-east-asian-width",
+      "version": "1.6.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/get-east-asian-width/-/get-east-asian-width-1.6.0.tgz",
+          "path": "/get-east-asian-width/-/get-east-asian-width-1.6.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbToxODVlYjI0Yw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "26ac0b5a5a86ce98b1112eaa128a06c1",
+            "sha1": "216900f91df11a8b2c198c3e1d93d6c035a776b9"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.227+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5310,
+          "blobCreated": "2026-05-25T19:12:11.230+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.227+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "get-east-asian-width",
+            "version": "1.6.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2MGJlMTljMQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "ansi-regex",
+      "version": "6.2.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/ansi-regex/-/ansi-regex-6.2.2.tgz",
+          "path": "/ansi-regex/-/ansi-regex-6.2.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo2NzdhNmYyOQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c85f5324dc3cec1f3f50ffe5cdf0d190",
+            "sha1": "60216eea464d864597ce2832000738a0589650c1"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.238+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2880,
+          "blobCreated": "2026-05-25T19:12:11.239+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.238+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "ansi-regex",
+            "version": "6.2.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphZmQ5ZDY5ZQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "queue-microtask",
+      "version": "1.2.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/queue-microtask/-/queue-microtask-1.2.3.tgz",
+          "path": "/queue-microtask/-/queue-microtask-1.2.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1YjFlOGUz",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "8a62daae67a615b3f97c843906e875dd",
+            "sha1": "4929228bbc724dfac43e0efb058caf7b6cfb6243"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.247+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3676,
+          "blobCreated": "2026-05-25T19:12:11.249+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.247+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "queue-microtask",
+            "version": "1.2.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmZWY1OTM3Yg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "onetime",
+      "version": "7.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/onetime/-/onetime-7.0.0.tgz",
+          "path": "/onetime/-/onetime-7.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpiNjk2MmMwNg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "bd4ffbef2e989b933d43b39e5930b945",
+            "sha1": "9f16c92d8c9ef5120e3acd9dd9957cceecc1ab60"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.246+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2366,
+          "blobCreated": "2026-05-25T19:12:11.249+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.246+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "onetime",
+            "version": "7.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0ZTExNTA1OA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "posthog",
+      "name": "types",
+      "version": "1.376.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@posthog/types/-/types-1.376.0.tgz",
+          "path": "/@posthog/types/-/types-1.376.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1NGNkYTVjMA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "f456cff7631095d9e6cffc54c890f2bb",
+            "sha1": "e69201709db3baee4caaf9b95c06e7d294ff2c9a"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.301+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 58429,
+          "blobCreated": "2026-05-25T19:12:11.302+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.301+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@posthog/types",
+            "version": "1.376.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo5ZDJkMGQzNQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "mimic-function",
+      "version": "5.0.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/mimic-function/-/mimic-function-5.0.1.tgz",
+          "path": "/mimic-function/-/mimic-function-5.0.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphM2U5NjI5ZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "6548b59284bcfbf04a4836f0cec2f4bb",
+            "sha1": "acbe2b3349f99b9deaca7fb70e48b83e94e67076"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.370+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3203,
+          "blobCreated": "2026-05-25T19:12:11.372+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.370+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "mimic-function",
+            "version": "5.0.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTplYzQ4Y2ExMg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "is-unicode-supported",
+      "version": "1.3.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/is-unicode-supported/-/is-unicode-supported-1.3.0.tgz",
+          "path": "/is-unicode-supported/-/is-unicode-supported-1.3.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmMzA1MWY3YQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "24d8c747015d8454b086b81643e01d0f",
+            "sha1": "d824984b616c292a2e198207d4a609983842f714"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.423+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1973,
+          "blobCreated": "2026-05-25T19:12:11.424+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.423+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "is-unicode-supported",
+            "version": "1.3.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozYjY0ODZlZg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "log-symbols",
+      "version": "6.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/log-symbols/-/log-symbols-6.0.0.tgz",
+          "path": "/log-symbols/-/log-symbols-6.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0MjIwZGM1Nw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c55c4646169b2d693a159752bf482422",
+            "sha1": "bb95e5f05322651cac30c0feb6404f9f2a8a9439"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.434+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2029,
+          "blobCreated": "2026-05-25T19:12:11.436+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.434+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "log-symbols",
+            "version": "6.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4YTgwNDNjYw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "run-parallel",
+      "version": "1.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/run-parallel/-/run-parallel-1.2.0.tgz",
+          "path": "/run-parallel/-/run-parallel-1.2.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5MTNjOTkzNA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "e383fc0a7d63e95a9d599c6b765851e3",
+            "sha1": "66d1368da7bdf921eb9d95bd1a9229e7f21a43ee"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.444+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2813,
+          "blobCreated": "2026-05-25T19:12:11.445+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.444+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "run-parallel",
+            "version": "1.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkOTljMDBhOQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "string-width",
+      "version": "7.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/string-width/-/string-width-7.2.0.tgz",
+          "path": "/string-width/-/string-width-7.2.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo3ZThmY2ZjYg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9dd1143de80f22977243071d6cb88dc0",
+            "sha1": "b5bb8e2165ce275d4d43476dd2700ad9091db6dc"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.448+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2989,
+          "blobCreated": "2026-05-25T19:12:11.460+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.448+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "string-width",
+            "version": "7.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToyOGI3YmQ4Ng",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "strip-ansi",
+      "version": "7.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/strip-ansi/-/strip-ansi-7.2.0.tgz",
+          "path": "/strip-ansi/-/strip-ansi-7.2.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphMWE4MDFj",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "7a61412e90096bf73749e7408221ff6d",
+            "sha1": "d22a269522836a627af8d04b5c3fd2c7fa3e32e3"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.452+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2156,
+          "blobCreated": "2026-05-25T19:12:11.460+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.452+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "strip-ansi",
+            "version": "7.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo3N2QzN2E2Mw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "restore-cursor",
+      "version": "5.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/restore-cursor/-/restore-cursor-5.1.0.tgz",
+          "path": "/restore-cursor/-/restore-cursor-5.1.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplMDU4NTYxMQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "007823d54c7e95c659b060dcf6cc9737",
+            "sha1": "0766d95699efacb14150993f55baf0953ea1ebe7"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.451+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1684,
+          "blobCreated": "2026-05-25T19:12:11.452+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.451+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "restore-cursor",
+            "version": "5.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjNmVmMzc0MA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "cli-cursor",
+      "version": "5.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/cli-cursor/-/cli-cursor-5.0.0.tgz",
+          "path": "/cli-cursor/-/cli-cursor-5.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpiYWZlYzMzZg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9f1ba427f9d1bf08ecc7751a0ec7f564",
+            "sha1": "24a4831ecf5a6b01ddeb32fb71a4b2088b0dce38"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.468+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1927,
+          "blobCreated": "2026-05-25T19:12:11.488+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.468+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "cli-cursor",
+            "version": "5.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxNjBhZjQxZA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "is-interactive",
+      "version": "2.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/is-interactive/-/is-interactive-2.0.0.tgz",
+          "path": "/is-interactive/-/is-interactive-2.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbToxY2M3NDk4NQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "b1c35e17b5f276648c68724a99a34949",
+            "sha1": "40c57614593826da1100ade6059778d597f16e90"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.469+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2391,
+          "blobCreated": "2026-05-25T19:12:11.470+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.469+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "is-interactive",
+            "version": "2.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2NTI2YjBmYQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "cli-spinners",
+      "version": "2.9.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/cli-spinners/-/cli-spinners-2.9.2.tgz",
+          "path": "/cli-spinners/-/cli-spinners-2.9.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbToyZjc0MTJlZQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "7f2a4584c1351652ae10872b7da44aac",
+            "sha1": "1773a8f4b9c4d6ac31563df53b3fc1d79462fe41"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.462+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6598,
+          "blobCreated": "2026-05-25T19:12:11.463+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.462+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "cli-spinners",
+            "version": "2.9.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpiNDQyNmRkNw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "picomatch",
+      "version": "2.3.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/picomatch/-/picomatch-2.3.2.tgz",
+          "path": "/picomatch/-/picomatch-2.3.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpjZGFiOGNhOA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "53e3353722fc7057af3d31fe0c122e51",
+            "sha1": "5a942915e26b372dc0f0e6753149a16e6b1c5601"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.476+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 23492,
+          "blobCreated": "2026-05-25T19:12:11.486+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.476+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "picomatch",
+            "version": "2.3.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozNWUyYWI0",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "is-unicode-supported",
+      "version": "2.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/is-unicode-supported/-/is-unicode-supported-2.1.0.tgz",
+          "path": "/is-unicode-supported/-/is-unicode-supported-2.1.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo2YmUzMDY2Mg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "1279f72ea203f1522e15aa06a312fac1",
+            "sha1": "09f0ab0de6d3744d48d265ebb98f65d11f2a9b3a"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.486+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2048,
+          "blobCreated": "2026-05-25T19:12:11.492+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.486+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "is-unicode-supported",
+            "version": "2.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo1Mjc5ZTc5MQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fastq",
+      "version": "1.20.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fastq/-/fastq-1.20.1.tgz",
+          "path": "/fastq/-/fastq-1.20.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1OTM2M2NmOQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "27abc632b62957685a4d487451a36396",
+            "sha1": "ca750a10dc925bc8b18839fd203e3ef4b3ced675"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.552+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 9885,
+          "blobCreated": "2026-05-25T19:12:11.553+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.552+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fastq",
+            "version": "1.20.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphMTk1YTQ2ZQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "nodelib",
+      "name": "fs.scandir",
+      "version": "2.1.5",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz",
+          "path": "/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphODUxZjlkNg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c9f11aab0960639af613b80dfaf5a981",
+            "sha1": "7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.573+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6586,
+          "blobCreated": "2026-05-25T19:12:11.577+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.573+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@nodelib/fs.scandir",
+            "version": "2.1.5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmMGIxNjE0Yg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "fission-ai",
+      "name": "openspec",
+      "version": "1.3.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@fission-ai/openspec/-/openspec-1.3.1.tgz",
+          "path": "/@fission-ai/openspec/-/openspec-1.3.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmNzZkYjZiMw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "e7414c6daa1d47bae20b1bc4513669c3",
+            "sha1": "4127b7f84944d7624df0655923d1db75d8fbb332"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.602+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 210479,
+          "blobCreated": "2026-05-25T19:12:11.603+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.602+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@fission-ai/openspec",
+            "version": "1.3.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozZmNkMWUyOA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "stdin-discarder",
+      "version": "0.2.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/stdin-discarder/-/stdin-discarder-0.2.2.tgz",
+          "path": "/stdin-discarder/-/stdin-discarder-0.2.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0Njg5NzM5MA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "3a3f8f921b69416e745f178444c52796",
+            "sha1": "390037f44c4ae1a1ae535c5fe38dc3aba8d997be"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.631+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2072,
+          "blobCreated": "2026-05-25T19:12:11.632+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.631+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "stdin-discarder",
+            "version": "0.2.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4ZWU4ZGIwNQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "nodelib",
+      "name": "fs.stat",
+      "version": "2.0.5",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@nodelib/fs.stat/-/fs.stat-2.0.5.tgz",
+          "path": "/@nodelib/fs.stat/-/fs.stat-2.0.5.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5NWE1MzA2ZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "6b6637b1a5d58b964c8a8d99ccf544e6",
+            "sha1": "5bd262af94e9d25bd1e71b05deed44876a222e8b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.638+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4182,
+          "blobCreated": "2026-05-25T19:12:11.639+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.638+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@nodelib/fs.stat",
+            "version": "2.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpkZTA0OTdlMg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "merge2",
+      "version": "1.4.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/merge2/-/merge2-1.4.1.tgz",
+          "path": "/merge2/-/merge2-1.4.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozM2RjYWEyNw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c12134c7445659565a4c87de0f84639e",
+            "sha1": "4368892f885e907455a6fd7dc55c0c9d404990ae"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.647+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3409,
+          "blobCreated": "2026-05-25T19:12:11.655+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.647+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "merge2",
+            "version": "1.4.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToyZDIwNTRiZg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "chardet",
+      "version": "2.1.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/chardet/-/chardet-2.1.1.tgz",
+          "path": "/chardet/-/chardet-2.1.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplNGMwZWQ0YQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9f810fe172261f5136edff81ca8789a7",
+            "sha1": "5c75593704a642f71ee53717df234031e65373c8"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.656+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 23502,
+          "blobCreated": "2026-05-25T19:12:11.657+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.656+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "chardet",
+            "version": "2.1.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo3YzNjMTE5Yw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "nodelib",
+      "name": "fs.walk",
+      "version": "1.2.8",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@nodelib/fs.walk/-/fs.walk-1.2.8.tgz",
+          "path": "/@nodelib/fs.walk/-/fs.walk-1.2.8.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo4MmY4NjcwNA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "c5d178aeb76a1653bf62415b8ac99364",
+            "sha1": "e95737e8bb6746ddedf69c556953494f196fe69a"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.668+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7360,
+          "blobCreated": "2026-05-25T19:12:11.672+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.668+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@nodelib/fs.walk",
+            "version": "1.2.8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjYjU3Y2U3OQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "reusify",
+      "version": "1.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/reusify/-/reusify-1.1.0.tgz",
+          "path": "/reusify/-/reusify-1.1.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbToyMTJmZTBiZQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "0c401038764fd2aeff3e7151d7061fbb",
+            "sha1": "0fe13b9522e1473f51b558ee796e08f11f9b489f"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.695+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4683,
+          "blobCreated": "2026-05-25T19:12:11.696+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.695+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "reusify",
+            "version": "1.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxYTczOGI1Ng",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "search",
+      "version": "3.2.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/search/-/search-3.2.2.tgz",
+          "path": "/@inquirer/search/-/search-3.2.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkMjE0MjNlMQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "7702c2a33736fb0241adee92bf1ae796",
+            "sha1": "4cc6fd574dcd434e4399badc37c742c3fd534ac8"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.697+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7146,
+          "blobCreated": "2026-05-25T19:12:11.698+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.697+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/search",
+            "version": "3.2.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2OThmNDgzMw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "external-editor",
+      "version": "1.0.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/external-editor/-/external-editor-1.0.3.tgz",
+          "path": "/@inquirer/external-editor/-/external-editor-1.0.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo3MDRiOWQ5Yg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "90990dbae2f9b2f1f794fb130c88c905",
+            "sha1": "c23988291ee676290fdab3fd306e64010a6d13b8"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.732+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6731,
+          "blobCreated": "2026-05-25T19:12:11.733+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.732+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/external-editor",
+            "version": "1.0.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpiOGFiMDUxMA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "iconv-lite",
+      "version": "0.7.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/iconv-lite/-/iconv-lite-0.7.2.tgz",
+          "path": "/iconv-lite/-/iconv-lite-0.7.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplODMxNzU1",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "140379159fa2387ca1557eb82d2afd99",
+            "sha1": "d0bdeac3f12b4835b7359c2ad89c422a4d1cc72e"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.757+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 189646,
+          "blobCreated": "2026-05-25T19:12:11.757+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.757+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "iconv-lite",
+            "version": "0.7.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo3YzZjMWVk",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "posthog",
+      "name": "core",
+      "version": "1.29.9",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@posthog/core/-/core-1.29.9.tgz",
+          "path": "/@posthog/core/-/core-1.29.9.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo1ZDllZDQzMg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "f5ffd9a5d3eadc459194b7a18478b9df",
+            "sha1": "58133ce5d21ff21574f3629e227df766ccab6a6e"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.762+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 226317,
+          "blobCreated": "2026-05-25T19:12:11.770+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.762+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@posthog/core",
+            "version": "1.29.9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo1NmUyN2VjYQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "input",
+      "version": "4.3.1",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/input/-/input-4.3.1.tgz",
+          "path": "/@inquirer/input/-/input-4.3.1.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpiZjY3NWE3OA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "dbeae60c1921183e133e1a086ee2b527",
+            "sha1": "778683b4c4c4d95d05d4b05c4a854964b73565b4"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.762+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4741,
+          "blobCreated": "2026-05-25T19:12:11.765+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.762+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/input",
+            "version": "4.3.1"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphNWZlM2JhNw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "rawlist",
+      "version": "4.1.11",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/rawlist/-/rawlist-4.1.11.tgz",
+          "path": "/@inquirer/rawlist/-/rawlist-4.1.11.tgz",
+          "id": "bnBtLXByb3h5LW5wbTphY2JhOTEwZg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "9bda068dff2ea4346db6a5f120a20497",
+            "sha1": "313c8c3ffccb7d41e990c606465726b4a898a033"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.790+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5091,
+          "blobCreated": "2026-05-25T19:12:11.792+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.790+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/rawlist",
+            "version": "4.1.11"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmNTE5Zjg4NA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "number",
+      "version": "3.0.23",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/number/-/number-3.0.23.tgz",
+          "path": "/@inquirer/number/-/number-3.0.23.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0YWYyMGFjOQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "e584804caf9d6ffac3e9225e49c1cffb",
+            "sha1": "3fdec2540d642093fd7526818fd8d4bdc7335094"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.836+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4550,
+          "blobCreated": "2026-05-25T19:12:11.836+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.836+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/number",
+            "version": "3.0.23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0NDM1YjU2MQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "password",
+      "version": "4.0.23",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/password/-/password-4.0.23.tgz",
+          "path": "/@inquirer/password/-/password-4.0.23.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5YTBkYzdhNg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "7957c441c0d90e9aad08b0d3d52d048e",
+            "sha1": "b9f5187c8c92fd7aa9eceb9d8f2ead0d7e7b000d"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.830+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3775,
+          "blobCreated": "2026-05-25T19:12:11.830+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.830+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/password",
+            "version": "4.0.23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo5MzUxNzIzZQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "confirm",
+      "version": "5.1.21",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/confirm/-/confirm-5.1.21.tgz",
+          "path": "/@inquirer/confirm/-/confirm-5.1.21.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpmYmQ2NGRlYw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "55e98214df22a0c98564d0268c8a5392",
+            "sha1": "610c4acd7797d94890a6e2dde2c98eb1e891dd12"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.831+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3424,
+          "blobCreated": "2026-05-25T19:12:11.832+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.831+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/confirm",
+            "version": "5.1.21"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTplMjZkMmYxYg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "yoctocolors-cjs",
+      "version": "2.1.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/yoctocolors-cjs/-/yoctocolors-cjs-2.1.3.tgz",
+          "path": "/yoctocolors-cjs/-/yoctocolors-cjs-2.1.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozODQ1NDE2MA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "8777c1de7e8deb1b77fa8c25a92437ca",
+            "sha1": "7e4964ea8ec422b7a40ac917d3a344cfd2304baa"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.866+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4092,
+          "blobCreated": "2026-05-25T19:12:11.867+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.866+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "yoctocolors-cjs",
+            "version": "2.1.3"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTozMTg4ZWJmOA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "checkbox",
+      "version": "4.3.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/checkbox/-/checkbox-4.3.2.tgz",
+          "path": "/@inquirer/checkbox/-/checkbox-4.3.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplOTI5ODQ4Mw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "f836a323afad7860bac01ce08efe8f0d",
+            "sha1": "e1483e6519d6ffef97281a54d2a5baa0d81b3f3b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.867+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 7242,
+          "blobCreated": "2026-05-25T19:12:11.868+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.867+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/checkbox",
+            "version": "4.3.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo4MGE0YThkNQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "wrap-ansi",
+      "version": "6.2.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/wrap-ansi/-/wrap-ansi-6.2.0.tgz",
+          "path": "/wrap-ansi/-/wrap-ansi-6.2.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo4NzYwZmUzZA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "f8917d0c5de3cfd4ab98a235260b3951",
+            "sha1": "e9393ba07102e6c91a3b221478f0257cd2856e53"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.889+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4004,
+          "blobCreated": "2026-05-25T19:12:11.890+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.889+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "wrap-ansi",
+            "version": "6.2.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjZmMwNjViMg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "select",
+      "version": "4.4.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/select/-/select-4.4.2.tgz",
+          "path": "/@inquirer/select/-/select-4.4.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpkNjdjYmIxYQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "fc0881c0a92463cac51a2b2ccdb0ecbc",
+            "sha1": "2ac8fca960913f18f1d1b35323ed8fcd27d89323"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.890+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6814,
+          "blobCreated": "2026-05-25T19:12:11.891+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.890+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/select",
+            "version": "4.4.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbToxZWRjMjI4Zg",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "type",
+      "version": "3.0.10",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/type/-/type-3.0.10.tgz",
+          "path": "/@inquirer/type/-/type-3.0.10.tgz",
+          "id": "bnBtLXByb3h5LW5wbToyNTk4NzdmNw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "1776c24eb60463c0157c415c9178a131",
+            "sha1": "11ed564ec78432a200ea2601a212d24af8150d50"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.906+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3385,
+          "blobCreated": "2026-05-25T19:12:11.907+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.906+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/type",
+            "version": "3.0.10"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo2ZGY3ZGY2Yw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "mute-stream",
+      "version": "2.0.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/mute-stream/-/mute-stream-2.0.0.tgz",
+          "path": "/mute-stream/-/mute-stream-2.0.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo3NGI0MzRkNA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "362ca94deb9e09df68214ae9cd39ef2f",
+            "sha1": "a5446fc0c512b71c83c44d908d5c7b7b4c493b2b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.926+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2816,
+          "blobCreated": "2026-05-25T19:12:11.935+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.926+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "mute-stream",
+            "version": "2.0.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpiZDEzOWM0OQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "cli-width",
+      "version": "4.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/cli-width/-/cli-width-4.1.0.tgz",
+          "path": "/cli-width/-/cli-width-4.1.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpjM2NmZjFiMQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "23511ba5d28684b2a94832cb5f39d416",
+            "sha1": "42daac41d3c254ef38ad8ac037672130173691c5"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.947+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2244,
+          "blobCreated": "2026-05-25T19:12:11.947+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.947+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "cli-width",
+            "version": "4.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpjMmY1OTI2",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "figures",
+      "version": "1.0.15",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/figures/-/figures-1.0.15.tgz",
+          "path": "/@inquirer/figures/-/figures-1.0.15.tgz",
+          "id": "bnBtLXByb3h5LW5wbToxMmViYWU4ZQ",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "7ee67a448c9f1e5252879fd4ed4340ad",
+            "sha1": "dbb49ed80df11df74268023b496ac5d9acd22b3a"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.948+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5769,
+          "blobCreated": "2026-05-25T19:12:11.949+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.948+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/figures",
+            "version": "1.0.15"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo1YjRiMTYwMw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "editor",
+      "version": "4.2.23",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/editor/-/editor-4.2.23.tgz",
+          "path": "/@inquirer/editor/-/editor-4.2.23.tgz",
+          "id": "bnBtLXByb3h5LW5wbTpiMTIzMjg0OA",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "4466fe514a5545ddc2066ed499d0f215",
+            "sha1": "fe046a3bfdae931262de98c1052437d794322e0b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.968+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4412,
+          "blobCreated": "2026-05-25T19:12:11.969+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.968+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/editor",
+            "version": "4.2.23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTphYTY2ZDJlMA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "expand",
+      "version": "4.0.23",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/expand/-/expand-4.0.23.tgz",
+          "path": "/@inquirer/expand/-/expand-4.0.23.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo2MjA3NmI2Yg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "f16b441edca01c0ebf795307276bc176",
+            "sha1": "a38b5f32226d75717c370bdfed792313b92bdc05"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.974+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4999,
+          "blobCreated": "2026-05-25T19:12:11.975+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.974+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/expand",
+            "version": "4.0.23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTpmOTgyOGZiZA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "signal-exit",
+      "version": "4.1.0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/signal-exit/-/signal-exit-4.1.0.tgz",
+          "path": "/signal-exit/-/signal-exit-4.1.0.tgz",
+          "id": "bnBtLXByb3h5LW5wbTozZWU1MjU",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "39a2e4b7419f5e466a66d3ce9663eb27",
+            "sha1": "952188c1cbd546070e2dd20d0f41c0ae0530cb04"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:11.981+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13369,
+          "blobCreated": "2026-05-25T19:12:11.982+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:11.981+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "signal-exit",
+            "version": "4.1.0"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo0ODllNGM5YQ",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "inquirer",
+      "name": "ansi",
+      "version": "1.0.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/@inquirer/ansi/-/ansi-1.0.2.tgz",
+          "path": "/@inquirer/ansi/-/ansi-1.0.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo0ZjVhYTIwMg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "6d1c5eeb4c72061ddb70bb1530a37b48",
+            "sha1": "674a4c4d81ad460695cb2a1fc69d78cd187f337e"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:12.043+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2980,
+          "blobCreated": "2026-05-25T19:12:12.045+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:12.043+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "@inquirer/ansi",
+            "version": "1.0.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTo5N2JhMDk3Nw",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "posthog-node",
+      "version": "5.35.2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/posthog-node/-/posthog-node-5.35.2.tgz",
+          "path": "/posthog-node/-/posthog-node-5.35.2.tgz",
+          "id": "bnBtLXByb3h5LW5wbTo5ZTc2NWVkZg",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "fdc9dbdbc7cb53acd7afe017b78f98f9",
+            "sha1": "317a2877c80d1c33348a4ca2590cabdb03f3afc0"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:12.061+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 132779,
+          "blobCreated": "2026-05-25T19:12:12.068+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:12.061+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "posthog-node",
+            "version": "5.35.2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bnBtLXByb3h5LW5wbTplNmQ1YzY1NA",
+      "repository": "npm-proxy-npm",
+      "format": "npm",
+      "group": "",
+      "name": "fast-glob",
+      "version": "3.3.3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/npm-proxy-npm/fast-glob/-/fast-glob-3.3.3.tgz",
+          "path": "/fast-glob/-/fast-glob-3.3.3.tgz",
+          "id": "bnBtLXByb3h5LW5wbTplZDkyMWJiYw",
+          "repository": "npm-proxy-npm",
+          "format": "npm",
+          "checksum": {
+            "md5": "07a1179a57eaeb1f27ea71e2be021caf",
+            "sha1": "d06d585ce8dba90a16b0505c543c3ccfb3aeb818"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-05-25T19:12:12.084+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 25301,
+          "blobCreated": "2026-05-25T19:12:12.085+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-05-25T19:12:12.084+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "npm": {
+            "name": "fast-glob",
+            "version": "3.3.3"
+          }
+        }
+      ]
+    }
+  ],
+  "continuationToken": "e6d5c654"
+}

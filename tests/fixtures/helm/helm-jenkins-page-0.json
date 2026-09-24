@@ -1,0 +1,79 @@
+{
+  "items": [
+    {
+      "id": "aGVsbS1qZW5raW5zOjllMzc3OWJh",
+      "repository": "helm-jenkins",
+      "format": "helm",
+      "group": "",
+      "name": "jenkins",
+      "version": "5.8.89",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/helm-jenkins/jenkins-5.8.89.tgz",
+          "path": "/jenkins-5.8.89.tgz",
+          "id": "aGVsbS1qZW5raW5zOmM3ZjlhM2M1",
+          "repository": "helm-jenkins",
+          "format": "helm",
+          "checksum": {
+            "md5": "b3bfd2b143e6689ccdbe1b87b87c42c0",
+            "sha1": "09986bffafdd77b12620c3aec4a6d161e17c2292",
+            "sha256": "b1f8a1e7d1339171259b1dc190c769f119169dfbdb7b73215a18ad3437808a79"
+          },
+          "contentType": "application/x-tgz",
+          "lastModified": "2025-09-18T19:23:18.138+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 81027,
+          "blobCreated": "2025-09-18T19:23:18.140+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2025-09-18T19:23:18.138+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "helm": {
+            "maintainers": [
+              {
+                "name": "maorfr",
+                "email": "maor.friedman@redhat.com"
+              },
+              {
+                "name": "torstenwalter",
+                "email": "mail@torstenwalter.de"
+              },
+              {
+                "name": "mogaal",
+                "email": "garridomota@gmail.com"
+              },
+              {
+                "name": "wmcdona89",
+                "email": "wmcdona89@gmail.com"
+              },
+              {
+                "name": "timja",
+                "email": "timjacomb1@gmail.com"
+              }
+            ],
+            "appVersion": "2.516.3",
+            "sources": [
+              "https://github.com/jenkinsci/jenkins",
+              "https://github.com/jenkinsci/docker-inbound-agent",
+              "https://github.com/maorfr/kube-tasks",
+              "https://github.com/jenkinsci/configuration-as-code-plugin"
+            ],
+            "keywords": [
+              "jenkins",
+              "ci",
+              "devops"
+            ],
+            "icon": "https://get.jenkins.io/art/jenkins-logo/logo.svg",
+            "name": "jenkins",
+            "description": "Jenkins - Build great things at any scale! As the leading open source automation server, Jenkins provides over 2000 plugins to support building, deploying and automating any project. ",
+            "version": "5.8.89"
+          }
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

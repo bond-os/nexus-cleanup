@@ -1,0 +1,551 @@
+{
+  "items": [
+    {
+      "id": "cHJveHktaGc6OWUzNzc5YmE",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "unsloth",
+      "name": "gemma-4-12B-it-qat-GGUF",
+      "version": "980b060c40a8539ac159e0501a3e0f66a6365af3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/README.md",
+          "path": "/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/README.md",
+          "id": "cHJveHktaGc6YjU0Y2RhNWM",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "06e7d72bb0ffe0e7547944069fdeaf42e73b81d6",
+            "sha256": "2f3f329a928bfad49a9d166f723c8a4b0f1c59d9601760d061d9247c2489366c"
+          },
+          "contentType": "text/x-web-markdown",
+          "lastModified": "2026-08-17T09:44:02.299+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 30915,
+          "blobCreated": "2026-08-17T09:44:02.300+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-17T09:44:02.299+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/gemma-4-12B-it-qat-UD-Q4_K_XL.gguf",
+          "path": "/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/gemma-4-12B-it-qat-UD-Q4_K_XL.gguf",
+          "id": "cHJveHktaGc6NDY4OTczOQ",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "cd1d79683d1d2770696ad3c6c855928164774896",
+            "sha256": "90fd44e29e0d7cffeb0fd00dc73cfdab9ed0b0e95306ecf7821ea634c940c370"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-17T13:30:18.852+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6716356800,
+          "blobCreated": "2026-08-17T13:30:18.864+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-17T13:30:18.852+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/mmproj-F16.gguf",
+          "path": "/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/mmproj-F16.gguf",
+          "id": "cHJveHktaGc6NTM4NDU0MTY",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "18f295e73ce0fdba0693f7c0a7218a0860dca09c",
+            "sha256": "ecc4e93128da8363b7dbf2193eab98cf1142353f52ceaa0c95c0872997aaadd3"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-17T13:31:20.019+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 175115840,
+          "blobCreated": "2026-08-17T13:31:20.020+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-17T13:31:20.019+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/mtp-gemma-4-12B-it.gguf",
+          "path": "/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/mtp-gemma-4-12B-it.gguf",
+          "id": "cHJveHktaGc6YTJhMDEwZjM",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "4691747af99753e0d5af4f2f89e8845c8f5ad257",
+            "sha256": "fcb35dea42c71333db904cee11baac525c9ef872818ee3753f6cb156f3c6f4f6"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-17T13:31:26.731+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 253708800,
+          "blobCreated": "2026-08-17T13:31:26.732+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-17T13:31:26.731+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6M2M2ZWYzNzQ",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "unsloth",
+      "name": "Qwen3.6-35B-A3B-MTP-GGUF",
+      "version": "5bc3e238d916f48a861bac2f8a1990a0e9b7e98d",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf",
+          "path": "/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf",
+          "id": "cHJveHktaGc6N2Q0NjdlMjE",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "15c7874b999a6baadbaab21c416f993274e08d99",
+            "sha256": "6c6b816537abad90b250a0972b345466028d861ddfe316d5f0de31ca6440f781"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T10:50:30.945+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 39099447584,
+          "blobCreated": "2026-08-18T10:50:30.947+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T10:50:30.945+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/mmproj-F16.gguf",
+          "path": "/unsloth/Qwen3.6-35B-A3B-MTP-GGUF/resolve/main/mmproj-F16.gguf",
+          "id": "cHJveHktaGc6Y2M2MjNhZmU",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "f928222eb8b1393496147e84e05a287561ec10f3",
+            "sha256": "71f3cbc1f7cc0f30d09d41cfa924c0060827ebc33bf15ace7e86661e856f0160"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T10:56:19.655+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 899283584,
+          "blobCreated": "2026-08-18T10:56:19.662+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T10:56:19.655+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6OGI4YWIwNTE",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "unsloth",
+      "name": "gemma-4-26B-A4B-it-qat-GGUF",
+      "version": "7b92b5b28818151e8669af2e45e88d6086f490dd",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-26B-A4B-it-qat-GGUF/resolve/main/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf",
+          "path": "/unsloth/gemma-4-26B-A4B-it-qat-GGUF/resolve/main/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf",
+          "id": "cHJveHktaGc6MWI3ZGY3ZGI",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "1d03220b376ae95895b678c28855fea6dd46b918",
+            "sha256": "a7c5bc715f5ff8e99a3e8901ce7d2b42b402c669bf24f7c5250747633d0f5891"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T10:59:36.766+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 14249047104,
+          "blobCreated": "2026-08-18T10:59:36.767+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T10:59:36.766+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-26B-A4B-it-qat-GGUF/resolve/main/mmproj-F16.gguf",
+          "path": "/unsloth/gemma-4-26B-A4B-it-qat-GGUF/resolve/main/mmproj-F16.gguf",
+          "id": "cHJveHktaGc6NmE5OWI0Yjg",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "92f511509a8ade0e69a3b5c3a17538ff2ffc390d",
+            "sha256": "d00f211a7d4f7fb19bd9b75d8e9342eccffb5920b08fd9562167560fdfcc5dd1"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T11:03:50.856+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1193058784,
+          "blobCreated": "2026-08-18T11:03:50.862+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T11:03:50.856+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-26B-A4B-it-qat-GGUF/resolve/main/mtp-gemma-4-26B-A4B-it.gguf",
+          "path": "/unsloth/gemma-4-26B-A4B-it-qat-GGUF/resolve/main/mtp-gemma-4-26B-A4B-it.gguf",
+          "id": "cHJveHktaGc6YjliNTcxOTU",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "e9d148dfdeee34af6f609a13d5458b233ae2eefa",
+            "sha256": "7272d97595f0d4c74bd7b623492b7dbdaafd8b7c72f329a8270ba4eca68f768a"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T11:04:05.784+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 251939328,
+          "blobCreated": "2026-08-18T11:04:05.791+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T11:04:05.784+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6ZGFhNjZkMmU",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "unsloth",
+      "name": "gemma-4-31B-it-qat-GGUF",
+      "version": "43cc1aeb31adf47ec06a854507ce552cd9862e6f",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-31B-it-qat-GGUF/resolve/main/gemma-4-31B-it-qat-UD-Q4_K_XL.gguf",
+          "path": "/unsloth/gemma-4-31B-it-qat-GGUF/resolve/main/gemma-4-31B-it-qat-UD-Q4_K_XL.gguf",
+          "id": "cHJveHktaGc6OGQxMmU3Mg",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "5dc9b5b65f39988f1c1387d555f3148023ee66ff",
+            "sha256": "00b5a7c497f0c8934033088c10a7fa9a4c015e46ee6d89e9c6890650ba5d0e71"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T11:09:23.488+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 17287670048,
+          "blobCreated": "2026-08-18T11:09:23.489+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T11:09:23.488+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-31B-it-qat-GGUF/resolve/main/mmproj-F16.gguf",
+          "path": "/unsloth/gemma-4-31B-it-qat-GGUF/resolve/main/mmproj-F16.gguf",
+          "id": "cHJveHktaGc6NTdlY2ViNGY",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "c7d158908938c0567d60e8eb0e841667b3d385bb",
+            "sha256": "4775e1bf6ef6f8df94caed2d672c74432f0722565e5225a170c72949ebe4cf23"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T11:13:48.946+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1198957024,
+          "blobCreated": "2026-08-18T11:13:48.951+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T11:13:48.946+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/gemma-4-31B-it-qat-GGUF/resolve/main/mtp-gemma-4-31B-it.gguf",
+          "path": "/unsloth/gemma-4-31B-it-qat-GGUF/resolve/main/mtp-gemma-4-31B-it.gguf",
+          "id": "cHJveHktaGc6YTcwOGE4MmM",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "db2e5de30cbb20dc177054274b6eaa87d70dea84",
+            "sha256": "3a5e99fd8d0b23afb1fccd1ee0c9ebd1f571d00399c2dae2292d217feeec0f6b"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-18T11:14:04.032+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 279955968,
+          "blobCreated": "2026-08-18T11:14:04.036+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T11:14:04.032+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6MjljMjJhMGI",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "froggeric",
+      "name": "Qwen-Fixed-Chat-Templates",
+      "version": "2b50d8ef73e9ba606680856aaeb46ab94702e788",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/froggeric/Qwen-Fixed-Chat-Templates/resolve/main/chat_template.jinja",
+          "path": "/froggeric/Qwen-Fixed-Chat-Templates/resolve/main/chat_template.jinja",
+          "id": "cHJveHktaGc6ZjYyNDY1MDk",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "9ad7fab749827d96cf6792725c0ede5f584f40d6",
+            "sha256": "e4d4955420645f1a65fb89fc1a4ed676fee7cd8214e76a3f520c8c8f33784da7"
+          },
+          "contentType": "text/plain",
+          "lastModified": "2026-08-18T13:07:09.491+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 22156,
+          "blobCreated": "2026-08-18T13:07:09.493+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-18T13:07:09.491+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6MTcxNTYwYTI",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "ornith-ai",
+      "name": "Ornith-1.5-9B-GGUF",
+      "version": "85bf2b98cdcbad4291cb4f46943526cc089f75a0",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/ornith-ai/Ornith-1.5-9B-GGUF/resolve/main/Ornith-1.5-9B-Q8_0.gguf",
+          "path": "/ornith-ai/Ornith-1.5-9B-GGUF/resolve/main/Ornith-1.5-9B-Q8_0.gguf",
+          "id": "cHJveHktaGc6ZmE4Y2ZjNDI",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "6c144ae11f54b5080499a99ba569fcaa53bae468",
+            "sha256": "6874eeb25c71081dc8f0bbe88f3ebb786312447132745371cd980bce95d259b9"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-21T10:41:50.071+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 9527501248,
+          "blobCreated": "2026-08-21T10:41:50.075+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-21T10:41:50.071+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/ornith-ai/Ornith-1.5-9B-GGUF/resolve/main/mmproj-Ornith-1.5-9B-BF16.gguf",
+          "path": "/ornith-ai/Ornith-1.5-9B-GGUF/resolve/main/mmproj-Ornith-1.5-9B-BF16.gguf",
+          "id": "cHJveHktaGc6NDlhOGI5MWY",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "ce1b843ece25287c01113af7fab5557893113282",
+            "sha256": "d65001a94c4b6852bc7a0e7c5cc92fe8506755bb270e54483fd5feec7ae39a19"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-21T10:43:56.018+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 921704416,
+          "blobCreated": "2026-08-21T10:43:56.019+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-21T10:43:56.018+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6NjYzMTFkN2Y",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "ornith-ai",
+      "name": "Ornith-1.5-35B-A3B-GGUF",
+      "version": "fbbaed45c2f0e200276ffa51701a24d45dc7f57e",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/ornith-ai/Ornith-1.5-35B-A3B-GGUF/resolve/main/Ornith-1.5-35B-Q8_0.gguf",
+          "path": "/ornith-ai/Ornith-1.5-35B-A3B-GGUF/resolve/main/Ornith-1.5-35B-Q8_0.gguf",
+          "id": "cHJveHktaGc6OThjNDc1ZmM",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "b07e0b903213c2d2b6ebf128af070716cbdf3230",
+            "sha256": "854cf83f80cd37a061ed86df1fa7201162e4e1fb820b91068cc12a11d2746c9e"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-21T10:59:58.333+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 37802149120,
+          "blobCreated": "2026-08-21T10:59:58.334+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-21T10:59:58.333+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        },
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/ornith-ai/Ornith-1.5-35B-A3B-GGUF/resolve/main/mmproj-Ornith-1.5-35B-BF16.gguf",
+          "path": "/ornith-ai/Ornith-1.5-35B-A3B-GGUF/resolve/main/mmproj-Ornith-1.5-35B-BF16.gguf",
+          "id": "cHJveHktaGc6ZTdlMDMyZDk",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "3e3c9fee5a1ebef586214b78795f22819e53d91a",
+            "sha256": "d9ce31026d1cb1f3f8d5152e2e2a014d9d2b302b6c93a7dc07bb0a0487f52837"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-21T11:05:36.607+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 902822016,
+          "blobCreated": "2026-08-21T11:05:36.609+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-21T11:05:36.607+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6YjU0Y2RhNWM",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "unsloth",
+      "name": "Qwen3.8-27B-GGUF",
+      "version": "4ca720788d1e01f1bff70c033e0d0028fd02e502",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/unsloth/Qwen3.8-27B-GGUF/resolve/main/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+          "path": "/unsloth/Qwen3.8-27B-GGUF/resolve/main/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+          "id": "cHJveHktaGc6MzZmYmVmYjY",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "ab47fc9f69e18e6669c36b10cab5cf04b5d843c2",
+            "sha256": "3f227079003add2511437e5b1e94812e363385225bf6a9b47b0054a72bc8b01e"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-08-26T11:24:33.384+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 17559178144,
+          "blobCreated": "2026-08-26T11:24:33.394+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-08-26T11:24:33.384+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    },
+    {
+      "id": "cHJveHktaGc6NDY4OTczOQ",
+      "repository": "proxy-hg",
+      "format": "huggingface",
+      "group": "nomic-ai",
+      "name": "nomic-embed-text-v2-moe-GGUF",
+      "version": "ffbcf4c99e5d617dda10ec8c0e9f75754b0cbb80",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/proxy-hg/nomic-ai/nomic-embed-text-v2-moe-GGUF/resolve/main/nomic-embed-text-v2-moe.Q8_0.gguf",
+          "path": "/nomic-ai/nomic-embed-text-v2-moe-GGUF/resolve/main/nomic-embed-text-v2-moe.Q8_0.gguf",
+          "id": "cHJveHktaGc6ODYxN2FjOTM",
+          "repository": "proxy-hg",
+          "format": "huggingface",
+          "checksum": {
+            "sha1": "9333c6b4079284572ce963b9f4d17880b7e6004a",
+            "sha256": "06e7a7e594a26985523c18383aba4aad39fe6e14f08ffc6ab5b554e1ccdc3cff"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-09-04T18:56:04.664+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 512225120,
+          "blobCreated": "2026-09-04T18:56:04.668+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-04T18:56:04.664+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "huggingface": {}
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

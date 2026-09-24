@@ -1,0 +1,2885 @@
+{
+  "items": [
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTcwMTdlNzY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "java-client-kubevirt",
+      "version": "0.5.0-2.el9",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.5/rpm/el9/noarch/java-client-kubevirt-0.5.0-2.el9.noarch.rpm",
+          "path": "/ovirt-4.5/rpm/el9/noarch/java-client-kubevirt-0.5.0-2.el9.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NmQ4MzIwNmI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "5580c3eb8ea2c881223413caf36736eb",
+            "sha1": "b8d0e16c48292a436de825b512b52ea178cca613",
+            "sha256": "0a0b7f7ebd17b1669d305972b8c15f5c09d0aace667cae06ea9d0ade4e5ee96a",
+            "sha512": "49d87775adf7e6be5e411648f717d97658723e8db26ce57ac57398cd2995c925fa128b7c0f4d2e5f9fede5a53af05e384a45b23a20b13e55f3ad37f33c931744"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-07-21T20:56:24.454+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 23057449,
+          "blobCreated": "2026-07-21T20:56:24.455+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-07-21T20:56:24.454+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Mzk0ZTI5MGI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "cockpit-ovirt-dashboard",
+      "version": "0.13.10-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/cockpit-ovirt-dashboard-0.13.10-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/cockpit-ovirt-dashboard-0.13.10-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzJlMGVkYzc",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "e781712eaf46effcfc035e322aeb9643",
+            "sha1": "1817d16bd80ea56abd4561f9f2d74137aef5b016",
+            "sha256": "48ab3310ad106dac86a9f347694cc956d261258f14fb2db285dd38cae3b4e88e",
+            "sha512": "4e321e5f738a486cfc18c2638b5c6c1ff988032bf1e624a3e36f341c47972bb12703b3986c21ef41c392830ae0f68340b4fa4890d7ba4a8eeedc69d8199347e4"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:10:22.065+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 3658276,
+          "blobCreated": "2026-09-07T09:10:22.066+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:10:22.065+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTBkNTUwYWE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "otopi-java",
+      "version": "1.8.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/otopi-java-1.8.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/otopi-java-1.8.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OWE2ODE1NjY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "1ee3a3dd5ee78944b7aa9e7bb71b008e",
+            "sha1": "ce61497fd639cff7e9bc1ed6675a4365c1a95120",
+            "sha256": "bed080bd36afe761f68a376c4337e0a32dbc2a861173fcf2275590cdfdf952a9",
+            "sha512": "2cad5d85a91053c987f8b5c0b0824339b674aedd4dd743d627712635039dc6a21bae95a07d64a24586bac0c68f332d2be2c82cb04de4a4d8ed10f7e44b6b1fe5"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.496+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 27100,
+          "blobCreated": "2026-09-07T09:11:08.497+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.496+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NWZmMTBkODc",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "otopi-common",
+      "version": "1.8.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/otopi-common-1.8.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/otopi-common-1.8.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTk4M2QyNDM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "a4a257362ce84ea6f1a0686e70399ad2",
+            "sha1": "26d3fb433f42983fa83d03b84d26fa4499f0eb2e",
+            "sha256": "71f21a2e8e444d86756ed7df0b9692e9e1a7114eb554147e6d725b7e29a42046",
+            "sha512": "af48a935be23c989988ee4045d3b7c2f1b45260127fa40f4f53be45164641e8747339c493a87ab995200838de09a0cd47e03e9917a49c2231ce4068a02a97569"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.523+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 80592,
+          "blobCreated": "2026-09-07T09:11:08.524+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.523+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YWYwY2NhNjQ",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-cluster-upgrade",
+      "version": "1.1.14-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-cluster-upgrade-1.1.14-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-cluster-upgrade-1.1.14-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Mzg5ZjhmMjA",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "dd05eccc066121dc7ea064ed247752e0",
+            "sha1": "02fed2b60cb727f26833342d9ae88f95e249029c",
+            "sha256": "779c1ddbcdb9883fb3705d9f80f2d5bbc587aa8f0e8eff76bf3ed387df89d45c",
+            "sha512": "bf68523b2aef4946427f3c4dcb7646857977271f683ced533eb46dec8e727df7c3e08fb88a73cda184c1bc4bb072bb3fc6e0ce13ad41ca50406ecb5868eab4e2"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.570+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 62104,
+          "blobCreated": "2026-09-07T09:11:08.571+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.570+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGQ0NDQ0MWU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-disaster-recovery",
+      "version": "1.2.0-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-disaster-recovery-1.2.0-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-disaster-recovery-1.2.0-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDZkNzA4ZGE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "21194de3a946e0d6c85016fe9be42d33",
+            "sha1": "646221f04ae6dd7c273c7f183697c8dd9cb072f6",
+            "sha256": "3d8ebf939de3d5b4ab4f16996be16834c42ca2d66eff0a539aba1861c628df4b",
+            "sha512": "8b8422ce21d732935288645306bf482baab8b9798cc2622392b313c6361d40bf9cc1a20842664721eb119e4a64baef61bcde297600ba6bb48a7cf812c0531554"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.634+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 58748,
+          "blobCreated": "2026-09-07T09:11:08.634+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.634+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OWM2MDAwZmI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-engine-setup",
+      "version": "1.1.9-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-engine-setup-1.1.9-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-engine-setup-1.1.9-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MjVmMmM1Yjc",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "a3610c50a7eb6d3229a43af6a63961e9",
+            "sha1": "4514a9a6f5e0b8047b66ce22c5fe20f64c813a2c",
+            "sha256": "f70b1ac4891cca4dca86d56fbcb7af6c72b86184ebb983b719e9907faf30e09f",
+            "sha512": "f97119c3cb634dcd2f709dc26a0d81066574ed27cb29e774217e8fdae6f27cf94fa2aed45a9ea88c0cdcaaca2353c90ff6931ba6436d345e4043b59d5da65b5b"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.638+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 16276,
+          "blobCreated": "2026-09-07T09:11:08.639+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.638+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZWI3YmJkZDg",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-hosted-engine-setup",
+      "version": "1.0.32-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-hosted-engine-setup-1.0.32-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-hosted-engine-setup-1.0.32-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzUwZTgyOTQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "83e6cf0ed85d05ccf518f3adf05f2a02",
+            "sha1": "ba815f0d931e7f938f6724b9c32742ae005b1870",
+            "sha256": "b80955e9300f5916ebd095a3dd0739f9ab6f8c65a9592790523ebf56b0a3eb4a",
+            "sha512": "bb20f12d61cfa3f42afe1f1a275477fd9bbfb987b4c1d9ccc014138ad6d1fa8a6231f603b6455290bc396cf8c9cac5cf4f1fff6b50854156bcaeb0099c70fcfc"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.703+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 66896,
+          "blobCreated": "2026-09-07T09:11:08.704+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.703+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6M2E5NzdhYjU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-image-template",
+      "version": "1.1.12-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-image-template-1.1.12-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-image-template-1.1.12-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzQyYTNmNzE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "bcd1c753430057faa04dcac0779d5628",
+            "sha1": "81e41b9e0e6d7956a65400ada35ca8ffe02e2acc",
+            "sha256": "d92c7f6115e7f5c67a0f67cee3977694f85a054938ac63a1ea0b1c6c40d9f13f",
+            "sha512": "6674b9cd80f3e8ff72d2671ba47093809a6b575f5bb11d021a8cae774706abe8b4e06683bbdfb2d8286f7d58aff48447db483940615cc213286cdb21768ece81"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.704+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 19828,
+          "blobCreated": "2026-09-07T09:11:08.705+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.704+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODliMzM3OTI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-infra",
+      "version": "1.1.13-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-infra-1.1.13-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-infra-1.1.13-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTM0NWZjNGU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "efd967dea89a16065404b3edd9af10ca",
+            "sha1": "864cb00ad4c347c7c5cfc5f89cfbf108d3dfadb2",
+            "sha256": "de0cf2aada6e1671d1e0c20478404cea2e43a6177734fa460960b0163cb3c3cc",
+            "sha512": "ea1157f82f832fe1ed1025cdaff82a045e0bf37fe2da17fbef05089407f605a22d2faf73577ae70e7f5c593531569795586fdf6a51321990362d59c72f9e9653"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.771+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 41164,
+          "blobCreated": "2026-09-07T09:11:08.772+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.771+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDhjZWY0NmY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-manageiq",
+      "version": "1.1.14-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-manageiq-1.1.14-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-manageiq-1.1.14-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NjI2MWI5MmI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "8e0c3982cc35ca5c10bec85254051365",
+            "sha1": "d521bb7c40692d90bc2e884fe38538482b090757",
+            "sha256": "957246cead4740ba7ead6b28f830e6e052f6bded43fb48ca19c441c3b4697f7a",
+            "sha512": "639be9b11c1965dde698b1c88159f62f0d4235ca7cf3cf7f81f440f107a895b575df521095df2571c6dc565406bb440ee612cb3ee8ea934f59e69c29656b54ab"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.771+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 24200,
+          "blobCreated": "2026-09-07T09:11:08.772+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.771+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MjdlYWIxNGM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-repositories",
+      "version": "1.1.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-repositories-1.1.5-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-repositories-1.1.5-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YjE3ZDc2MDg",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "61351ef47cf533004b812a41e786aac2",
+            "sha1": "e6e2e85ce4a9f6f153551039a34d422452c1036f",
+            "sha256": "c4941f8acf030488929f739f9fce8b2f72e76499ccac55611d869fdf52000110",
+            "sha512": "24e711492f5bc0f8e42377f8b6d4141ca86e18c3f7624139331e822137fb6ebf482c4bdaed3450080e602b6aa3326f06f1b79deecbc526a2dcfa40f2c069d29c"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.838+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 14188,
+          "blobCreated": "2026-09-07T09:11:08.839+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.838+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzcwNjZlMjk",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-roles",
+      "version": "1.1.7-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-roles-1.1.7-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-roles-1.1.7-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OTkzMmU1",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "dba3fcdc911eea32d6767f52e7df5d14",
+            "sha1": "d48fae54aa2ee7ab6fd474c8d57deb638657d711",
+            "sha256": "333b6ab147438f8a3b990f393d7417d503a5b08611103ca7fb1bf5e6a69ac3d6",
+            "sha512": "252ffa4a473cbf17f69a910731a284020f62fff1def6e2f4b04ab5c709aaa225377846e0f76b340c3f02c7d78b8385a51edf88079f3aecb75311754ebd57900f"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.838+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 14168,
+          "blobCreated": "2026-09-07T09:11:08.839+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.838+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzYyMjJiMDY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-shutdown-env",
+      "version": "1.0.3-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-shutdown-env-1.0.3-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-shutdown-env-1.0.3-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGZiNGVmYzI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "4a08d62dd30e98ccce111a830df1df8a",
+            "sha1": "450bd50e96db2986ed86dc58ab56855554e67c1c",
+            "sha256": "3e7cd683bf9c131c04643d1878a785a25ddb4366233ea44da633a99f294da054",
+            "sha512": "f507b5de49ecb40c237b56825681235d4efa09537112c66d2e569140423c85af4b6583b7e88abf457f803ed6858969160a17dfdf65ca4d6288f9372511f11bcd"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:08.910+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 12700,
+          "blobCreated": "2026-09-07T09:11:08.911+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:08.910+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTFhY2RiNTc",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZGIzZmEwMTM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "a391d063008b336749401de6f6821b07",
+            "sha1": "44c3c535341934220f760e0bc60177a2b0f3e633",
+            "sha256": "ac1d5bb96b9136a0e8dd77918067bdecb267d596ca0dc848232f77f79a993945",
+            "sha512": "836ff6dcd7d6e3f11edf8c2ebcb828848ec5f37af4719b217a38146bb21054f9b1ad52fa56f49a73b8298fa9c1a5a01bf86a820711aa23029e99ab5444def165"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:09.488+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6324552,
+          "blobCreated": "2026-09-07T09:11:09.489+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:09.488+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZWZlNDU1MTE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-REDACTED-explorer",
+      "version": "0.0.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-REDACTED-explorer-0.0.5-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-REDACTED-explorer-0.0.5-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Nzk3NzE5Y2Q",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "c7409cb7514f6f30c66683a4602fbeaa",
+            "sha1": "3335a692f525a88f6e65ddf72be802a60d65c18d",
+            "sha256": "210e6b727bd9cef90aa07b6fa1f42ecff3f74d283b428a20e97e973f37c152c1",
+            "sha512": "02b5ca7dcdb9836be4f34b96d97b0b5a88a9953f8aa4eda5da46065aa6ecfee26327b237d1961f66c320111cc014f2a08f659c46769cef07df025be78e8b7c5d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:09.633+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 285356,
+          "blobCreated": "2026-09-07T09:11:09.634+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:09.633+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OGUxYmNlY2I",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-backend",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-backend-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-backend-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTdhZTkzODc",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "3a5912a6f76cdd09185f44b8464ace97",
+            "sha1": "c946fe63b0f67288e98c7664032fd0ad396f0d38",
+            "sha256": "89e33ab0a4c72e3d79ff03bffc712d5ab68dd6422b3797d83208501c4124d884",
+            "sha512": "b551120118fca31bd22702511c422ab5c185c974f0111db426d6c11e98ff5a994efb4d2823d49ad47b60ffe9faa101c07d92dcae1211f6cdecadb47f1c958f20"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.099+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13936008,
+          "blobCreated": "2026-09-07T09:11:10.100+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.099+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6N2I2ZjA1NjI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-dbscripts",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-dbscripts-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-dbscripts-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTAxY2ExZQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "710d7e754f8afdaaacc4b2b824d897d1",
+            "sha1": "08c994aafb372ad9904bd386a326c82afd8ea811",
+            "sha256": "a1714562b74b1c03b8e9ce39198f03e6e76f70686e6ad6f828bf94628370404b",
+            "sha512": "e756e2aeb9bbc0a04ee8661cceb50623410b458f9703023818c22d55dd62156eabb22a45df03544f2bd4033e197c4abdc0c94f6a7594f90b54afe31867f36be2"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.340+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 348740,
+          "blobCreated": "2026-09-07T09:11:10.342+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.340+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Y2E4YWMyM2Y",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-dwh",
+      "version": "4.3.8-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-dwh-4.3.8-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-dwh-4.3.8-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTQxZDg2ZmI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "1e98fcee09b165421e099c83cc51ae58",
+            "sha1": "6ace5d432a106b49a0b36d6a9c218d66b2db9022",
+            "sha256": "fa207198d2a6b718bb94c2edffd1207786f97290560b49e80b9660f47aece023",
+            "sha512": "e73ca20dad7e93cacae5e3201994bf9f272f8dc59367dd1dfa26ed23b769b0d63441acded10b3e4d6521aa35b8082dc9f2dc50bbf77941009b3c1212424dbaf4"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.454+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 2197240,
+          "blobCreated": "2026-09-07T09:11:10.455+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.454+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTlhNjdmMWM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-dwh-setup",
+      "version": "4.3.8-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-dwh-setup-4.3.8-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-dwh-setup-4.3.8-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YTMzOTQzZDg",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "112bdb4238841c51f52b87813d695818",
+            "sha1": "449aae667fc0f2a24d5cac2efa75af04563ac864",
+            "sha256": "d2d47768c498c154a1ce37a613a7826c8b7959c3601940d51a872648d854200f",
+            "sha512": "e2b550f0521d7bdb573b63d0ffaf19eaadcc54d160aa4684c98e3a7519c7cfb510a2b60944795f496f139ffaef690e4d5e02aa49bbf0834f614fe16e22983eae"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.547+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 81624,
+          "blobCreated": "2026-09-07T09:11:10.548+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.547+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YjdkZGY4ZDY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-extension-aaa-jdbc",
+      "version": "1.1.10-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-extension-aaa-jdbc-1.1.10-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-extension-aaa-jdbc-1.1.10-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NDE3MGJkOTI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "7bd31935c595a1975f7beb639884bb33",
+            "sha1": "7bc1504b5f0e647af4828a9c13ba10e1d72f388b",
+            "sha256": "760fe3e553aaa6c5b63749774146dbf27012ec7d81c74895f187b8c20b797293",
+            "sha512": "7468c59088fc1f552b016ee9d7ffe3e0763f473f04d625202dd4a7b307a1ffc501d53e8c454dca18be78792afa9aea30364b0151b2973ebd32f30d4833453c9b"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.619+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 182060,
+          "blobCreated": "2026-09-07T09:11:10.620+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.619+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NmY5YjViMw",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-extensions-REDACTED-impl",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-extensions-REDACTED-impl-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-extensions-REDACTED-impl-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OTA4YzdhNmY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "7abd7470de29df329c4a6239743dcf06",
+            "sha1": "6ee9eee689443920a37d639bdebbee12e4327f4e",
+            "sha256": "602fbe21bab1e135cedc6653e612a1adb22ad1e319aa123d817af1acfc959fbd",
+            "sha512": "6a9687be8efa8de5cd3132009e5ee76b49ba42384669deae3d2efd3af987bca0949577ce0c233840d40aee6e35963fed09ef9d8ae828c536ff4154deaeea3d23"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.691+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 55048,
+          "blobCreated": "2026-09-07T09:11:10.692+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.691+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTYxNTcyOTA",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-metrics",
+      "version": "1.3.7-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-metrics-1.3.7-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-metrics-1.3.7-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZGZhODM3NGM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "4c2d5bf00e500d5b7a2cc0e23bdcab76",
+            "sha1": "5991c2e118480fb5a50415118d2c996021b32508",
+            "sha256": "b5e93e4fa10ff93cfa4a586bafc52848af170fa47438b0547fcdc4bd4330cb30",
+            "sha512": "4a0994c2839fba16ea9188f2d4b5973d34a879781df671985c5b8367469911345b3d366d67df09e06c365f08f0b0048494c65165d218fe3859f4f09a0695d7e1"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.764+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 145760,
+          "blobCreated": "2026-09-07T09:11:10.765+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.764+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YTUzMTJmNmQ",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-restREDACTED",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-restREDACTED-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-restREDACTED-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MmVjM2Y0Mjk",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "a444b757b5626dde2300d39447e72364",
+            "sha1": "12dd867cf8df67a7ff487975f04033fbdf5e0d68",
+            "sha256": "9744a9d0247f40b289f9c1f493e5aece653a4af694be5cc8443c8cd83f3afb4c",
+            "sha512": "2c05d8a7bdb7f2a5e94cc9eb7f4b079be094d831cd996b0c000bdc4d3f84d94cdcee1feb03b3ced010f785c9476e71e823e3518b8d2dba9b89ba3fa93ceb8362"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:10.961+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6709516,
+          "blobCreated": "2026-09-07T09:11:10.962+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:10.961+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZjQ0Y2VjNGE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6N2RkZmIxMDY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "1308166ced92ba8bbe5febf6f2f4ad89",
+            "sha1": "a105153850a705ca2cac77bbafe5bb27c8f1880a",
+            "sha256": "ec62e493d8dc8758ab743f982f43aced40fe0f1e895ddc7b714c1c4ce6412d7e",
+            "sha512": "6541a23458349215828ce3f942855ee2416d67e14139dc74e76a431dedd61fdf686d9b1c9fa7fa8594406831f92c8643ac5deafcd0b859924b4e43fa2740f41a"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:11.169+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 15816,
+          "blobCreated": "2026-09-07T09:11:11.170+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:11.169+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NDM2OGE5Mjc",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup-base",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-base-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-base-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Y2NmYjZkZTM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "3d415f5d3ead36d55448933a8bcb50c2",
+            "sha1": "5099896ddb573dd51000e5f3465784f6ac81e02d",
+            "sha256": "4ad99dff045e085f8c31d7a26d4993bbdcd0c18adc6904cab5fa67b2708db33c",
+            "sha512": "2c1c1f35ad0e0239f629c6a38a3452f75a716b0f506aad96bfd6320b7824f37d200fdc190776a967d7d091282e95397f9086737f6bec1bdd93d4bb3fbab43680"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:11.308+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 111380,
+          "blobCreated": "2026-09-07T09:11:11.309+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:11.308+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTFhMDIyZTE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup-plugin-cinderlib",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-cinderlib-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-cinderlib-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NmIzMmU3OWQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "803c1a41d070949aa0f4e5632de6b054",
+            "sha1": "e5cca6922df965361d0f53f23eea4025acba2655",
+            "sha256": "2af02fad827b54c106a3ab8048311befacd5c2f3591ff8f5477d1adcd4cd44c0",
+            "sha512": "b958cd6e9bc24113ab79e1dcf5358c6a8a156ba95663b95d0212d9410ea3b9aa2d23e41f1fd575da9fc0c4a1c3d4f90775d5ff616b4bff69dc0813451087fd8f"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:11.482+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 36380,
+          "blobCreated": "2026-09-07T09:11:11.483+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:11.482+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MzBiYmRmYmU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup-plugin-ovirt-engine",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-ovirt-engine-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-ovirt-engine-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YmE0ZWE0N2E",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "4c25de7a2dbb9e68aa7bddb7e4d56578",
+            "sha1": "287192ac3ae383adc69e753c350dc0e719e167ab",
+            "sha256": "09b9c675f36ff5fa0058384c99f48bf534fc91421200858007cd665b0342f3a1",
+            "sha512": "ddd2a8ab9f43d605ce1bd952796e7cf848f966a6b39b867a3deda82c6d02162ec9deaf6edc38512c8d1e4ca26def393e7d50c5e4b1defc7898454ee23f6af00d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:11.626+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 190684,
+          "blobCreated": "2026-09-07T09:11:11.627+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:11.626+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6N2ZkNzljOWI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup-plugin-ovirt-engine-common",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-ovirt-engine-common-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-ovirt-engine-common-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OTZhNjE1Nw",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "c3e4c8580ad747cbeeea8c6537f37a24",
+            "sha1": "6378fb6cf4d41b65e0ee3ceec044936bef5f3188",
+            "sha256": "8043250d891d8f87322ff8a5617a0bfc4095f51eee54da476dc83e47dd7274ce",
+            "sha512": "4c4620cdea66e8f9a7deb0906eaa17eb44fe6b395317570b0a3707695c9b52b286b3794eb80a1e14aff90c735c9396f0009b40ecc54efa027961b8a6798f7c7e"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:11.757+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 116108,
+          "blobCreated": "2026-09-07T09:11:11.759+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:11.757+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Y2VmMzU5Nzg",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup-plugin-vmconsole-proxy-helper",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-vmconsole-proxy-helper-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-vmconsole-proxy-helper-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTg4NjFlMzQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "7bb10fd3133becc7e6fbcada0b337fef",
+            "sha1": "8b109047b34515cc037cdb984c4f7fe525e3d0c3",
+            "sha256": "fceacf40f5f8df7369e0bbc9576ea9f3a98d5308da88192adf65d0635b2c7590",
+            "sha512": "0b637ffb32ef1697b71a6b718f1e0779cf456e19a9acf5e88be31c827c1a53b1dd2df602f7da7e500d3dfce3aa99f8fd91c74dfa322aa4a131554ea273e0303e"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:11.884+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 35196,
+          "blobCreated": "2026-09-07T09:11:11.885+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:11.884+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NmQyYWQzMzI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-setup-plugin-websocket-proxy",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-websocket-proxy-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-setup-plugin-websocket-proxy-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZjZiZDk3ZWU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "6d970079897b634a35ccfcbf9ed5f690",
+            "sha1": "701f8e30e81cbec1dfaae6c09ad2941269af0c7a",
+            "sha256": "6722aa7e717008f6160b86a32326154222f579b4c301a393ea2f1c61ff3f6510",
+            "sha512": "4604f1e01331e2a93d0f24cddbd37298ab94a2647a818ec20a666e6b8b8c4eb441fa764d34fd3918c2a8ca72f1faaa978db929867f57dc9fac39225f67ce6c2d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:12.044+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 32400,
+          "blobCreated": "2026-09-07T09:11:12.046+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:12.044+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YmM0NjkwMGY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-tools",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-tools-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-tools-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NDVkOTU0Y2I",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "ec4733981463e0174de2ac451656d515",
+            "sha1": "746e1d598e6651695b91703b12a62b8c68c9e76e",
+            "sha256": "44f21b289b5bb98ea6492d37edc6d6d00ccb1ea6703895e82c0c519fb44e27a6",
+            "sha512": "e464445396ff56a6ec5c8340535b7d2e251595866de6699cf313fc5dd571fcdb9743850cf3799b5e26bb05a288e7ded183d6240d99463071a92a15d8727bb014"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:12.208+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 301508,
+          "blobCreated": "2026-09-07T09:11:12.209+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:12.208+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YjYyNGNlYw",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-tools-backup",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-tools-backup-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-tools-backup-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OTRmNTExYTg",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "f67f44042967a0f531045165aabbf39f",
+            "sha1": "21222f838d97aaa8dc8bc6e6228e49af1fbdcb24",
+            "sha256": "d72dc2591a6fcbfd6dc6603d613ca4b584526eb42bf85becefed986f157a5745",
+            "sha512": "de071fb965de8dfceabb9c2cf6eb2cee9c62f4655d0a360ddbd3b73bfb90f370d3662b2f788d7d591a4012e33d1abf0c7064effa0cc30501c139b618ea3a16cb"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:12.331+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 35864,
+          "blobCreated": "2026-09-07T09:11:12.332+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:12.331+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NWE3ZTA5Yzk",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-ui-extensions",
+      "version": "1.0.10-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-ui-extensions-1.0.10-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-ui-extensions-1.0.10-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTQxMGNlODU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "5b647bb7359740bc7a3cfb359bc783f6",
+            "sha1": "283cc15f8d1d58c0577fd8feb1d4801f4529391d",
+            "sha256": "2fda577d12b97a4b7e9aa7476ec9da1e26d638a0dc008000aca5e82eed487217",
+            "sha512": "237912577ead39279aa77b109cbc58cb11d33cbe6b2ea71cc13a9bc7edf381e0400fa12d4af7ef789f79d74e1486fb980b11b29cf048cdfaa0b2e0c54960dee8"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:12.517+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5028708,
+          "blobCreated": "2026-09-07T09:11:12.518+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:12.517+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZjhiNTgzODM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-vmconsole-proxy-helper",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-vmconsole-proxy-helper-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-vmconsole-proxy-helper-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODI0ODQ4M2Y",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "973ada1793de88c0fd5e428fab9be883",
+            "sha1": "75bb099b74e0632863000d17f1c969dbb6b0fc64",
+            "sha256": "c79630ac9cc4d9ae55ec61fa3a76b42d306ad36d4a77f9130296521d045ee875",
+            "sha512": "d85ab83a048bcba9c49eeefb18cc898a9958bc10565604bbe15ec732d5ed45afcaec029deafda851c89a876be079e6b5cc3b88660502bd5198a02ff0aab24e3e"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:12.695+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 23380,
+          "blobCreated": "2026-09-07T09:11:12.696+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:12.695+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NDdkMTQwNjA",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-ansible-vm-infra",
+      "version": "1.1.22-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-vm-infra-1.1.22-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-ansible-vm-infra-1.1.22-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDE2NDA1MWM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "0ba86034e25ab1b9e0efdfbfc6fd6d33",
+            "sha1": "700b37b23b0808fc09de04a626a382d915d7cc48",
+            "sha256": "07c70905d066d95f2591a086a4f7217df9b481b9caabe15d65835896db8c57d4",
+            "sha512": "bafe200b9a5c814241be5a7da9a6bbf6093f557f4e24e16b518a7f98e1571036e6669839ee1613fa0e8ad3f0f899266406e8f3e45ff5cd27e59277ae118d0788"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:14.825+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 39176,
+          "blobCreated": "2026-09-07T09:11:14.826+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:14.825+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTYwOGJhMWE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-webadmin-portal",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-webadmin-portal-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-webadmin-portal-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NmY5YjdlZDY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "6f91c9958316b2970f3bc8acd773f802",
+            "sha1": "fe660d3fc90c14bb16940b722a3be34cec0e5908",
+            "sha256": "24053fe16dbe469558a6ca5c73ee46e2f34ccf3d21b75fcdfb6e37619dfc0e73",
+            "sha512": "4fb07a46d9a3aca16be094b830b5e63e127311856e7b373eb9d545da726c4216738085391e6bf45cd8a57f5e77375372f81578d16cad9fdb56b8e92b53eb4123"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:14.857+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 126868128,
+          "blobCreated": "2026-09-07T09:11:14.858+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:14.857+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MzUyNDc2Zjc",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-websocket-proxy",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-websocket-proxy-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-websocket-proxy-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YmViNzNiYjM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "500d0c1cf3fa5f63d9c561247196b192",
+            "sha1": "04bd007b085786ea2a67e442122a743fd0c1cc01",
+            "sha256": "e79787b321a2b361818696cb95fe129bdb74a1c672cb1b78bfeba677a3ff0c84",
+            "sha512": "8ebbfc335f4de954f4fd59ed1c8c7879dec06df421bc48ce189ac9f03a8358432de51a8be559d6eb145653fc849c44621428e2f1a849196dca7e975c970b59ed"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:14.895+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 29140,
+          "blobCreated": "2026-09-07T09:11:14.896+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:14.895+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDM1YmYwYjE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-engine-wildfly-overlay",
+      "version": "17.0.1-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-engine-wildfly-overlay-17.0.1-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-engine-wildfly-overlay-17.0.1-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NWNlZWI1NmQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "9c057be52f5e3e55ae1dc89f8cbdae1b",
+            "sha1": "4b44e5d921afece5eb6658d5d7c1ccf92c487971",
+            "sha256": "958d630fc09c114957fb308b417040fec1be0e2e0da34116b33e8660d395e321",
+            "sha512": "f9e167b07ee9c4a1c674e50cf4471deeeb9fb2e9171da731afca9cf4387157cfe27baddb76b4e6b54a65ba724d245f7e17e7e40584bb3f16ca1be830a9126794"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:16.280+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 4420,
+          "blobCreated": "2026-09-07T09:11:16.281+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:16.280+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzE5MzZhNmI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-host-deploy-common",
+      "version": "1.8.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-host-deploy-common-1.8.5-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-host-deploy-common-1.8.5-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZmIyNjJmMjc",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "2c740680aa017d85e2d6da2863f73d29",
+            "sha1": "b31a03570a2180ecf1c7f6fd4ec3e80a161622ee",
+            "sha256": "ea18bdce31f979a639beb2773121b405496e25aeb688674ddfe1aec571583491",
+            "sha512": "c21d950d46b0a00f73ec1fb33e8bcc64a1367bd47b8936800a97c3c1804d64c2e13a119d3a2f37256635f4c2454d55515d5bc8d9191acf5e6cb02e7bf419e7a3"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:16.451+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 75084,
+          "blobCreated": "2026-09-07T09:11:16.453+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:16.451+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzBhZjI3NDg",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-host-deploy-java",
+      "version": "1.8.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-host-deploy-java-1.8.5-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-host-deploy-java-1.8.5-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGE0MWVjMDQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "adefdaa1e05ec2b5a3e787e56806d9df",
+            "sha1": "b2613088d2578fcde472d90ee5ce4907ca438424",
+            "sha256": "4f83869717884a950a4a6c4800219ef634773dfd7a637a70e39e1e1a4d68e917",
+            "sha512": "b61a367b0fc627b184f6bbb6e8b2a91c8818c2bd548bf3247a82ae0e5844f70d2d97a8dd9a46a6d5123d8ec87cd3e8a3417c0df933609037a7f524efeb40a55f"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:16.592+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 16828,
+          "blobCreated": "2026-09-07T09:11:16.594+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:16.592+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZmNhZTQyNQ",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "ovirt-imageio-common",
+      "version": "1.5.3-0.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/ovirt-imageio-common-1.5.3-0.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/ovirt-imageio-common-1.5.3-0.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OTk1ZGE4ZTE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "41a19ebc2a8029412ff25414d6705245",
+            "sha1": "8351b6e84db91cc1f8b51b0699ada2568a14de47",
+            "sha256": "cb4ceaf37975505796a99455d5f46fa90e80e6d85f22f3ef368a770c11d130b1",
+            "sha512": "a5b7b7764bc6150cd672de54d320df1d90f7798351725c386700fc94885e418bb907cda330c85b05ac9f9a9b004e101f0f7a6d9d0da9fbcb1d2875434dc786d1"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:16.714+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 82524,
+          "blobCreated": "2026-09-07T09:11:16.715+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:16.714+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NWVlNmExMDI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-imageio-proxy",
+      "version": "1.5.3-0.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-imageio-proxy-1.5.3-0.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-imageio-proxy-1.5.3-0.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTg3OTY1YmU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "bf64a10ab84d6bd27304c3d414637141",
+            "sha1": "1025da0391f1f696431e76435b7297c8eab8ce72",
+            "sha256": "1bdf0eb8ea5f882adbc5500c7d7d0f862d2ea890b25f9eff6c97abbd83da04b7",
+            "sha512": "0dff88d3ea9c8404eff58f3ece6ea23ac0fed9f166c2acc31682bb2a0df9c1432fbb399bdd45a3ba48c538883cd1b35e604a4274b5cbb1d516ba94b9ff0a5fd3"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:16.833+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 39008,
+          "blobCreated": "2026-09-07T09:11:16.833+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:16.833+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YWUwMjVkZGY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-imageio-proxy-setup",
+      "version": "1.5.3-0.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-imageio-proxy-setup-1.5.3-0.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-imageio-proxy-setup-1.5.3-0.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Mzc5NTIyOWI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "85e7050ea5e7885e8c092a7bf16c1205",
+            "sha1": "4496f2cca53287840ab9c82c3e999864fc059145",
+            "sha256": "b196eea7c9d307c58c3d8ca7c22be8aabb1e08cb3789e99b5beea71afbe51594",
+            "sha512": "3bc9ac58da29d316fa8b372a0413734de40e6203679d7bb4a62ec8641612cdfec7e1624ce17c7e0c74177ac340626aa42f2399fd424011056dcc6d0cc016b723"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:16.953+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 24864,
+          "blobCreated": "2026-09-07T09:11:16.954+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:16.953+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZmQxZTFhYmM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-iso-uploader",
+      "version": "4.3.2-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-iso-uploader-4.3.2-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-iso-uploader-4.3.2-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODZiMGRmNzg",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "8c2002cb74914b6e88d13810a241ac33",
+            "sha1": "789c77f92446b820b2b4e4136010bab5ed8dc1f4",
+            "sha256": "424e43beacf9a2473e35f9f433b43e9c1632d55531a72e83fa2825449a1fbe3e",
+            "sha512": "a056c72f9aadc08ee21244f4e6f443a0b0786c2dff3f9498e7ba1b7f4fb5957a22d4847078e103d5d74f56002ace1b97f6226be59d6bf299fa1b978235870084"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:17.084+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 41084,
+          "blobCreated": "2026-09-07T09:11:17.086+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:17.084+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGMzOWQ3OTk",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-provider-ovn",
+      "version": "1.2.29-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-provider-ovn-1.2.29-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-provider-ovn-1.2.29-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDVjYzljNTU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "e46cd3f7981a7e9e9f73a97c5826150a",
+            "sha1": "521bef0eeae6d2a157814142afb01457b6e67404",
+            "sha256": "332ffb3f9e534ff3fe763c43bbcd6206a7c2151a843d1302449a29d585cbedb8",
+            "sha512": "afe0fb2dfeb5fb9041d1ec6eb1fdaa736c9778701f323367da1e13e88ca44b0f95e7220b04e7bd9cccbb8ca840bb1ef2439bd1cc24e4daf5f57bdff3f0161cb9"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:17.214+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 141196,
+          "blobCreated": "2026-09-07T09:11:17.215+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:17.214+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZWE3MTUxNTM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-vmconsole",
+      "version": "1.0.7-2.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-vmconsole-1.0.7-2.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-vmconsole-1.0.7-2.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzQwNDE2MGY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "a25bb45e22472bbe2f1ff23a067f42f2",
+            "sha1": "b4b110756b33e56595f1945b7d9527d80cbdaebd",
+            "sha256": "c0f3135177829d97696f6f9fe3533fa29ebe639b09b4a4e18e0c6864a2487c7b",
+            "sha512": "59659c3e2c4c3ead813ba375f9b8548016f9a6d4dfbca6d14216d3f0bf5d64544abcf7d5959b6c6d1ac5c0300024e9496373741bfbbf9d866cd9617b3e96c77d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:17.351+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 35188,
+          "blobCreated": "2026-09-07T09:11:17.352+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:17.351+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Mzk4ZDBlMzA",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-vmconsole-proxy",
+      "version": "1.0.7-2.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-vmconsole-proxy-1.0.7-2.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-vmconsole-proxy-1.0.7-2.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzMxZmQyZWM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "e635b2515ae5358c534e61758f6555b7",
+            "sha1": "a69e9f579ae9d1481ea992a4b695d6123993aad1",
+            "sha256": "8dfb11676cfcf11de6850b24f3b30e2d2f4a5097a29fe5ce4ee04896843be99d",
+            "sha512": "5c1d9fea1667607221149ce6cb9ce7d4595785c76437018d395c13b42cb62d864ffdfd1537a6bd6c6fb17d7a41d338971323c0ec69a0d244f8a934caac2dda0d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:17.487+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 19612,
+          "blobCreated": "2026-09-07T09:11:17.488+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:17.487+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODhhOGNiMGQ",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-web-ui",
+      "version": "1.6.0-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-web-ui-1.6.0-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-web-ui-1.6.0-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTIzYjhmYzk",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "19e67eb19d28a5a3fd6e2a9da7c8ab3a",
+            "sha1": "a3eddb95ec3a7c89bc88a2a75e70b6e8864a6434",
+            "sha256": "88028c19d905e95c998751fa4b9632ae179bfe70a74c49abc0fe4e68de472d9f",
+            "sha512": "3faab537ea0aa70293d1810f8a0e8842d8771e2f3109cd2bda03e8d477457c359ea86ec9e5c6450174de524aa6277277324af4a3ba407029e6620b91920775cd"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:17.877+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 8113188,
+          "blobCreated": "2026-09-07T09:11:17.877+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:17.877+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTQzMzdiNWU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "ovirt-engine-wildfly",
+      "version": "17.0.1-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/ovirt-engine-wildfly-17.0.1-1.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/ovirt-engine-wildfly-17.0.1-1.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OWRjNjQwMWE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "0d06b64f97b0606ed6638ed33f9f7943",
+            "sha1": "d1804b2800175b13813a5e811688a5a4a9dfa7fa",
+            "sha256": "36ddadad810724984e4892d5987d4d64147571be47f666b3dfeac45bbc1441ac",
+            "sha512": "8ea0c5770c6c1bf48dd36769c4971b80a60017833788a88a2a49e0436383d583ec58260f9144bad1c0144800d3f9ab101cac105318e455e66f69678f00d74425"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:19.708+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 178897868,
+          "blobCreated": "2026-09-07T09:11:19.709+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:19.708+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTg2OTMwYmY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "python-ovirt-engine-sdk4",
+      "version": "4.3.4-2.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/python-ovirt-engine-sdk4-4.3.4-2.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/python-ovirt-engine-sdk4-4.3.4-2.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTFmYmY1N2I",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "6f45945a40df308c37490191c7447b88",
+            "sha1": "b1f7872e94e8e7846ea5cc36c916f0d215a9e440",
+            "sha256": "95db61a75531d9f2e71a9ace45fb04e1aee5c3878ac1ccfde37c13f6088e19a8",
+            "sha512": "8b042edc6c8cc3984654c7b56c6e597950b7ce94a607540bf58422b8734a587006e3735a765a2bcb87c3be8b9ca543093c7bd395c609d486010690452836b679"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:42.745+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 544972,
+          "blobCreated": "2026-09-07T09:11:42.746+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:42.745+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YTc4NGVkOWM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-ovirt-engine-lib",
+      "version": "4.3.10.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/python2-ovirt-engine-lib-4.3.10.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/python2-ovirt-engine-lib-4.3.10.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MzExN2IyNTg",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "cbb6b42a1d43c352110083b22b9a98ed",
+            "sha1": "33911fc639c7d22c24d4987806e8abf6b111ce8e",
+            "sha256": "0a699139d29f2ac57cf635818974fffbcb1a65a714e61424c2f5be1d21a7d403",
+            "sha512": "9b29b5e65b3f484d0b4bc7b09d32446dc1b7fa47bfc65292dc9caccce8ee8eac94c44fb08d0db05b1973ded552a69619f40e5c61f5f213ab4fbe5b191bc8ee43"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:42.834+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 36576,
+          "blobCreated": "2026-09-07T09:11:42.835+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:42.834+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZjZhMGFhNzk",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-ovirt-host-deploy",
+      "version": "1.8.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/python2-ovirt-host-deploy-1.8.5-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/python2-ovirt-host-deploy-1.8.5-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODAzMzZmMzU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "5e75ee115d58d86f25c855857699914f",
+            "sha1": "a89830b64b82ee3ec5d3c1d7ef54e594a4c09011",
+            "sha256": "67914c89f7087b4c13cbacbdac1c1c9f94c2bcf9943653da9ac7c2753e8a4633",
+            "sha512": "f87351903e8c9dc786695bb5f4f3a99da6bd4062092100066bb33a293694e201720fd568b0f6287bdb9fc28964b6603db7bee9c5447e134f4f80d6966c7c278d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:42.915+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 29940,
+          "blobCreated": "2026-09-07T09:11:42.916+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:42.915+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NDViYzY3NTY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-ovirt-setup-lib",
+      "version": "1.2.0-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/python2-ovirt-setup-lib-1.2.0-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/python2-ovirt-setup-lib-1.2.0-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Y2Y0ZjJjMTI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "7cd349bc80acefbe29fa93c3fdc73018",
+            "sha1": "5ca1ba897729bbfb25e0275a8aefd9c12c4bcbcc",
+            "sha256": "a21d99d17d5fbcf5051cef9356ac3b2053b9600d88aafb91c652d01d629c5a9c",
+            "sha512": "5bf55b5cc0c2ddafadc24bb9186aa2b97a59935f42a1f376b1afa2258d25544ea91233858705d4b5eb82acac145c23e0200236373c0054806a0841e95a255c42"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:42.988+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 20296,
+          "blobCreated": "2026-09-07T09:11:42.989+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:42.988+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGEyNGZlOGY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-otopi",
+      "version": "1.8.4-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/python2-otopi-1.8.4-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/python2-otopi-1.8.4-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDNiN2MzNGI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "613ecf675f562ec057afa14baef5de9f",
+            "sha1": "4230d7cbdb427cb04be467160bfa7488d7777127",
+            "sha256": "c8179c667e19e01116e56931eebfa9c137063103da15ff3b4571fca8e180af10",
+            "sha512": "0c6d3105aa3729f75b216319526a5890a5f49a15c3dd58c997a19e0f885d3a8a27edc10460caa4d03807e51d064e5336788f643a53439837af15d52d86a8e6de"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:47.934+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 102696,
+          "blobCreated": "2026-09-07T09:11:47.935+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:47.934+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YTEwNzdkNTk",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "v2v-conversion-host-ansible",
+      "version": "1.16.0-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/v2v-conversion-host-ansible-1.16.0-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/v2v-conversion-host-ansible-1.16.0-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MmE5YTQyMTU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "b6173bfa1866c53c164bdc89a6621fe0",
+            "sha1": "401619f0697b50405f218f5932ff5eed17f3ca77",
+            "sha256": "dc79c128ad0e9748e5e5af8de17167ff5fed4d8da7339df87c684bebd9899c65",
+            "sha512": "a1a834cf79c2e43985ac7046a4a2fcb6128da114191d21a37cf8fe9f0f5eee675dbfb81cf8c06d4de6614fbb046ce7a4f3a8450fa99bf34621b00bfe28b72db7"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:08.497+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 32512,
+          "blobCreated": "2026-09-07T09:12:08.497+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:08.497+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZjAyMzNhMzY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-jsonrpc-java",
+      "version": "1.4.18-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-jsonrpc-java-1.4.18-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-jsonrpc-java-1.4.18-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzliNWZlZjI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "55d4b8a34beb47524bab114b3b0146bf",
+            "sha1": "0110abae1bba52335c4e57769da07dac887c6fb1",
+            "sha256": "ca7e46e57309e8da21d9bdb683a99bb8800305d06d9f1dc8c7d006f6c9b9389e",
+            "sha512": "83c1ab0b1f98b3d8d9f6748945ec8e2ddf819eb3750b051303a11b3f3fe76afbff0a1fdb7a877d597cc22e4b306eb32f40a033569ec2025cf183cf5453651a3f"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:08.560+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 130108,
+          "blobCreated": "2026-09-07T09:12:08.561+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:08.560+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NTY1NDU3YjU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "mom",
+      "version": "0.5.12-1.el7.centos",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/mom-0.5.12-1.el7.centos.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/mom-0.5.12-1.el7.centos.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZGZlNzFjNzE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "dd670b065ed4c39b57fbba4dd79b0609",
+            "sha1": "af8157cbf7ffe74c3ab7deebec1aa96ea84b4787",
+            "sha256": "fbf3c77a36e7e5d3f1363d21fb0ad693dee9004ce428718c1947f62c29b20826",
+            "sha512": "0f8a13c8544e90072a4df8c96d5f0ca3ae2e1c81afb1b6f0d22466188802024aeda807f7c0acb4b5193f0113bafad4bf462a70f473162bbee60d6f725ae87ce3"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:22.680+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 129252,
+          "blobCreated": "2026-09-07T09:12:22.681+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:22.680+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZmQ1Y2ZmZTE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "ovirt-host",
+      "version": "4.3.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/ovirt-host-4.3.5-1.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/ovirt-host-4.3.5-1.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODZlZmM0OWQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "a87a299aa3129ba0ffe8c4f9f3fd7158",
+            "sha1": "049f5dfb1b7c12ca657994012b6213f3377cb03d",
+            "sha256": "92df2b1c7fa9c30bec8777ca6f9430fc9660f36bdf29a7dc9d8cefb4994e8452",
+            "sha512": "f39ff285de861571ff8ca7d235311f1f0a2ba76fda8ad35b024a9edb8e4b286ff4b0bb5d7c8e1fa714db866d6ac33107999805723ae5274d05a56fb3e626d3c1"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.306+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 9024,
+          "blobCreated": "2026-09-07T09:12:54.307+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.306+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGM3OGJjYmU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "ovirt-host-dependencies",
+      "version": "4.3.5-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/ovirt-host-dependencies-4.3.5-1.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/ovirt-host-dependencies-4.3.5-1.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDYwYjgxN2E",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "8346963f4111e636d9b093cd2b0c10b4",
+            "sha1": "5f63eb605eff65e0f9b817c3592e03c6d13b263f",
+            "sha256": "3c731cd8b3033e7a4928409dde7a761d8cb831a281a9948af35effda52c1edd6",
+            "sha512": "d60b7f6b0fec6c5df26aa26ecf7b86e982e52a18eb0a5570607ec1adea5f468587398788f5a09be4a04e5083a2302e3df63856e9d4f1ead157bacff36dddaeca"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.307+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 8796,
+          "blobCreated": "2026-09-07T09:12:54.308+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.307+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OWI5NDc5OWI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-hosted-engine-setup",
+      "version": "2.3.13-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-hosted-engine-setup-2.3.13-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-hosted-engine-setup-2.3.13-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MjUyNzNlNTc",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "686d490a42eec8d77c77be8b968ae310",
+            "sha1": "a11870110470acdaa727978b4fcf704d57b7cfe3",
+            "sha256": "516d6af3b90e55737178bb29c1c71a7a4f789eac6dd11ff0a54ec343339a0f39",
+            "sha512": "7a98b76613ce77bea535508dfe275bf31667fdbe33f5a1f648ae5bf409b474d31fb402e1e0049526a2a10b7becd1e42b289a40da98b8319d467bcffac807f31a"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.540+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 227168,
+          "blobCreated": "2026-09-07T09:12:54.540+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.540+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZWFiMDM2Nzg",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-hosted-engine-ha",
+      "version": "2.3.6-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-hosted-engine-ha-2.3.6-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-hosted-engine-ha-2.3.6-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzQ0MmZiMzQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "e7e7ce6a881fae25571ca8e62d4afca1",
+            "sha1": "e87d5d3e421a7b460f445100b721f48431f1580e",
+            "sha256": "20490e26e1b1fdbf0396698ddcc488e05f58be89f507074ca62eb58797b04583",
+            "sha512": "b45bc1d8dc7f6a3ee9bd5d9602a36b23175452ebf9b9d328ab29877fe943871785cc2058c80e685fccf029f362df50f93b8760efa5e0fd5e672b2544712df3e5"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.541+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 318328,
+          "blobCreated": "2026-09-07T09:12:54.542+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.541+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MzljYmYzNTU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-imageio-daemon",
+      "version": "1.5.3-0.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-imageio-daemon-1.5.3-0.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-imageio-daemon-1.5.3-0.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzM1ZWI4MTE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "7f2840b8ba46c661e94b9f7e2f9276d9",
+            "sha1": "635d9fb26e201146e4dc2b12c89effabc90009bc",
+            "sha256": "8c58b3717810da1dd47337f4ec0fee4062c9abdf7ada76a880e841a2af45f4d2",
+            "sha512": "478dd2cafe628306615f188c8eff5f29cd2a31dafa4d662e3c2c6677eaa56b587131c1f3c078f695b7db296005d2566cc8f9bed9a71a415cf2f7d73e15292ca1"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.624+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 40036,
+          "blobCreated": "2026-09-07T09:12:54.625+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.624+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODhlN2IwMzI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-provider-ovn-driver",
+      "version": "1.2.29-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-provider-ovn-driver-1.2.29-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-provider-ovn-driver-1.2.29-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTI3YTc0ZWU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "8d7c74e8230943cecfb6d01b7b1e609f",
+            "sha1": "c56415f29fe57123bc1454d98d3bbbf349145269",
+            "sha256": "0a9e2fa07c9274f1d88d8c97d50c6b9f7b1ffed171b67722ce9af767bea198f7",
+            "sha512": "048adde4aa57ea5bd5f75ed38a12251456cbbdb9585c15cc923ac52ae380c0e9a1d2d83b44a583b11f88e28d5cedf56a36715b537c7eefa1052e795049aa3937"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.625+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 22684,
+          "blobCreated": "2026-09-07T09:12:54.626+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.625+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDgwMzZkMGY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ovirt-vmconsole-host",
+      "version": "1.0.7-2.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/ovirt-vmconsole-host-1.0.7-2.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/ovirt-vmconsole-host-1.0.7-2.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NjE5NjMxY2I",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "03b1445c65810b4a4dd8321a4d3703f2",
+            "sha1": "98437c6338f05594c4b780541f81d645ca93973c",
+            "sha256": "e3d464bbeedb10b74d0d05ca8163fd7e662c2eda26f5870cf39b5e50a8b76c5d",
+            "sha512": "57c89c238c62327e8d4fc1425f959f63c614bb2fca5e346c665cc05b386c1de001ea53a91091ccd201409e468f958ca984998833102132633b82bce22d987a4c"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:12:54.700+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 18192,
+          "blobCreated": "2026-09-07T09:12:54.701+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:12:54.700+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OTk3ZmEwOTE",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "v2v-conversion-host-wrapper",
+      "version": "1.16.0-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/v2v-conversion-host-wrapper-1.16.0-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/v2v-conversion-host-wrapper-1.16.0-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MjMxMjY1NGQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "22790cd957faeb78edead49cd112c4d9",
+            "sha1": "83c75127625fd0014d018a781fea88ca7c360ba0",
+            "sha256": "f5ad794f1bfb2f069a788e9c939f28412a66881cfc683b81b32c3dea51f51063",
+            "sha512": "deacabc6d89dfb5eb6bde319a1694810c0ccd287009fde65d1bba11240bd5f48bddf513fd362162d4fb027b52e36ca8dc79211bc633cca8f76cffe97301a0d06"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:02.761+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 73060,
+          "blobCreated": "2026-09-07T09:14:02.762+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:02.761+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZTg5YjVkNmU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-REDACTED",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-REDACTED-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-REDACTED-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzIyZTIyMmE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "8446cb08f12c409a0160d8dfbd798177",
+            "sha1": "296bb021e098dba972b0d842eb7a6a0e43c23bfd",
+            "sha256": "0efc253cac631c5bf204cd1f54e31ecefc8f6c3e8a086015beb00882587d857c",
+            "sha512": "46a798b083fe5af41348c8b7ad77893a420b0bf245c1dcca055052f30c3f05cb7bfb1a879626ca5a412b65e0493dfb7f8278f7d25fc432b17b5edd45689be6fe"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:02.871+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 109672,
+          "blobCreated": "2026-09-07T09:14:02.872+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:02.871+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MzdiNzFhNGI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-client",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-client-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-client-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzE0OWRmMDc",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "381f7c362c794dc5098f63144d3c5009",
+            "sha1": "9ff313892194ff36bb2cf80b390afa067a20ebc7",
+            "sha256": "dc5804a8839e558b86267074cc41354c45c745924d0598538d0f50e34d2b86f4",
+            "sha512": "6cacf64503b1e5201f8becfa31f9bb6d05ad0efa0bd7ab36877056b94d62cc76ab4534c042c34d17e15b710fe9e21d1ddfab0d705c78c3355374174b2bda24e3"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:02.938+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 19748,
+          "blobCreated": "2026-09-07T09:14:02.939+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:02.938+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODZkMmQ3Mjg",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-common",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-common-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-common-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTA2NTliZTQ",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "907219fbec6f11a41fe2c7b78bbf1561",
+            "sha1": "85c1a306d8616d5996a12fc9738946a3344a74ba",
+            "sha256": "fc1525f8f8110bc5a8915b6fb122d46af5a8e60e8f03a3d10831a30522e986c5",
+            "sha512": "005bd0144767a00a6f0199696ada5673e6265f2e9af3349909441f929ddeff9a9848377b49055a071303519210e66f64704281fba03a5daa4a0120f916b2a68d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.044+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 134032,
+          "blobCreated": "2026-09-07T09:14:03.045+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.044+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDVlZTk0MDU",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "vdsm",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/vdsm-4.30.46-1.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/vdsm-4.30.46-1.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NWY4MTU4YzE",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "4a934408ff69086b672df27c08c8a932",
+            "sha1": "3a57752c872c76d94f7ab42b62d1fa24f1a78264",
+            "sha256": "a0fc0696209fc31c2d0fff7aaf750bc6d2a7061988cc7a78d114ffc919cf31c4",
+            "sha512": "4be6bc3646e865f6fc4f2c74c8c2aee9cfbfbfddabc3f8e9e50404dba627988b951e3f00212ea84ebfbad7b2e83ab97956ce2e795a3dc2e481afd3824aa400ad"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.045+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1238900,
+          "blobCreated": "2026-09-07T09:14:03.046+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.045+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MjUwYTUwZTI",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-hook-ethtool-options",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-hook-ethtool-options-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-hook-ethtool-options-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YWU5ZDE1OWU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "64fc1ab19cc7874bb6b614b7431bd01a",
+            "sha1": "7c0ec383704dd4183336bceb3ebed1f8479d60a6",
+            "sha256": "d22003eaee8714e0cdf2828c2ec7c813e2ad99b106b2ee3aecf779dee0052f15",
+            "sha512": "434312396486de52e16db49fa6b1de6ec7b6bb9511a33b59b75337c5911ca0ead5a8a717b568358b0d19f13585da0365076df833291ab285b5f6e9c6d09b1cfa"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.112+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5464,
+          "blobCreated": "2026-09-07T09:14:03.113+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.112+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzQyNjBkYmY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-hook-fcoe",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-hook-fcoe-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-hook-fcoe-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZmRiOGQyN2I",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "73bcabf8a879e7a4ae433d4dfa3a207d",
+            "sha1": "f8db7e36b52d29f57ae4fa0dd10d278db70e7e78",
+            "sha256": "5d6f16e9c10439100d60b2ab9c9ee3259c5f18248edbac825e1bcdbddec7a27c",
+            "sha512": "8737f5ea781420eb5d7b081c45beb64c4c19bc84634775a85864d31436798725e77a923eda75a12616c869c48e339301c139394f5c5d512332f57f6cd54e3430"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.127+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 5804,
+          "blobCreated": "2026-09-07T09:14:03.128+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.127+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YzM0MWNhOWM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-hook-openstacknet",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-hook-openstacknet-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-hook-openstacknet-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGNkNDhmNTg",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "f993f094441d3971617f878feaf5d9dd",
+            "sha1": "fe3e58ef88d027b2fd16138fb6aa832fae6a7960",
+            "sha256": "f3887047d04e239bf888c57f1521f9701a105ad7cf9eb0c8198d76786e187043",
+            "sha512": "264677616e3d9f24eddc39900f00b9fea16b7598ddd0e6796ec277e32c794750ef05d5ae35c89a9b5d8f59f7ff863367be2eadc3d14c41e33fe850e90f2c670d"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.178+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13572,
+          "blobCreated": "2026-09-07T09:14:03.179+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.178+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6MTI1ZDg3Nzk",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-hook-vhostmd",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-hook-vhostmd-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-hook-vhostmd-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OWJmMDRjMzU",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "27081c66f711cca5f3408f6f9da51965",
+            "sha1": "d1ced3796329cff4ff852eec80f0591eb1b431b6",
+            "sha256": "7e8cf2d06b016cfc9c154f732dae1fcc3d70631e5efbc448153430797c7f612d",
+            "sha512": "7f08ae53231ca4bbe1f8b4b97ad56a46e12f3b8377e2f14e3920d8ed6c88174deee25e0d7a14df8768cd3882b9d2e691049e2a3787d01eb0b873c6fd5caf6f76"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.192+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 11752,
+          "blobCreated": "2026-09-07T09:14:03.193+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.192+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NjE3OTQ0NTY",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-hook-vmfex-dev",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-hook-vmfex-dev-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-hook-vmfex-dev-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZWIwYzA5MTI",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "5de1ad9d664d666a11da2d6a1da26333",
+            "sha1": "c0f1d186e42f6b5fd68fe209a599095705910deb",
+            "sha256": "4bf18725eba9ee329d81509ff086fdd039da9bf4b56d25dee5ef215fa6eb6c45",
+            "sha512": "d1b76640cf68989a98aaa6575e99b8c9ff568a3ced521d0f2c61f169cdbd0c075a2b1928fbe8e2e579a9f800da9c31526c80e125b64309a1e6de86663e83db11"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.243+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 6484,
+          "blobCreated": "2026-09-07T09:14:03.243+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.243+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6YjA5NTAxMzM",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-http",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-http-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-http-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6M2EyN2M1ZWY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "2767b7e43d8c548617ce6b77399a957f",
+            "sha1": "3735ee51d54cf743708d473384b4f244b3e16492",
+            "sha256": "30200d60a20c1654d4fd7ff2585c6d5b33ae46dbdcbc4f98b6b99b4f47a97e11",
+            "sha512": "f550419e1ce9d8e8a426ab49888ffcf358b4be750471df1c88b2fb5724c586eb1e81698adb1dfba30b36ee9af187aad6ba798ed4eed26180e63ceff0c384a616"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.257+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10608,
+          "blobCreated": "2026-09-07T09:14:03.258+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.257+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZmZiMGJlMTA",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-jsonrpc",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-jsonrpc-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-jsonrpc-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ODk0MzgyY2M",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "c7d378097f07a24dc068da261a304870",
+            "sha1": "1dcad0f6649acf49450adeaaa00d9431be4a5497",
+            "sha256": "22d3fd51b23a8e9fc281cfff0efde085bc726c326fd26e408c098ecea05602f4",
+            "sha512": "69700f6a88a93fef32878471b906b87e9c38824a49870aaa2fc8edf435f0a58592c48bc705e5d200a4fa4c2c0b0a64a18e1e0633d9e522d89812ecad30b29eec"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.309+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 27472,
+          "blobCreated": "2026-09-07T09:14:03.310+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.309+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NGVjYzdhZWQ",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "x86_64",
+      "name": "vdsm-network",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/x86_64/vdsm-network-4.30.46-1.el7.x86_64.rpm",
+          "path": "/ovirt-4.3/rpm/el7/x86_64/vdsm-network-4.30.46-1.el7.x86_64.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZDg1ZjNmYTk",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "f9f453ac4b0de842b4325ed2de17db6f",
+            "sha1": "6b9a94968659f31b229a8b3d35a2df3836964cdb",
+            "sha256": "bf557f17fe906000dc7e033567f2a8e008c2f298f5ff9d288005cbfc0e6c58fc",
+            "sha512": "95ba5ec217e5e03fe8cef43cafa9d061a34c8fdf5b4eec35acc627f66bc343b3aa329ab42079d8b0b9fddb7bb084f634ceea5c423cb84d37b9b097274409c392"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.364+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 296080,
+          "blobCreated": "2026-09-07T09:14:03.365+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.364+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6OWRlODM3Y2E",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-yajsonrpc",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-yajsonrpc-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-yajsonrpc-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6Mjc3YWZjODY",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "eba90d9d22c86566c7dc7b1aebfc1191",
+            "sha1": "8a06b3c2a559481884d95fe2ebbd3f27364c912d",
+            "sha256": "95f8bc7a1abb5ca90e9af9113d5b64ecb38dc2e542e609cad0f9310c38c4f6e2",
+            "sha512": "a4c3d7821490aae2b0056ba8f2af84a31d29ee3353eeee935a3b104c8b197ab08e570fef44d52edf02d3b3d28fe47ebd815c51d3521b4b3e47c1bb50a106281e"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.433+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 35664,
+          "blobCreated": "2026-09-07T09:14:03.434+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.433+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6ZWQwM2Y0YTc",
+      "repository": "yum-proxy-resources.ovirt.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "vdsm-python",
+      "version": "4.30.46-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-resources.ovirt.org/ovirt-4.3/rpm/el7/noarch/vdsm-python-4.30.46-1.el7.noarch.rpm",
+          "path": "/ovirt-4.3/rpm/el7/noarch/vdsm-python-4.30.46-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LXJlc291cmNlcy5vdmlydC5vcmc6NzY5NmI5NjM",
+          "repository": "yum-proxy-resources.ovirt.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "1c4e774735f292a9f699026746c9fa12",
+            "sha1": "18359a5e22d6c8b07500832cb7559752de64af7f",
+            "sha256": "58ca5b956541ad269c73ef4e4de62fcdfda18f84e9b150adbb51afec4456ca7c",
+            "sha512": "b75c6f4a790d217d1f9e0a356ed69386381e5468866c47cc9c67f8f0167ffba58fddc1675195474c0caa3ee95fc3e4386602c753148470dcaf9db366b5356c58"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:14:03.466+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 1328812,
+          "blobCreated": "2026-09-07T09:14:03.466+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:14:03.466+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

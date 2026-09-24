@@ -1,0 +1,2710 @@
+{
+  "items": [
+    {
+      "id": "raw-dates:/some_dir/20250101/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250101",
+      "name": "/some_dir/20250101/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250101/app.tar.gz",
+          "path": "/some_dir/20250101/app.tar.gz",
+          "id": "asset:/some_dir/20250101/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250101/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250101",
+      "name": "/some_dir/20250101/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250101/app.sha256",
+          "path": "/some_dir/20250101/app.sha256",
+          "id": "asset:/some_dir/20250101/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250101/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250101/docs",
+      "name": "/some_dir/20250101/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250101/docs/readme.txt",
+          "path": "/some_dir/20250101/docs/readme.txt",
+          "id": "asset:/some_dir/20250101/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250102/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250102",
+      "name": "/some_dir/20250102/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250102/app.tar.gz",
+          "path": "/some_dir/20250102/app.tar.gz",
+          "id": "asset:/some_dir/20250102/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250102/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250102",
+      "name": "/some_dir/20250102/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250102/app.sha256",
+          "path": "/some_dir/20250102/app.sha256",
+          "id": "asset:/some_dir/20250102/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250102/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250102/docs",
+      "name": "/some_dir/20250102/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250102/docs/readme.txt",
+          "path": "/some_dir/20250102/docs/readme.txt",
+          "id": "asset:/some_dir/20250102/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250103/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250103",
+      "name": "/some_dir/20250103/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250103/app.tar.gz",
+          "path": "/some_dir/20250103/app.tar.gz",
+          "id": "asset:/some_dir/20250103/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250103/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250103",
+      "name": "/some_dir/20250103/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250103/app.sha256",
+          "path": "/some_dir/20250103/app.sha256",
+          "id": "asset:/some_dir/20250103/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250103/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250103/docs",
+      "name": "/some_dir/20250103/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250103/docs/readme.txt",
+          "path": "/some_dir/20250103/docs/readme.txt",
+          "id": "asset:/some_dir/20250103/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250104/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250104",
+      "name": "/some_dir/20250104/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250104/app.tar.gz",
+          "path": "/some_dir/20250104/app.tar.gz",
+          "id": "asset:/some_dir/20250104/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250104/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250104",
+      "name": "/some_dir/20250104/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250104/app.sha256",
+          "path": "/some_dir/20250104/app.sha256",
+          "id": "asset:/some_dir/20250104/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250104/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250104/docs",
+      "name": "/some_dir/20250104/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250104/docs/readme.txt",
+          "path": "/some_dir/20250104/docs/readme.txt",
+          "id": "asset:/some_dir/20250104/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250105/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250105",
+      "name": "/some_dir/20250105/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250105/app.tar.gz",
+          "path": "/some_dir/20250105/app.tar.gz",
+          "id": "asset:/some_dir/20250105/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250105/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250105",
+      "name": "/some_dir/20250105/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250105/app.sha256",
+          "path": "/some_dir/20250105/app.sha256",
+          "id": "asset:/some_dir/20250105/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250105/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250105/docs",
+      "name": "/some_dir/20250105/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250105/docs/readme.txt",
+          "path": "/some_dir/20250105/docs/readme.txt",
+          "id": "asset:/some_dir/20250105/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250106/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250106",
+      "name": "/some_dir/20250106/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250106/app.tar.gz",
+          "path": "/some_dir/20250106/app.tar.gz",
+          "id": "asset:/some_dir/20250106/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250106/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250106",
+      "name": "/some_dir/20250106/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250106/app.sha256",
+          "path": "/some_dir/20250106/app.sha256",
+          "id": "asset:/some_dir/20250106/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250106/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250106/docs",
+      "name": "/some_dir/20250106/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250106/docs/readme.txt",
+          "path": "/some_dir/20250106/docs/readme.txt",
+          "id": "asset:/some_dir/20250106/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250107/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250107",
+      "name": "/some_dir/20250107/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250107/app.tar.gz",
+          "path": "/some_dir/20250107/app.tar.gz",
+          "id": "asset:/some_dir/20250107/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250107/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250107",
+      "name": "/some_dir/20250107/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250107/app.sha256",
+          "path": "/some_dir/20250107/app.sha256",
+          "id": "asset:/some_dir/20250107/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250107/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250107/docs",
+      "name": "/some_dir/20250107/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250107/docs/readme.txt",
+          "path": "/some_dir/20250107/docs/readme.txt",
+          "id": "asset:/some_dir/20250107/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250108/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250108",
+      "name": "/some_dir/20250108/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250108/app.tar.gz",
+          "path": "/some_dir/20250108/app.tar.gz",
+          "id": "asset:/some_dir/20250108/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250108/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250108",
+      "name": "/some_dir/20250108/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250108/app.sha256",
+          "path": "/some_dir/20250108/app.sha256",
+          "id": "asset:/some_dir/20250108/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250108/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250108/docs",
+      "name": "/some_dir/20250108/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250108/docs/readme.txt",
+          "path": "/some_dir/20250108/docs/readme.txt",
+          "id": "asset:/some_dir/20250108/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250109/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250109",
+      "name": "/some_dir/20250109/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250109/app.tar.gz",
+          "path": "/some_dir/20250109/app.tar.gz",
+          "id": "asset:/some_dir/20250109/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250109/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250109",
+      "name": "/some_dir/20250109/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250109/app.sha256",
+          "path": "/some_dir/20250109/app.sha256",
+          "id": "asset:/some_dir/20250109/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250109/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250109/docs",
+      "name": "/some_dir/20250109/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250109/docs/readme.txt",
+          "path": "/some_dir/20250109/docs/readme.txt",
+          "id": "asset:/some_dir/20250109/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250110/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250110",
+      "name": "/some_dir/20250110/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250110/app.tar.gz",
+          "path": "/some_dir/20250110/app.tar.gz",
+          "id": "asset:/some_dir/20250110/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250110/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250110",
+      "name": "/some_dir/20250110/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250110/app.sha256",
+          "path": "/some_dir/20250110/app.sha256",
+          "id": "asset:/some_dir/20250110/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250110/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250110/docs",
+      "name": "/some_dir/20250110/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250110/docs/readme.txt",
+          "path": "/some_dir/20250110/docs/readme.txt",
+          "id": "asset:/some_dir/20250110/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250111/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250111",
+      "name": "/some_dir/20250111/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250111/app.tar.gz",
+          "path": "/some_dir/20250111/app.tar.gz",
+          "id": "asset:/some_dir/20250111/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250111/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250111",
+      "name": "/some_dir/20250111/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250111/app.sha256",
+          "path": "/some_dir/20250111/app.sha256",
+          "id": "asset:/some_dir/20250111/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250111/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250111/docs",
+      "name": "/some_dir/20250111/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250111/docs/readme.txt",
+          "path": "/some_dir/20250111/docs/readme.txt",
+          "id": "asset:/some_dir/20250111/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250112/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250112",
+      "name": "/some_dir/20250112/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250112/app.tar.gz",
+          "path": "/some_dir/20250112/app.tar.gz",
+          "id": "asset:/some_dir/20250112/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250112/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250112",
+      "name": "/some_dir/20250112/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250112/app.sha256",
+          "path": "/some_dir/20250112/app.sha256",
+          "id": "asset:/some_dir/20250112/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250112/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250112/docs",
+      "name": "/some_dir/20250112/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250112/docs/readme.txt",
+          "path": "/some_dir/20250112/docs/readme.txt",
+          "id": "asset:/some_dir/20250112/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250113/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250113",
+      "name": "/some_dir/20250113/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250113/app.tar.gz",
+          "path": "/some_dir/20250113/app.tar.gz",
+          "id": "asset:/some_dir/20250113/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250113/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250113",
+      "name": "/some_dir/20250113/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250113/app.sha256",
+          "path": "/some_dir/20250113/app.sha256",
+          "id": "asset:/some_dir/20250113/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250113/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250113/docs",
+      "name": "/some_dir/20250113/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250113/docs/readme.txt",
+          "path": "/some_dir/20250113/docs/readme.txt",
+          "id": "asset:/some_dir/20250113/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250114/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250114",
+      "name": "/some_dir/20250114/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250114/app.tar.gz",
+          "path": "/some_dir/20250114/app.tar.gz",
+          "id": "asset:/some_dir/20250114/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250114/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250114",
+      "name": "/some_dir/20250114/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250114/app.sha256",
+          "path": "/some_dir/20250114/app.sha256",
+          "id": "asset:/some_dir/20250114/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250114/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250114/docs",
+      "name": "/some_dir/20250114/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250114/docs/readme.txt",
+          "path": "/some_dir/20250114/docs/readme.txt",
+          "id": "asset:/some_dir/20250114/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250103-hotfix/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250103-hotfix",
+      "name": "/some_dir/20250103-hotfix/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250103-hotfix/app.tar.gz",
+          "path": "/some_dir/20250103-hotfix/app.tar.gz",
+          "id": "asset:/some_dir/20250103-hotfix/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250103-hotfix/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250103-hotfix",
+      "name": "/some_dir/20250103-hotfix/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250103-hotfix/app.sha256",
+          "path": "/some_dir/20250103-hotfix/app.sha256",
+          "id": "asset:/some_dir/20250103-hotfix/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250103-hotfix/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250103-hotfix/docs",
+      "name": "/some_dir/20250103-hotfix/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250103-hotfix/docs/readme.txt",
+          "path": "/some_dir/20250103-hotfix/docs/readme.txt",
+          "id": "asset:/some_dir/20250103-hotfix/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250110hotfix/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250110hotfix",
+      "name": "/some_dir/20250110hotfix/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250110hotfix/app.tar.gz",
+          "path": "/some_dir/20250110hotfix/app.tar.gz",
+          "id": "asset:/some_dir/20250110hotfix/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250110hotfix/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250110hotfix",
+      "name": "/some_dir/20250110hotfix/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250110hotfix/app.sha256",
+          "path": "/some_dir/20250110hotfix/app.sha256",
+          "id": "asset:/some_dir/20250110hotfix/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/20250110hotfix/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/20250110hotfix/docs",
+      "name": "/some_dir/20250110hotfix/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/20250110hotfix/docs/readme.txt",
+          "path": "/some_dir/20250110hotfix/docs/readme.txt",
+          "id": "asset:/some_dir/20250110hotfix/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/3.2.4.24-something/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/3.2.4.24-something",
+      "name": "/some_dir/3.2.4.24-something/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/3.2.4.24-something/app.tar.gz",
+          "path": "/some_dir/3.2.4.24-something/app.tar.gz",
+          "id": "asset:/some_dir/3.2.4.24-something/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/3.2.5/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/3.2.5",
+      "name": "/some_dir/3.2.5/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/3.2.5/app.tar.gz",
+          "path": "/some_dir/3.2.5/app.tar.gz",
+          "id": "asset:/some_dir/3.2.5/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/12345678.0.1/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir/12345678.0.1",
+      "name": "/some_dir/12345678.0.1/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/12345678.0.1/app.tar.gz",
+          "path": "/some_dir/12345678.0.1/app.tar.gz",
+          "id": "asset:/some_dir/12345678.0.1/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_dir/app-at-top-level.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_dir",
+      "name": "/some_dir/app-at-top-level.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_dir/app-at-top-level.tar.gz",
+          "path": "/some_dir/app-at-top-level.tar.gz",
+          "id": "asset:/some_dir/app-at-top-level.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240601/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240601",
+      "name": "/some_other_dir/20240601/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240601/app.tar.gz",
+          "path": "/some_other_dir/20240601/app.tar.gz",
+          "id": "asset:/some_other_dir/20240601/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240601/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240601",
+      "name": "/some_other_dir/20240601/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240601/app.sha256",
+          "path": "/some_other_dir/20240601/app.sha256",
+          "id": "asset:/some_other_dir/20240601/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240601/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240601/docs",
+      "name": "/some_other_dir/20240601/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240601/docs/readme.txt",
+          "path": "/some_other_dir/20240601/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240601/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240602/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240602",
+      "name": "/some_other_dir/20240602/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240602/app.tar.gz",
+          "path": "/some_other_dir/20240602/app.tar.gz",
+          "id": "asset:/some_other_dir/20240602/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240602/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240602",
+      "name": "/some_other_dir/20240602/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240602/app.sha256",
+          "path": "/some_other_dir/20240602/app.sha256",
+          "id": "asset:/some_other_dir/20240602/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240602/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240602/docs",
+      "name": "/some_other_dir/20240602/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240602/docs/readme.txt",
+          "path": "/some_other_dir/20240602/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240602/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240603/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240603",
+      "name": "/some_other_dir/20240603/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240603/app.tar.gz",
+          "path": "/some_other_dir/20240603/app.tar.gz",
+          "id": "asset:/some_other_dir/20240603/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240603/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240603",
+      "name": "/some_other_dir/20240603/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240603/app.sha256",
+          "path": "/some_other_dir/20240603/app.sha256",
+          "id": "asset:/some_other_dir/20240603/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240603/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240603/docs",
+      "name": "/some_other_dir/20240603/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240603/docs/readme.txt",
+          "path": "/some_other_dir/20240603/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240603/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240604/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240604",
+      "name": "/some_other_dir/20240604/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240604/app.tar.gz",
+          "path": "/some_other_dir/20240604/app.tar.gz",
+          "id": "asset:/some_other_dir/20240604/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240604/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240604",
+      "name": "/some_other_dir/20240604/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240604/app.sha256",
+          "path": "/some_other_dir/20240604/app.sha256",
+          "id": "asset:/some_other_dir/20240604/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240604/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240604/docs",
+      "name": "/some_other_dir/20240604/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240604/docs/readme.txt",
+          "path": "/some_other_dir/20240604/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240604/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240605/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240605",
+      "name": "/some_other_dir/20240605/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240605/app.tar.gz",
+          "path": "/some_other_dir/20240605/app.tar.gz",
+          "id": "asset:/some_other_dir/20240605/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240605/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240605",
+      "name": "/some_other_dir/20240605/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240605/app.sha256",
+          "path": "/some_other_dir/20240605/app.sha256",
+          "id": "asset:/some_other_dir/20240605/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240605/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240605/docs",
+      "name": "/some_other_dir/20240605/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240605/docs/readme.txt",
+          "path": "/some_other_dir/20240605/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240605/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240606/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240606",
+      "name": "/some_other_dir/20240606/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240606/app.tar.gz",
+          "path": "/some_other_dir/20240606/app.tar.gz",
+          "id": "asset:/some_other_dir/20240606/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240606/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240606",
+      "name": "/some_other_dir/20240606/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240606/app.sha256",
+          "path": "/some_other_dir/20240606/app.sha256",
+          "id": "asset:/some_other_dir/20240606/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240606/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240606/docs",
+      "name": "/some_other_dir/20240606/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240606/docs/readme.txt",
+          "path": "/some_other_dir/20240606/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240606/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240607/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240607",
+      "name": "/some_other_dir/20240607/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240607/app.tar.gz",
+          "path": "/some_other_dir/20240607/app.tar.gz",
+          "id": "asset:/some_other_dir/20240607/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240607/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240607",
+      "name": "/some_other_dir/20240607/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240607/app.sha256",
+          "path": "/some_other_dir/20240607/app.sha256",
+          "id": "asset:/some_other_dir/20240607/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240607/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240607/docs",
+      "name": "/some_other_dir/20240607/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240607/docs/readme.txt",
+          "path": "/some_other_dir/20240607/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240607/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240608/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240608",
+      "name": "/some_other_dir/20240608/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240608/app.tar.gz",
+          "path": "/some_other_dir/20240608/app.tar.gz",
+          "id": "asset:/some_other_dir/20240608/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240608/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240608",
+      "name": "/some_other_dir/20240608/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240608/app.sha256",
+          "path": "/some_other_dir/20240608/app.sha256",
+          "id": "asset:/some_other_dir/20240608/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240608/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240608/docs",
+      "name": "/some_other_dir/20240608/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240608/docs/readme.txt",
+          "path": "/some_other_dir/20240608/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240608/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240609/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240609",
+      "name": "/some_other_dir/20240609/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240609/app.tar.gz",
+          "path": "/some_other_dir/20240609/app.tar.gz",
+          "id": "asset:/some_other_dir/20240609/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240609/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240609",
+      "name": "/some_other_dir/20240609/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240609/app.sha256",
+          "path": "/some_other_dir/20240609/app.sha256",
+          "id": "asset:/some_other_dir/20240609/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240609/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240609/docs",
+      "name": "/some_other_dir/20240609/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240609/docs/readme.txt",
+          "path": "/some_other_dir/20240609/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240609/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240610/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240610",
+      "name": "/some_other_dir/20240610/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240610/app.tar.gz",
+          "path": "/some_other_dir/20240610/app.tar.gz",
+          "id": "asset:/some_other_dir/20240610/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240610/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240610",
+      "name": "/some_other_dir/20240610/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240610/app.sha256",
+          "path": "/some_other_dir/20240610/app.sha256",
+          "id": "asset:/some_other_dir/20240610/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240610/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240610/docs",
+      "name": "/some_other_dir/20240610/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240610/docs/readme.txt",
+          "path": "/some_other_dir/20240610/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240610/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240611/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240611",
+      "name": "/some_other_dir/20240611/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240611/app.tar.gz",
+          "path": "/some_other_dir/20240611/app.tar.gz",
+          "id": "asset:/some_other_dir/20240611/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240611/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240611",
+      "name": "/some_other_dir/20240611/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240611/app.sha256",
+          "path": "/some_other_dir/20240611/app.sha256",
+          "id": "asset:/some_other_dir/20240611/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240611/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240611/docs",
+      "name": "/some_other_dir/20240611/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240611/docs/readme.txt",
+          "path": "/some_other_dir/20240611/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240611/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240612/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240612",
+      "name": "/some_other_dir/20240612/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240612/app.tar.gz",
+          "path": "/some_other_dir/20240612/app.tar.gz",
+          "id": "asset:/some_other_dir/20240612/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240612/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240612",
+      "name": "/some_other_dir/20240612/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240612/app.sha256",
+          "path": "/some_other_dir/20240612/app.sha256",
+          "id": "asset:/some_other_dir/20240612/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240612/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240612/docs",
+      "name": "/some_other_dir/20240612/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240612/docs/readme.txt",
+          "path": "/some_other_dir/20240612/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240612/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240613/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240613",
+      "name": "/some_other_dir/20240613/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240613/app.tar.gz",
+          "path": "/some_other_dir/20240613/app.tar.gz",
+          "id": "asset:/some_other_dir/20240613/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240613/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240613",
+      "name": "/some_other_dir/20240613/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240613/app.sha256",
+          "path": "/some_other_dir/20240613/app.sha256",
+          "id": "asset:/some_other_dir/20240613/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240613/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240613/docs",
+      "name": "/some_other_dir/20240613/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240613/docs/readme.txt",
+          "path": "/some_other_dir/20240613/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240613/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240614/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240614",
+      "name": "/some_other_dir/20240614/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240614/app.tar.gz",
+          "path": "/some_other_dir/20240614/app.tar.gz",
+          "id": "asset:/some_other_dir/20240614/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240614/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240614",
+      "name": "/some_other_dir/20240614/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240614/app.sha256",
+          "path": "/some_other_dir/20240614/app.sha256",
+          "id": "asset:/some_other_dir/20240614/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240614/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240614/docs",
+      "name": "/some_other_dir/20240614/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240614/docs/readme.txt",
+          "path": "/some_other_dir/20240614/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240614/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240605-rc1/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240605-rc1",
+      "name": "/some_other_dir/20240605-rc1/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240605-rc1/app.tar.gz",
+          "path": "/some_other_dir/20240605-rc1/app.tar.gz",
+          "id": "asset:/some_other_dir/20240605-rc1/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240605-rc1/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240605-rc1",
+      "name": "/some_other_dir/20240605-rc1/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240605-rc1/app.sha256",
+          "path": "/some_other_dir/20240605-rc1/app.sha256",
+          "id": "asset:/some_other_dir/20240605-rc1/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240605-rc1/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240605-rc1/docs",
+      "name": "/some_other_dir/20240605-rc1/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240605-rc1/docs/readme.txt",
+          "path": "/some_other_dir/20240605-rc1/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240605-rc1/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240612b/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240612b",
+      "name": "/some_other_dir/20240612b/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240612b/app.tar.gz",
+          "path": "/some_other_dir/20240612b/app.tar.gz",
+          "id": "asset:/some_other_dir/20240612b/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240612b/app.sha256",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240612b",
+      "name": "/some_other_dir/20240612b/app.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240612b/app.sha256",
+          "path": "/some_other_dir/20240612b/app.sha256",
+          "id": "asset:/some_other_dir/20240612b/app.sha256",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/20240612b/docs/readme.txt",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/20240612b/docs",
+      "name": "/some_other_dir/20240612b/docs/readme.txt",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/20240612b/docs/readme.txt",
+          "path": "/some_other_dir/20240612b/docs/readme.txt",
+          "id": "asset:/some_other_dir/20240612b/docs/readme.txt",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/3.2.4.24-something/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/3.2.4.24-something",
+      "name": "/some_other_dir/3.2.4.24-something/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/3.2.4.24-something/app.tar.gz",
+          "path": "/some_other_dir/3.2.4.24-something/app.tar.gz",
+          "id": "asset:/some_other_dir/3.2.4.24-something/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/3.2.5/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/3.2.5",
+      "name": "/some_other_dir/3.2.5/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/3.2.5/app.tar.gz",
+          "path": "/some_other_dir/3.2.5/app.tar.gz",
+          "id": "asset:/some_other_dir/3.2.5/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/12345678.0.1/app.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir/12345678.0.1",
+      "name": "/some_other_dir/12345678.0.1/app.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/12345678.0.1/app.tar.gz",
+          "path": "/some_other_dir/12345678.0.1/app.tar.gz",
+          "id": "asset:/some_other_dir/12345678.0.1/app.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "raw-dates:/some_other_dir/app-at-top-level.tar.gz",
+      "repository": "raw-dates",
+      "format": "raw",
+      "group": "/some_other_dir",
+      "name": "/some_other_dir/app-at-top-level.tar.gz",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/raw-dates/some_other_dir/app-at-top-level.tar.gz",
+          "path": "/some_other_dir/app-at-top-level.tar.gz",
+          "id": "asset:/some_other_dir/app-at-top-level.tar.gz",
+          "repository": "raw-dates",
+          "format": "raw",
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-01-01T00:00:00.000+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 10,
+          "blobCreated": "2026-01-01T00:00:00.000+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "raw": {}
+        }
+      ]
+    }
+  ],
+  "continuationToken": null,
+  "_note": "SYNTHETIC \u2014 not recorded from a live instance. Shaped like raw/raw-proxy-repo.almalinux.org-page-0.json to back path-derived retention tests."
+}

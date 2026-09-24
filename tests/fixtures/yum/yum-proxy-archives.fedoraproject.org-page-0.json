@@ -1,0 +1,365 @@
+{
+  "items": [
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjY5OGRjMzU5",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "ansible",
+      "version": "2.9.27-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/a/ansible-2.9.27-1.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/a/ansible-2.9.27-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmYzMjA4ODE1",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "b92c91b0023380a0ed0d63167c8195e3",
+            "sha1": "74aae167c96a973decdcf9734a41e8418131ec54",
+            "sha256": "e5bff699292057a0da129aa55482c170473fa9d1ce8ec1aad1c5d592611db41f",
+            "sha512": "496360dfebc919a11c7990358219d20cd2bd0ed977f893cfe197b83dc069fcd05b5b294922d8862ae86aad26c414f046ba232e784db58f60887beb9637f59115"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:10:05.379+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 17832207,
+          "blobCreated": "2026-09-07T09:10:05.381+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:10:05.379+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjI1ZDVkODQy",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python-extras",
+      "version": "1.0.0-2.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python-extras-1.0.0-2.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python-extras-1.0.0-2.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmFmNjg5Y2Zl",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "c5f1a3881f88fab1da3159fa00335f6a",
+            "sha1": "68cba680c0b497f63deaca9b5528346af0ac0054",
+            "sha256": "4d58a558eca9f72419f9c0918c437d8903faa2d89ac444b93837f68f6da05b71",
+            "sha512": "3bf05cf04203c703c398aabde9d5247e1df5410bc775bae861b79e749c5f9c00adaa275f2b013c597f24254877327a411da68ce28ae47bccc077a57b840e01f4"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:35.966+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 14953,
+          "blobCreated": "2026-09-07T09:11:35.967+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:35.966+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmEzMWM1NjYz",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python-unittest2",
+      "version": "1.1.0-4.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python-unittest2-1.1.0-4.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python-unittest2-1.1.0-4.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjJjYWYxYjFm",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "9d9c9c5a304418a02ff1d62b671474dc",
+            "sha1": "665a580a1527a947689a9d593a64a8ee5ffaade8",
+            "sha256": "5f104ce49fa0a5479efafc7f712fb10ae336a45ed4dfbbfdfffe0c3f61852228",
+            "sha512": "d8d787bcd4d96c5b84d6c46327982529917c03fb94552735bd07a8f2da90d039447be72a84313b066f7db14d7bf949e88f8c5294a0363bd3cf89e3d1504af0dd"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:40.792+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 178124,
+          "blobCreated": "2026-09-07T09:11:40.793+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:40.792+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjkwNmY4Y2Zh",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-asn1crypto",
+      "version": "0.24.0-7.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-asn1crypto-0.24.0-7.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-asn1crypto-0.24.0-7.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjFhMDI1MWI2",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "fe7137f63e25185b2bda57a56282d606",
+            "sha1": "493253f45051e571954daa297185c3e7822b7dc5",
+            "sha256": "ddfef13eee04f3d86ed3dc44c5b4b12ea9e596a4942459f42a641743bbb6fec0",
+            "sha512": "8ecbbb23ee4dfb0d9ef2035e991d95e8a4104d2ce61af97dc7bd470d7572300329f3cdd4352bec3ff66e85a24a1fd7048214b79551e45506029f0887c0813adb"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:41.115+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 181573,
+          "blobCreated": "2026-09-07T09:11:41.116+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:41.115+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjFiZmEzZDRi",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-jmespath",
+      "version": "0.9.4-2.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-jmespath-0.9.4-2.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-jmespath-0.9.4-2.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmE1OGQwMjA3",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "28da473e53e8be9f6eca60fa98f2639a",
+            "sha1": "94510891e6b3bbf3d631f944819eb3e2c71162ce",
+            "sha256": "eddd11c8cb004e7d92964d97038caacc341b4dc8b23af426e4c54766ac87acda",
+            "sha512": "c07a0770ca4e4f77895ac2851104f678bc5d64da2af84e12702ae233c27faf2236f121773d9befb145fb0534af26047d44ae82ac3c5535796fb62a048e1cf298"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:41.959+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 42303,
+          "blobCreated": "2026-09-07T09:11:41.960+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:41.959+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmJhMzFiNzA1",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-lockfile",
+      "version": "0.11.0-17.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-lockfile-0.11.0-17.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-lockfile-0.11.0-17.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjQzYzQ3YmMx",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "55da986620a9a3e1213f1d0be16e79f9",
+            "sha1": "eb532a5c586b47a8f094d9af229c9e5b99142a76",
+            "sha256": "c44b3af0ee89f1d863de2671e8143f7a67131b4fe427369f2691c818a4ae8a54",
+            "sha512": "206f9f52d34e3925fa0d34412eb3af35a436e677ce9bd1f33494fc28bb8504b58e06f56f67f6c24b556734baec59e41802bc24d1532e2ba948c8d4efcdb1dda7"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:42.135+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 29991,
+          "blobCreated": "2026-09-07T09:11:42.136+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:42.135+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjk0ZDczZTI",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-mimeparse",
+      "version": "1.6.0-5.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-mimeparse-1.6.0-5.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-mimeparse-1.6.0-5.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjkyZTAzODll",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "2bc69d7f94d02b6fef2e5693630f4a73",
+            "sha1": "cfeef94f0f6bd173d7797472d2a4bb3ea4bc9363",
+            "sha256": "c45d4f4cd010b9258935441549ed0eedf3797942a6c9d8fa67620d8b066ff180",
+            "sha512": "a3039c72f05dbc13d9f9190b2146a123d8c28b84530f5cd85538316a097ecf061b5037fc6913c60cf83a78ef7ca03d708d0f21c5477ada893dabc5d77510a49f"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:42.300+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 13476,
+          "blobCreated": "2026-09-07T09:11:42.301+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:42.300+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjk0ZDgyNDMz",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-passlib",
+      "version": "1.7.1-1.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-passlib-1.7.1-1.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-passlib-1.7.1-1.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjFlNmFlOGVm",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "5260d63e012c87433ff53ea573fba7a4",
+            "sha1": "aee7843fc19413b6b7aeba500cf35054267130a2",
+            "sha256": "6b99a6d5871622e93b9fec564d77f19676f52e3d30bfafd10e482e1b7c3b283c",
+            "sha512": "29f7373b7c57e67f7a0825f9b833400f5588e6bc389149534c1e5eb2e3d1968767115ce9cde2a973d08c8bdbef9d1e4a7c2523118218d9c858ead2da1f343368"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:44.448+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 758686,
+          "blobCreated": "2026-09-07T09:11:44.449+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:44.448+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmUzZjNlMTEw",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-pbr",
+      "version": "4.2.0-3.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-pbr-4.2.0-3.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-pbr-4.2.0-3.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjZkODZhNWNj",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "01baf3d19c5a7cda0bef9c73f67d3cde",
+            "sha1": "ae152c06c17025c648c251c41e0dd6a1090a9895",
+            "sha256": "96caee8f3430648b50ff30613d7bc9ea27c5f06c3d4b17ef6e7e8fa4e7befc7a",
+            "sha512": "2f23ecb5838cbe07ac36c1c89d316c830d464de4442d2cc986ffd4e61396ee95440657b3e140e5291aa0bb19a8e4b26f04064e863e5cf1501adabcdc052db8a4"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:44.798+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 192158,
+          "blobCreated": "2026-09-07T09:11:44.799+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:44.798+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    },
+    {
+      "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOmZiMDk0MWIy",
+      "repository": "yum-proxy-archives.fedoraproject.org",
+      "format": "yum",
+      "group": "noarch",
+      "name": "python2-httplib2",
+      "version": "0.18.1-3.el7",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/yum-proxy-archives.fedoraproject.org/pub/archive/epel/7/x86_64/Packages/p/python2-httplib2-0.18.1-3.el7.noarch.rpm",
+          "path": "/pub/archive/epel/7/x86_64/Packages/p/python2-httplib2-0.18.1-3.el7.noarch.rpm",
+          "id": "eXVtLXByb3h5LWFyY2hpdmVzLmZlZG9yYXByb2plY3Qub3JnOjg0OWMwNjZl",
+          "repository": "yum-proxy-archives.fedoraproject.org",
+          "format": "yum",
+          "checksum": {
+            "md5": "3966ded5eba34b04fe93838beeec6035",
+            "sha1": "2243cba62035e98ac28ae99b58c5cb618dbc1ee4",
+            "sha256": "ed30e43a07acce58a6efb54a15320b0f3c5e80cedc2e19d545edf1117640e9dd",
+            "sha512": "d58d6393fed306fbb7f40b88b25098d066d58841d9457f64b09686bbca1e79950a8206630a6645be8c2812138f316db1b0bc566172dc8acebef8b286ea590ee5"
+          },
+          "contentType": "application/x-rpm",
+          "lastModified": "2026-09-07T09:11:47.084+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 128003,
+          "blobCreated": "2026-09-07T09:11:47.085+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-07T09:11:47.084+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "yum": {}
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

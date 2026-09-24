@@ -1,0 +1,87 @@
+# nexus-cleanup — GitLab CI pipeline.
+#
+# Use as the project's .gitlab-ci.yml, or pull it in with
+#   include:
+#     - local: examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml
+#
+# Needs:
+#   - CI/CD variables NEXUS_USERNAME and NEXUS_PASSWORD, masked and protected
+#     (protected variables reach pipelines on protected branches only)
+#   - a pipeline schedule on a protected branch for the nightly dry run
+#
+# Every pipeline performs a dry run and keeps its report as an artifact. Deletion
+# happens only in a pipeline started from "Run pipeline" with EXECUTE=true, and only
+# once someone presses play on the blocked manual job after reading that report. A
+# scheduled pipeline never deletes.
+
+variables:
+  NEXUS_URL: https://nexus.example.com
+  PATTERN:
+    value: "yum-proxy-*"
+    description: Glob selecting the proxy repositories to clean
+  KEEP:
+    value: "2"
+    description: Newest versions to retain per group
+  MAX_DELETIONS:
+    value: "500"
+    description: Abort an executing run above this many deletions
+  EXECUTE:
+    value: "false"
+    options: ["false", "true"]
+    description: Offer the manual deletion job after the dry run
+
+stages:
+  - dry-run
+  - execute
+
+.nexus-cleanup:
+  image:
+    # Pinned to the version floor in AGENTS.md. The image's entrypoint is `nu`;
+    # the runner needs a shell entrypoint to run `script`.
+    name: ghcr.io/nushell/nushell:0.115.1-alpine
+    entrypoint: [""]
+  resource_group: nexus-cleanup
+
+nexus-cleanup:dry-run:
+  extends: .nexus-cleanup
+  stage: dry-run
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web"
+  script:
+    - nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip
+        --summary-out summary-dry-run.json > report-dry-run.json
+  # Exit 4: some groups were skipped. Worth a warning, not a red pipeline.
+  allow_failure:
+    exit_codes: [4]
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths:
+      - report-dry-run.json
+      - summary-dry-run.json
+
+nexus-cleanup:execute:
+  extends: .nexus-cleanup
+  stage: execute
+  needs: [nexus-cleanup:dry-run]
+  rules:
+    # A manual job from `rules` blocks the pipeline until someone runs it. To limit
+    # who may, add an `environment:` here and protect that environment.
+    - if: $CI_PIPELINE_SOURCE == "web" && $EXECUTE == "true"
+      when: manual
+  interruptible: false
+  script:
+    - |
+      case "$MAX_DELETIONS" in
+        ''|*[!0-9]*|0*) echo "EXECUTE needs MAX_DELETIONS set to a positive whole number" >&2; exit 2 ;;
+      esac
+    - nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP"
+        --max-deletions "$MAX_DELETIONS" --execute
+        --summary-out summary-execute.json > report-execute.json
+  artifacts:
+    when: always
+    expire_in: 90 days
+    paths:
+      - report-execute.json
+      - summary-execute.json

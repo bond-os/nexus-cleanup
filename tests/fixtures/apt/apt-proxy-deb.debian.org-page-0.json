@@ -1,0 +1,215 @@
+{
+  "items": [
+    {
+      "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjRmMWJiY2Rk",
+      "repository": "apt-proxy-deb.debian.org",
+      "format": "apt",
+      "group": "amd64",
+      "name": "hello",
+      "version": "2.10-2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org/pool/main/h/hello/hello_2.10-2_amd64.deb",
+          "path": "/pool/main/h/hello/hello_2.10-2_amd64.deb",
+          "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjRmMWJiY2Rk",
+          "repository": "apt-proxy-deb.debian.org",
+          "format": "apt",
+          "checksum": {
+            "md5": "52b0cad2e741dd722c3e2e16a0aae57e",
+            "sha1": "9942852719b998fb190848966bcbe13f10534842",
+            "sha256": "35b1508eeee9c1dfba798c4c04304ef0f266990f936a51f165571edf53325cbc"
+          },
+          "contentType": "application/x-debian-package",
+          "lastModified": "2026-09-08T06:30:25.794+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 56132,
+          "blobCreated": "2026-09-08T06:30:25.797+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:30:25.794+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "apt": {}
+        }
+      ]
+    },
+    {
+      "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjllMzc3OWJh",
+      "repository": "apt-proxy-deb.debian.org",
+      "format": "apt",
+      "group": "arm64",
+      "name": "hello",
+      "version": "2.10-2",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org/pool/main/h/hello/hello_2.10-2_arm64.deb",
+          "path": "/pool/main/h/hello/hello_2.10-2_arm64.deb",
+          "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjllMzc3OWJh",
+          "repository": "apt-proxy-deb.debian.org",
+          "format": "apt",
+          "checksum": {
+            "md5": "dc901ea35f8c92f5617e407152096eb6",
+            "sha1": "4fed716ffe37f7720e051cfb39e4d5170ec953b0",
+            "sha256": "0518a4222821dadbb9c19bf181e88d76db5eda62ce80d5e63ff8bfed10afab20"
+          },
+          "contentType": "application/x-debian-package",
+          "lastModified": "2026-09-08T06:30:25.953+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 55372,
+          "blobCreated": "2026-09-08T06:30:25.954+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:30:25.953+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "apt": {}
+        }
+      ]
+    },
+    {
+      "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOmVkNTMzNjk3",
+      "repository": "apt-proxy-deb.debian.org",
+      "format": "apt",
+      "group": "amd64",
+      "name": "hello",
+      "version": "2.10-3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org/pool/main/h/hello/hello_2.10-3_amd64.deb",
+          "path": "/pool/main/h/hello/hello_2.10-3_amd64.deb",
+          "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOmVkNTMzNjk3",
+          "repository": "apt-proxy-deb.debian.org",
+          "format": "apt",
+          "checksum": {
+            "md5": "d04c2e9639dee67aa836d8232b1ca658",
+            "sha1": "f322085c1e2f95e8febe24989f776cfac268ff90",
+            "sha256": "2e6e2f1a0007dc43bc91c273fd36e91e40a4f1c2765a03eca68b70a42103878a"
+          },
+          "contentType": "application/x-debian-package",
+          "lastModified": "2026-09-08T06:30:26.093+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 53080,
+          "blobCreated": "2026-09-08T06:30:26.093+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:30:26.093+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "apt": {}
+        }
+      ]
+    },
+    {
+      "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjNjNmVmMzc0",
+      "repository": "apt-proxy-deb.debian.org",
+      "format": "apt",
+      "group": "arm64",
+      "name": "hello",
+      "version": "2.10-3",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org/pool/main/h/hello/hello_2.10-3_arm64.deb",
+          "path": "/pool/main/h/hello/hello_2.10-3_arm64.deb",
+          "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjNjNmVmMzc0",
+          "repository": "apt-proxy-deb.debian.org",
+          "format": "apt",
+          "checksum": {
+            "md5": "97c78ed3e5498aeccd04798392317e0e",
+            "sha1": "886b91e2acb631a2e0dcdfdf21af03f55d801d22",
+            "sha256": "f7b20d304db0f3a18da28eb2000de2b0205eaa340c1d0fecec3b7c50acc932dc"
+          },
+          "contentType": "application/x-debian-package",
+          "lastModified": "2026-09-08T06:30:26.237+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 52308,
+          "blobCreated": "2026-09-08T06:30:26.238+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:30:26.237+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "apt": {}
+        }
+      ]
+    },
+    {
+      "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjhiOGFiMDUx",
+      "repository": "apt-proxy-deb.debian.org",
+      "format": "apt",
+      "group": "amd64",
+      "name": "hello",
+      "version": "2.10-5",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org/pool/main/h/hello/hello_2.10-5_amd64.deb",
+          "path": "/pool/main/h/hello/hello_2.10-5_amd64.deb",
+          "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOjhiOGFiMDUx",
+          "repository": "apt-proxy-deb.debian.org",
+          "format": "apt",
+          "checksum": {
+            "md5": "205bff7f0368ca10574c658af3cbb572",
+            "sha1": "93e819b89d08e2b5d49473090f948d471bbdb062",
+            "sha256": "4536aabbb75ec21ffe161099ee4b97274945770bdb0682e25ec322421211ca5e"
+          },
+          "contentType": "application/x-debian-package",
+          "lastModified": "2026-09-08T06:30:26.355+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 53228,
+          "blobCreated": "2026-09-08T06:30:26.356+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:30:26.355+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "apt": {}
+        }
+      ]
+    },
+    {
+      "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOmRhYTY2ZDJl",
+      "repository": "apt-proxy-deb.debian.org",
+      "format": "apt",
+      "group": "arm64",
+      "name": "hello",
+      "version": "2.10-5",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/apt-proxy-deb.debian.org/pool/main/h/hello/hello_2.10-5_arm64.deb",
+          "path": "/pool/main/h/hello/hello_2.10-5_arm64.deb",
+          "id": "YXB0LXByb3h5LWRlYi5kZWJpYW4ub3JnOmRhYTY2ZDJl",
+          "repository": "apt-proxy-deb.debian.org",
+          "format": "apt",
+          "checksum": {
+            "md5": "71f76b5c3636726142acef761fe4d451",
+            "sha1": "fecb242a059fec95f6cdc0760e9b44298c04d279",
+            "sha256": "7a917c7f44fbd3373dff0f35a0b6bdf8ef564ff90579d8b130ff52fbf33fce1f"
+          },
+          "contentType": "application/x-debian-package",
+          "lastModified": "2026-09-08T06:30:26.486+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 52660,
+          "blobCreated": "2026-09-08T06:30:26.487+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:30:26.486+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "apt": {}
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

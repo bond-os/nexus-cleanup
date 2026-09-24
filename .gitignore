@@ -1,0 +1,8 @@
+# Local Nexus credentials for fixture recording and smoke runs. Never committed.
+.nexus.env
+
+# Scratch output from local runs.
+/out/
+
+# Local agent tooling (Junie commands and skills).
+/.junie/
