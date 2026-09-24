@@ -147,6 +147,141 @@ run-suite "report" [
         assert equal $s.counts.groups_total 2
         assert equal $s.counts.groups_skipped 1
     } }
+    { name: "multi-variant components resolve decisions and size correctly in summary", run: {||
+        let records = [
+            # Component 1: mixed delete + keep -> effective keep
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app1", variant: "amd64", version: "1.0", component_id: "c1", decision: "delete", reason: "superseded", rank: 2, size_bytes: 100, last_modified: "2026-01-01", deleted: false, error: "", path: "/app1-amd64"}
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app1", variant: "arm64", version: "1.0", component_id: "c1", decision: "keep", reason: "within-keep-window", rank: 1, size_bytes: 100, last_modified: "2026-01-01", deleted: false, error: "", path: "/app1-arm64"}
+
+            # Component 2: mixed delete + skip -> effective skip
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app2", variant: "amd64", version: "1.0", component_id: "c2", decision: "delete", reason: "superseded", rank: 2, size_bytes: 200, last_modified: "2026-01-01", deleted: false, error: "", path: "/app2-amd64"}
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app2", variant: "arm64", version: "1.0", component_id: "c2", decision: "skip", reason: "group-unorderable", rank: null, size_bytes: 200, last_modified: "2026-01-01", deleted: false, error: "", path: "/app2-arm64"}
+
+            # Component 3: all delete -> effective delete (executed & deleted)
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app3", variant: "amd64", version: "1.0", component_id: "c3", decision: "delete", reason: "superseded", rank: 2, size_bytes: 300, last_modified: "2026-01-01", deleted: true, error: "", path: "/app3-amd64"}
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app3", variant: "arm64", version: "1.0", component_id: "c3", decision: "delete", reason: "superseded", rank: 2, size_bytes: 300, last_modified: "2026-01-01", deleted: true, error: "", path: "/app3-arm64"}
+
+            # Component 4: all delete -> effective delete (execution failed on one variant)
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app4", variant: "amd64", version: "1.0", component_id: "c4", decision: "delete", reason: "superseded", rank: 2, size_bytes: 400, last_modified: "2026-01-01", deleted: false, error: "500 Internal Server Error", path: "/app4-amd64"}
+            {repository: "r", format: "docker", scope: "*", group: "", name: "app4", variant: "arm64", version: "1.0", component_id: "c4", decision: "delete", reason: "superseded", rank: 2, size_bytes: 400, last_modified: "2026-01-01", deleted: false, error: "", path: "/app4-arm64"}
+        ]
+        let s = (report summary $records (sample-run | merge {mode: "execute"}))
+        assert equal $s.counts.components_total 4
+        assert equal $s.counts.kept 1
+        assert equal $s.counts.skipped 1
+        assert equal $s.counts.to_delete 1 # 2 planned (c3, c4) - 1 failed (c4) = 1
+        assert equal $s.counts.failed 1     # c4
+        assert equal $s.counts.deleted 1    # c3
+        assert equal ($s.counts.kept + $s.counts.to_delete + $s.counts.skipped + $s.counts.failed) $s.counts.components_total
+        assert equal $s.bytes_reclaimable 700 # c3 (300) + c4 (400)
+        assert equal $s.bytes_reclaimed 300   # c3 (300)
+    } }
+    { name: "summary aggregates complex multi-group and outside-pattern records correctly", run: {||
+        let records = [
+            # Group 1: 2 records, all keep
+            {repository: "r1", format: "npm", scope: "*", group: "", name: "p1", variant: "*", version: "1.0", component_id: "p1-1", decision: "keep", reason: "within-keep-window", rank: 1, size_bytes: 10, last_modified: "2026-01-01", deleted: false, error: "", path: "/p1-1"}
+            {repository: "r1", format: "npm", scope: "*", group: "", name: "p1", variant: "*", version: "2.0", component_id: "p1-2", decision: "keep", reason: "within-keep-window", rank: 2, size_bytes: 20, last_modified: "2026-01-01", deleted: false, error: "", path: "/p1-2"}
+
+            # Group 2: 2 records, all delete
+            {repository: "r1", format: "npm", scope: "*", group: "", name: "p2", variant: "*", version: "1.0", component_id: "p2-1", decision: "delete", reason: "superseded", rank: 2, size_bytes: 30, last_modified: "2026-01-01", deleted: true, error: "", path: "/p2-1"}
+            {repository: "r1", format: "npm", scope: "*", group: "", name: "p2", variant: "*", version: "2.0", component_id: "p2-2", decision: "delete", reason: "superseded", rank: 3, size_bytes: 40, last_modified: "2026-01-01", deleted: true, error: "", path: "/p2-2"}
+
+            # Group 3: 2 records, mixed keep + skip -> skipped group
+            {repository: "r2", format: "yum", scope: "os", group: "x86_64", name: "k1", variant: "x86_64", version: "1.0", component_id: "k1-1", decision: "keep", reason: "within-keep-window", rank: 1, size_bytes: 50, last_modified: "2026-01-01", deleted: false, error: "", path: "/k1-1"}
+            {repository: "r2", format: "yum", scope: "os", group: "x86_64", name: "k1", variant: "x86_64", version: "2.0", component_id: "k1-2", decision: "skip", reason: "group-unorderable", rank: null, size_bytes: 60, last_modified: "2026-01-01", deleted: false, error: "", path: "/k1-2"}
+
+            # Outside-pattern records: 3 records
+            {repository: "r3", format: "raw", scope: "*", group: "", name: "raw1", variant: "*", version: "", component_id: "raw-1", decision: "keep", reason: "outside-pattern", rank: null, size_bytes: 70, last_modified: "2026-01-01", deleted: false, error: "", path: "/raw-1"}
+            {repository: "r3", format: "raw", scope: "*", group: "", name: "raw2", variant: "*", version: "", component_id: "raw-2", decision: "keep", reason: "outside-pattern", rank: null, size_bytes: 80, last_modified: "2026-01-01", deleted: false, error: "", path: "/raw-2"}
+            {repository: "r3", format: "raw", scope: "*", group: "", name: "raw3", variant: "*", version: "", component_id: "raw-3", decision: "keep", reason: "outside-pattern", rank: null, size_bytes: 90, last_modified: "2026-01-01", deleted: false, error: "", path: "/raw-3"}
+        ]
+        let s = (report summary $records (sample-run | merge {mode: "execute"}))
+        assert equal $s.counts.components_total 9
+        assert equal $s.counts.groups_total 3
+        assert equal $s.counts.groups_skipped 1
+        assert equal $s.counts.kept 6
+        assert equal $s.counts.to_delete 2
+        assert equal $s.counts.skipped 1
+        assert equal $s.counts.failed 0
+        assert equal $s.counts.deleted 2
+        assert equal $s.bytes_reclaimable 70
+        assert equal $s.bytes_reclaimed 70
+    } }
+    { name: "summary scales accurately on large datasets", run: {||
+        # Generate 1,000 components across 100 groups:
+        # - 500 kept (size 10 each = 5000 bytes)
+        # - 300 to_delete and deleted (size 20 each = 6000 bytes)
+        # - 100 to_delete but failed (size 30 each = 3000 bytes)
+        # - 100 skipped (size 40 each = 4000 bytes)
+        # Only groups 0..9 contain skipped components (10 skipped groups).
+        mut recs = []
+        for i in 0..<1000 {
+            let decision_type = if $i < 500 {
+                "keep"
+            } else if $i < 800 {
+                "del_success"
+            } else if $i < 900 {
+                "del_fail"
+            } else {
+                "skip"
+            }
+
+            let group_num = if $decision_type == "skip" {
+                ($i mod 10)
+            } else {
+                ($i mod 100)
+            }
+
+            let comp_id = $"comp-($i)"
+
+            let rec = match $decision_type {
+                "keep" => {
+                    decision: "keep", reason: "within-keep-window", size_bytes: 10, deleted: false, error: ""
+                }
+                "del_success" => {
+                    decision: "delete", reason: "superseded", size_bytes: 20, deleted: true, error: ""
+                }
+                "del_fail" => {
+                    decision: "delete", reason: "superseded", size_bytes: 30, deleted: false, error: "HTTP 500"
+                }
+                "skip" => {
+                    decision: "skip", reason: "group-unorderable", size_bytes: 40, deleted: false, error: ""
+                }
+            }
+
+            $recs = ($recs | append {
+                repository: "repo"
+                format: "generic"
+                scope: "scope"
+                group: $"grp-($group_num)"
+                name: $"pkg-($group_num)"
+                variant: "*"
+                version: $"1.0.($i)"
+                component_id: $comp_id
+                decision: $rec.decision
+                reason: $rec.reason
+                rank: 1
+                size_bytes: $rec.size_bytes
+                last_modified: "2026-01-01"
+                deleted: $rec.deleted
+                error: $rec.error
+                path: $"/pkg-($group_num)/1.0.($i)"
+            })
+        }
+
+        let s = (report summary $recs (sample-run | merge {mode: "execute"}))
+        assert equal $s.counts.components_total 1000
+        assert equal $s.counts.kept 500
+        assert equal $s.counts.to_delete 300 # 400 planned - 100 failed = 300
+        assert equal $s.counts.failed 100
+        assert equal $s.counts.deleted 300
+        assert equal $s.counts.skipped 100
+        assert equal $s.counts.groups_total 100
+        assert equal $s.counts.groups_skipped 10
+        assert equal ($s.counts.kept + $s.counts.to_delete + $s.counts.skipped + $s.counts.failed) $s.counts.components_total
+        assert equal $s.bytes_reclaimable 9000 # (300 * 20) + (100 * 30)
+        assert equal $s.bytes_reclaimed 6000   # (300 * 20)
+    } }
     { name: "no credential appears anywhere in the report", run: {||
         let run = (sample-run | merge {nexus_url: "https://someone:hunter2@nexus.example.invalid"})
         let doc = (report encode {summary: (report summary (report records (sample-plan)) $run), records: (report records (sample-plan))})
