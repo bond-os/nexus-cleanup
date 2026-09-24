@@ -3,3 +3,6 @@
 
 # Scratch output from local runs.
 /out/
+
+# Local agent tooling (Junie commands and skills).
+/.junie/
