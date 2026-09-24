@@ -2,15 +2,41 @@ name: tests
 
 on:
   push:
+    branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    # Pinned to match the version floor in AGENTS.md. Nushell breaks
-    # compatibility between minor releases, so this moves deliberately.
-    container: ghcr.io/nushell/nushell:0.115.1-alpine
+    timeout-minutes: 10
+    container:
+      # Pinned to match the version floor in AGENTS.md. Nushell breaks
+      # compatibility between minor releases, so this moves deliberately.
+      image: ghcr.io/nushell/nushell:0.115.1-alpine
+      # The image runs as `nushell` (uid 1000), but the runner hands the job a
+      # workspace owned by its own uid, so checkout fails without root.
+      options: --user root
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Importing the module is inert
+        run: |
+          out=$(nu -c 'use nexus-cleanup' 2>&1)
+          if [ -n "$out" ]; then
+            echo "importing the module printed output:" >&2
+            echo "$out" >&2
+            exit 1
+          fi
+
       - name: Run the test suite
         run: nu tests/run-tests.nu
