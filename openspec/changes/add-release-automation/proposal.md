@@ -28,6 +28,11 @@ would hide the tool.
   on `PATH` and becomes the entrypoint, and `/work` stays an empty working directory. The same
   image then works both as `docker run IMAGE --pattern …` and in CI systems that clear the
   entrypoint and run `nexus-cleanup …` from a shell.
+- **The image runs without root.** It declares a numeric non-root user (`1000:1000`), so a
+  Kubernetes pod with `runAsNonRoot` admits it without extra configuration. The tool runs under
+  any UID, with a read-only root filesystem and no capabilities, so OpenShift's arbitrary UIDs
+  and rootless Podman or Docker work too. The examples and README say which flags make the CI
+  workspace writable under each runtime, and the image check runs a rootless Podman pass.
 - **The tool knows its version.** A single version constant in the module, rewritten by
   release-please, feeds a new `--version` flag, a `tool_version` field at the end of the report's
   aggregate block, and the image's version label.
@@ -52,7 +57,7 @@ that is repeated across the Containerfile, CI and examples.
 
 - `nexus-cleanup/distribution`: how the tool is versioned, released and packaged — version
   derivation from commit messages, the release PR and changelog, the published container image
-  (contents, entrypoint, platforms, tags, labels, provenance), the gates a release must pass,
+  (contents, entrypoint, user, platforms, tags, labels, provenance), the gates a release must pass,
   and the commit message checks that feed it.
 
 ### Modified Capabilities
@@ -66,8 +71,9 @@ that is repeated across the Containerfile, CI and examples.
 
 - **Code**: a new `nexus-cleanup/version.nu` exported from `mod.nu`; the entrypoint gains
   `--version`; `report.nu` appends `tool_version`, read from that constant, to the aggregate.
-- **Packaging**: `Containerfile` relocates the tool and adds the launcher; a launcher script and
-  an image smoke-check script shared by pull-request CI and the release workflow.
+- **Packaging**: `Containerfile` relocates the tool, adds the launcher and declares the numeric
+  user; a launcher script and an image smoke-check script shared by pull-request CI and the
+  release workflow.
 - **CI**: a new release workflow (release-please, image build, smoke test, push, attestation)
   and a commit-check workflow; `tests.yml` additionally builds and smoke-tests the image on
   pull requests without pushing.

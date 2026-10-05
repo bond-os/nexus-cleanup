@@ -10,6 +10,10 @@ builds on:
   pinned by commit SHA with the version in a trailing comment.
 - The base image is an OCI index for `linux/amd64`, `linux/arm64` and `linux/arm/v7`. The image
   build has no `RUN` step, so buildx can produce every platform without QEMU emulation.
+- The base image sets `USER nushell`, which is uid/gid 1000 with home `/home/nushell`, and our
+  `Containerfile` sets no `USER`. So the image already runs as non-root, but only by inheriting
+  a *named* user that upstream could change. `WORKDIR /work` is created as that user
+  (`1000:1000`, mode 755). The tool and launcher are root-owned and world-readable.
 - The entrypoint resolves its modules with `use ./nexus-cleanup/…` relative to the script file.
   Verified on Nushell 0.116.0: a **symlink** to the entrypoint fails with
   `nu::parser::module_not_found`, because Nushell resolves the relative path against the
@@ -128,6 +132,70 @@ module and the launcher, which keeps tests, fixtures, `.nexus.env` and `openspec
 context. That enforces "Image contains only the runtime and the tool" at the source rather than
 relying on `COPY` lines alone.
 
+### The image declares `USER 1000:1000`
+
+The target runtimes are rootful Docker, rootless Podman (and rootless Docker) in CI, and CI
+runners hosted on Kubernetes or OpenShift. Probing a local build of the image showed that the
+tool needs no root and no writable path of its own:
+
+- `--user 12345:12345` works;
+- so do `--read-only`, `--cap-drop ALL` and `--security-opt no-new-privileges`;
+- Nushell running a script writes nothing to `HOME`.
+
+The only things that differ between these runtimes are how the image declares its user and who
+can write the workspace.
+
+`Containerfile` declares `USER 1000:1000` explicitly, numerically, and before `WORKDIR`. This is
+the same identity the image already runs as, so behaviour does not change. It fixes two things:
+
+- **Kubernetes `runAsNonRoot`.** The kubelet cannot verify that a *named* user is non-root, so it
+  refuses to start a pod with `runAsNonRoot: true` unless the pod also sets `runAsUser`. The
+  "restricted" Pod Security Standard requires `runAsNonRoot`. With a numeric `USER`, a GitLab
+  Kubernetes executor or a Jenkins Kubernetes agent in a restricted namespace admits the image
+  with no extra configuration.
+- **Upstream drift.** The user is now ours, not whatever the next Nushell image sets.
+
+`1000` also happens to be the UID of the `jenkins/inbound-agent` image, so a Jenkins Kubernetes
+pod sharing a workspace volume between the agent and our container sees one owner.
+
+Who can write the workspace, by runtime:
+
+```
+                          workspace owner         tool runs as          works?
+ ------------------------------------------------------------------------------------------
+ Docker rootful, GitLab   helper (root), dirs     1000 (image)          yes: the runner applies
+                          0777                                          umask 0000, or chowns to
+                                                                        the image user via `id`
+                                                                        (busybox, present)
+ Docker rootful, Jenkins  agent uid               --user agent uid      yes
+ Podman rootless, GitLab  container 0 = host      1000 -> subuid        yes, dirs are 0777
+                          user
+ Podman rootless,         container 0 = host      --user $(id -u)       NO: host uid N inside
+   Jenkins                user                    -> subuid             the userns is another uid
+                                                                        -> use --userns=keep-id
+ Docker rootless, Jenkins same                    same                  NO -> use --user 0:0
+                                                                        (maps to the host user)
+ Kubernetes executor      emptyDir 0777 or        1000, or runAsUser    yes
+                          fsGroup
+ OpenShift restricted-v2  emptyDir / fsGroup      arbitrary uid, gid 0  yes
+```
+
+Under a rootless runtime, `--user "$(id -u):$(id -g)"` is wrong. The host UID is mapped to
+container root, and the same number inside the namespace lands on an unrelated subordinate UID.
+The Docker Pipeline plugin injects exactly that `-u`, so it has the same problem under rootless
+Podman. These are runtime configuration, not something the image can fix. The examples and the
+README name the right flags per runtime.
+
+*Alternatives considered:*
+- Keep inheriting `USER nushell`. Rejected: it fails `runAsNonRoot`, and upstream controls it.
+- `USER 0`. Rootless runtimes would then write the workspace trivially, but the image would fail
+  `runAsNonRoot` and run as real root under rootful Docker.
+- `USER 1000:0`, with a group-0-writable `/work` (the usual OpenShift pattern). Making `/work`
+  group-writable needs either a `RUN chmod`, which brings back QEMU, or copying in a placeholder
+  directory, which leaves `/work` non-empty. Neither is worth it: no CI executor uses `/work` as
+  its job directory, and every runtime that does use it mounts a workspace over it. OpenShift
+  assigns GID 0 itself, whatever the image declares.
+
 ### One smoke-check script, two callers
 
 `.github/scripts/image-smoke.sh IMAGE EXPECTED_VERSION` runs against a locally loaded image and
@@ -142,6 +210,18 @@ fails on the first broken check:
 | `--entrypoint nu IMAGE -c 'use /opt/nexus-cleanup/nexus-cleanup'` | no output, exit 0 |
 | `ls /opt/nexus-cleanup` inside the image | exactly the entrypoint and the module |
 | image label `org.opencontainers.image.version` | `EXPECTED_VERSION` |
+| image config `User` | numeric `uid:gid`, uid not `0` |
+| `--user 12345:0 --read-only --cap-drop ALL --security-opt no-new-privileges` | `--version` prints `EXPECTED_VERSION`; no selection exits 2 |
+| `--user "$(id -u):$(id -g)" -v "$tmp:/work"` (`$tmp` not world-writable), `--summary-out` | file lands in `$tmp`, owned by the caller |
+
+The existing `chmod 0777` mount case stays: it models the GitLab executor and Kubernetes
+`emptyDir`, where the image's own user writes a world-writable workspace.
+
+In the `image` job the smoke script runs twice: once with `docker`, and once under rootless
+Podman, which ships on GitHub's `ubuntu-24.04` runners. The amd64 image is moved across with
+`docker save | podman load`. The container engine is a parameter of the script, and the Podman
+pass replaces the `--user` case with `--userns=keep-id`. This is what turns the rootless rows of
+the matrix above from reasoning into a checked fact.
 
 None of these checks needs a network or a Nexus. The script orchestrates `docker`, which places
 it under the maintenance-tooling side of the AGENTS.md boundary, so bash is appropriate.
@@ -292,8 +372,8 @@ any of them, in particular adding a bypass actor on `main`, reopens what that se
 | Example | Change |
 |---|---|
 | GitLab | `image: ghcr.io/bond-os/nexus-cleanup:0.1.0` with `entrypoint: [""]`, `script: nexus-cleanup …`, and `GIT_STRATEGY: none` because nothing from the repository is needed |
-| Jenkins, Docker Pipeline plugin | the release image, `args '--entrypoint='`, `sh 'nexus-cleanup …'`, and `skipDefaultCheckout()` |
-| Jenkins, plain `sh` | `docker run` of the release image with its default entrypoint; the workspace mount stays because `--summary-out` and the report land there |
+| Jenkins, Docker Pipeline plugin | the release image, `args '--entrypoint='`, `sh 'nexus-cleanup …'`, and `skipDefaultCheckout()`; a comment that under rootless Podman the plugin's injected `-u` cannot write the workspace, so the agent needs a rootful engine or `args '--entrypoint= --userns=keep-id'` |
+| Jenkins, plain `sh` | `docker run` of the release image with its default entrypoint; the workspace mount stays because `--summary-out` and the report land there; `--user "$(id -u):$(id -g)"` is commented as rootful-only, with `--userns=keep-id` (Podman) and `--user 0:0` (rootless Docker) as the rootless replacements |
 | Forgejo | stays on a node job image because `upload-artifact` needs node. It replaces "the tool is in your repository" with a shallow `git clone --branch v0.1.0` of this repository, keeping the checksum-verified Nushell install |
 
 Each example states that the pinned version should be bumped deliberately, after reading the
@@ -315,6 +395,17 @@ changelog.
 - **The launcher behaviour was verified on 0.116.0, not 0.115.1.** → The smoke check exercises
   every verified property inside the pinned image on the first PR. If `--wrapped` or `exec`
   differ on 0.115.1, revisit before merge.
+- **Only the rootless Podman rows of the user matrix have been observed.** They were checked under
+  rootless Podman (`quay.io/podman/stable`, `podman info` reporting `rootless: true`):
+  - `--user "$(id -u):$(id -g)"` fails with `Permission denied` on a caller-owned workspace;
+  - `--userns=keep-id` and `--user 0:0` both write, and the file is owned by the caller;
+  - the Jenkins plugin's `-u uid:gid` plus `--userns=keep-id` writes too.
+
+  The rootless Docker row (`--user 0:0`) relies on the same user-namespace mapping but has not
+  been run under rootless Docker. Docker Desktop on macOS hides ownership mismatches on bind
+  mounts, so it cannot stand in. → The rootless Podman smoke pass in the `image` job re-checks
+  the Podman rows on every PR. If anything disagrees, the examples follow the observed
+  behaviour, not this document.
 - **Moving the `X.Y` tag means a consumer on `0.2` picks up `0.2.1` unread.** → Under
   `bump-minor-pre-major`, a patch release contains fixes only. The examples pin `X.Y.Z` anyway,
   and `X.Y` is documented as a convenience.
