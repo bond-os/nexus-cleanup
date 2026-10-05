@@ -176,6 +176,29 @@ release.yml (push to main)
   `RELEASE_APP_PRIVATE_KEY`.
 - **Workflow hygiene.** release-please outputs reach `run:` steps through `env:`, never through
   `${{ }}` interpolated into the script. No workflow uses `pull_request_target`.
+- **Tags.** `docker/metadata-action` with two `type=semver` patterns, `{{version}}` and
+  `{{major}}.{{minor}}`, fed the release tag, plus `flavor: latest=false`. Without that flavor
+  setting, metadata-action adds `latest` on semver tags.
+- **commitlint.** A shell step runs `npx -p @commitlint/cli@<exact> -p
+  @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on the runner's
+  preinstalled Node, with `.commitlintrc.yaml` extending the preset and nothing else. The
+  repository gains no `package.json`.
+
+  *Alternative considered:* `wagoid/commitlint-github-action`. Rejected during implementation:
+  even when the action is pinned by SHA, it runs `docker://wagoid/commitlint-github-action:<tag>`,
+  a Docker Hub tag that can be re-pointed. So the pin does not pin what executes. Published npm
+  versions are immutable.
+- **Pinning.** Every third-party action is pinned by commit SHA with the version in a comment,
+  matching `tests.yml`.
+
+*Alternatives considered:*
+- A separate workflow triggered by tag push. This works with the App token, but it adds a
+  second entry point: anyone with push access could publish an image by pushing a `v*` tag
+  without going through a release PR. Gating `publish` on `release_created` in the same run
+  makes the merged release PR the only way to publish.
+- A draft GitHub Release that is un-drafted after the image push: this needs
+  `force-tag-creation`, plus a second token-scoped step. Deferred unless a failed publish proves
+  to be a real problem (see Risks).
 
 ### The GitHub App and its trust boundary
 
@@ -219,10 +242,15 @@ both the App and the token only if release-please demonstrably fails to label it
 Repository rules. release-please never pushes to `main`: it pushes its own branch and opens a
 PR. So the App needs no bypass on `main`. A stolen key cannot land code on `main`.
 
-**4. Release tags are created only by the App and are immutable once created.** A tag ruleset on
-`refs/tags/v*` restricts creation, update and deletion. The App is the only bypass actor, and
-only for creation. Release immutability is enabled on the repository, so a published release's
-tag and assets cannot be changed afterwards.
+**4. Release tags are created only by the App and are immutable once created.** Two tag rulesets
+cover `refs/tags/v*`:
+- one restricts creation, with the App as its only bypass actor;
+- one restricts update and deletion, with no bypass actors at all.
+
+They have to be separate, because a ruleset's bypass list applies to every rule in it. A single
+ruleset would let the App move and delete tags as well as create them. Release immutability is
+also enabled on the repository, so a published release's tag and assets cannot be changed
+afterwards.
 
 Pinned `X.Y.Z` references can therefore never be moved under a consumer. That includes the
 Forgejo example's `git clone --branch vX.Y.Z`. A stolen key cannot rewrite an existing release.
@@ -230,29 +258,6 @@ Forgejo example's `git clone --branch vX.Y.Z`. A stolen key cannot rewrite an ex
 **Key handling.** The `.pem` file is deleted locally once stored. The key is rotated yearly and
 whenever a maintainer with access leaves. Apps allow two active keys, so rotation means: add the
 new key, update the secret, then revoke the old key.
-- **Tags.** `docker/metadata-action` with two `type=semver` patterns, `{{version}}` and
-  `{{major}}.{{minor}}`, fed the release tag, plus `flavor: latest=false`. Without that flavor
-  setting, metadata-action adds `latest` on semver tags.
-- **commitlint.** A shell step runs `npx -p @commitlint/cli@<exact> -p
-  @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on the runner's
-  preinstalled Node, with `.commitlintrc.yaml` extending the preset and nothing else. The
-  repository gains no `package.json`.
-
-  *Alternative considered:* `wagoid/commitlint-github-action`. Rejected during implementation:
-  even when the action is pinned by SHA, it runs `docker://wagoid/commitlint-github-action:<tag>`,
-  a Docker Hub tag that can be re-pointed. So the pin does not pin what executes. Published npm
-  versions are immutable.
-- **Pinning.** Every third-party action is pinned by commit SHA with the version in a comment,
-  matching `tests.yml`.
-
-*Alternatives considered:*
-- A separate workflow triggered by tag push. This works with the App token, but it adds a
-  second entry point: anyone with push access could publish an image by pushing a `v*` tag
-  without going through a release PR. Gating `publish` on `release_created` in the same run
-  makes the merged release PR the only way to publish.
-- A draft GitHub Release that is un-drafted after the image push: this needs
-  `force-tag-creation`, plus a second token-scoped step. Deferred unless a failed publish proves
-  to be a real problem (see Risks).
 
 ### Repository rules
 
@@ -263,12 +268,17 @@ The branch ruleset on `main`, with **no bypass actors** (neither the App nor adm
   cannot approve their own PRs;
 - allowed merge method **rebase** only;
 - required status checks `test`, `image` and `commitlint`, with "require branches to be up to
-  date", so the checked commits are the ones that land;
+  date", so the checked commits are the ones that land. Each check is tied to the GitHub Actions
+  app (`integration_id` 15368), so a status posted by anything else does not satisfy it;
 - no force pushes and no deletion.
 
-The tag ruleset on `refs/tags/v*`:
-- restrict creation, with the release App as the only bypass actor;
-- restrict updates and deletion, with no bypass actors.
+Two tag rulesets on `refs/tags/v*` (see point 4 above for why they cannot be one):
+- "created by the release App only": restrict creation, with the App as the only bypass actor;
+- "immutable": restrict updates and deletion, with no bypass actors.
+
+To check the `main` ruleset, read the effective rules (`GET /repos/{owner}/{repo}/rules/branches/main`)
+rather than attempting a direct push. If the ruleset were misconfigured, a test push from a
+feature branch would land unreviewed commits on `main` and start the release workflow.
 
 Repository settings:
 - squash merging and merge commits are turned off, so the merge button offers nothing else;

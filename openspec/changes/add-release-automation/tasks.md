@@ -111,26 +111,30 @@
   - installed on `bond-os/nexus-cleanup` only.
 
   Generate a private key and delete the downloaded `.pem` once 7.3 has stored it. Verify on the installation page that it lists exactly one repository and exactly those two permissions plus Metadata read.
-- [ ] 7.3 Create the Environment `release` with a deployment branch policy allowing `main` only and no required reviewers. Store `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_PRIVATE_KEY` as **environment** secrets. Verify:
+- [x] 7.3 Create the Environment `release` with a deployment branch policy allowing `main` only and no required reviewers. Store `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_PRIVATE_KEY` as **environment** secrets. Verify:
   - `gh secret list --env release` shows both;
   - `gh secret list` (repository level) shows neither;
   - `gh api repos/bond-os/nexus-cleanup/environments/release` reports the branch policy.
-- [ ] 7.4 Disable squash merging and merge commits, enable release immutability, and add the branch ruleset on `main` with no bypass actors:
+- [x] 7.4 Disable squash merging and merge commits, enable release immutability, and add the branch ruleset on `main` with no bypass actors:
   - require a pull request, 0 approvals;
   - rebase merge only;
-  - required checks `test`, `image` and `commitlint`;
+  - required checks `test`, `image` and `commitlint`, each tied to the GitHub Actions app (`integration_id` 15368);
   - branches must be up to date;
   - no force push or deletion.
 
   Verify:
   - `gh api repos/bond-os/nexus-cleanup` shows only `allow_rebase_merge: true`;
   - the ruleset lists the pull-request rule and the three checks with an empty bypass list;
-  - a direct `git push origin HEAD:main` from a scratch commit is rejected.
-- [ ] 7.5 Add the tag ruleset on `refs/tags/v*`:
-  - restrict creation, with the release App as the only bypass actor;
-  - restrict updates and deletion, with no bypass actors.
+  - `gh api repos/bond-os/nexus-cleanup/rules/branches/main` lists `deletion`, `non_fast_forward`, `pull_request` and `required_status_checks`.
 
-  Verify that pushing a test tag `v0.0.0-ruleset-check` from a maintainer checkout is rejected.
+  Do not test with a direct push from a feature branch: if the ruleset were wrong, unreviewed commits would land on `main` and start the release workflow.
+- [x] 7.5 Add two tag rulesets on `refs/tags/v*`. They must be separate, because a bypass list applies to every rule in its ruleset:
+  - "release tags: created by the release App only": restrict creation, with the App (by numeric App ID) as the only bypass actor;
+  - "release tags: immutable": restrict updates and deletion, with no bypass actors.
+
+  Verify:
+  - both rulesets are listed as `active`;
+  - pushing a test tag `v0.0.0-ruleset-check` from a maintainer checkout is rejected, and the tag is then deleted locally.
 - [ ] 7.6 Verify the environment boundary: on a throwaway branch, push a workflow that declares `environment: release` and only checks whether `RELEASE_APP_CLIENT_ID` is non-empty, without printing it. Confirm the job is refused by the branch policy. Delete the branch.
 
 ## 8. First release, end to end
