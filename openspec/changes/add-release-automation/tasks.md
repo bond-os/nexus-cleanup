@@ -104,7 +104,7 @@
 ## 7. Repository administration (maintainer, manual; complete before merging this change)
 
 - [x] 7.1 Rebase the branch onto `origin/main`, so that the "branches up to date" rule accepts it. No reword is needed: `init - openspec` reached `main` through PR #1, and rewording it would mean force-pushing `main`. Verify that `commitlint --from origin/main --to HEAD` (pinned versions) passes for every commit the PR will contain.
-- [ ] 7.2 Create the GitHub App owned by `bond-os`:
+- [x] 7.2 Create the GitHub App owned by `bond-os`:
   - private ("Only on this account");
   - webhook disabled;
   - repository permissions Contents and Pull requests set to read and write, and nothing else;
