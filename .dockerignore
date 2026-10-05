@@ -1,0 +1,6 @@
+# Allow-list: the build context holds the tool and its launcher, nothing else.
+# Tests, fixtures, .nexus.env, openspec/ and tooling never reach the image.
+*
+!nexus-cleanup.nu
+!nexus-cleanup/
+!packaging/
