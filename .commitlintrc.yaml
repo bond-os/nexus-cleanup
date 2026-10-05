@@ -1,0 +1,5 @@
+# Conventional Commits, checked on every commit of every pull request.
+# The stock preset, unmodified: release-please reads these messages to derive
+# versions and the changelog. See "Commits and merging" in AGENTS.md.
+extends:
+  - "@commitlint/config-conventional"
