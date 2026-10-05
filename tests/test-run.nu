@@ -2,6 +2,7 @@ use ./harness.nu *
 use ../nexus-cleanup/run.nu *
 use ../nexus-cleanup/api.nu *
 use ../nexus-cleanup/config.nu *
+use ../nexus-cleanup/version.nu [VERSION]
 
 # A Nexus that serves one npm proxy holding four versions of one package.
 def stub-fetch [--delete-status: int = 204, --record-deletes: string = ""]: nothing -> closure {
@@ -87,6 +88,11 @@ run-suite "run" [
         assert equal $out.exit_code $EXIT_OK
         assert equal $out.report.records []
         assert equal $out.report.summary.counts.components_total 0
+        assert equal $out.report.summary.tool_version $VERSION
+    } }
+    { name: "a populated run's summary names the tool version", run: {||
+        let out = (run-with (cfg) (stub-fetch))
+        assert equal $out.report.summary.tool_version $VERSION
     } }
     { name: "a pattern selects only proxies", run: {||
         let out = (run-with (cfg {repositories: [], pattern: "npm-*"}) (stub-fetch))

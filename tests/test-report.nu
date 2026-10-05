@@ -1,6 +1,7 @@
 use ./harness.nu *
 use ../nexus-cleanup/report.nu *
 use ../nexus-cleanup/policy.nu *
+use ../nexus-cleanup/version.nu [VERSION]
 
 def comp [repo: string, name: string, version: string, size: int]: nothing -> record {
     {
@@ -361,6 +362,27 @@ run-suite "report" [
         let plan = (policy plan $layout --from-path '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/' --version-scheme date --keep 14)
         let s = (report summary (report records $plan) (sample-run))
         assert equal $s.counts.groups_total 2
+    } }
+    # --- tool version ---
+    { name: "the aggregate ends with the tool version", run: {||
+        let s = (report summary (report records (sample-plan)) (sample-run))
+        assert equal ($s | columns | last) "tool_version"
+        assert equal $s.tool_version $VERSION
+    } }
+    { name: "an empty run's aggregate also ends with the tool version", run: {||
+        let s = (report summary [] (sample-run))
+        assert equal ($s | columns | last) "tool_version"
+        assert equal $s.tool_version $VERSION
+    } }
+    { name: "the summary written for --summary-out carries the tool version", run: {||
+        let s = (report encode-summary (report summary (report records (sample-plan)) (sample-run)) | from json)
+        assert equal $s.tool_version $VERSION
+    } }
+    { name: "the tool version never becomes a CSV column", run: {||
+        let records = (report records (sample-plan))
+        let doc = (report encode {summary: (report summary $records (sample-run)), records: $records} --format csv)
+        assert equal ($doc | lines | first) ($FIELDS | str join ",")
+        assert not ($doc | str contains "tool_version")
     } }
     { name: "an unknown format is refused", run: {||
         assert error {|| report encode {summary: {}, records: []} --format "yaml" }

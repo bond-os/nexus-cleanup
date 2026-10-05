@@ -3,6 +3,7 @@
 # Importing this module is inert: it makes no request, reads no credentials and
 # writes nothing to stdout or stderr.
 
+export use ./version.nu *
 export use ./versions.nu *
 export use ./variants.nu *
 export use ./paths.nu *
