@@ -19,6 +19,13 @@ COPY nexus-cleanup.nu /opt/nexus-cleanup/nexus-cleanup.nu
 COPY nexus-cleanup /opt/nexus-cleanup/nexus-cleanup
 COPY --chmod=0755 packaging/nexus-cleanup /usr/local/bin/nexus-cleanup
 
+# The base image's `nushell` user, declared here rather than inherited so that
+# upstream cannot change it, and numeric because Kubernetes cannot verify that
+# a named user is non-root: `runAsNonRoot` would refuse to start the pod. The
+# tool runs under any UID the runtime assigns instead. Set before WORKDIR, which
+# creates /work owned by it.
+USER 1000:1000
+
 # Empty: relative output paths such as --summary-out land in whatever the CI
 # system mounts here.
 WORKDIR /work

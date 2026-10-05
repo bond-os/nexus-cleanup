@@ -443,6 +443,30 @@ directory names are too easy to mistake for dates; selection must be explicit
 (`--version-scheme date`). Calendar validation uses `into datetime --format "%Y%m%d"` — no
 external binary — and an impossible date makes its group unorderable rather than guessed.
 
+### The image declares a numeric `USER 1000:1000`, and `/work` stays owner-writable only
+
+The base image already runs as `nushell` (uid 1000). The `Containerfile` declares that user
+again, in numeric form, for two reasons:
+
+- **Kubernetes cannot verify a named user.** With `runAsNonRoot: true`, which the "restricted"
+  Pod Security Standard requires, the kubelet refuses to start a pod whose image user is a name.
+  It would need an explicit `runAsUser`. A numeric user is admitted with no extra configuration.
+- **An inherited user belongs to upstream.** A Nushell image that changed or dropped its user
+  would silently change ours.
+
+Do not remove the line, and do not replace it with the name.
+
+The tool needs no root and no writable path of its own. It runs under any uid, including
+OpenShift's arbitrary uids with gid 0, on a read-only root filesystem with no capabilities.
+The smoke script checks this. Workspace ownership under rootless runtimes is a runtime flag,
+not an image property (`--userns=keep-id` for Podman, `--user 0:0` for rootless Docker), and
+the README documents it.
+
+`/work` is deliberately **not** made group-0-writable, the usual OpenShift pattern. That would
+need either a `RUN chmod`, which brings back QEMU for `arm64` and `arm/v7`, or a copied-in
+placeholder, which breaks "`/work` is empty". It would buy nothing: no CI executor uses `/work`
+as its job directory, and every runtime that does use `/work` mounts a workspace over it.
+
 ### Report fields are only ever appended
 
 CSV consumers address columns by position. A new record field goes at the end of `FIELDS`,
