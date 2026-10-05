@@ -5,6 +5,7 @@
 # the same table, produced at the last step, so neither can drift from the other.
 
 use ./policy.nu *
+use ./version.nu [VERSION]
 
 # Column order for CSV. Documented and stable: consumers index by position, so a
 # new field is only ever appended — never inserted.
@@ -124,6 +125,8 @@ export def "report summary" [records: list<record>, run: record]: nothing -> rec
         }
         bytes_reclaimable: (sum-or-zero ($planned | get size))
         bytes_reclaimed: (sum-or-zero ($deleted | get size))
+        # Appended last, like every aggregate field: consumers may rely on the order.
+        tool_version: $VERSION
     }
 }
 

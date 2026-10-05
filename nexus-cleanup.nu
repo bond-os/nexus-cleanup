@@ -7,6 +7,7 @@
 use ./nexus-cleanup/config.nu *
 use ./nexus-cleanup/api.nu *
 use ./nexus-cleanup/run.nu *
+use ./nexus-cleanup/version.nu [VERSION]
 
 def main [
     ...repositories: string             # proxy repositories to clean
@@ -26,7 +27,15 @@ def main [
     --max-deletions: int = 0            # abort an executing run above this many
     --max-deletion-share: float = 0.0   # abort above this share of components
     --summary-out: string = ""          # also write the aggregate here as JSON
+    --version                           # print the tool version and exit
 ] {
+    # Before any configuration is read: asking for the version never needs a
+    # Nexus, credentials or a valid selection.
+    if $version {
+        print $VERSION
+        return
+    }
+
     let resolved = (try {
         {ok: (config resolve {
             url: $url
