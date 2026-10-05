@@ -158,9 +158,10 @@ App's private key is the one long-lived credential in the repository, so everyth
 arranged to limit who can read it and what it can do. These are security controls; do not
 loosen them for convenience.
 
-- **The key is readable only from `main`.** `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY` are
-  secrets of the `release` *environment*, whose deployment branch policy allows `main` only; the
-  `release-please` job declares `environment: release`. They are deliberately **not** repository
+- **The key is readable only from `main`.** `RELEASE_APP_CLIENT_ID` and
+  `RELEASE_APP_PRIVATE_KEY` are secrets of the `release` *environment*, whose deployment branch
+  policy allows `main` only; the `release-please` job declares `environment: release`. The token
+  action takes the App's Client ID (`client-id`), not its numeric App ID, which it deprecates. They are deliberately **not** repository
   secrets, which any workflow on any branch could read — write access alone would leak the key.
 - **Least privilege twice over.** The App is private to `bond-os`, installed on this repository
   only, and holds Contents and Pull requests (read and write) and nothing else. The workflow also
@@ -200,7 +201,7 @@ delete any forged release and its tag (an administrator can, despite immutabilit
   restrict updates and deletion (no bypass actors).
 - Release immutability enabled.
 - Environment `release`: deployment branches `main` only, no required reviewers, secrets
-  `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY`.
+  `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_PRIVATE_KEY`.
 - The GHCR package `nexus-cleanup` is public and linked to this repository.
 
 ## Reference Nexus

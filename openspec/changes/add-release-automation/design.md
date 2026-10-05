@@ -172,7 +172,7 @@ release.yml (push to main)
 
 - **Job permissions.** `publish` uses the job's `GITHUB_TOKEN` with `packages: write`,
   `id-token: write` and `attestations: write`. Only the release-please step uses the App token,
-  minted per run with `actions/create-github-app-token` from `RELEASE_APP_ID` and
+  minted per run with `actions/create-github-app-token` from `RELEASE_APP_CLIENT_ID` and
   `RELEASE_APP_PRIVATE_KEY`.
 - **Workflow hygiene.** release-please outputs reach `run:` steps through `env:`, never through
   `${{ }}` interpolated into the script. No workflow uses `pull_request_target`.

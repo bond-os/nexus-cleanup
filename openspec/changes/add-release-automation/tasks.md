@@ -70,7 +70,7 @@
 - [ ] 5.2 Write `.github/workflows/release.yml` (push to `main`) with three jobs:
   - `release-please`:
     - declares `environment: release`;
-    - mints its token with `actions/create-github-app-token` from `RELEASE_APP_ID` / `RELEASE_APP_PRIVATE_KEY`, passing `permission-contents: write` and `permission-pull-requests: write` explicitly and no `owner`/`repositories`, so the token is limited to this repository;
+    - mints its token with `actions/create-github-app-token` from `RELEASE_APP_CLIENT_ID` / `RELEASE_APP_PRIVATE_KEY`, passing `permission-contents: write` and `permission-pull-requests: write` explicitly and no `owner`/`repositories`, so the token is limited to this repository;
   - `tests`, calling `./.github/workflows/tests.yml` when `release_created`;
   - `publish`, which asserts that `version.nu` equals the `version` output, builds three platforms, loads amd64, smokes, then pushes `X.Y.Z` and `X.Y` via `docker/metadata-action` with `flavor: latest=false` and runs `actions/attest-build-provenance` with `push-to-registry: true`.
 
@@ -111,7 +111,7 @@
   - installed on `bond-os/nexus-cleanup` only.
 
   Generate a private key and delete the downloaded `.pem` once 7.3 has stored it. Verify on the installation page that it lists exactly one repository and exactly those two permissions plus Metadata read.
-- [ ] 7.3 Create the Environment `release` with a deployment branch policy allowing `main` only and no required reviewers. Store `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY` as **environment** secrets. Verify:
+- [ ] 7.3 Create the Environment `release` with a deployment branch policy allowing `main` only and no required reviewers. Store `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_PRIVATE_KEY` as **environment** secrets. Verify:
   - `gh secret list --env release` shows both;
   - `gh secret list` (repository level) shows neither;
   - `gh api repos/bond-os/nexus-cleanup/environments/release` reports the branch policy.
@@ -131,7 +131,7 @@
   - restrict updates and deletion, with no bypass actors.
 
   Verify that pushing a test tag `v0.0.0-ruleset-check` from a maintainer checkout is rejected.
-- [ ] 7.6 Verify the environment boundary: on a throwaway branch, push a workflow that declares `environment: release` and only checks whether `RELEASE_APP_ID` is non-empty, without printing it. Confirm the job is refused by the branch policy. Delete the branch.
+- [ ] 7.6 Verify the environment boundary: on a throwaway branch, push a workflow that declares `environment: release` and only checks whether `RELEASE_APP_CLIENT_ID` is non-empty, without printing it. Confirm the job is refused by the branch policy. Delete the branch.
 
 ## 8. First release, end to end
 
