@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# Smoke-checks a locally loaded nexus-cleanup image. Hermetic: no network, no Nexus.
+# Used by pull-request CI and by the release job before anything is pushed.
+#
+#   .github/scripts/image-smoke.sh IMAGE EXPECTED_VERSION
+#
+# Exits non-zero on the first failed check.
+set -euo pipefail
+
+if [ "$#" -ne 2 ]; then
+  echo "usage: $0 IMAGE EXPECTED_VERSION" >&2
+  exit 2
+fi
+image=$1
+expected=$2
+
+fail() { echo "FAIL: $*" >&2; exit 1; }
+pass() { echo "ok    $*"; }
+
+# Runs the container with no environment beyond what is passed, capturing stdout,
+# stderr and the exit code separately. Never with -t: a TTY merges the streams.
+out=$(mktemp) err=$(mktemp) work=$(mktemp -d)
+trap 'rm -rf "$out" "$err" "$work"' EXIT
+run() {
+  set +e
+  docker run --rm "$@" >"$out" 2>"$err"
+  code=$?
+  set -e
+}
+
+# 1. The default entrypoint prints the version.
+run "$image" --version
+[ "$code" -eq 0 ] || fail "--version exited $code: $(cat "$err")"
+[ "$(cat "$out")" = "$expected" ] || fail "--version printed '$(cat "$out")', expected '$expected'"
+pass "--version prints $expected"
+
+# 2. No selection is a usage error, with nothing on stdout.
+run "$image"
+[ "$code" -eq 2 ] || fail "no arguments exited $code, expected 2"
+[ ! -s "$out" ] || fail "no arguments wrote to stdout: $(cat "$out")"
+pass "no arguments exits 2 with empty stdout"
+
+# 3. The image sets nothing that changes behaviour: the tool sees no Nexus config.
+grep -q 'NEXUS_URL' "$err" || fail "usage error does not name NEXUS_URL: $(cat "$err")"
+pass "the image sets no NEXUS_* configuration"
+
+# 4. Entrypoint cleared, invoked by name from a shell, as GitLab and Jenkins do.
+run --entrypoint "" "$image" sh -c 'nexus-cleanup --version'
+[ "$code" -eq 0 ] && [ "$(cat "$out")" = "$expected" ] \
+  || fail "nexus-cleanup from a shell: exit $code, stdout '$(cat "$out")'"
+pass "nexus-cleanup on PATH behaves like the entrypoint"
+
+# 5. A workspace mounted at the working directory does not hide the tool, and
+#    relative output paths land in it.
+chmod 0777 "$work"
+run -v "$work:/work" "$image" --version
+[ "$code" -eq 0 ] && [ "$(cat "$out")" = "$expected" ] || fail "--version with /work mounted: exit $code"
+run -v "$work:/work" --entrypoint nu "$image" -c '"probe" | save probe.txt'
+[ -f "$work/probe.txt" ] || fail "a relative path did not land in the mounted /work"
+pass "a mount at /work leaves the tool intact and receives relative output"
+
+# 6. Arguments arrive intact through the launcher: spaces, quotes, the empty
+#    string, and an unknown flag reported by the tool itself.
+run "$image" --url 'http://127.0.0.1:9' --keep 0 'repo with spaces' 'a"b' ''
+[ "$code" -eq 2 ] || fail "invalid --keep through the launcher exited $code, expected 2"
+grep -q -- '--keep' "$err" || fail "the usage error does not name --keep: $(cat "$err")"
+run "$image" --no-such-flag
+[ "$code" -ne 0 ] || fail "an unknown flag was accepted"
+grep -q -- 'no-such-flag' "$err" || fail "the unknown flag is not named: $(cat "$err")"
+[ ! -s "$out" ] || fail "an unknown flag wrote to stdout"
+pass "flags and awkward arguments pass through the launcher unchanged"
+
+# 6b. Byte-exact round trip: swap the tool for a probe that echoes its arguments
+#     and exits 7, then call the real launcher.
+probe=$(mktemp -d)
+# shellcheck disable=SC2016 # Nushell source, expanded by nu, not the shell
+printf '%s\n' 'def --wrapped main [...args] { print --stderr "probe-stderr"; print ($args | to json --raw); exit 7 }' \
+  > "$probe/nexus-cleanup.nu"
+chmod -R a+rX "$probe"
+run -v "$probe:/opt/nexus-cleanup:ro" "$image" --execute --keep=2 'repo with spaces' 'a"b' '' "it's"
+rm -rf "$probe"
+[ "$code" -eq 7 ] || fail "the probe's exit code 7 came back as $code"
+[ "$(cat "$out")" = '["--execute","--keep=2","repo with spaces","a\"b","","it'"'"'s"]' ] \
+  || fail "arguments arrived as $(cat "$out")"
+[ "$(cat "$err")" = "probe-stderr" ] || fail "stderr was not passed through separately: $(cat "$err")"
+pass "arguments, stdout, stderr and the exit code round-trip through the launcher exactly"
+
+# 7. --help is the tool's own help, not the launcher's.
+run "$image" --help
+[ "$code" -eq 0 ] || fail "--help exited $code"
+grep -q -- '--execute' "$out" || fail "--help does not show the tool's flags"
+pass "--help shows the tool's help"
+
+# 8. Importing the module is inert.
+run --entrypoint nu "$image" -c 'use /opt/nexus-cleanup/nexus-cleanup'
+[ "$code" -eq 0 ] && [ ! -s "$out" ] && [ ! -s "$err" ] || fail "importing the module was not inert"
+pass "importing the module prints nothing"
+
+# 9. The image holds the tool and nothing else from the repository.
+run --entrypoint nu "$image" -c 'ls /opt/nexus-cleanup | get name | path basename | sort | str join ","'
+[ "$(cat "$out")" = "nexus-cleanup,nexus-cleanup.nu" ] || fail "/opt/nexus-cleanup holds: $(cat "$out")"
+run --entrypoint nu "$image" -c 'ls -a /work | length'
+[ "$(cat "$out")" = "0" ] || fail "/work is not empty"
+pass "only the entrypoint and the module are installed; /work is empty"
+
+# 10. The version label agrees with the tool.
+label=$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$image")
+[ "$label" = "$expected" ] || fail "version label is '$label', expected '$expected'"
+pass "org.opencontainers.image.version is $expected"
+
+echo "image smoke check passed: $image"

@@ -1,0 +1,12 @@
+#!/usr/bin/env nu
+# Launcher for the container image: puts the tool on PATH as `nexus-cleanup` and
+# serves as the image's ENTRYPOINT, so a CI system that clears the entrypoint and
+# runs a shell script gets exactly the same behaviour as `docker run IMAGE …`.
+#
+# --wrapped hands every argument through unparsed; exec replaces this process,
+# so stdout, stderr and the exit code are the tool's own. A symlink would not do:
+# Nushell resolves the entrypoint's relative `use` against the link's directory.
+
+def --wrapped main [...args] {
+    exec nu /opt/nexus-cleanup/nexus-cleanup.nu ...$args
+}
