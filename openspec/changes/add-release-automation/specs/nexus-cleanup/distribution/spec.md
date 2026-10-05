@@ -145,6 +145,30 @@ and relative output paths land in the mounted workspace.
 - **THEN** the tool runs normally
 - **AND** `summary.json` is written into the mounted workspace
 
+### Requirement: Image runs without root privileges
+
+The image SHALL declare a numeric, non-zero default user, so that a runtime can verify it is not
+root without starting it. The tool SHALL run under any user and group ID the runtime assigns,
+including an arbitrary UID with group 0. It SHALL also run with a read-only root filesystem, no
+Linux capabilities and privilege escalation disabled. Apart from the output locations the
+operator names, it SHALL need no writable path.
+
+#### Scenario: Kubernetes requires a non-root user
+
+- **WHEN** a pod runs the image with `runAsNonRoot: true` and sets no `runAsUser`
+- **THEN** the container is admitted and the tool starts
+
+#### Scenario: Arbitrary user ID
+
+- **WHEN** the image is run as a user ID that exists nowhere in the image, with group 0, a read-only root filesystem, every capability dropped and privilege escalation disabled
+- **THEN** `--version` prints the release version and exits 0
+- **AND** a run with no repository selection exits with the tool's usage error code
+
+#### Scenario: Rootless runtime writes into the mounted workspace
+
+- **WHEN** a rootless Podman job mounts a workspace owned by the invoking host user at the working directory, maps that user into the container as documented, and runs the tool with `--summary-out summary.json`
+- **THEN** `summary.json` is written into the workspace and is owned by the invoking host user
+
 ### Requirement: Image contains only the runtime and the tool
 
 The image SHALL consist of the official Nushell image at the project's pinned version plus the

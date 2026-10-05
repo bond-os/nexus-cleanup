@@ -44,6 +44,24 @@
   - the `/work` working directory.
 
   Keep the stock-image-plus-checkout variant for unreleased revisions. Verify every command in the section runs as written against the locally built image.
+- [x] 3.6 Add `USER 1000:1000` to `Containerfile`, before `WORKDIR`, with a comment saying why it is numeric (`runAsNonRoot`) and explicit (not inherited from upstream). The file stays `COPY`-only. Verify:
+  - `docker image inspect --format '{{.Config.User}}'` prints `1000:1000`;
+  - `/work` is still `1000:1000` and empty;
+  - the existing smoke checks pass.
+- [x] 3.7 Extend `.github/scripts/image-smoke.sh` with the three new rows of the design's smoke table:
+  - the image config `User` is numeric and its uid is not `0`;
+  - an arbitrary UID with group 0, `--read-only`, `--cap-drop ALL` and `--security-opt no-new-privileges` runs `--version` and the no-selection usage error;
+  - a `--user "$(id -u):$(id -g)"` mount of a non-world-writable directory receives a `--summary-out` file owned by the caller.
+
+  Keep the existing `chmod 0777` case. Make the container engine a parameter (default `docker`). Verify:
+  - each new check fails against an image built without `USER 1000:1000`, or explain why it cannot;
+  - the whole script passes against the image from 3.6.
+- [ ] 3.8 Run the smoke script a second time in the `image` job (see 4.1) under rootless Podman on `ubuntu-24.04`. Load the amd64 image with `docker save | podman load`, and use `--userns=keep-id` in place of `--user` for the workspace case. Verify:
+  - the Podman pass runs rootless (`podman info` reports `rootless: true`);
+  - it passes on this change's PR.
+
+  If it contradicts a rootless row of the design's user matrix, update the matrix and the examples to match what was observed.
+- [x] 3.9 Record in `AGENTS.md`, under the deliberate exceptions, that the image declares a numeric `USER 1000:1000`, and why: `runAsNonRoot` cannot verify a named user, and inheriting the user would let upstream change it. Also record that `/work` is deliberately not made group-0-writable, because that would need `RUN` or a non-empty `/work`, and every runtime that uses `/work` mounts over it. Verify by reading that a future agent could not "simplify" either point away without contradicting the recorded reason.
 
 ## 4. Pull request checks
 
@@ -51,6 +69,8 @@
   - add a `workflow_call` trigger;
   - add an `image` job that builds all three platforms without pushing, loads `linux/amd64` with `VERSION` read from `version.nu`, and runs the smoke script;
   - pin every new action by SHA with a version comment.
+
+  - run the smoke script under Docker and, per 3.8, under rootless Podman.
 
   Verify both jobs pass on the pull request for this change.
 - [x] 4.2 Add `.commitlintrc.yaml` (`extends: ['@commitlint/config-conventional']`) and `.github/workflows/commits.yml`. The workflow runs `npx -p @commitlint/cli@<exact> -p @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on `pull_request`, with a full-history checkout, on the runner's preinstalled Node. It uses exact npm versions because the wagoid action's Docker Hub image tag can be re-pointed. Verify it fails on a throwaway PR containing a non-conventional commit, naming that commit, and passes on this change's PR.
@@ -100,6 +120,17 @@
   Verify the `sh` variant's `docker run` lines work against the locally built image with `NEXUS_URL` pointing at an unreachable host and dummy credentials, expecting exit 3, empty stdout and the cause on stderr.
 - [ ] 6.3 Change the Forgejo example to fetch the tool with a shallow `git clone --branch v0.1.0` of this repository instead of assuming it is in the consumer's checkout, keeping the node image and the checksum-verified Nushell install. Verify the clone command and the tool invocation by running them in `node:24-bookworm` once `v0.1.0` exists.
 - [x] 6.4 Update the README CI table ("Runs in" column, entrypoint notes). In every example, state that the pinned version is bumped deliberately after reading `CHANGELOG.md`. Verify `grep -rn '0.115.1-alpine' examples/` matches only the Forgejo Nushell install comment.
+
+- [x] 6.5 Document rootless and cluster runtimes:
+  - **plain `sh` Jenkins example:** comment that `--user "$(id -u):$(id -g)"` is for rootful Docker only, and name `--userns=keep-id` (Podman) and `--user 0:0` (rootless Docker) as the rootless replacements;
+  - **Docker Pipeline plugin example:** comment that the plugin's injected `-u` cannot write the workspace under rootless Podman, and name the workaround;
+  - **README:** add a short "Rootless and Kubernetes" subsection to "In a container", covering:
+    - the image's user;
+    - that no `runAsUser` is needed under `runAsNonRoot`;
+    - OpenShift's arbitrary UIDs;
+    - the per-runtime workspace flags.
+
+  Verify the rootless flags against the 3.8 Podman pass rather than by reasoning.
 
 ## 7. Repository administration (maintainer, manual; complete before merging this change)
 
