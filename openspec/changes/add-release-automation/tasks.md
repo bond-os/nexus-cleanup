@@ -53,7 +53,7 @@
   - pin every new action by SHA with a version comment.
 
   Verify both jobs pass on the pull request for this change.
-- [ ] 4.2 Add `.commitlintrc.yaml` (`extends: ['@commitlint/config-conventional']`) and `.github/workflows/commits.yml`. The workflow runs `npx -p @commitlint/cli@<exact> -p @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on `pull_request`, with a full-history checkout, on the runner's preinstalled Node. It uses exact npm versions because the wagoid action's Docker Hub image tag can be re-pointed. Verify it fails on a throwaway PR containing a non-conventional commit, naming that commit, and passes on this change's PR.
+- [x] 4.2 Add `.commitlintrc.yaml` (`extends: ['@commitlint/config-conventional']`) and `.github/workflows/commits.yml`. The workflow runs `npx -p @commitlint/cli@<exact> -p @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on `pull_request`, with a full-history checkout, on the runner's preinstalled Node. It uses exact npm versions because the wagoid action's Docker Hub image tag can be re-pointed. Verify it fails on a throwaway PR containing a non-conventional commit, naming that commit, and passes on this change's PR.
 
 ## 5. Release automation
 
@@ -135,7 +135,7 @@
   Verify:
   - both rulesets are listed as `active`;
   - pushing a test tag `v0.0.0-ruleset-check` from a maintainer checkout is rejected, and the tag is then deleted locally.
-- [ ] 7.6 Verify the environment boundary: on a throwaway branch, push a workflow that declares `environment: release` and only checks whether `RELEASE_APP_CLIENT_ID` is non-empty, without printing it. Confirm the job is refused by the branch policy. Delete the branch.
+- [x] 7.6 Verify the environment boundary: on a throwaway branch, push a workflow that declares `environment: release` and only checks whether `RELEASE_APP_CLIENT_ID` is non-empty, without printing it. Confirm the job is refused by the branch policy. Delete the branch.
 
 ## 8. First release, end to end
 
