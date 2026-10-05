@@ -11,11 +11,15 @@
 # has no approval gate inside a run, so read a dry-run report before ticking
 # `execute`: the deletion cap is what stands between a surprise and the repository.
 #
-# The job image is a node image rather than the Nushell one: Forgejo runs JavaScript
-# actions (checkout, upload-artifact) inside the job container, and the Nushell
-# image has no node. Nushell is installed at the pinned version instead, verified by
-# checksum. The binary is x86_64; on an arm64 runner use the aarch64-unknown-linux-musl
-# asset and its checksum.
+# The job image is a node image rather than the published nexus-cleanup one: Forgejo
+# runs JavaScript actions (upload-artifact) inside the job container, and that image
+# has no node. So the tool is fetched at an exact release tag instead, and Nushell is
+# installed at the pinned version, verified by checksum. Release tags are immutable,
+# so the tag always names the same code. Bump NEXUS_CLEANUP_VERSION deliberately,
+# after reading CHANGELOG.md.
+#
+# The Nushell binary is x86_64; on an arm64 runner use the
+# aarch64-unknown-linux-musl asset and its checksum.
 
 name: nexus-cleanup
 
@@ -51,6 +55,8 @@ jobs:
       image: node:24-bookworm
     env:
       NEXUS_URL: ${{ vars.NEXUS_URL }}
+      # An exact release of nexus-cleanup, never a branch.
+      NEXUS_CLEANUP_VERSION: v0.1.0
       # Scheduled runs have no inputs, so each falls back to the dispatch default.
       PATTERN: ${{ inputs.pattern || 'yum-proxy-*' }}
       KEEP: ${{ inputs.keep || 2 }}
@@ -59,7 +65,10 @@ jobs:
       NU_VERSION: 0.115.1
       NU_SHA256: 8a9722177ddd421eba927b4baae4ae341a4d1c3434504be7b1b17d998bafdd87
     steps:
-      - uses: https://data.forgejo.org/actions/checkout@v4
+      - name: Fetch nexus-cleanup
+        run: |
+          git clone --quiet --depth 1 --branch "$NEXUS_CLEANUP_VERSION" \
+            https://github.com/bond-os/nexus-cleanup.git /opt/nexus-cleanup
 
       - name: Install Nushell
         run: |
@@ -75,7 +84,7 @@ jobs:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
         run: |
-          nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
+          nu /opt/nexus-cleanup/nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
             --summary-out summary-dry-run.json > report-dry-run.json
 
       - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
@@ -96,7 +105,7 @@ jobs:
           case "$MAX_DELETIONS" in
             ''|*[!0-9]*|0*) echo "execute needs max_deletions set to a positive whole number" >&2; exit 2 ;;
           esac
-          nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
+          nu /opt/nexus-cleanup/nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
             --max-deletions "$MAX_DELETIONS" --execute \
             --summary-out summary-execute.json > report-execute.json
 

@@ -9,6 +9,21 @@ exceptions are recorded below **with their rationale** — do not "fix" them.
 
 ## Runtime
 
+The repository holds code in three areas, and the language rule differs between them:
+
+| Area | What | Rule |
+|---|---|---|
+| **The tool** | `nexus-cleanup.nu`, `nexus-cleanup/`, everything inside the container image | Nushell only, no external binaries (below) |
+| **Tests and dev tools** | `tests/`, `tools/` | Nushell — they exercise the tool and share its runtime |
+| **Maintenance automation** | release, commit checks, image build and smoke check (`.github/`, release and commitlint config) | established third-party tools, *configured rather than written*; shell only as glue around them |
+
+The Nushell-only rule exists so that the tool runs from an image holding nothing but Nushell. It
+does not extend to the machinery that releases the tool: reimplementing a release bot or a commit
+linter in Nushell would be code to maintain with no runtime benefit. Conversely, nothing from the
+maintenance area may enter the image or become a runtime dependency of the tool.
+
+For the tool, tests and dev tools:
+
 - **Nushell only.** Version floor **0.115.1**. Pinned CI image:
   `ghcr.io/nushell/nushell:0.115.1-alpine`.
 - The floor is set by features the tool relies on: `sort-by --custom` with a two-argument
@@ -33,6 +48,8 @@ nexus-cleanup/
   paths.nu                # --from-path matching: name and version from the asset path
   policy.nu               # grouping, ordering, keep/delete/skip decisions
   report.nu               # record schema, aggregate, json/csv encoding
+  run.nu                  # orchestration: enumerate, plan, delete, emit
+  version.nu              # VERSION; rewritten by release-please, never by hand
 tools/
   record-fixtures.nu      # development only; records redacted fixtures from a live Nexus
 examples/                 # CI pipelines: dry run on schedule, deletion only by hand
@@ -43,10 +60,25 @@ tests/
   fixtures/<format>/      # recorded, redacted Nexus API responses
   test-*.nu               # std assert tests
   run-tests.nu            # runner
+Containerfile             # release image: COPY only, no RUN
+.dockerignore             # allow-list: only the tool and packaging/ reach the build
+packaging/
+  nexus-cleanup           # launcher on PATH and image ENTRYPOINT
+.github/
+  workflows/              # tests (+ image check), commits, release
+  scripts/image-smoke.sh  # hermetic image checks, shared by PR CI and release
+release-please-config.json, .release-please-manifest.json, .commitlintrc.yaml
 ```
 
 `tools/` is development-time only. The shipped module never reads it and the container image
 does not need it.
+
+In the image the tool lives in `/opt/nexus-cleanup`, the launcher in `/usr/local/bin`, and the
+working directory `/work` is empty — CI systems mount their workspace there, which would hide
+anything installed in it. The launcher `exec`s `nu /opt/nexus-cleanup/nexus-cleanup.nu` with its
+arguments passed through by `def --wrapped`; do not replace it with a symlink, because Nushell
+resolves the entrypoint's relative `use ./nexus-cleanup/…` against the symlink's directory and
+fails to find the module.
 
 ## Tests
 
@@ -59,6 +91,117 @@ contacts a Nexus. Run it inside the pinned image before calling work done.
 
 Importing the module must stay inert: `nu -c 'use nexus-cleanup'` makes no request and prints
 nothing.
+
+## Commits and merging
+
+Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) and are
+checked by commitlint with the stock `@commitlint/config-conventional` preset
+(`.commitlintrc.yaml`) — every commit of every pull request, in CI. The preset is used unmodified
+so the same check runs anywhere without project-specific rules to remember.
+
+Pull requests land on `main` by **rebase merge only**; squash and merge commits are disabled.
+This is deliberate: release-please derives versions and the changelog from the commits on
+`main`, so each commit must reach `main` exactly as the check validated it. Squashing would
+collapse a branch's `feat:`/`fix:`/`docs:` commits into one changelog line chosen at merge time.
+Keep commits atomic and reword them before review rather than after.
+
+The CI check is the gate (`.github/workflows/commits.yml`, which pins exact commitlint versions;
+the hook below uses the same ones). A local hook is optional:
+
+```bash
+printf '#!/bin/sh\nexec npx --yes -p @commitlint/cli@21.2.3 -p @commitlint/config-conventional@21.2.3 commitlint --edit "$1"\n' > .git/hooks/commit-msg
+chmod +x .git/hooks/commit-msg
+```
+
+## Releases
+
+Releases are cut by [release-please](https://github.com/googleapis/release-please) from the
+commits on `main` (`release-please-config.json`, `.release-please-manifest.json`,
+`.github/workflows/release.yml`).
+
+```
+merge to main --> release-please opens/updates the release PR (version + CHANGELOG.md)
+                     | maintainer merges the release PR
+                     v
+                  tag vX.Y.Z + GitHub Release        (same workflow run)
+                     v
+                  tests --> build, smoke, push X.Y.Z and X.Y --> attest
+```
+
+- **Versioning.** Conventional Commits decide the bump. Below 1.0 a breaking change bumps the
+  minor (`bump-minor-pre-major`); the first release is `0.1.0` (`initial-version`). Do not hand-
+  edit versions: `nexus-cleanup/version.nu` is the single source, rewritten by release-please via
+  its `x-release-please-version` marker. The tool's `--version`, the report's `tool_version` and
+  the image's version label all read it, and the release job refuses to publish if it disagrees
+  with the release.
+- **The changelog shows behaviour.** `feat`, `fix`, `perf` and `revert` are listed; `docs`,
+  `test`, `ci`, `chore`, `refactor`, `build` and `style` are hidden. Operators read the changelog
+  to decide whether to move a pinned version.
+- **Image tags are `X.Y.Z` and `X.Y` — never `latest`.** A scheduled cleanup on a floating tag
+  would silently pick up new deletion behaviour. `X.Y` only ever moves to a patch release, which
+  below 1.0 means fixes only. Do not add `latest`, a major-only tag, or an `edge`/`main` tag.
+- **Publishing is gated on `release_created`, not on a tag push.** A separate tag-triggered
+  workflow would let anyone with push access publish an image by pushing a `v*` tag. Keeping
+  `publish` in the run that created the release makes the merged release PR the only way in.
+- **A failed `publish` is re-run, not re-released.** The tag and Release already exist; re-running
+  the failed job builds the same commit and pushes the same tags. Releases are immutable, so a
+  release with wrong *content* is fixed by the next patch release, never by moving its tag.
+- **The image is checked on every pull request** by the `image` job in `tests.yml`, with the same
+  smoke script the release uses (`.github/scripts/image-smoke.sh`). Keep the `Containerfile`
+  `COPY`-only: a `RUN` step would need QEMU for `arm64` and `arm/v7`.
+
+### The release App
+
+release-please authenticates as a GitHub App, because pull requests and tags created with
+`GITHUB_TOKEN` trigger no workflows — the release PR would never get its required checks. The
+App's private key is the one long-lived credential in the repository, so everything around it is
+arranged to limit who can read it and what it can do. These are security controls; do not
+loosen them for convenience.
+
+- **The key is readable only from `main`.** `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY` are
+  secrets of the `release` *environment*, whose deployment branch policy allows `main` only; the
+  `release-please` job declares `environment: release`. They are deliberately **not** repository
+  secrets, which any workflow on any branch could read — write access alone would leak the key.
+- **Least privilege twice over.** The App is private to `bond-os`, installed on this repository
+  only, and holds Contents and Pull requests (read and write) and nothing else. The workflow also
+  requests exactly those two permissions when minting each one-hour token, so a token stays
+  narrow even if the App later gains more. Issues is deliberately absent; add it to both only if
+  release-please demonstrably cannot label its PR without it.
+- **No bypass on `main`.** The `main` ruleset requires a pull request and lists no bypass actors —
+  not the App, not administrators. release-please never pushes to `main`; it pushes its own
+  branch and opens a PR.
+- **Release tags are write-once.** A tag ruleset on `refs/tags/v*` lets only the App create them
+  and nobody update or delete them, and release immutability is enabled. Pinned versions —
+  including `git clone --branch vX.Y.Z` in the Forgejo example — can never move under a consumer.
+- **Outputs reach shell steps through `env:` only**, never `${{ }}` inside a `run:` body, and no
+  workflow uses `pull_request_target`.
+
+With all of the above, a stolen key can open junk PRs, push non-`main` branches and create a
+*new* `v*` release — but cannot land code on `main`, alter an existing release or publish an
+image. A forged release is visible on the releases page and missing from `CHANGELOG.md`.
+
+**Key rotation:** yearly, and whenever someone who had access to the key leaves. An App can hold
+two keys at once: generate the new key, replace `RELEASE_APP_PRIVATE_KEY` in the `release`
+environment, confirm a release run succeeds, then delete the old key from the App. Delete the
+downloaded `.pem` once it is stored.
+
+**If the key leaks:** delete the key from the App settings immediately (tokens already minted
+expire within the hour), generate a replacement as above, review the repository's recent
+branches, pull requests and releases for anything the App did that a release run did not, and
+delete any forged release and its tag (an administrator can, despite immutability).
+
+### Repository settings (configured by hand)
+
+- Merge buttons: rebase merging only; squash and merge commits disabled.
+- Branch ruleset on `main`, **no bypass actors**: require a pull request (0 approvals — a sole
+  maintainer cannot approve their own); allowed merge method rebase; required checks `test`,
+  `image`, `commitlint`, branches up to date; block force pushes and deletion.
+- Tag ruleset on `refs/tags/v*`: restrict creation (the release App is the only bypass actor),
+  restrict updates and deletion (no bypass actors).
+- Release immutability enabled.
+- Environment `release`: deployment branches `main` only, no required reviewers, secrets
+  `RELEASE_APP_ID` and `RELEASE_APP_PRIVATE_KEY`.
+- The GHCR package `nexus-cleanup` is public and linked to this repository.
 
 ## Reference Nexus
 
@@ -183,9 +326,14 @@ echo the whole response record. The recorder writes response bodies only, and
 
 ### No Python, no `uv`
 
-The global Python/`uv` convention does not apply here: this repository contains no Python. If
-a helper is ever needed, write it in Nushell rather than reaching for another runtime — the CI
-image has nothing else in it.
+The global Python/`uv` convention does not apply here: the tool contains no Python. If the tool,
+its tests or its dev tools ever need a helper, write it in Nushell rather than reaching for
+another runtime — the image has nothing else in it.
+
+This applies to the tool side of the boundary in [Runtime](#runtime). Maintenance automation is
+free to use an established third-party tool; if one of those is ever Python-based, the global
+`uv` convention applies to it again (dependencies in `pyproject.toml`, `uv.lock` committed,
+`uv sync --locked` in CI).
 
 ### Dry run is the default; `--execute` opts in
 

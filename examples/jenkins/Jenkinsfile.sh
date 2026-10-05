@@ -4,7 +4,9 @@
 // Needs:
 //   - an agent labelled `docker` with the docker CLI and access to a daemon
 //   - a "Username with password" credential with the id `nexus-cleanup`
-// Point the job's Script Path at this file.
+// Point the job's Script Path at this file. The tool comes from the published image,
+// pinned to an exact release; nothing from the nexus-cleanup repository is checked
+// out. Bump the pinned version deliberately, after reading CHANGELOG.md.
 //
 // The workspace is bind-mounted into the container, so if the agent itself runs
 // in a container talking to the host's daemon, $WORKSPACE must be a path that
@@ -20,6 +22,8 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
+        // The tool is in the image; the workspace only receives the reports.
+        skipDefaultCheckout()
         buildDiscarder(logRotator(numToKeepStr: '60'))
     }
 
@@ -40,8 +44,8 @@ pipeline {
 
     environment {
         NEXUS_URL = 'https://nexus.example.com'
-        // Pinned to the version floor in AGENTS.md.
-        NUSHELL_IMAGE = 'ghcr.io/nushell/nushell:0.115.1-alpine'
+        // An exact release, never a floating tag.
+        NEXUS_CLEANUP_IMAGE = 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
     }
 
     // In both `docker run` calls below:
@@ -63,8 +67,7 @@ pipeline {
                                 --user "$(id -u):$(id -g)" \
                                 --volume "$WORKSPACE:/work" --workdir /work \
                                 --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD \
-                                --entrypoint nu "$NUSHELL_IMAGE" \
-                                nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip \
+                                "$NEXUS_CLEANUP_IMAGE" --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip \
                                     --summary-out summary-dry-run.json > report-dry-run.json
                         '''))
                     }
@@ -104,8 +107,7 @@ pipeline {
                                 --user "$(id -u):$(id -g)" \
                                 --volume "$WORKSPACE:/work" --workdir /work \
                                 --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD \
-                                --entrypoint nu "$NUSHELL_IMAGE" \
-                                nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
+                                "$NEXUS_CLEANUP_IMAGE" --pattern "$PATTERN" --keep "$KEEP" \
                                     --max-deletions "$MAX_DELETIONS" --execute \
                                     --summary-out summary-execute.json > report-execute.json
                         '''))
