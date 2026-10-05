@@ -1,0 +1,38 @@
+name: commits
+
+# Every commit of a pull request must be a Conventional Commit: they reach main
+# unchanged (rebase merge only) and release-please derives versions and the
+# changelog from them. See "Commits and merging" in AGENTS.md.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: commits-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      # Exact versions: published npm versions are immutable, so this pins what
+      # runs. Bump both together, deliberately.
+      COMMITLINT_CLI: "@commitlint/cli@21.2.3"
+      COMMITLINT_CONFIG: "@commitlint/config-conventional@21.2.3"
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Uses the runner's preinstalled Node. The config is .commitlintrc.yaml.
+      - name: Check every commit in the pull request
+        run: |
+          npx --yes -p "$COMMITLINT_CLI" -p "$COMMITLINT_CONFIG" \
+            commitlint --from "$BASE_SHA" --to "$HEAD_SHA" --verbose
