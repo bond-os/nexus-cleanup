@@ -42,10 +42,11 @@ pick up new deletion behaviour that nobody has read about.
 
 The working directory is an empty `/work`; mount your workspace there and relative paths such as
 `--summary-out summary.json` land in it. The tool itself lives in `/opt/nexus-cleanup`, so the
-mount cannot hide it:
+mount cannot hide it. `--user` lets the container write your directory. For rootless runtimes,
+see [Who the container runs as](#who-the-container-runs-as).
 
 ```bash
-docker run --rm -v "$PWD:/work" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
   ghcr.io/bond-os/nexus-cleanup:0.1.0 --pattern 'yum-proxy-*' --summary-out summary.json > report.json
 ```
 
@@ -75,6 +76,31 @@ docker run --rm -v "$PWD:/work" -w /work -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS
 ```
 
 Never pass `-t`: a TTY merges stderr into stdout, and stdout is the report.
+
+#### Who the container runs as
+
+The image runs as uid/gid `1000:1000`, declared numerically. The tool needs no root, no
+capabilities and no writable path except the files you ask it to write, so it also runs on a
+read-only root filesystem and under any uid the runtime assigns.
+
+- **Kubernetes:** a pod with `runAsNonRoot: true` (required by the "restricted" Pod Security
+  Standard) starts it without setting `runAsUser`.
+- **OpenShift:** the arbitrary uid with gid 0 that `restricted-v2` assigns works as is.
+- **GitLab runners** (Docker, rootless Podman or Kubernetes executor) hand the job a
+  world-writable build directory, so no flag is needed.
+
+When you **mount a workspace yourself**, the uid inside the container must be able to write it.
+The right flag depends on the runtime:
+
+| Runtime | Add to `docker run` / `podman run` | Files in the workspace end up owned by |
+|---|---|---|
+| Docker (rootful) | `--user "$(id -u):$(id -g)"` | you |
+| Podman (rootless) | `--userns=keep-id` | you |
+| Docker (rootless) | `--user 0:0` | you (container root *is* your user) |
+
+Under a rootless runtime, `--user "$(id -u):$(id -g)"` is **wrong**. The user namespace maps
+your host uid to container root, so the same number inside the container is an unrelated
+subordinate uid that cannot write your workspace.
 
 ## Configuration
 

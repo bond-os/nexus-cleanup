@@ -14,6 +14,11 @@
 // Every build performs a dry run and archives its report. Deletion happens only in
 // a build started by hand with EXECUTE ticked, only after someone approves the
 // dry-run report, and never in a build started by the timer.
+//
+// The plugin runs the container as the agent's uid (`-u uid:gid`), which works
+// with a rootful Docker daemon. If the agent's `docker` is rootless Podman, that
+// uid is remapped and cannot write the workspace: append `--userns=keep-id` to
+// both `args` lines, so the agent's uid stays itself inside the container.
 
 pipeline {
     // Per-stage agents, so the approval prompt waits without holding an executor.

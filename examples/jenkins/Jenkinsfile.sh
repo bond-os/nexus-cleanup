@@ -52,7 +52,11 @@ pipeline {
     //   - no `-t`: a TTY merges stderr into stdout, and stdout is the report
     //   - `--env NAME` without a value passes the variable through, so the
     //     credentials never appear on a command line
-    //   - `--user` keeps the report files owned by the agent user
+    //   - `--user` keeps the report files owned by the agent user. That holds
+    //     for a rootful Docker daemon only. Under rootless Podman, replace it with
+    //     `--userns=keep-id`; under rootless Docker, with `--user 0:0`, which maps
+    //     to the agent user. A rootless runtime maps the agent's uid to container
+    //     root, so the same uid inside cannot write $WORKSPACE.
 
     stages {
         stage('Dry run') {
