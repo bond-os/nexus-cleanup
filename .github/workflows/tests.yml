@@ -47,7 +47,9 @@ jobs:
 
   # Builds the image exactly as a release would and smoke-checks it. Pushes nothing.
   image:
-    runs-on: ubuntu-latest
+    # Pinned rather than ubuntu-latest: the rootless Podman pass relies on the
+    # runner image shipping Podman.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -91,3 +93,22 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: .github/scripts/image-smoke.sh nexus-cleanup:smoke "$VERSION"
+
+      # The same image again, run the way a rootless CI runner runs it: the user
+      # namespace maps the caller to container root, which is where workspace
+      # ownership goes wrong.
+      - name: Smoke-check the image under rootless Podman
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          CONTAINER_ENGINE: podman
+        run: |
+          if [ "$(podman info --format '{{.Host.Security.Rootless}}')" != "true" ]; then
+            echo "podman is not running rootless; this check would prove nothing" >&2
+            exit 1
+          fi
+          ref=$(docker save nexus-cleanup:smoke | podman load | sed -n 's/^Loaded image: //p')
+          if [ -z "$ref" ]; then
+            echo "podman load reported no image" >&2
+            exit 1
+          fi
+          .github/scripts/image-smoke.sh "$ref" "$VERSION"

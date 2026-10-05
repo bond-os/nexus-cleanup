@@ -3,6 +3,10 @@
 # Used by pull-request CI and by the release job before anything is pushed.
 #
 #   .github/scripts/image-smoke.sh IMAGE EXPECTED_VERSION
+#   CONTAINER_ENGINE=podman .github/scripts/image-smoke.sh IMAGE EXPECTED_VERSION
+#
+# CONTAINER_ENGINE is `docker` (default, rootful) or `podman` (rootless). The
+# engine decides how a caller-owned workspace is mapped into the container.
 #
 # Exits non-zero on the first failed check.
 set -euo pipefail
@@ -13,6 +17,17 @@ if [ "$#" -ne 2 ]; then
 fi
 image=$1
 expected=$2
+engine=${CONTAINER_ENGINE:-docker}
+
+# Runs the container as the caller, so that a workspace only the caller can write
+# is writable inside. Rootful Docker takes the caller's uid as is. Rootless Podman
+# maps the caller to container root, so the same uid inside the user namespace is
+# someone else; keep-id maps the caller to their own uid instead.
+case "$engine" in
+  docker) as_caller=(--user "$(id -u):$(id -g)") ;;
+  podman) as_caller=(--userns=keep-id) ;;
+  *) echo "CONTAINER_ENGINE must be docker or podman, not '$engine'" >&2; exit 2 ;;
+esac
 
 fail() { echo "FAIL: $*" >&2; exit 1; }
 pass() { echo "ok    $*"; }
@@ -23,7 +38,7 @@ out=$(mktemp) err=$(mktemp) work=$(mktemp -d)
 trap 'rm -rf "$out" "$err" "$work"' EXIT
 run() {
   set +e
-  docker run --rm "$@" >"$out" 2>"$err"
+  "$engine" run --rm "$@" >"$out" 2>"$err"
   code=$?
   set -e
 }
@@ -104,8 +119,43 @@ run --entrypoint nu "$image" -c 'ls -a /work | length'
 pass "only the entrypoint and the module are installed; /work is empty"
 
 # 10. The version label agrees with the tool.
-label=$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$image")
+label=$("$engine" image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$image")
 [ "$label" = "$expected" ] || fail "version label is '$label', expected '$expected'"
 pass "org.opencontainers.image.version is $expected"
+
+# 11. The image declares a numeric, non-root user: Kubernetes' runAsNonRoot cannot
+#     verify a named one and refuses to start the pod.
+user=$("$engine" image inspect --format '{{ .Config.User }}' "$image")
+[[ "$user" =~ ^([0-9]+):[0-9]+$ ]] || fail "image user is '$user', expected a numeric uid:gid"
+[ "${BASH_REMATCH[1]}" -ne 0 ] || fail "image user is root ($user)"
+pass "the image runs as $user"
+
+# 12. Any uid works, with group 0 as OpenShift assigns it, a read-only root
+#     filesystem, no capabilities and no privilege escalation.
+hardened=(--user 12345:0 --read-only --cap-drop ALL --security-opt no-new-privileges)
+run "${hardened[@]}" "$image" --version
+[ "$code" -eq 0 ] && [ "$(cat "$out")" = "$expected" ] \
+  || fail "--version as an arbitrary uid: exit $code, stdout '$(cat "$out")', stderr '$(cat "$err")'"
+run "${hardened[@]}" "$image"
+[ "$code" -eq 2 ] || fail "no arguments as an arbitrary uid exited $code, expected 2: $(cat "$err")"
+pass "an arbitrary uid runs the tool on a read-only root with no capabilities"
+
+# 13. A workspace only the caller can write (mktemp -d is 0700) receives the
+#     summary when the container runs as the caller. Written through the same
+#     `cleanup emit` that --summary-out uses; a real run would need a Nexus.
+ws=$(mktemp -d)
+# shellcheck disable=SC2016 # Nushell source, expanded by nu, not the shell
+run "${as_caller[@]}" -v "$ws:/work" --entrypoint nu "$image" -c '
+  use /opt/nexus-cleanup/nexus-cleanup/run.nu *
+  use /opt/nexus-cleanup/nexus-cleanup/report.nu *
+  let summary = (report summary [] {mode: "dry-run", started_at: "", finished_at: "",
+    nexus_url: "", repositories: [], keep: 1})
+  cleanup emit {summary: $summary, records: []} json summary.json'
+owned=no
+[ -O "$ws/summary.json" ] && owned=yes
+rm -rf "$ws"
+[ "$code" -eq 0 ] || fail "writing the summary as the caller exited $code: $(cat "$err")"
+[ "$owned" = yes ] || fail "the summary is missing from the workspace or not owned by the caller"
+pass "a caller-owned workspace receives the summary, owned by the caller (${as_caller[*]})"
 
 echo "image smoke check passed: $image"
