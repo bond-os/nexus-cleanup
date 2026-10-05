@@ -53,7 +53,7 @@
   - pin every new action by SHA with a version comment.
 
   Verify both jobs pass on the pull request for this change.
-- [ ] 4.2 Add `.commitlintrc.yaml` (`extends: ['@commitlint/config-conventional']`) and `.github/workflows/commits.yml`. The workflow runs `npx -p @commitlint/cli@<exact> -p @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on `pull_request`, with a full-history checkout, on the runner's preinstalled Node. It uses exact npm versions because the wagoid action's Docker Hub image tag can be re-pointed. Verify it fails on a throwaway PR containing a non-conventional commit, naming that commit, and passes on this change's PR once 7.1 is done.
+- [ ] 4.2 Add `.commitlintrc.yaml` (`extends: ['@commitlint/config-conventional']`) and `.github/workflows/commits.yml`. The workflow runs `npx -p @commitlint/cli@<exact> -p @commitlint/config-conventional@<exact> commitlint --from <base> --to <head>` on `pull_request`, with a full-history checkout, on the runner's preinstalled Node. It uses exact npm versions because the wagoid action's Docker Hub image tag can be re-pointed. Verify it fails on a throwaway PR containing a non-conventional commit, naming that commit, and passes on this change's PR.
 
 ## 5. Release automation
 
@@ -103,7 +103,7 @@
 
 ## 7. Repository administration (maintainer, manual; complete before merging this change)
 
-- [ ] 7.1 Reword `init - openspec` on this branch to a conventional message (for example `chore: initialise OpenSpec`) by interactive rebase. Verify the commitlint command from 1.2 passes for every commit on the branch.
+- [x] 7.1 Rebase the branch onto `origin/main`, so that the "branches up to date" rule accepts it. No reword is needed: `init - openspec` reached `main` through PR #1, and rewording it would mean force-pushing `main`. Verify that `commitlint --from origin/main --to HEAD` (pinned versions) passes for every commit the PR will contain.
 - [ ] 7.2 Create the GitHub App owned by `bond-os`:
   - private ("Only on this account");
   - webhook disabled;
