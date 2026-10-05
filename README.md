@@ -25,17 +25,48 @@ nu nexus-cleanup.nu --pattern 'yum-proxy-*'
 nu nexus-cleanup.nu --pattern 'yum-proxy-*' --keep 2 --max-deletions 500 --execute
 ```
 
-In a container, built from the `Containerfile` — its entrypoint is the tool, so flags follow the
-image name directly:
+### In a container
+
+Each release is published as a multi-platform image (`linux/amd64`, `linux/arm64`,
+`linux/arm/v7`). Its entrypoint is the tool, so flags follow the image name directly:
 
 ```bash
-docker build -f Containerfile -t nexus-cleanup .
 docker run --rm -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  nexus-cleanup --pattern 'yum-proxy-*'
+  ghcr.io/bond-os/nexus-cleanup:0.1.0 --pattern 'yum-proxy-*' > report.json
 ```
 
-Or with the stock Nushell image and the checkout mounted — that image's entrypoint is `nu`, so
-the script path comes first:
+**Pin an exact version** (`0.1.0`), or a digest (`@sha256:…`) for full reproducibility, and bump
+it deliberately after reading `CHANGELOG.md`. Each release also moves an `X.Y` tag (`0.1`) to its
+newest patch. There is deliberately **no `latest`**: a scheduled cleanup on a floating tag would
+pick up new deletion behaviour that nobody has read about.
+
+The working directory is an empty `/work`; mount your workspace there and relative paths such as
+`--summary-out summary.json` land in it. The tool itself lives in `/opt/nexus-cleanup`, so the
+mount cannot hide it:
+
+```bash
+docker run --rm -v "$PWD:/work" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
+  ghcr.io/bond-os/nexus-cleanup:0.1.0 --pattern 'yum-proxy-*' --summary-out summary.json > report.json
+```
+
+CI systems that run a shell script inside the image (GitLab, the Jenkins Docker Pipeline plugin)
+clear the entrypoint and call the tool by name — it is on `PATH` as `nexus-cleanup` and behaves
+exactly like the entrypoint:
+
+```bash
+docker run --rm --entrypoint "" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
+  ghcr.io/bond-os/nexus-cleanup:0.1.0 sh -c "nexus-cleanup --pattern 'yum-proxy-*'"
+```
+
+Every image carries a build provenance attestation tying it to the commit and workflow run that
+built it:
+
+```bash
+gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup:0.1.0 --repo bond-os/nexus-cleanup
+```
+
+To run an unreleased revision, use the stock Nushell image with a checkout mounted — that
+image's entrypoint is `nu`, so the script path comes first:
 
 ```bash
 docker run --rm -v "$PWD:/work" -w /work -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
@@ -43,7 +74,7 @@ docker run --rm -v "$PWD:/work" -w /work -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS
   nexus-cleanup.nu --pattern 'yum-proxy-*'
 ```
 
-Either way, do not pass `-t`: a TTY merges stderr into stdout, and stdout is the report.
+Never pass `-t`: a TTY merges stderr into stdout, and stdout is the report.
 
 ## Configuration
 
@@ -72,6 +103,7 @@ enumerated. Credentials never appear in the report, in diagnostics, or in any er
 | `--fail-on-skip` | off | exit non-zero if any group was skipped |
 | `--timeout` | `30sec` | per-request timeout |
 | `--max-attempts` | `4` | attempts per retryable request |
+| `--version` | — | print the tool version and exit; reads no configuration and contacts nothing |
 
 You must name at least one repository or supply `--pattern`; there is no "all repositories"
 default. Only `proxy` repositories are eligible — naming a hosted or group repository is an
@@ -165,6 +197,11 @@ decision, reason, rank, size_bytes, last_modified, deleted, error, path`. Fields
 apply are present and empty rather than omitted. New fields are only ever appended, so CSV
 column positions never move; `path` was added last.
 
+The `summary` block (and the `--summary-out` file) ends with `tool_version`, the version of the
+tool that produced the report — the same string `--version` prints. Keep it with archived reports:
+it is what tells you which release made a given deletion decision. Summary fields, like record
+fields, are only ever appended.
+
 `decision` is one of `keep`, `delete`, `skip`. `reason` is one of:
 
 | Reason | Meaning |
@@ -215,15 +252,20 @@ reads the output of.
 
 | CI system | File | Runs in | Approval before deleting |
 |---|---|---|---|
-| GitLab CI | `examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml` | the pinned Nushell image | a blocked manual job |
-| Forgejo Actions | `examples/forgejo/nexus-cleanup.yml` | a node image with Nushell installed by checksum | none; the cap is the guard |
-| Jenkins, Docker Pipeline plugin | `examples/jenkins/Jenkinsfile.docker-plugin` | the pinned Nushell image | an `input` step |
-| Jenkins, plain `sh` | `examples/jenkins/Jenkinsfile.sh` | the pinned Nushell image via `docker run` | an `input` step |
+| GitLab CI | `examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml` | the release image, entrypoint cleared | a blocked manual job |
+| Forgejo Actions | `examples/forgejo/nexus-cleanup.yml` | a node image; the release tag cloned, Nushell installed by checksum | none; the cap is the guard |
+| Jenkins, Docker Pipeline plugin | `examples/jenkins/Jenkinsfile.docker-plugin` | the release image, entrypoint cleared | an `input` step |
+| Jenkins, plain `sh` | `examples/jenkins/Jenkinsfile.sh` | the release image via `docker run` | an `input` step |
 
-Two container details matter everywhere. The Nushell image's entrypoint is `nu`, so a CI system
-that runs a shell script in the container needs it cleared (`entrypoint: [""]` in GitLab,
-`args '--entrypoint='` for the Jenkins plugin). And Forgejo runs JavaScript actions such as
-checkout inside the job container, which the Nushell image cannot do because it has no node.
+Every example pins an exact release (`ghcr.io/bond-os/nexus-cleanup:0.1.0`, or the tag `v0.1.0`
+for Forgejo) and needs nothing from this repository in the consumer's checkout. Bump the pin
+deliberately, after reading `CHANGELOG.md`.
+
+Two container details matter. A CI system that runs a shell script inside the image needs its
+entrypoint cleared (`entrypoint: [""]` in GitLab, `args '--entrypoint='` for the Jenkins plugin);
+the tool is then on `PATH` as `nexus-cleanup`. And Forgejo runs JavaScript actions such as
+`upload-artifact` inside the job container, which the release image cannot do because it has no
+node — hence the node image there.
 
 Skipped groups (exit 4, with `--fail-on-skip`) and failed deletions (exit 1) are surfaced as
 warnings where the CI system has them: allowed failure in GitLab, unstable in Jenkins.

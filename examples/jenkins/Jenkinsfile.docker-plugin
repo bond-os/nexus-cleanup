@@ -7,6 +7,10 @@
 // Point the job's Script Path at this file. Without the plugin, use
 // Jenkinsfile.sh next to it instead.
 //
+// The tool comes from the published image, pinned to an exact release; nothing
+// from the nexus-cleanup repository is checked out. Bump the pinned version
+// deliberately, after reading CHANGELOG.md.
+//
 // Every build performs a dry run and archives its report. Deletion happens only in
 // a build started by hand with EXECUTE ticked, only after someone approves the
 // dry-run report, and never in a build started by the timer.
@@ -17,6 +21,8 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
+        // The tool is in the image; the workspace only receives the reports.
+        skipDefaultCheckout()
         buildDiscarder(logRotator(numToKeepStr: '60'))
     }
 
@@ -44,10 +50,10 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    // Pinned to the version floor in AGENTS.md.
-                    image 'ghcr.io/nushell/nushell:0.115.1-alpine'
-                    // The image's entrypoint is `nu`; the plugin must start the
-                    // container with its own command.
+                    // An exact release, never a floating tag.
+                    image 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
+                    // The image's entrypoint is the tool; the plugin must start the
+                    // container with its own command. The tool is on PATH.
                     args '--entrypoint='
                 }
             }
@@ -57,7 +63,7 @@ pipeline {
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
                         handleExit(sh(returnStatus: true, script: '''
-                            nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip \
+                            nexus-cleanup --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip \
                                 --summary-out summary-dry-run.json > report-dry-run.json
                         '''))
                     }
@@ -90,7 +96,7 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    image 'ghcr.io/nushell/nushell:0.115.1-alpine'
+                    image 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
                     args '--entrypoint='
                 }
             }
@@ -99,7 +105,7 @@ pipeline {
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
                         handleExit(sh(returnStatus: true, script: '''
-                            nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
+                            nexus-cleanup --pattern "$PATTERN" --keep "$KEEP" \
                                 --max-deletions "$MAX_DELETIONS" --execute \
                                 --summary-out summary-execute.json > report-execute.json
                         '''))

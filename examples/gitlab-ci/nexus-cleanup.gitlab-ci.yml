@@ -4,6 +4,10 @@
 #   include:
 #     - local: examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml
 #
+# Runs the published image, pinned to an exact release, so this file is all a project
+# needs: nothing from the nexus-cleanup repository is checked out. Bump the pinned
+# version deliberately, after reading the release notes in CHANGELOG.md.
+#
 # Needs:
 #   - CI/CD variables NEXUS_USERNAME and NEXUS_PASSWORD, masked and protected
 #     (protected variables reach pipelines on protected branches only)
@@ -36,10 +40,14 @@ stages:
 
 .nexus-cleanup:
   image:
-    # Pinned to the version floor in AGENTS.md. The image's entrypoint is `nu`;
-    # the runner needs a shell entrypoint to run `script`.
-    name: ghcr.io/nushell/nushell:0.115.1-alpine
+    # An exact release, never a floating tag. The image's entrypoint is the tool;
+    # the runner needs a shell entrypoint to run `script`, and the tool is on PATH.
+    name: ghcr.io/bond-os/nexus-cleanup:0.1.0
     entrypoint: [""]
+  variables:
+    # The tool comes from the image; these jobs need nothing cloned. Set here,
+    # not globally, so an `include:` does not change other jobs.
+    GIT_STRATEGY: none
   resource_group: nexus-cleanup
 
 nexus-cleanup:dry-run:
@@ -49,7 +57,7 @@ nexus-cleanup:dry-run:
     - if: $CI_PIPELINE_SOURCE == "schedule"
     - if: $CI_PIPELINE_SOURCE == "web"
   script:
-    - nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip
+    - nexus-cleanup --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip
         --summary-out summary-dry-run.json > report-dry-run.json
   # Exit 4: some groups were skipped. Worth a warning, not a red pipeline.
   allow_failure:
@@ -76,7 +84,7 @@ nexus-cleanup:execute:
       case "$MAX_DELETIONS" in
         ''|*[!0-9]*|0*) echo "EXECUTE needs MAX_DELETIONS set to a positive whole number" >&2; exit 2 ;;
       esac
-    - nu nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP"
+    - nexus-cleanup --pattern "$PATTERN" --keep "$KEEP"
         --max-deletions "$MAX_DELETIONS" --execute
         --summary-out summary-execute.json > report-execute.json
   artifacts:
