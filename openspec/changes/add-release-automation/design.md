@@ -14,8 +14,9 @@ builds on:
   Verified on Nushell 0.116.0: a **symlink** to the entrypoint fails with
   `nu::parser::module_not_found`, because Nushell resolves the relative path against the
   symlink's directory, not the target's.
-- The repository is public, allows all three merge methods and has no rulesets. `main` holds
-  only `Initial commit`; this branch's commits are conventional apart from `init - openspec`.
+- The repository is public, allows all three merge methods and has no rulesets. `main` already
+  holds the tool through PR #1, merged with a merge commit. Its history includes three
+  non-conventional messages: `Initial commit`, `init - openspec` and the merge commit itself.
 - `report summary` builds the aggregate record in `report.nu`. Its consumers are the JSON report
   and `--summary-out`. CSV carries records only.
 
@@ -297,8 +298,10 @@ changelog.
 - **A new GHCR package may be created private.** → One-time manual step: after the first
   publish, set the package to public and confirm it is linked to the repository. The
   `org.opencontainers.image.source` label provides the link.
-- **`init - openspec` blocks the PR that introduces commitlint.** → Reword it before opening
-  the PR (one interactive rebase on this branch, done by the maintainer).
+- **Non-conventional commits already on `main`.** → They are left as they are: rewording them
+  would mean force-pushing `main`. They cannot block a pull request, because the commit check
+  covers only `base..head`. release-please skips unparseable messages and still finds the
+  `feat:` commits, so the first release is `0.1.0` regardless.
 - **The launcher behaviour was verified on 0.116.0, not 0.115.1.** → The smoke check exercises
   every verified property inside the pinned image on the first PR. If `--wrapped` or `exec`
   differ on 0.115.1, revisit before merge.

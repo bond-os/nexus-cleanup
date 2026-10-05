@@ -85,8 +85,9 @@ that is repeated across the Containerfile, CI and examples.
 
   The release workflow runs on the push that merges this change, so all of this must exist
   first.
-- **History**: the branch commit `init - openspec` must be reworded to a conventional message
-  before the branch merges, or the new commit check rejects the PR.
+- **History**: none rewritten. The non-conventional `Initial commit`, `init - openspec` and PR
+  #1's merge commit are already on `main`. The commit check only covers a pull request's own
+  commits, and release-please skips messages it cannot parse.
 - **Docs**: `README.md` (image usage, pinning, `--version`, `tool_version`, CI examples table),
   `AGENTS.md` (layout, the narrowed Nushell rule, release process, no `latest`, the App's trust
   boundary and key rotation), and all four CI examples.
