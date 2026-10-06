@@ -22,10 +22,11 @@ engine=${CONTAINER_ENGINE:-docker}
 # Runs the container as the caller, so that a workspace only the caller can write
 # is writable inside. Rootful Docker takes the caller's uid as is. Rootless Podman
 # maps the caller to container root, so the same uid inside the user namespace is
-# someone else; keep-id maps the caller to their own uid instead.
+# someone else. keep-id maps the caller to their own uid, but on its own runs the
+# image's USER; --user is still needed to run as the caller.
 case "$engine" in
   docker) as_caller=(--user "$(id -u):$(id -g)") ;;
-  podman) as_caller=(--userns=keep-id) ;;
+  podman) as_caller=(--userns=keep-id --user "$(id -u):$(id -g)") ;;
   *) echo "CONTAINER_ENGINE must be docker or podman, not '$engine'" >&2; exit 2 ;;
 esac
 
