@@ -172,7 +172,7 @@ Who can write the workspace, by runtime:
                           user
  Podman rootless,         container 0 = host      --user $(id -u)       NO: host uid N inside
    Jenkins                user                    -> subuid             the userns is another uid
-                                                                        -> use --userns=keep-id
+                                                                        -> add --userns=keep-id
  Docker rootless, Jenkins same                    same                  NO -> use --user 0:0
                                                                         (maps to the host user)
  Kubernetes executor      emptyDir 0777 or        1000, or runAsUser    yes
@@ -183,7 +183,10 @@ Who can write the workspace, by runtime:
 Under a rootless runtime, `--user "$(id -u):$(id -g)"` is wrong. The host UID is mapped to
 container root, and the same number inside the namespace lands on an unrelated subordinate UID.
 The Docker Pipeline plugin injects exactly that `-u`, so it has the same problem under rootless
-Podman. These are runtime configuration, not something the image can fix. The examples and the
+Podman. `--userns=keep-id` maps the host UID to itself, but it is not enough on its own: without
+`--user`, the container runs as the image's `USER` (1000), which maps to a subordinate UID. The
+working combination is `--userns=keep-id --user "$(id -u):$(id -g)"`. That is also what the
+plugin produces once `--userns=keep-id` is appended to its `args`. These are runtime configuration, not something the image can fix. The examples and the
 README name the right flags per runtime.
 
 *Alternatives considered:*
@@ -220,7 +223,7 @@ The existing `chmod 0777` mount case stays: it models the GitLab executor and Ku
 In the `image` job the smoke script runs twice: once with `docker`, and once under rootless
 Podman, which ships on GitHub's `ubuntu-24.04` runners. The amd64 image is moved across with
 `docker save | podman load`. The container engine is a parameter of the script, and the Podman
-pass replaces the `--user` case with `--userns=keep-id`. This is what turns the rootless rows of
+pass adds `--userns=keep-id` to the `--user` case. This is what turns the rootless rows of
 the matrix above from reasoning into a checked fact.
 
 None of these checks needs a network or a Nexus. The script orchestrates `docker`, which places
@@ -373,7 +376,7 @@ any of them, in particular adding a bypass actor on `main`, reopens what that se
 |---|---|
 | GitLab | `image: ghcr.io/bond-os/nexus-cleanup:0.1.0` with `entrypoint: [""]`, `script: nexus-cleanup …`, and `GIT_STRATEGY: none` because nothing from the repository is needed |
 | Jenkins, Docker Pipeline plugin | the release image, `args '--entrypoint='`, `sh 'nexus-cleanup …'`, and `skipDefaultCheckout()`; a comment that under rootless Podman the plugin's injected `-u` cannot write the workspace, so the agent needs a rootful engine or `args '--entrypoint= --userns=keep-id'` |
-| Jenkins, plain `sh` | `docker run` of the release image with its default entrypoint; the workspace mount stays because `--summary-out` and the report land there; `--user "$(id -u):$(id -g)"` is commented as rootful-only, with `--userns=keep-id` (Podman) and `--user 0:0` (rootless Docker) as the rootless replacements |
+| Jenkins, plain `sh` | `docker run` of the release image with its default entrypoint; the workspace mount stays because `--summary-out` and the report land there; `--user "$(id -u):$(id -g)"` is commented as rootful-only, with `--userns=keep-id` added next to it (Podman) and `--user 0:0` in its place (rootless Docker) as the rootless forms |
 | Forgejo | stays on a node job image because `upload-artifact` needs node. It replaces "the tool is in your repository" with a shallow `git clone --branch v0.1.0` of this repository, keeping the checksum-verified Nushell install |
 
 Each example states that the pinned version should be bumped deliberately, after reading the
@@ -396,10 +399,17 @@ changelog.
   every verified property inside the pinned image on the first PR. If `--wrapped` or `exec`
   differ on 0.115.1, revisit before merge.
 - **Only the rootless Podman rows of the user matrix have been observed.** They were checked under
-  rootless Podman (`quay.io/podman/stable`, `podman info` reporting `rootless: true`):
+  rootless Podman (`quay.io/podman/stable`, `podman info` reporting `rootless: true`), with a
+  caller whose uid differs from the image's `USER`:
   - `--user "$(id -u):$(id -g)"` fails with `Permission denied` on a caller-owned workspace;
-  - `--userns=keep-id` and `--user 0:0` both write, and the file is owned by the caller;
-  - the Jenkins plugin's `-u uid:gid` plus `--userns=keep-id` writes too.
+  - `--userns=keep-id` alone also fails, because the container runs as the image's `USER`;
+  - `--userns=keep-id --user "$(id -u):$(id -g)"` and `--user 0:0` both write, and the file is
+    owned by the caller. The former is what the Jenkins plugin's `-u` plus `--userns=keep-id`
+    amounts to.
+
+  A first local run passed with `--userns=keep-id` alone, because the caller's uid happened to
+  equal the image's (1000). CI's runner (uid 1001) exposed it. A local check must use a caller
+  whose uid differs from the image's `USER`.
 
   The rootless Docker row (`--user 0:0`) relies on the same user-namespace mapping but has not
   been run under rootless Docker. Docker Desktop on macOS hides ownership mismatches on bind

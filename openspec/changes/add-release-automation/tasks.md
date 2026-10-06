@@ -56,7 +56,7 @@
   Keep the existing `chmod 0777` case. Make the container engine a parameter (default `docker`). Verify:
   - each new check fails against an image built without `USER 1000:1000`, or explain why it cannot;
   - the whole script passes against the image from 3.6.
-- [ ] 3.8 Run the smoke script a second time in the `image` job (see 4.1) under rootless Podman on `ubuntu-24.04`. Load the amd64 image with `docker save | podman load`, and use `--userns=keep-id` in place of `--user` for the workspace case. Verify:
+- [ ] 3.8 Run the smoke script a second time in the `image` job (see 4.1) under rootless Podman on `ubuntu-24.04`. Load the amd64 image with `docker save | podman load`, and add `--userns=keep-id` to `--user` for the workspace case (`keep-id` alone runs the image's uid, not the caller's). Verify:
   - the Podman pass runs rootless (`podman info` reports `rootless: true`);
   - it passes on this change's PR.
 
@@ -122,7 +122,7 @@
 - [x] 6.4 Update the README CI table ("Runs in" column, entrypoint notes). In every example, state that the pinned version is bumped deliberately after reading `CHANGELOG.md`. Verify `grep -rn '0.115.1-alpine' examples/` matches only the Forgejo Nushell install comment.
 
 - [x] 6.5 Document rootless and cluster runtimes:
-  - **plain `sh` Jenkins example:** comment that `--user "$(id -u):$(id -g)"` is for rootful Docker only, and name `--userns=keep-id` (Podman) and `--user 0:0` (rootless Docker) as the rootless replacements;
+  - **plain `sh` Jenkins example:** comment that `--user "$(id -u):$(id -g)"` is for rootful Docker only, and name `--userns=keep-id` added to `--user` (Podman) and `--user 0:0` in its place (rootless Docker) as the rootless forms;
   - **Docker Pipeline plugin example:** comment that the plugin's injected `-u` cannot write the workspace under rootless Podman, and name the workaround;
   - **README:** add a short "Rootless and Kubernetes" subsection to "In a container", covering:
     - the image's user;

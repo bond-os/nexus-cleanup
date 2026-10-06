@@ -95,12 +95,14 @@ The right flag depends on the runtime:
 | Runtime | Add to `docker run` / `podman run` | Files in the workspace end up owned by |
 |---|---|---|
 | Docker (rootful) | `--user "$(id -u):$(id -g)"` | you |
-| Podman (rootless) | `--userns=keep-id` | you |
+| Podman (rootless) | `--userns=keep-id --user "$(id -u):$(id -g)"` | you |
 | Docker (rootless) | `--user 0:0` | you (container root *is* your user) |
 
-Under a rootless runtime, `--user "$(id -u):$(id -g)"` is **wrong**. The user namespace maps
-your host uid to container root, so the same number inside the container is an unrelated
-subordinate uid that cannot write your workspace.
+Under a rootless runtime, `--user "$(id -u):$(id -g)"` **on its own** is wrong. The user
+namespace maps your host uid to container root, so the same number inside the container is an
+unrelated subordinate uid that cannot write your workspace. Podman's `--userns=keep-id` maps
+your uid to itself, but without `--user` the container still runs as the image's uid 1000.
+That only works if your own uid happens to be 1000.
 
 ## Configuration
 

@@ -459,8 +459,10 @@ Do not remove the line, and do not replace it with the name.
 The tool needs no root and no writable path of its own. It runs under any uid, including
 OpenShift's arbitrary uids with gid 0, on a read-only root filesystem with no capabilities.
 The smoke script checks this. Workspace ownership under rootless runtimes is a runtime flag,
-not an image property (`--userns=keep-id` for Podman, `--user 0:0` for rootless Docker), and
-the README documents it.
+not an image property, and the README documents it: `--userns=keep-id` *together with*
+`--user "$(id -u):$(id -g)"` for rootless Podman, and `--user 0:0` for rootless Docker.
+`keep-id` alone runs the image's uid 1000. It passes only for a caller who happens to be
+uid 1000, so do not test it that way.
 
 `/work` is deliberately **not** made group-0-writable, the usual OpenShift pattern. That would
 need either a `RUN chmod`, which brings back QEMU for `arm64` and `arm/v7`, or a copied-in
