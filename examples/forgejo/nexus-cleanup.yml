@@ -1,15 +1,21 @@
 # nexus-cleanup — Forgejo Actions workflow.
 #
-# Copy to .forgejo/workflows/nexus-cleanup.yml.
+# Copy to .forgejo/workflows/nexus-cleanup.yml in a private repository that holds the
+# configuration files: one YAML file per cleanup under CONFIG_DIR, and
+# ci/run-configs.sh, the loop that runs the tool once per file. Adding a file needs
+# no change here.
 #
 # Needs:
 #   - a runner with the `docker` label
 #   - repository variable NEXUS_URL, secrets NEXUS_USERNAME and NEXUS_PASSWORD
+#   - max-deletions or max-deletion-share in every configuration file: the loop
+#     passes --require-cap, so a file without a cap fails the dry run
 #
-# Every run performs a dry run and uploads its report. Deletion happens only in a run
+# Every run performs a dry run of every file and uploads the reports. Deletion happens only in a run
 # started by hand with `execute` ticked, and a scheduled run never deletes. Forgejo
 # has no approval gate inside a run, so read a dry-run report before ticking
-# `execute`: the deletion cap is what stands between a surprise and the repository.
+# `execute`: each file's deletion cap is what stands between a surprise and the
+# repository.
 #
 # The job image is a node image rather than the published nexus-cleanup one: Forgejo
 # runs JavaScript actions (upload-artifact) inside the job container, and that image
@@ -28,18 +34,6 @@ on:
     - cron: '17 3 * * *'
   workflow_dispatch:
     inputs:
-      pattern:
-        description: Glob selecting the proxy repositories to clean
-        type: string
-        default: 'yum-proxy-*'
-      keep:
-        description: Newest versions to retain per group
-        type: number
-        default: 2
-      max_deletions:
-        description: Abort an executing run above this many deletions
-        type: number
-        default: 500
       execute:
         description: Delete after the dry run
         type: boolean
@@ -57,14 +51,16 @@ jobs:
       NEXUS_URL: ${{ vars.NEXUS_URL }}
       # An exact release of nexus-cleanup, never a branch.
       NEXUS_CLEANUP_VERSION: v0.1.0
-      # Scheduled runs have no inputs, so each falls back to the dispatch default.
-      PATTERN: ${{ inputs.pattern || 'yum-proxy-*' }}
-      KEEP: ${{ inputs.keep || 2 }}
-      MAX_DELETIONS: ${{ inputs.max_deletions }}
+      # In your own repository this is `configs`; this example reads the files
+      # shipped beside it.
+      CONFIG_DIR: examples/configs
+      NEXUS_CLEANUP: nu /opt/nexus-cleanup/nexus-cleanup.nu
       # Pinned to the version floor in AGENTS.md.
       NU_VERSION: 0.115.1
       NU_SHA256: 8a9722177ddd421eba927b4baae4ae341a4d1c3434504be7b1b17d998bafdd87
     steps:
+      - uses: https://code.forgejo.org/actions/checkout@v4
+
       - name: Fetch nexus-cleanup
         run: |
           git clone --quiet --depth 1 --branch "$NEXUS_CLEANUP_VERSION" \
@@ -83,17 +79,15 @@ jobs:
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-        run: |
-          nu /opt/nexus-cleanup/nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
-            --summary-out summary-dry-run.json > report-dry-run.json
+        # Exit 4: some groups were skipped. A warning in the reports, not a reason to
+        # stop the run before the execute step.
+        run: sh examples/ci/run-configs.sh || [ $? -eq 4 ]
 
       - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
         if: always()
         with:
           name: dry-run
-          path: |
-            report-dry-run.json
-            summary-dry-run.json
+          path: reports/*.dry-run*.json
 
       - name: Execute
         # A boolean input can arrive as a string, depending on the Forgejo version.
@@ -101,18 +95,10 @@ jobs:
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-        run: |
-          case "$MAX_DELETIONS" in
-            ''|*[!0-9]*|0*) echo "execute needs max_deletions set to a positive whole number" >&2; exit 2 ;;
-          esac
-          nu /opt/nexus-cleanup/nexus-cleanup.nu --pattern "$PATTERN" --keep "$KEEP" \
-            --max-deletions "$MAX_DELETIONS" --execute \
-            --summary-out summary-execute.json > report-execute.json
+        run: sh examples/ci/run-configs.sh --execute
 
       - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
-        if: always() && hashFiles('report-execute.json') != ''
+        if: always() && hashFiles('reports/*.execute.json') != ''
         with:
           name: execute
-          path: |
-            report-execute.json
-            summary-execute.json
+          path: reports/*.execute*.json

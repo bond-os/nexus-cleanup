@@ -12,6 +12,18 @@
         {
           "type": "generic",
           "path": "nexus-cleanup/version.nu"
+        },
+        {
+          "type": "generic",
+          "path": "examples/configs/yum-proxies.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/configs/raw-builds.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "README.md"
         }
       ],
       "changelog-sections": [
