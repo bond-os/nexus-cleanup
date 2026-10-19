@@ -56,7 +56,7 @@
   Keep the existing `chmod 0777` case. Make the container engine a parameter (default `docker`). Verify:
   - each new check fails against an image built without `USER 1000:1000`, or explain why it cannot;
   - the whole script passes against the image from 3.6.
-- [ ] 3.8 Run the smoke script a second time in the `image` job (see 4.1) under rootless Podman on `ubuntu-24.04`. Load the amd64 image with `docker save | podman load`, and add `--userns=keep-id` to `--user` for the workspace case (`keep-id` alone runs the image's uid, not the caller's). Verify:
+- [x] 3.8 Run the smoke script a second time in the `image` job (see 4.1) under rootless Podman on `ubuntu-24.04`. Load the amd64 image with `docker save | podman load`, and add `--userns=keep-id` to `--user` for the workspace case (`keep-id` alone runs the image's uid, not the caller's). Verify:
   - the Podman pass runs rootless (`podman info` reports `rootless: true`);
   - it passes on this change's PR.
 
@@ -65,7 +65,7 @@
 
 ## 4. Pull request checks
 
-- [ ] 4.1 Extend `tests.yml`:
+- [x] 4.1 Extend `tests.yml`:
   - add a `workflow_call` trigger;
   - add an `image` job that builds all three platforms without pushing, loads `linux/amd64` with `VERSION` read from `version.nu`, and runs the smoke script;
   - pin every new action by SHA with a version comment.
@@ -87,7 +87,7 @@
   - the `simple` type never creates `version.txt` (`createIfMissing: false`).
 
   The token-based dry run was skipped by decision, because it would hand a GitHub token to a downloaded package; 8.1 checks the real release PR instead. If 8.1 does not propose `0.1.0`, fall back to `release-as` as the design describes.
-- [ ] 5.2 Write `.github/workflows/release.yml` (push to `main`) with three jobs:
+- [x] 5.2 Write `.github/workflows/release.yml` (push to `main`) with three jobs:
   - `release-please`:
     - declares `environment: release`;
     - mints its token with `actions/create-github-app-token` from `RELEASE_APP_CLIENT_ID` / `RELEASE_APP_PRIVATE_KEY`, passing `permission-contents: write` and `permission-pull-requests: write` explicitly and no `owner`/`repositories`, so the token is limited to this repository;
@@ -118,7 +118,7 @@
   - the plain `sh` variant uses `docker run` with the default entrypoint and keeps the workspace mount.
 
   Verify the `sh` variant's `docker run` lines work against the locally built image with `NEXUS_URL` pointing at an unreachable host and dummy credentials, expecting exit 3, empty stdout and the cause on stderr.
-- [ ] 6.3 Change the Forgejo example to fetch the tool with a shallow `git clone --branch v0.1.0` of this repository instead of assuming it is in the consumer's checkout, keeping the node image and the checksum-verified Nushell install. Verify the clone command and the tool invocation by running them in `node:24-bookworm` once `v0.1.0` exists.
+- [x] 6.3 Change the Forgejo example to fetch the tool with a shallow `git clone --branch v0.1.0` of this repository instead of assuming it is in the consumer's checkout, keeping the node image and the checksum-verified Nushell install. Verify the clone command and the tool invocation by running them in `node:24-bookworm` once `v0.1.0` exists.
 - [x] 6.4 Update the README CI table ("Runs in" column, entrypoint notes). In every example, state that the pinned version is bumped deliberately after reading `CHANGELOG.md`. Verify `grep -rn '0.115.1-alpine' examples/` matches only the Forgejo Nushell install comment.
 
 - [x] 6.5 Document rootless and cluster runtimes:
@@ -170,19 +170,19 @@
 
 ## 8. First release, end to end
 
-- [ ] 8.1 Merge this change and confirm the release PR:
+- [x] 8.1 Merge this change and confirm the release PR:
   - it is opened by the App and proposes `0.1.0`;
   - it carries release-please's `autorelease: pending` label without Issues permission;
   - it updates `CHANGELOG.md`, `.release-please-manifest.json` and `version.nu`;
   - its required checks run and pass.
 
   If labelling fails for lack of Issues permission, add Issues write to both the App and the token's `permission-issues` input, and record why in `AGENTS.md`.
-- [ ] 8.2 Merge the release PR and confirm:
+- [x] 8.2 Merge the release PR and confirm:
   - tag `v0.1.0` and a GitHub Release exist, and the release is shown as immutable;
   - `ghcr.io/bond-os/nexus-cleanup` has `0.1.0` and `0.1`, and no `latest`;
   - `docker buildx imagetools inspect` lists amd64, arm64 and arm/v7.
-- [ ] 8.3 Make the GHCR package public if it was created private, then confirm:
+- [x] 8.3 Make the GHCR package public if it was created private, then confirm:
   - `gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup:0.1.0 --repo bond-os/nexus-cleanup` succeeds;
   - an anonymous `docker pull` works;
   - `docker run --rm ghcr.io/bond-os/nexus-cleanup:0.1.0 --version` prints `0.1.0`.
-- [ ] 8.4 Run a dry run with the published image against the reference Nexus (`--pattern 'yum-proxy-*'`). Confirm the report's `summary.tool_version` is `0.1.0` and that its decisions match a dry run of `nu nexus-cleanup.nu` from the `v0.1.0` checkout.
+- [x] 8.4 Run a dry run with the published image against the reference Nexus (`--pattern 'yum-proxy-*'`). Confirm the report's `summary.tool_version` is `0.1.0` and that its decisions match a dry run of `nu nexus-cleanup.nu` from the `v0.1.0` checkout.
