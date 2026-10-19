@@ -11,22 +11,24 @@ use ./nexus-cleanup/version.nu [VERSION]
 
 def main [
     ...repositories: string             # proxy repositories to clean
+    --config: string                    # read settings from this YAML file; flags override it
     --url: string                       # Nexus base URL (default: $NEXUS_URL)
     --username: string                  # default: $NEXUS_USERNAME
     --password: string                  # default: $NEXUS_PASSWORD
-    --pattern: string = ""              # select proxy repositories by glob instead
-    --keep: int = 1                     # newest versions to retain per group
-    --timeout: duration = 30sec         # per-request timeout
-    --max-attempts: int = 4             # attempts per retryable request
-    --format: string = "json"           # json or csv
-    --version-scheme: string = ""       # force generic, debian, rpm or date
-    --scope-from-path: string = ""      # regex with a (?P<scope>...) group
-    --from-path: string = ""            # regex with (?P<name>...) and (?P<version>...)
+    --pattern: string                   # select proxy repositories by glob instead
+    --keep: int                         # newest versions to retain per group (default 1)
+    --timeout: duration                 # per-request timeout (default 30sec)
+    --max-attempts: int                 # attempts per retryable request (default 4)
+    --format: string                    # json or csv (default json)
+    --version-scheme: string            # force generic, debian, rpm or date
+    --scope-from-path: string           # regex with a (?P<scope>...) group
+    --from-path: string                 # regex with (?P<name>...) and (?P<version>...)
     --execute                           # actually delete; omit for a dry run
     --fail-on-skip                      # exit non-zero if any group was skipped
-    --max-deletions: int = 0            # abort an executing run above this many
-    --max-deletion-share: float = 0.0   # abort above this share of components
-    --summary-out: string = ""          # also write the aggregate here as JSON
+    --require-cap                       # refuse to run unless a deletion cap is set
+    --max-deletions: int                # abort an executing run above this many (default 0 = off)
+    --max-deletion-share: float         # abort above this share of components (default 0 = off)
+    --summary-out: string               # also write the aggregate here as JSON
     --version                           # print the tool version and exit
 ] {
     # Before any configuration is read: asking for the version never needs a
@@ -36,8 +38,11 @@ def main [
         return
     }
 
+    # Defaults live only in `config resolve`: a flag left out arrives as null, so a
+    # configuration file can supply the value instead.
     let resolved = (try {
-        {ok: (config resolve {
+        let file = if ($config | is-not-empty) { config load $config } else { null }
+        {ok: (config resolve --file $file {
             url: $url
             username: $username
             password: $password
@@ -52,6 +57,7 @@ def main [
             from_path: $from_path
             execute: $execute
             fail_on_skip: $fail_on_skip
+            require_cap: $require_cap
             max_deletions: $max_deletions
             max_deletion_share: $max_deletion_share
             summary_out: $summary_out

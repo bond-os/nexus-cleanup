@@ -53,7 +53,32 @@ def run-all [extra: record = {}]: nothing -> record {
     cleanup run $config (api client "https://nexus.example.invalid" --backoff 0ms --fetch (fixture-fetch))
 }
 
+# The same run as `run-dates`, configured from a file instead of flags.
+def run-from-file [extra: record = {}]: nothing -> record {
+    let file = (config load $"((fixtures-root))/config/end-to-end.yaml")
+    let config = (with-env {NEXUS_URL: "https://nexus.example.invalid", NEXUS_USERNAME: ""} {
+        config resolve $extra --file $file
+    })
+    cleanup run $config (api client "https://nexus.example.invalid" --backoff 0ms --fetch (fixture-fetch))
+}
+
+def decisions [out: record]: nothing -> list {
+    $out.report.records | select repository component_id variant decision reason rank | sort-by repository component_id variant
+}
+
 run-suite "end to end" [
+    { name: "a run configured from a file decides exactly as the same flags do", run: {||
+        let from_file = (run-from-file)
+        let from_flags = (run-dates {max_deletions: 1000})
+        assert equal (decisions $from_file) (decisions $from_flags)
+        assert equal $from_file.report.summary.counts $from_flags.report.summary.counts
+        assert greater $from_file.report.summary.counts.to_delete 0
+        assert ($from_file.report.summary.config_file | str ends-with "config/end-to-end.yaml")
+        assert equal $from_flags.report.summary.config_file ""
+    } }
+    { name: "a flag over the file changes the decisions as the flag alone would", run: {||
+        assert equal (decisions (run-from-file {keep: 2})) (decisions (run-dates {keep: 2, max_deletions: 1000}))
+    } }
     { name: "the run completes over every recorded format", run: {||
         let out = (run-all)
         assert equal $out.exit_code $EXIT_OK
