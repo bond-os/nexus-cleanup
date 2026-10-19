@@ -33,6 +33,11 @@ full report, and SHALL issue no deletion request of any kind.
 - **WHEN** any other flag or environment variable is set, including verbose or format flags
 - **THEN** the run remains a dry run unless the execute flag itself was passed
 
+#### Scenario: Execute is not implied by a configuration file
+
+- **WHEN** the tool is invoked with a configuration file and without the execute flag
+- **THEN** the run remains a dry run whatever the file contains
+
 ### Requirement: Repository targeting
 
 The tool SHALL accept one or more repository names and/or a name pattern, and SHALL operate
@@ -64,9 +69,11 @@ tool with no selection SHALL be refused rather than interpreted as "every reposi
 ### Requirement: Configuration precedence and validation
 
 The tool SHALL read connection settings from the environment and SHALL let an equivalent
-command-line flag override the environment value for the same setting. All configuration
-SHALL be validated before any repository is enumerated, and an invalid value SHALL abort the
-run with a message naming the offending setting.
+command-line flag override the environment value for the same setting. When a configuration
+file is given, its values SHALL sit below both: a flag overrides the file for every setting, and
+the environment overrides the file for connection settings. All configuration, from every
+source, SHALL be validated before any repository is enumerated, and an invalid value SHALL abort
+the run with a message naming the offending setting.
 
 #### Scenario: Flag overrides environment
 
@@ -77,6 +84,17 @@ run with a message naming the offending setting.
 
 - **WHEN** a keep count, timeout or retry limit is not a valid positive value
 - **THEN** the run aborts with a usage error naming that setting
+- **AND** no repository is enumerated
+
+#### Scenario: Flag overrides the configuration file
+
+- **WHEN** a configuration file sets a keep count and a different keep count is passed as a flag
+- **THEN** the flag's value is used
+
+#### Scenario: Invalid file value rejected up front
+
+- **WHEN** a configuration file holds an invalid value for any setting
+- **THEN** the run aborts with a usage error naming that setting and the file
 - **AND** no repository is enumerated
 
 ### Requirement: Scope pattern override
@@ -260,3 +278,31 @@ Nexus.
 - **WHEN** the version flag is passed together with other flags, including the execute flag
 - **THEN** only the version is printed and the tool exits with code 0
 - **AND** no repository is enumerated and nothing is deleted
+
+### Requirement: A deletion cap can be required
+
+The tool SHALL accept a switch that requires a deletion cap. With it, a run — dry or executing —
+whose resolved configuration sets neither an absolute nor a proportional cap SHALL be refused
+with a usage error naming both cap settings, before any repository is enumerated. The switch
+SHALL NOT imply execution and SHALL NOT be settable from a configuration file.
+
+#### Scenario: Cap missing
+
+- **WHEN** the tool is invoked with the require-cap switch and no cap is set by flag or file
+- **THEN** the run aborts with a usage error naming the absolute and the proportional cap settings
+- **AND** no repository is enumerated
+
+#### Scenario: Cap from the configuration file
+
+- **WHEN** the tool is invoked with the require-cap switch and a configuration file setting `max-deletions: 200`
+- **THEN** the run proceeds with a cap of 200
+
+#### Scenario: Dry run also checked
+
+- **WHEN** the tool is invoked with the require-cap switch, without the execute flag, and no cap is set
+- **THEN** the run aborts with the same usage error, so a missing cap surfaces in the dry run rather than at execution
+
+#### Scenario: Not a file setting
+
+- **WHEN** a configuration file contains `require-cap: true`
+- **THEN** the run aborts with a usage error naming `require-cap` as an unknown key
