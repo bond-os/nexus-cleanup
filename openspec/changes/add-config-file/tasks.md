@@ -37,7 +37,7 @@
 
 - [x] 7.1 Extend `tests/test-end-to-end.nu` with a run driven by a configuration file against the recorded fixtures and verify its decisions equal those of the same settings passed as flags
 - [x] 7.2 Run `nu tests/run-tests.nu` inside `ghcr.io/nushell/nushell:0.115.1-alpine` and confirm the whole suite passes
-- [ ] 7.3 Run a dry run with a configuration file against the reference instance and confirm the report's `config_file` and decisions match the equivalent flag-driven dry run; open an example file in an editor with the YAML language server and confirm a misspelt key and `execute` are flagged with their descriptions
+- [x] 7.3 Run a dry run with a configuration file against the reference instance and confirm the report's `config_file` and decisions match the equivalent flag-driven dry run; open an example file in an editor with the YAML language server and confirm a misspelt key and `execute` are flagged with their descriptions
 
 ## Workflow follow-up
 
