@@ -51,6 +51,17 @@ run-suite "run" [
         assert equal $out.report.summary.counts.to_delete 3
         assert equal $out.report.summary.counts.deleted 0
     } }
+    { name: "a run configured from a file is a dry run whatever the file sets", run: {||
+        let log = (mktemp -t "deletes-XXXXXX")
+        let file = (config load $"($env.FILE_PWD)/fixtures/config/full.yaml")
+        let config = (with-env {NEXUS_URL: "", NEXUS_USERNAME: ""} {
+            config resolve {repositories: ["npm-proxy"], keep: 1} --file $file
+        })
+        let out = (run-with $config (stub-fetch --record-deletes $log))
+        assert equal (open --raw $log | str trim) ""
+        rm -f $log
+        assert equal $out.report.summary.mode "dry-run"
+    } }
     { name: "no other flag implies execute", run: {||
         let log = (mktemp -t "deletes-XXXXXX")
         let config = (cfg {keep: 2, format: "csv", fail_on_skip: true, max_deletions: 100})

@@ -1,0 +1,12 @@
+# The end-to-end run's settings, as a file: every recorded repository, the date
+# layout retained by path, 14 directories per parent.
+repositories:
+  - apt-proxy-deb.debian.org
+  - docker-proxy-hub
+  - yum-proxy-resources.ovirt.org
+  - npm-proxy-npm
+  - raw-dates
+from-path: '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+version-scheme: date
+keep: 14
+max-deletions: 1000

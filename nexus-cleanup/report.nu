@@ -125,8 +125,9 @@ export def "report summary" [records: list<record>, run: record]: nothing -> rec
         }
         bytes_reclaimable: (sum-or-zero ($planned | get size))
         bytes_reclaimed: (sum-or-zero ($deleted | get size))
-        # Appended last, like every aggregate field: consumers may rely on the order.
+        # Appended in order, like every aggregate field: consumers may rely on it.
         tool_version: $VERSION
+        config_file: ($run.config_file? | default "")
     }
 }
 

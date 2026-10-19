@@ -34,6 +34,7 @@ export def "cleanup run" [config: record, client: record]: nothing -> record {
             nexus_url: $config.url
             repositories: []
             keep: $config.keep
+            config_file: ($config.config_file? | default "")
         })
         return {report: {summary: $summary, records: []}, exit_code: $EXIT_OK}
     }
@@ -93,6 +94,7 @@ export def "cleanup run" [config: record, client: record]: nothing -> record {
         nexus_url: $config.url
         repositories: ($selected | get name)
         keep: $config.keep
+        config_file: ($config.config_file? | default "")
     })
 
     if $exit_code == $EXIT_OK {

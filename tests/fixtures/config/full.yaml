@@ -1,0 +1,17 @@
+# Every recognised key, each with a valid value.
+$schema: https://example.invalid/config.schema.json
+url: https://nexus.example.invalid
+username: cleanup-bot
+repositories: [yum-proxy-a, yum-proxy-b]
+pattern: "yum-proxy-*"
+keep: 3
+timeout: 2min
+max-attempts: 5
+format: csv
+version-scheme: rpm
+scope-from-path: '^/(?P<scope>[^/]+)/'
+from-path: '^/(?P<name>app)/(?P<version>[0-9]{8})/'
+fail-on-skip: true
+max-deletions: 200
+max-deletion-share: 0.5
+summary-out: summary.json

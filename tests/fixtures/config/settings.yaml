@@ -1,0 +1,5 @@
+repositories: [r]
+keep: 3
+format: csv
+timeout: 2min
+fail-on-skip: true

@@ -2,6 +2,7 @@ use ./harness.nu *
 use ../nexus-cleanup/config.nu *
 use ../nexus-cleanup/run.nu *
 use ../nexus-cleanup/report.nu [FIELDS]
+use ../nexus-cleanup/version.nu [VERSION]
 
 def entrypoint []: nothing -> string { $"($env.FILE_PWD | path dirname)/nexus-cleanup.nu" }
 
@@ -12,6 +13,63 @@ def cli [...args: string]: nothing -> record {
         ^$nu.current-exe (entrypoint) ...$args | complete
     }
 }
+
+def fixture [name: string]: nothing -> string { $"($env.FILE_PWD)/fixtures/config/($name)" }
+
+run-suite "cli: configuration file" [
+    { name: "an invalid file exits with the usage code, naming it, before any request", run: {||
+        # The URL is unreachable: reaching it would exit with the API code instead.
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "misspelt-key.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert equal $r.stdout ""
+        assert ($r.stderr | str contains "misspelt-key.yaml")
+        assert ($r.stderr | str contains "keeep")
+    } }
+    { name: "a missing file exits with the usage code", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "absent.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "absent.yaml")
+    } }
+    { name: "a flag overrides the file's value", run: {||
+        # The file's keep: 0 alone is a usage error; --keep 5 replaces it, so the run
+        # gets as far as the unreachable Nexus.
+        let alone = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "keep-zero.yaml"))
+        assert equal $alone.exit_code $EXIT_USAGE
+        assert ($alone.stderr | str contains "'keep' in")
+        let r = (cli "--url" "http://127.0.0.1:9" "--max-attempts" "1" "--timeout" "2sec"
+            "--config" (fixture "keep-zero.yaml") "--keep" "5")
+        assert equal $r.exit_code $EXIT_API
+    } }
+    { name: "execute in the file is refused, pointing at the flag", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "execute-true.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--execute")
+    } }
+    { name: "--require-cap without a cap exits with the usage code before any request", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--require-cap" "repo")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--max-deletions")
+        let capped = (cli "--url" "http://127.0.0.1:9" "--max-attempts" "1" "--timeout" "2sec"
+            "--require-cap" "--config" (fixture "capped.yaml"))
+        assert equal $capped.exit_code $EXIT_API
+    } }
+    { name: "--version ignores a broken configuration file", run: {||
+        let r = (cli "--version" "--config" (fixture "invalid.yaml"))
+        assert equal $r.exit_code 0
+        assert equal ($r.stdout | str trim) $VERSION
+    } }
+    { name: "--help still states each flag's default", run: {||
+        let help = (cli "--help" | get stdout)
+        for line in [
+            ["--keep" "default 1"] ["--timeout" "default 30sec"] ["--max-attempts" "default 4"]
+            ["--format" "default json"] ["--max-deletions" "default 0"] ["--max-deletion-share" "default 0"]
+        ] {
+            let flag_line = ($help | lines | where {|l| $l | str contains $"($line.0) <" } | first)
+            assert ($flag_line | str contains $line.1) $"($line.0): ($flag_line)"
+        }
+        assert ($help | str contains "--config")
+    } }
+]
 
 run-suite "cli" [
     { name: "no repository selection exits with the usage code", run: {||
