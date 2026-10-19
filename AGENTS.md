@@ -52,7 +52,12 @@ nexus-cleanup/
   version.nu              # VERSION; rewritten by release-please, never by hand
 tools/
   record-fixtures.nu      # development only; records redacted fixtures from a live Nexus
+  generate-config-schema.nu # development only; writes schema/ from the config key table
+schema/
+  config.schema.json      # generated; JSON Schema for --config files, pinned by release tag
 examples/                 # CI pipelines: dry run on schedule, deletion only by hand
+  ci/run-configs.sh       # the loop every pipeline calls: one run per configs/*.yaml
+  configs/                # example configuration files
   gitlab-ci/
   forgejo/
   jenkins/                # Docker Pipeline plugin and plain `sh` variants
@@ -196,7 +201,7 @@ delete any forged release and its tag (an administrator can, despite immutabilit
 - Merge buttons: rebase merging only; squash and merge commits disabled.
 - Branch ruleset on `main`, **no bypass actors**: require a pull request (0 approvals — a sole
   maintainer cannot approve their own); allowed merge method rebase; required checks `test`,
-  `image`, `commitlint`, branches up to date; block force pushes and deletion.
+  `config-schema`, `image`, `commitlint`, branches up to date; block force pushes and deletion.
 - Tag ruleset on `refs/tags/v*`: restrict creation (the release App is the only bypass actor),
   restrict updates and deletion (no bypass actors).
 - Release immutability enabled.
@@ -468,6 +473,58 @@ uid 1000, so do not test it that way.
 need either a `RUN chmod`, which brings back QEMU for `arm64` and `arm/v7`, or a copied-in
 placeholder, which breaks "`/work` is empty". It would buy nothing: no CI executor uses `/work`
 as its job directory, and every runtime that does use `/work` mounts a workspace over it.
+
+### A configuration file can never ask for deletion
+
+`--config` reads a run's settings from YAML, but `execute` is refused as a key whatever its
+value, and nothing else in a file implies it. A scheduled job must not start deleting because
+someone edited a file in a repository. `password` is refused too, and so is a `url` carrying
+credentials: they belong in `NEXUS_PASSWORD` or a secret store. Do not add an `execute` key,
+an "allow execute" key, or any key that switches the run mode.
+
+### Configuration files: how they are read and layered
+
+- **Always parsed as YAML** (`open --raw | from yaml`), never by extension. Plain `open` would
+  pick a different parser per extension and fail confusingly on an unknown one.
+- **Strict.** Unknown keys and wrong types are usage errors naming the file and the key. A typo
+  that silently fell back to `keep: 1` would be the most destructive outcome available.
+- **Defaults live only in `config resolve`.** `def main` declares its flags without defaults, so
+  a flag the operator did not pass arrives as `null` and the file can supply the value. Giving a
+  flag a default again would silently override every file. State the default in the flag's
+  comment instead, for `--help`.
+- **Layering:** flag > file > default; for `url` and `username`, flag > environment > file.
+- **The selection is one unit.** Names or a pattern on the command line replace the file's
+  `repositories` and `pattern` together, never per key.
+- **One key table** (`CONFIG_KEYS` in `config.nu`) drives mapping, type checks, the schema and
+  the README table. Add a key there, never in three places.
+
+### `--require-cap` is a flag, never a file key
+
+It makes a run with no `max-deletions` or `max-deletion-share` a usage error, dry runs
+included, so a file missing its cap fails the nightly dry run rather than at execution. The
+guard belongs to the pipeline that passes it, so a file cannot set it.
+
+### The configuration schema is generated, versioned by tag, and looser than the tool
+
+`schema/config.schema.json` is written by `tools/generate-config-schema.nu` from the key table
+and never edited by hand; `tests/test-config-schema.nu` fails when the two differ. The tool
+never reads it — Nushell has no JSON Schema validator — so the tool's own checks are the
+authority. Where the schema cannot state a rule exactly (whether a regex compiles, every
+spelling `into duration` accepts), it must be **looser** than the tool, never stricter: a schema
+that flags working files teaches operators to ignore it.
+
+It is referenced by a URL pinned to a release tag and is deliberately not submitted to
+SchemaStore, which serves one floating schema — the `latest` problem again. It is not copied
+into the image either: nothing there reads it. Example files pin it inside release-please
+block markers, and their paths are listed as `generic` extra-files, so a release moves the pin.
+
+### Example pipelines loop over a directory through one script
+
+Every example pipeline calls `examples/ci/run-configs.sh`, which runs the tool once per
+`*.yaml` file, keeps going past a failing file, and ends with the first exit code other than 0
+and 4, else 4, else 0. Adding a configuration needs no pipeline edit, and the loop is tested once
+(`tests/test-run-configs.nu`) rather than in four CI dialects. It is glue, not a tool feature:
+one file stays one run, and the tool has no multi-run mode.
 
 ### Report fields are only ever appended
 

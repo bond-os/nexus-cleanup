@@ -4,17 +4,23 @@
 // Needs:
 //   - an agent labelled `docker` with the docker CLI and access to a daemon
 //   - a "Username with password" credential with the id `nexus-cleanup`
-// Point the job's Script Path at this file. The tool comes from the published image,
-// pinned to an exact release; nothing from the nexus-cleanup repository is checked
-// out. Bump the pinned version deliberately, after reading CHANGELOG.md.
+//   - max-deletions or max-deletion-share in every configuration file: the loop
+//     passes --require-cap, so a file without a cap fails the dry run
+//
+// Use as the Jenkinsfile of a private repository that holds the configuration
+// files: one YAML file per cleanup under CONFIG_DIR, and ci/run-configs.sh, the
+// loop that runs the tool once per file. Adding a file needs no change here.
+// The tool comes from the published image, pinned to an exact release. Bump the
+// pinned version deliberately, after reading CHANGELOG.md.
 //
 // The workspace is bind-mounted into the container, so if the agent itself runs
 // in a container talking to the host's daemon, $WORKSPACE must be a path that
 // exists on the Docker host.
 //
-// Every build performs a dry run and archives its report. Deletion happens only in
-// a build started by hand with EXECUTE ticked, only after someone approves the
-// dry-run report, and never in a build started by the timer.
+// Every build performs a dry run of every configuration file and archives the
+// reports. Deletion happens only in a build started by hand with EXECUTE ticked,
+// only after someone approves the dry-run reports, and never in a build started by
+// the timer.
 
 pipeline {
     // Per-stage agents, so the approval prompt waits without holding an executor.
@@ -22,8 +28,8 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
-        // The tool is in the image; the workspace only receives the reports.
-        skipDefaultCheckout()
+        // Each stage checks out this repository: the configuration files and the
+        // loop script live in it.
         buildDiscarder(logRotator(numToKeepStr: '60'))
     }
 
@@ -32,24 +38,23 @@ pipeline {
     }
 
     parameters {
-        string(name: 'PATTERN', defaultValue: 'yum-proxy-*',
-               description: 'Glob selecting the proxy repositories to clean')
-        string(name: 'KEEP', defaultValue: '2',
-               description: 'Newest versions to retain per group')
-        string(name: 'MAX_DELETIONS', defaultValue: '500',
-               description: 'Abort an executing run above this many deletions')
         booleanParam(name: 'EXECUTE', defaultValue: false,
                      description: 'Delete after the dry run is approved. Ignored on timer-triggered builds.')
     }
 
     environment {
         NEXUS_URL = 'https://nexus.example.com'
+        // In your own repository this is `configs`; this example reads the files
+        // shipped beside it.
+        CONFIG_DIR = 'examples/configs'
         // An exact release, never a floating tag.
         NEXUS_CLEANUP_IMAGE = 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
     }
 
     // In both `docker run` calls below:
-    //   - no `-t`: a TTY merges stderr into stdout, and stdout is the report
+    //   - no `-t`: a TTY merges stderr into stdout, which the loop keeps apart
+    //   - `--entrypoint sh` runs the loop script inside the image, where the tool
+    //     is on PATH
     //   - `--env NAME` without a value passes the variable through, so the
     //     credentials never appear on a command line
     //   - `--user` keeps the report files owned by the agent user. That holds
@@ -63,7 +68,6 @@ pipeline {
         stage('Dry run') {
             agent { label 'docker' }
             steps {
-                script { checkExecuteParameters() }
                 withCredentials([usernamePassword(credentialsId: 'nexus-cleanup',
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
@@ -71,16 +75,15 @@ pipeline {
                             docker run --rm \
                                 --user "$(id -u):$(id -g)" \
                                 --volume "$WORKSPACE:/work" --workdir /work \
-                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD \
-                                "$NEXUS_CLEANUP_IMAGE" --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip \
-                                    --summary-out summary-dry-run.json > report-dry-run.json
+                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD --env CONFIG_DIR \
+                                --entrypoint sh "$NEXUS_CLEANUP_IMAGE" examples/ci/run-configs.sh
                         '''))
                     }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: '*-dry-run.json', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'reports/*.dry-run*.json', allowEmptyArchive: true
                 }
             }
         }
@@ -98,7 +101,7 @@ pipeline {
                 timeout(time: 24, unit: 'HOURS')
             }
             input {
-                message 'Delete the components marked "delete" in report-dry-run.json?'
+                message 'Delete the components marked "delete" in the dry-run reports?'
                 ok 'Delete'
                 // submitter 'nexus-admins'
             }
@@ -111,31 +114,23 @@ pipeline {
                             docker run --rm \
                                 --user "$(id -u):$(id -g)" \
                                 --volume "$WORKSPACE:/work" --workdir /work \
-                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD \
-                                "$NEXUS_CLEANUP_IMAGE" --pattern "$PATTERN" --keep "$KEEP" \
-                                    --max-deletions "$MAX_DELETIONS" --execute \
-                                    --summary-out summary-execute.json > report-execute.json
+                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD --env CONFIG_DIR \
+                                --entrypoint sh "$NEXUS_CLEANUP_IMAGE" examples/ci/run-configs.sh --execute
                         '''))
                     }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: '*-execute.json', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'reports/*.execute*.json', allowEmptyArchive: true
                 }
             }
         }
     }
 }
 
-// Refuse EXECUTE without a deletion cap, before anything is enumerated.
-void checkExecuteParameters() {
-    if (params.EXECUTE && !(params.MAX_DELETIONS ==~ /[1-9][0-9]*/)) {
-        error 'EXECUTE needs MAX_DELETIONS set to a positive whole number'
-    }
-}
-
-// Maps the exit codes documented in README.md onto build results.
+// Maps the exit codes documented in README.md onto build results. The loop ends
+// with the first code other than 0 and 4, else 4, else 0, so the same mapping holds.
 void handleExit(int status) {
     switch (status) {
         case 0:

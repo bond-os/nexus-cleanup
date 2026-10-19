@@ -1,5 +1,6 @@
 use ./harness.nu *
 use ../nexus-cleanup/config.nu *
+use ../nexus-cleanup/version.nu [VERSION]
 
 def fixture [name: string]: nothing -> string { $"($env.FILE_PWD)/fixtures/config/($name)" }
 
@@ -94,6 +95,28 @@ run-suite "config file" [
         assert not ($err.msg | str contains "keeep")
     } }
 
+    # --- the shipped example files ---
+    { name: "every example configuration file is accepted, with a cap, by the tool", run: {||
+        let files = (glob $"($env.FILE_PWD | path dirname)/examples/configs/*.yaml")
+        assert greater ($files | length) 1
+        for f in $files {
+            with-env {NEXUS_URL: "https://nexus.example.invalid"} {
+                config resolve {require_cap: true} --file (config load $f)
+            }
+        }
+    } }
+    { name: "every example pins the schema to this release inside release-please markers", run: {||
+        let url = $"https://raw.githubusercontent.com/bond-os/nexus-cleanup/v($VERSION)/schema/config.schema.json"
+        for f in (glob $"($env.FILE_PWD | path dirname)/examples/configs/*.yaml") {
+            let head = (open --raw $f | lines | first 3)
+            assert equal $head [
+                "# x-release-please-start-version"
+                $"# yaml-language-server: $schema=($url)"
+                "# x-release-please-end"
+            ] ($f | path basename)
+        }
+    } }
+
     # --- YAML coercions (task 1.3): the intended type, or refused; never another valid setting ---
     { name: "a bare yes for a switch is refused rather than read as true", run: {||
         assert-refused "switch-as-bare-yes.yaml" "fail-on-skip"
@@ -108,5 +131,22 @@ run-suite "config file" [
             config resolve {url: "https://n.invalid"} --file $loaded; null
         } catch {|e| $e })
         assert ($err.msg | str contains "version-scheme")
+    } }
+]
+
+def readme []: nothing -> string { open --raw $"($env.FILE_PWD | path dirname)/README.md" }
+
+run-suite "config file: documentation" [
+    { name: "the README's key table lists exactly the recognised keys", run: {||
+        let table = (readme | split row "<!-- config-keys:start -->" | get 1 | split row "<!-- config-keys:end -->" | get 0)
+        let keys = ($table | parse --regex '(?m)^\| `(?P<k>[^`]+)` \|' | get k)
+        assert equal $keys ($CONFIG_KEYS | get key)
+    } }
+    { name: "the README's worked file is the raw example, without its comments", run: {||
+        let block = (readme | split row "## Configuration files" | get 1 | split row "```yaml\n" | get 1 | split row "```" | get 0)
+        let settings = {|text: string| $text | lines | where {|l| not ($l | str starts-with "#") and ($l | is-not-empty) } }
+        let example = (open --raw $"($env.FILE_PWD | path dirname)/examples/configs/raw-builds.yaml")
+        assert equal (do $settings $block) (do $settings $example)
+        assert equal ($block | lines | first 3) ($example | lines | first 3)
     } }
 ]

@@ -1,34 +1,29 @@
 # nexus-cleanup — GitLab CI pipeline.
 #
-# Use as the project's .gitlab-ci.yml, or pull it in with
-#   include:
-#     - local: examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml
+# Use as the .gitlab-ci.yml of a private repository that holds the configuration
+# files: one YAML file per cleanup under CONFIG_DIR, and ci/run-configs.sh, the loop
+# that runs the tool once per file. Adding a file needs no change here.
 #
-# Runs the published image, pinned to an exact release, so this file is all a project
-# needs: nothing from the nexus-cleanup repository is checked out. Bump the pinned
-# version deliberately, after reading the release notes in CHANGELOG.md.
+# Runs the published image, pinned to an exact release. Bump the pinned version
+# deliberately, after reading the release notes in CHANGELOG.md.
 #
 # Needs:
 #   - CI/CD variables NEXUS_USERNAME and NEXUS_PASSWORD, masked and protected
 #     (protected variables reach pipelines on protected branches only)
 #   - a pipeline schedule on a protected branch for the nightly dry run
+#   - max-deletions or max-deletion-share in every configuration file: the loop
+#     passes --require-cap, so a file without a cap fails the dry run
 #
-# Every pipeline performs a dry run and keeps its report as an artifact. Deletion
-# happens only in a pipeline started from "Run pipeline" with EXECUTE=true, and only
-# once someone presses play on the blocked manual job after reading that report. A
-# scheduled pipeline never deletes.
+# Every pipeline performs a dry run of every file and keeps the reports as
+# artifacts. Deletion happens only in a pipeline started from "Run pipeline" with
+# EXECUTE=true, and only once someone presses play on the blocked manual job after
+# reading those reports. A scheduled pipeline never deletes.
 
 variables:
   NEXUS_URL: https://nexus.example.com
-  PATTERN:
-    value: "yum-proxy-*"
-    description: Glob selecting the proxy repositories to clean
-  KEEP:
-    value: "2"
-    description: Newest versions to retain per group
-  MAX_DELETIONS:
-    value: "500"
-    description: Abort an executing run above this many deletions
+  # In your own repository this is `configs`; this example reads the files
+  # shipped beside it.
+  CONFIG_DIR: examples/configs
   EXECUTE:
     value: "false"
     options: ["false", "true"]
@@ -44,10 +39,6 @@ stages:
     # the runner needs a shell entrypoint to run `script`, and the tool is on PATH.
     name: ghcr.io/bond-os/nexus-cleanup:0.1.0
     entrypoint: [""]
-  variables:
-    # The tool comes from the image; these jobs need nothing cloned. Set here,
-    # not globally, so an `include:` does not change other jobs.
-    GIT_STRATEGY: none
   resource_group: nexus-cleanup
 
 nexus-cleanup:dry-run:
@@ -57,8 +48,7 @@ nexus-cleanup:dry-run:
     - if: $CI_PIPELINE_SOURCE == "schedule"
     - if: $CI_PIPELINE_SOURCE == "web"
   script:
-    - nexus-cleanup --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip
-        --summary-out summary-dry-run.json > report-dry-run.json
+    - sh examples/ci/run-configs.sh
   # Exit 4: some groups were skipped. Worth a warning, not a red pipeline.
   allow_failure:
     exit_codes: [4]
@@ -66,8 +56,7 @@ nexus-cleanup:dry-run:
     when: always
     expire_in: 30 days
     paths:
-      - report-dry-run.json
-      - summary-dry-run.json
+      - reports/
 
 nexus-cleanup:execute:
   extends: .nexus-cleanup
@@ -80,16 +69,9 @@ nexus-cleanup:execute:
       when: manual
   interruptible: false
   script:
-    - |
-      case "$MAX_DELETIONS" in
-        ''|*[!0-9]*|0*) echo "EXECUTE needs MAX_DELETIONS set to a positive whole number" >&2; exit 2 ;;
-      esac
-    - nexus-cleanup --pattern "$PATTERN" --keep "$KEEP"
-        --max-deletions "$MAX_DELETIONS" --execute
-        --summary-out summary-execute.json > report-execute.json
+    - sh examples/ci/run-configs.sh --execute
   artifacts:
     when: always
     expire_in: 90 days
     paths:
-      - report-execute.json
-      - summary-execute.json
+      - reports/

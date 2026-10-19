@@ -4,16 +4,21 @@
 //   - the Docker Pipeline plugin (`agent { docker { … } }`)
 //   - an agent labelled `docker` that can run containers
 //   - a "Username with password" credential with the id `nexus-cleanup`
-// Point the job's Script Path at this file. Without the plugin, use
-// Jenkinsfile.sh next to it instead.
+//   - max-deletions or max-deletion-share in every configuration file: the loop
+//     passes --require-cap, so a file without a cap fails the dry run
 //
-// The tool comes from the published image, pinned to an exact release; nothing
-// from the nexus-cleanup repository is checked out. Bump the pinned version
-// deliberately, after reading CHANGELOG.md.
+// Use as the Jenkinsfile of a private repository that holds the configuration
+// files: one YAML file per cleanup under CONFIG_DIR, and ci/run-configs.sh, the
+// loop that runs the tool once per file. Adding a file needs no change here.
+// Without the plugin, use Jenkinsfile.sh next to it instead.
 //
-// Every build performs a dry run and archives its report. Deletion happens only in
-// a build started by hand with EXECUTE ticked, only after someone approves the
-// dry-run report, and never in a build started by the timer.
+// The tool comes from the published image, pinned to an exact release. Bump the
+// pinned version deliberately, after reading CHANGELOG.md.
+//
+// Every build performs a dry run of every configuration file and archives the
+// reports. Deletion happens only in a build started by hand with EXECUTE ticked,
+// only after someone approves the dry-run reports, and never in a build started by
+// the timer.
 //
 // The plugin runs the container as the agent's uid (`-u uid:gid`), which works
 // with a rootful Docker daemon. If the agent's `docker` is rootless Podman, that
@@ -26,8 +31,8 @@ pipeline {
 
     options {
         disableConcurrentBuilds()
-        // The tool is in the image; the workspace only receives the reports.
-        skipDefaultCheckout()
+        // Each stage checks out this repository: the configuration files and the
+        // loop script live in it.
         buildDiscarder(logRotator(numToKeepStr: '60'))
     }
 
@@ -36,18 +41,15 @@ pipeline {
     }
 
     parameters {
-        string(name: 'PATTERN', defaultValue: 'yum-proxy-*',
-               description: 'Glob selecting the proxy repositories to clean')
-        string(name: 'KEEP', defaultValue: '2',
-               description: 'Newest versions to retain per group')
-        string(name: 'MAX_DELETIONS', defaultValue: '500',
-               description: 'Abort an executing run above this many deletions')
         booleanParam(name: 'EXECUTE', defaultValue: false,
                      description: 'Delete after the dry run is approved. Ignored on timer-triggered builds.')
     }
 
     environment {
         NEXUS_URL = 'https://nexus.example.com'
+        // In your own repository this is `configs`; this example reads the files
+        // shipped beside it.
+        CONFIG_DIR = 'examples/configs'
     }
 
     stages {
@@ -63,20 +65,18 @@ pipeline {
                 }
             }
             steps {
-                script { checkExecuteParameters() }
                 withCredentials([usernamePassword(credentialsId: 'nexus-cleanup',
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
                         handleExit(sh(returnStatus: true, script: '''
-                            nexus-cleanup --pattern "$PATTERN" --keep "$KEEP" --fail-on-skip \
-                                --summary-out summary-dry-run.json > report-dry-run.json
+                            sh examples/ci/run-configs.sh
                         '''))
                     }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: '*-dry-run.json', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'reports/*.dry-run*.json', allowEmptyArchive: true
                 }
             }
         }
@@ -94,7 +94,7 @@ pipeline {
                 timeout(time: 24, unit: 'HOURS')
             }
             input {
-                message 'Delete the components marked "delete" in report-dry-run.json?'
+                message 'Delete the components marked "delete" in the dry-run reports?'
                 ok 'Delete'
                 // submitter 'nexus-admins'
             }
@@ -110,30 +110,22 @@ pipeline {
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
                         handleExit(sh(returnStatus: true, script: '''
-                            nexus-cleanup --pattern "$PATTERN" --keep "$KEEP" \
-                                --max-deletions "$MAX_DELETIONS" --execute \
-                                --summary-out summary-execute.json > report-execute.json
+                            sh examples/ci/run-configs.sh --execute
                         '''))
                     }
                 }
             }
             post {
                 always {
-                    archiveArtifacts artifacts: '*-execute.json', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'reports/*.execute*.json', allowEmptyArchive: true
                 }
             }
         }
     }
 }
 
-// Refuse EXECUTE without a deletion cap, before anything is enumerated.
-void checkExecuteParameters() {
-    if (params.EXECUTE && !(params.MAX_DELETIONS ==~ /[1-9][0-9]*/)) {
-        error 'EXECUTE needs MAX_DELETIONS set to a positive whole number'
-    }
-}
-
-// Maps the exit codes documented in README.md onto build results.
+// Maps the exit codes documented in README.md onto build results. The loop ends
+// with the first code other than 0 and 4, else 4, else 0, so the same mapping holds.
 void handleExit(int status) {
     switch (status) {
         case 0:

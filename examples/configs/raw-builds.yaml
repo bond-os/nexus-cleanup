@@ -1,0 +1,13 @@
+# x-release-please-start-version
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.1.0/schema/config.schema.json
+# x-release-please-end
+#
+# A raw repository laid out as <parent>/<YYYYMMDD[suffix]>/…: keep the 14 newest dated
+# directories under each parent and never touch anything else, such as the
+# version directories beside them, which the pattern does not match.
+repositories: [raw-builds]
+# Single quotes: YAML processes no escapes, so the regex arrives exactly as written.
+from-path: '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+version-scheme: date
+keep: 14
+max-deletions: 200

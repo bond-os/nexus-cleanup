@@ -118,6 +118,7 @@ enumerated. Credentials never appear in the report, in diagnostics, or in any er
 | Flag | Default | Meaning |
 |---|---|---|
 | *(positional)* | — | proxy repositories to clean |
+| `--config` | — | read settings from a YAML file; flags override it, see [Configuration files](#configuration-files) |
 | `--pattern` | — | select proxy repositories by glob instead |
 | `--keep` | `1` | newest versions to retain per group |
 | `--execute` | off | actually delete; omit for a dry run |
@@ -129,6 +130,7 @@ enumerated. Credentials never appear in the report, in diagnostics, or in any er
 | `--max-deletions` | `0` (off) | abort an executing run above this many |
 | `--max-deletion-share` | `0` (off) | abort above this share of components |
 | `--fail-on-skip` | off | exit non-zero if any group was skipped |
+| `--require-cap` | off | refuse to run unless `--max-deletions` or `--max-deletion-share` is set |
 | `--timeout` | `30sec` | per-request timeout |
 | `--max-attempts` | `4` | attempts per retryable request |
 | `--version` | — | print the tool version and exit; reads no configuration and contacts nothing |
@@ -136,6 +138,88 @@ enumerated. Credentials never appear in the report, in diagnostics, or in any er
 You must name at least one repository or supply `--pattern`; there is no "all repositories"
 default. Only `proxy` repositories are eligible — naming a hosted or group repository is an
 error, not a silent skip.
+
+## Configuration files
+
+`--config <file>` reads a run's settings from a YAML file instead of flags. One file describes
+one run, so a private repository can hold a file per target — `configs/yum.yaml`,
+`configs/raw-builds.yaml` — and one pipeline that runs the tool once per file (see [CI](#ci)).
+The regexes live in reviewed YAML rather than in shell quoting inside CI jobs.
+
+```yaml
+# x-release-please-start-version
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.1.0/schema/config.schema.json
+# x-release-please-end
+repositories: [raw-builds]
+from-path: '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+version-scheme: date
+keep: 14
+max-deletions: 200
+```
+
+```bash
+nu nexus-cleanup.nu --config configs/raw-builds.yaml            # dry run
+nu nexus-cleanup.nu --config configs/raw-builds.yaml --execute  # delete
+```
+
+Keys are the flag names without their dashes:
+
+<!-- config-keys:start -->
+| Key | Value | Flag |
+|---|---|---|
+| `url` | text | `--url` |
+| `username` | text | `--username` |
+| `repositories` | list of names | *(positional)* |
+| `pattern` | text | `--pattern` |
+| `keep` | integer | `--keep` |
+| `timeout` | duration, e.g. `30sec`, `2min` | `--timeout` |
+| `max-attempts` | integer | `--max-attempts` |
+| `format` | `json` or `csv` | `--format` |
+| `version-scheme` | `generic`, `debian`, `rpm` or `date` | `--version-scheme` |
+| `scope-from-path` | regex | `--scope-from-path` |
+| `from-path` | regex | `--from-path` |
+| `fail-on-skip` | `true` / `false` | `--fail-on-skip` |
+| `max-deletions` | integer | `--max-deletions` |
+| `max-deletion-share` | number between 0 and 1 | `--max-deletion-share` |
+| `summary-out` | path, relative to the working directory | `--summary-out` |
+<!-- config-keys:end -->
+
+- **A flag overrides the file.** For `url` and `username` the environment sits in between:
+  flag, then `NEXUS_URL` / `NEXUS_USERNAME`, then the file. That lets one set of files run
+  against staging and production. Any repository selection on the command line — names or
+  `--pattern` — replaces the file's `repositories` and `pattern` together.
+- **Two keys are refused.** `execute`, whatever its value: deletion is asked for with the
+  `--execute` flag and nothing else, so a scheduled job can never delete because someone edited a
+  file. And `password`, as well as a `url` with credentials in it: those belong in
+  `NEXUS_PASSWORD` or the CI system's secret store, never in a repository.
+- **Parsing is strict.** An unknown key (`keeep: 3`), a value of the wrong type (`keep: "3"`,
+  `fail-on-skip: yes`) or a file that is not a YAML mapping is a usage error naming the file and
+  the key, raised before Nexus is contacted. A typo never falls back to a default.
+- **Quote patterns and globs.** Single quotes make YAML process no escapes, so a regex arrives
+  exactly as written: `from-path: '^/(?P<name>app)/…'`, `pattern: "yum-proxy-*"`.
+- **`--require-cap`** refuses a run, dry or executing, unless `max-deletions` or
+  `max-deletion-share` is set by the file or a flag. The example pipelines pass it to every run,
+  so a file without a cap fails in the nightly dry run rather than when someone executes.
+
+The file is always parsed as YAML, whatever its extension; JSON, being YAML, works too. The
+report's summary records the path given to `--config` as `config_file`.
+
+### Editor support
+
+[`schema/config.schema.json`](schema/config.schema.json) is a JSON Schema for these files,
+generated from the tool's own key table. Editors that use the YAML language server — VS Code
+with Red Hat's YAML extension, among others — complete keys, show their descriptions and flag
+a misspelt or refused key while you type, given the modeline at the top of the file:
+
+```yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/vX.Y.Z/schema/config.schema.json
+```
+
+**Pin the tag of the release your pipeline runs** (`v0.1.0` with image `0.1.0`): release tags
+never move, so the schema always matches the tool that reads the file. A JSON file can carry the
+same address in a top-level `$schema` key, which the tool accepts and ignores. The schema is an
+aid, not the authority: where it cannot express a rule exactly — whether a regex compiles, say —
+it is looser than the tool, which still refuses the file.
 
 ## Exit codes
 
@@ -266,12 +350,21 @@ report shows which happened.
 
 ## CI
 
-Complete pipelines live in `examples/`. They share one shape:
+Complete pipelines live in `examples/`. Each is meant to be the pipeline of a private
+repository that holds the [configuration files](#configuration-files), and each calls
+[`examples/ci/run-configs.sh`](examples/ci/run-configs.sh), which runs the tool once per
+`*.yaml` file in `CONFIG_DIR` (`configs` by default). Adding a file needs no pipeline change.
+They share one shape:
 
-- **Every run is a dry run first**, on a nightly schedule, and keeps the report and summary as
+- **Every run is a dry run first**, on a nightly schedule, and keeps one report and summary per
+  configuration file (`reports/<name>.dry-run.json`, `reports/<name>.dry-run.summary.json`) as
   build artifacts.
 - **Deletion needs a person.** Only a run started by hand with an explicit execute switch
-  deletes, and only with a positive `--max-deletions`. A scheduled run never deletes.
+  deletes. A scheduled run never deletes.
+- **Every file needs a deletion cap.** The loop passes `--require-cap`, so a file without
+  `max-deletions` or `max-deletion-share` fails the dry run.
+- **One failing file does not hide the others.** The loop runs every file and ends with the
+  first exit code other than 0 and 4; otherwise 4 if any file had skipped groups; otherwise 0.
 - **Credentials come from the CI system's secret store** as `NEXUS_USERNAME` and
   `NEXUS_PASSWORD`, never from a command line.
 
@@ -281,13 +374,15 @@ reads the output of.
 | CI system | File | Runs in | Approval before deleting |
 |---|---|---|---|
 | GitLab CI | `examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml` | the release image, entrypoint cleared | a blocked manual job |
-| Forgejo Actions | `examples/forgejo/nexus-cleanup.yml` | a node image; the release tag cloned, Nushell installed by checksum | none; the cap is the guard |
+| Forgejo Actions | `examples/forgejo/nexus-cleanup.yml` | a node image; the release tag cloned, Nushell installed by checksum | none; each file's cap is the guard |
 | Jenkins, Docker Pipeline plugin | `examples/jenkins/Jenkinsfile.docker-plugin` | the release image, entrypoint cleared | an `input` step |
 | Jenkins, plain `sh` | `examples/jenkins/Jenkinsfile.sh` | the release image via `docker run` | an `input` step |
 
 Every example pins an exact release (`ghcr.io/bond-os/nexus-cleanup:0.1.0`, or the tag `v0.1.0`
-for Forgejo) and needs nothing from this repository in the consumer's checkout. Bump the pin
-deliberately, after reading `CHANGELOG.md`.
+for Forgejo). Bump the pin deliberately, after reading `CHANGELOG.md`. To adopt one, copy it,
+`examples/ci/run-configs.sh` to `ci/run-configs.sh` and your configuration files to `configs/`,
+then point the pipeline's script calls at `ci/run-configs.sh` and drop its `CONFIG_DIR` line,
+which only makes the example read `examples/configs/`.
 
 Two container details matter. A CI system that runs a shell script inside the image needs its
 entrypoint cleared (`entrypoint: [""]` in GitLab, `args '--entrypoint='` for the Jenkins plugin);
@@ -295,8 +390,9 @@ the tool is then on `PATH` as `nexus-cleanup`. And Forgejo runs JavaScript actio
 `upload-artifact` inside the job container, which the release image cannot do because it has no
 node — hence the node image there.
 
-Skipped groups (exit 4, with `--fail-on-skip`) and failed deletions (exit 1) are surfaced as
-warnings where the CI system has them: allowed failure in GitLab, unstable in Jenkins.
+Skipped groups (exit 4, with `fail-on-skip`) and failed deletions (exit 1) are surfaced as
+warnings where the CI system has them: allowed failure in GitLab, unstable in Jenkins, a passing
+dry-run step in Forgejo.
 
 ## Development
 

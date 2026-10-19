@@ -1,0 +1,12 @@
+# x-release-please-start-version
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.1.0/schema/config.schema.json
+# x-release-please-end
+#
+# Every yum proxy: keep the two newest builds of each package, per architecture and
+# per repository section (releases/44 and updates/44 never compete).
+pattern: "yum-proxy-*"
+keep: 2
+# Required by the example pipelines (they pass --require-cap): an executing run that
+# would delete more than this aborts and deletes nothing.
+max-deletions: 500
+fail-on-skip: true
