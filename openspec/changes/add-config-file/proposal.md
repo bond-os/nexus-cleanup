@@ -25,6 +25,9 @@ will do.
 - **Strict parsing.** An unknown key, a value of the wrong type, a missing or unreadable file,
   or a document that is not a mapping is a usage error naming the file and the key, raised
   before any request. A misspelt `keeep: 3` must not silently fall back to `keep: 1`.
+- **`--require-cap`** refuses a run, dry or executing, whose resolved configuration sets no
+  deletion cap. The example loop passes it to every run, keeping the cap guard the example
+  pipelines enforced before while letting each file carry its own cap.
 - **The report names its configuration.** The aggregate block gains a `config_file` field,
   appended after `tool_version`, holding the path given to `--config` (empty without one).
 - **A JSON Schema for the file**, `schema/config.schema.json`, so editors flag a misspelt or

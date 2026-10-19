@@ -83,8 +83,9 @@ times in four CI dialects. It runs under BusyBox `sh` inside the image for GitLa
 `jenkins-docker`; `jenkins-sh` runs it in the image with `docker run --entrypoint sh`. Invoking it
 through `sh` means no executable bit is needed, which `save` cannot set.
 
-`--execute` is the script's only argument and is passed straight through; the script adds no other
-flag, so the tool's own dry-run default still decides.
+`--execute` is the script's only argument and is passed straight through, so the tool's own
+dry-run default still decides. The script always adds `--require-cap`, so a configuration file
+without a deletion cap fails in the dry run.
 
 *Alternative considered:* the loop inline in each pipeline, as `add-config-file` first wrote it.
 Rejected: four copies to keep in step, and a loop embedded in CI YAML or Groovy cannot be run by

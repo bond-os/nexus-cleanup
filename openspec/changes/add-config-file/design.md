@@ -90,7 +90,7 @@ README both use.
 
 `tools/generate-config-schema.nu` turns the key table and the refused-keys table into
 `schema/config.schema.json` (draft 2020-12, `additionalProperties: false`). Refused keys appear as
-properties whose schema is `false` with a description stating why and what to use instead, so an
+properties whose schema is `{"not": {}}` — equivalent to `false`, which cannot carry one — with a description stating why and what to use instead, so an
 editor explains the refusal rather than only reporting an unknown key. A test regenerates the
 schema in memory and fails if it differs from the committed file, so a key added to the tool
 without regenerating cannot reach `main`.
@@ -131,8 +131,10 @@ reads it, and the `.dockerignore` allow-list stays limited to the tool and its l
 
 ### CI validates example files with ajv-cli
 
-A step in `tests.yml` runs `ajv-cli` with `ajv-formats` through `npx`, at pinned exact versions
-in `env:` as `commits.yml` pins commitlint, over every configuration file under `examples/` and
+A `config-schema` job in `tests.yml` — its own job, because the `test` job's Nushell container
+has no Node — runs `ajv-cli` in strict mode through `npx`, at an exact version pinned in `env:`
+as `commits.yml` pins commitlint (no `ajv-formats`: the schema uses no `format` keyword), over
+every configuration file under `examples/` and
 the README's worked file (extracted to `examples/` so it is a real file rather than a snippet).
 This exercises the schema with an independent validator: the generator test proves the
 committed file is current, ajv proves it is a valid schema that accepts the files the project
@@ -153,6 +155,21 @@ expose the runner's directory layout and make two otherwise identical reports fr
 runners differ. The field is appended after `tool_version`; the reporting delta moves the "last
 field" assertion accordingly.
 
+### `--require-cap` keeps the pipelines' cap guard with per-file caps
+
+The example execute jobs used to refuse to run without a pipeline `MAX_DELETIONS` and pass it as
+`--max-deletions`. With a file per target, each file carries its own cap, and a pipeline-wide
+flag would override all of them (flag > file). The pipeline cannot check the files itself — it
+has no YAML reader — so the tool does: `--require-cap` makes a run whose resolved configuration
+has neither `max-deletions` nor `max-deletion-share` a usage error.
+
+It applies to dry runs too, so the loop passes it to every run and a file missing its cap fails
+in the scheduled dry run rather than when someone presses execute. It is a flag only, not a file
+key: the guard belongs to the pipeline, and a file could only ever turn it on.
+
+*Alternatives considered:* a pipeline-wide cap passed to every run (loses per-file caps), and
+caps documented but unenforced (weaker than the guard the examples had).
+
 ### Example pipelines run one job that loops over the configuration directory
 
 Each example pipeline has one dry-run job and one manual execute job, and each job loops over
@@ -165,7 +182,7 @@ calling the tool once per file. Adding a configuration file therefore needs no p
   had skipped groups; otherwise 0. Pipelines keep treating 4 as a warning.
 - **An empty directory is an error.** A `sh` glob that matches nothing expands to itself, so the
   loop checks for that explicitly rather than succeeding having run nothing.
-- **One report per file**, `reports/<basename>.json` and `reports/<basename>.summary.json`, kept
+- **One report per file**, `reports/<basename>.<mode>.json` and `reports/<basename>.<mode>.summary.json` (mode `dry-run` or `execute`), kept
   as artifacts, so a reviewer reads each configuration's plan on its own.
 - **The execute job runs the same loop with `--execute`** from the same commit, so it covers
   exactly the files the dry run reported on.

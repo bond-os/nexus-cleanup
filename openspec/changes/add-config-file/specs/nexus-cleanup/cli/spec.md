@@ -59,3 +59,33 @@ the run with a message naming the offending setting.
 - **WHEN** a configuration file holds an invalid value for any setting
 - **THEN** the run aborts with a usage error naming that setting and the file
 - **AND** no repository is enumerated
+
+## ADDED Requirements
+
+### Requirement: A deletion cap can be required
+
+The tool SHALL accept a switch that requires a deletion cap. With it, a run — dry or executing —
+whose resolved configuration sets neither an absolute nor a proportional cap SHALL be refused
+with a usage error naming both cap settings, before any repository is enumerated. The switch
+SHALL NOT imply execution and SHALL NOT be settable from a configuration file.
+
+#### Scenario: Cap missing
+
+- **WHEN** the tool is invoked with the require-cap switch and no cap is set by flag or file
+- **THEN** the run aborts with a usage error naming the absolute and the proportional cap settings
+- **AND** no repository is enumerated
+
+#### Scenario: Cap from the configuration file
+
+- **WHEN** the tool is invoked with the require-cap switch and a configuration file setting `max-deletions: 200`
+- **THEN** the run proceeds with a cap of 200
+
+#### Scenario: Dry run also checked
+
+- **WHEN** the tool is invoked with the require-cap switch, without the execute flag, and no cap is set
+- **THEN** the run aborts with the same usage error, so a missing cap surfaces in the dry run rather than at execution
+
+#### Scenario: Not a file setting
+
+- **WHEN** a configuration file contains `require-cap: true`
+- **THEN** the run aborts with a usage error naming `require-cap` as an unknown key
