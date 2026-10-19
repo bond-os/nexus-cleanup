@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Settings for one nexus-cleanup run, keyed by flag name. Flags override the file; --execute is never a file setting.",
+  "properties": {
+    "$schema": {
+      "description": "Address of this schema, for editors. Read and ignored by the tool.",
+      "type": "string"
+    },
+    "execute": {
+      "description": "Deletion is requested only by the --execute flag, never by a configuration file.",
+      "not": {}
+    },
+    "fail-on-skip": {
+      "description": "Exit non-zero if any group was skipped.",
+      "type": "boolean"
+    },
+    "format": {
+      "description": "Report format: json or csv (default json).",
+      "enum": [
+        "json",
+        "csv"
+      ],
+      "type": "string"
+    },
+    "from-path": {
+      "description": "Regex with (?P<name>...) and (?P<version>...) groups: retain by path.",
+      "pattern": "^$|^(?=[\\s\\S]*\\(\\?P<name>)(?=[\\s\\S]*\\(\\?P<version>)",
+      "type": "string"
+    },
+    "keep": {
+      "description": "Newest versions to retain per group (default 1).",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "max-attempts": {
+      "description": "Attempts per retryable request (default 4).",
+      "minimum": 1,
+      "type": "integer"
+    },
+    "max-deletion-share": {
+      "description": "Abort above this share of enumerated components (0 = off).",
+      "maximum": 1,
+      "minimum": 0,
+      "type": "number"
+    },
+    "max-deletions": {
+      "description": "Abort an executing run above this many deletions (0 = off).",
+      "minimum": 0,
+      "type": "integer"
+    },
+    "password": {
+      "description": "Credentials never belong in a configuration file; set NEXUS_PASSWORD or pass --password.",
+      "not": {}
+    },
+    "pattern": {
+      "description": "Select proxy repositories by glob instead of by name.",
+      "type": "string"
+    },
+    "repositories": {
+      "description": "Proxy repositories to clean, by name.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "scope-from-path": {
+      "description": "Regex with a (?P<scope>...) group naming the scope within the asset path.",
+      "pattern": "^$|\\(\\?P<scope>",
+      "type": "string"
+    },
+    "summary-out": {
+      "description": "Also write the aggregate here as JSON, relative to the working directory.",
+      "type": "string"
+    },
+    "timeout": {
+      "description": "Per-request timeout, such as 30sec or 2min (default 30sec).",
+      "pattern": "^\\s*[-+]?[0-9.][0-9_.eE+-]*\\s*(?:ns|us|µs|ms|sec|min|hr|day|wk)(?:\\s*[-+]?[0-9.][0-9_.eE+-]*\\s*(?:ns|us|µs|ms|sec|min|hr|day|wk))*\\s*$",
+      "type": "string"
+    },
+    "url": {
+      "description": "Nexus base URL; NEXUS_URL and --url override it. Never with credentials in it.",
+      "not": {
+        "pattern": "^[a-zA-Z][a-zA-Z0-9+.-]*://[^/?#]*@"
+      },
+      "pattern": "^http",
+      "type": "string"
+    },
+    "username": {
+      "description": "Nexus username; NEXUS_USERNAME and --username override it.",
+      "type": "string"
+    },
+    "version-scheme": {
+      "description": "Force a version scheme instead of the per-format default.",
+      "enum": [
+        "",
+        "generic",
+        "debian",
+        "rpm",
+        "date"
+      ],
+      "type": "string"
+    }
+  },
+  "title": "nexus-cleanup configuration",
+  "type": "object"
+}
