@@ -45,6 +45,28 @@ jobs:
       - name: Run the test suite
         run: nu tests/run-tests.nu
 
+  # Validates the shipped configuration files against the committed schema with an
+  # independent validator: tests/test-config-schema.nu proves the schema is current,
+  # this proves it is a valid schema that accepts the files the project ships. A job
+  # of its own because the test container has no Node. Maintenance automation only;
+  # nothing here reaches the image.
+  config-schema:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      # An exact version: published npm versions are immutable. Bump deliberately.
+      AJV_CLI: "ajv-cli@5.0.0"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Uses the runner's preinstalled Node. ajv-cli expands the glob itself.
+      - name: Validate the example configuration files
+        run: |
+          npx --yes -p "$AJV_CLI" ajv validate --spec=draft2020 --strict=true \
+            -s schema/config.schema.json -d "examples/configs/*.yaml"
+
   # Builds the image exactly as a release would and smoke-checks it. Pushes nothing.
   image:
     # Pinned rather than ubuntu-latest: the rootless Podman pass relies on the
