@@ -2,7 +2,9 @@
 
 Deletes obsolete component versions from Nexus 3 **proxy** repositories, keeping the newest
 `N` per component — per architecture and per distribution release. A Nushell script with no
-runtime dependencies beyond Nushell itself, meant to run unattended in CI.
+runtime dependencies beyond Nushell itself, meant to run unattended in CI. It can also prune
+dated build directories from a **raw hosted** repository, when you name it and opt in; see
+[Raw hosted repositories](#raw-hosted-repositories).
 
 Proxy repositories in Nexus grow without bound: the built-in cleanup policies are age and
 usage based, not version based, so a proxy that has mirrored a busy upstream for a year holds
@@ -117,11 +119,12 @@ enumerated. Credentials never appear in the report, in diagnostics, or in any er
 
 | Flag | Default | Meaning |
 |---|---|---|
-| *(positional)* | — | proxy repositories to clean |
+| *(positional)* | — | repositories to clean: proxies, or raw hosted with `--allow-hosted` |
 | `--config` | — | read settings from a YAML file; flags override it, see [Configuration files](#configuration-files) |
 | `--pattern` | — | select proxy repositories by glob instead |
 | `--keep` | `1` | newest versions to retain per group |
 | `--execute` | off | actually delete; omit for a dry run |
+| `--allow-hosted` | off | allow named raw hosted repositories, see [below](#raw-hosted-repositories); deletes nothing without `--execute` |
 | `--format` | `json` | `json` or `csv` |
 | `--summary-out` | — | also write the aggregate here as JSON |
 | `--version-scheme` | per format | force `generic`, `debian`, `rpm` or `date` |
@@ -136,8 +139,10 @@ enumerated. Credentials never appear in the report, in diagnostics, or in any er
 | `--version` | — | print the tool version and exit; reads no configuration and contacts nothing |
 
 You must name at least one repository or supply `--pattern`; there is no "all repositories"
-default. Only `proxy` repositories are eligible — naming a hosted or group repository is an
-error, not a silent skip.
+default. `proxy` repositories are eligible, and so are `raw` hosted repositories that you name
+while passing `--allow-hosted`. Naming any other repository — a group, a hosted repository of
+another format, or a raw hosted one without the switch — is an error, not a silent skip.
+`--pattern` only ever selects proxies.
 
 ## Configuration files
 
@@ -299,6 +304,47 @@ date comes first and respins follow in natural order (`20250103` < `20250103-hot
 (`20250229`) makes its parent's group unorderable, so nothing under that parent is deleted.
 `date` is never chosen automatically; pass `--version-scheme date`.
 
+## Raw hosted repositories
+
+Build pipelines often publish into a **raw hosted** repository as dated directories —
+`app/20261019/…`, `app/20261019-hotfix/…` — that nothing ever removes. Retention by path handles
+that layout, and the tool cleans such a repository under three conditions:
+
+- **`--allow-hosted`** (or `allow-hosted: true` in a configuration file) is given. It widens what
+  can be selected, nothing more: without `--execute` the run is still a dry run.
+- **The repository is named.** `--pattern` never selects a hosted repository, with or without the
+  switch, so a glob cannot sweep in one created next year; a matching hosted repository is listed
+  on stderr as excluded.
+- **Its format is `raw`.** A hosted repository of any other format is refused: docker manifests,
+  maven metadata, npm dist-tags and yum repodata all refer to other components, and deleting
+  correctly there needs a study of each format that has not been done.
+
+[`examples/configs/raw-hosted-builds.yaml`](examples/configs/raw-hosted-builds.yaml) is a
+worked example:
+
+```yaml
+allow-hosted: true
+repositories: [raw-hosted-builds]
+from-path: '^/(?P<name>app)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+version-scheme: date
+keep: 10
+max-deletions: 300
+```
+
+- **Hosted content is the only copy.** A deletion in a proxy costs a re-download; here it is
+  permanent. Run the dry run first and read its records: each one carries the asset `path`, so
+  the report lists exactly which URLs will stop working.
+- **Without `--from-path` nothing is deleted.** Every raw component is then its own group, which
+  the keep count retains. The tool proceeds — a dry run over the repository is a harmless
+  inventory — and says so on stderr for each such repository.
+- **A directory is deleted file by file.** Nexus has no transaction across components, so if
+  some deletions fail, the files that remain stay, appear in the report with their error, and
+  the run exits 1. The directory was due for deletion anyway; the next run retries what is left.
+- **Dates decide, not upload times.** A directory backfilled today with an old date is as old
+  as its name says, and the next run deletes it if it falls outside the keep window.
+- **No cap is forced on you,** but set one: the example does, and `--require-cap` (which the
+  example pipelines pass) refuses a file without it.
+
 ## The report
 
 Stdout carries the report and nothing else; diagnostics go to stderr. JSON is one document
@@ -331,9 +377,10 @@ fields, are only ever appended.
 **Freed space appears only after blob compaction.** Deleting components removes them from the
 repository, but the disk is not reclaimed until Nexus' own "Compact blob store" task runs.
 
-**A deletion is a cache eviction.** These are proxy repositories, so anything deleted is
-re-fetchable from upstream — which is what makes version-based cleanup safe here. The
-exception is an upstream that has since removed the artifact.
+**In a proxy, a deletion is a cache eviction.** Anything deleted is re-fetchable from upstream —
+which is what makes version-based cleanup safe there. The exception is an upstream that has
+since removed the artifact. A raw hosted repository has no upstream; see
+[Raw hosted repositories](#raw-hosted-repositories).
 
 **apt repositories carry a residual risk.** A Nexus apt proxy is pinned to one suite via
 `apt.distribution`, and clients only learn pool paths from that suite's index, so in normal

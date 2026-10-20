@@ -2,10 +2,10 @@
 
 ## Purpose
 
-Defines which cached components a cleanup run keeps and which it marks for deletion:
-how components are grouped per repository, name and architecture variant, how versions
-within a group are ordered, and when a group is left untouched because its versions cannot
-be ordered with confidence.
+Defines which components of an eligible repository a cleanup run keeps and which it marks
+for deletion: how components are grouped per repository, name and architecture variant, how
+versions within a group are ordered, and when a group is left untouched because its versions
+cannot be ordered with confidence.
 
 ## Requirements
 

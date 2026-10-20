@@ -156,4 +156,10 @@ run-suite "config file: documentation" [
         assert equal (do $settings $block) (do $settings $example)
         assert equal ($block | lines | first 3) ($example | lines | first 3)
     } }
+    { name: "the README's hosted example is the raw hosted example file, without its comments", run: {||
+        let block = (readme | split row "## Raw hosted repositories" | get 1 | split row "```yaml\n" | get 1 | split row "```" | get 0)
+        let settings = {|text: string| $text | lines | where {|l| not ($l | str starts-with "#") and ($l | is-not-empty) } }
+        let example = (open --raw $"($env.FILE_PWD | path dirname)/examples/configs/raw-hosted-builds.yaml")
+        assert equal (do $settings $block) (do $settings $example)
+    } }
 ]
