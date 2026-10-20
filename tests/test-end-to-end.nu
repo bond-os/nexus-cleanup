@@ -15,6 +15,10 @@ const REPOS = [
     ["raw-dates", "raw", "raw/path-derived-layout.json"]
 ]
 
+# A recorded raw hosted repository. Listed beside the proxies, but processed only
+# when named under the hosted opt-in.
+const HOSTED = {name: "packer-bases", format: "raw", fixture: "raw/packer-bases-page-0.json"}
+
 const DATE_DIRS = '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
 
 def run-dates [extra: record = {}]: nothing -> record {
@@ -25,8 +29,9 @@ def fixtures-root []: nothing -> string { $"($env.FILE_PWD)/fixtures" }
 
 def fixture-fetch [--delete-status: int = 204]: nothing -> closure {
     let root = (fixtures-root)
-    let listing = ($REPOS | each {|r| {name: $r.name, format: $r.format, type: "proxy"}})
-    let pages = ($REPOS | reduce --fold {} {|r, acc|
+    let listing = ($REPOS | each {|r| {name: $r.name, format: $r.format, type: "proxy"}}
+        | append {name: $HOSTED.name, format: $HOSTED.format, type: "hosted"})
+    let pages = ($REPOS | append $HOSTED | reduce --fold {} {|r, acc|
         $acc | insert $r.name (open $"($root)/($r.fixture)" | get items)
     })
     {|req|
@@ -173,6 +178,33 @@ run-suite "end to end" [
         assert equal (do $strip $dry.report.records) (do $strip $live.report.records)
         assert equal $live.report.summary.counts.deleted 12
         assert equal $dry.report.summary.counts.deleted 0
+    } }
+
+    # --- the recorded raw hosted repository ---
+    { name: "the recorded raw hosted repository is processed beside the proxies under the opt-in", run: {||
+        let out = (run-all {repositories: ($REPOS | get name | append $HOSTED.name), allow_hosted: true})
+        assert equal $out.exit_code $EXIT_OK
+        assert ($HOSTED.name in $out.report.summary.repositories)
+        let rows = ($out.report.records | where repository == $HOSTED.name)
+        assert equal ($rows | length) 2
+        assert equal ($rows | get decision | uniq) ["keep"]
+        assert equal ($rows | get reason | uniq) ["group-within-keep"]
+    } }
+    { name: "hosted and proxy dry and executing passes agree on every decision", run: {||
+        for extra in [{} {from_path: $DATE_DIRS, version_scheme: "date", keep: 14}] {
+            let settings = ({repositories: ($REPOS | get name | append $HOSTED.name), allow_hosted: true} | merge $extra)
+            let dry = (run-all $settings)
+            let live = (run-all ($settings | merge {execute: true, max_deletion_share: 1.0}))
+            let strip = {|rs| $rs | select repository name version path decision reason rank | sort-by repository path }
+            assert equal (do $strip $dry.report.records) (do $strip $live.report.records)
+            assert equal $dry.report.summary.counts.deleted 0
+            assert equal $live.report.summary.counts.deleted $dry.report.summary.counts.to_delete
+            assert equal ($live.report.records | where repository == $HOSTED.name | where deleted | length) 0
+        }
+    } }
+    { name: "the hosted repository stays out of a run that does not name it", run: {||
+        assert not ($HOSTED.name in (run-all | get report.summary.repositories))
+        assert not ($HOSTED.name in (run-all {allow_hosted: true} | get report.summary.repositories))
     } }
 
     # --- CSV encoding of the same run ---
