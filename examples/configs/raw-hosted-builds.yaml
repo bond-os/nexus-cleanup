@@ -1,0 +1,17 @@
+# x-release-please-start-version
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.1.0/schema/config.schema.json
+# x-release-please-end
+#
+# A raw *hosted* repository that a build pipeline publishes into as app/<YYYYMMDD[suffix]>/…:
+# keep the 10 newest builds and nothing older. Hosted content is the only copy — read the
+# dry-run report before the first executing run.
+#
+# allow-hosted admits the repository named below; a pattern never selects a hosted
+# repository. It deletes nothing by itself: deletion still needs --execute.
+allow-hosted: true
+repositories: [raw-hosted-builds]
+# Without from-path nothing in a raw hosted repository can be deleted.
+from-path: '^/(?P<name>app)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+version-scheme: date
+keep: 10
+max-deletions: 300

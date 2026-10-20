@@ -3,9 +3,9 @@
 ## Purpose
 
 Provides authenticated, non-interactive, fully paginated access to the Nexus 3 REST API so
-the cleanup can enumerate proxy repositories and their components and delete individual
-components, with predictable behaviour when the server is slow, unreachable, or refuses a
-request.
+the cleanup can enumerate eligible repositories — proxies, and raw hosted repositories when
+named and allowed — and their components and delete individual components, with predictable
+behaviour when the server is slow, unreachable, or refuses a request.
 
 ## Requirements
 
