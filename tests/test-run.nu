@@ -40,6 +40,83 @@ def run-with [config: record, fetch: closure]: nothing -> record {
     cleanup run $config (client-for $fetch)
 }
 
+const DATE_DIRS = '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+
+# The components of the four oldest date directories: what `--keep 14` deletes.
+def oldest-dirs []: nothing -> list<string> {
+    ["some_dir/20250101" "some_dir/20250102" "some_other_dir/20240601" "some_other_dir/20240602"]
+    | each {|d| ["app.tar.gz" "app.sha256" "docs/readme.txt"] | each {|f| $"raw-dates:/($d)/($f)" } }
+    | flatten | sort
+}
+
+# A Nexus whose listing declares the synthetic date layout a raw hosted repository,
+# beside a raw proxy that a `raw-*` pattern also matches. Deletion requests are
+# logged; `fail_id` answers 403.
+def hosted-fetch [log: string, --fail-id: string = ""]: nothing -> closure {
+    let items = (open $"($env.FILE_PWD)/fixtures/raw/path-derived-layout.json" | get items)
+    {|req|
+        if $req.method == "DELETE" {
+            $"($req.url)\n" | save --append --raw $log
+            if ($fail_id | is-not-empty) and ($req.url | str ends-with $fail_id) {
+                {status: 403, body: {message: "denied"}}
+            } else {
+                {status: 204, body: {}}
+            }
+        } else if ($req.url | str contains "/service/rest/v1/repositories/") {
+            {status: 404, body: {}}
+        } else if ($req.url | str contains "/service/rest/v1/repositories") {
+            {status: 200, body: [
+                {name: "raw-dates", format: "raw", type: "hosted"}
+                {name: "raw-mirror", format: "raw", type: "proxy"}
+            ]}
+        } else if ($req.url | str contains "repository=raw-dates") {
+            {status: 200, body: {items: $items, continuationToken: null}}
+        } else {
+            {status: 200, body: {items: [], continuationToken: null}}
+        }
+    }
+}
+
+def hosted-cfg [extra: record = {}]: nothing -> record {
+    config resolve ({url: "https://nexus.example.invalid", repositories: ["raw-dates"], allow_hosted: true} | merge $extra)
+}
+
+def deleted-ids [log: string]: nothing -> list<string> {
+    open --raw $log | str trim | lines | each {|u| $u | split row "/service/rest/v1/components/" | last } | sort
+}
+
+# Run against `hosted-fetch` in a subprocess, so stderr can be read. `settings` is
+# merged over `hosted-cfg`. Returns the process's {stdout, stderr, exit_code}; stdout
+# carries the run's outcome as JSON.
+def hosted-subprocess [settings: record]: nothing -> record {
+    let root = ($env.FILE_PWD | path dirname)
+    let script = (mktemp -t "hosted-probe-XXXXXX.nu")
+    [
+        $"use ($root)/nexus-cleanup/run.nu *"
+        $"use ($root)/nexus-cleanup/api.nu *"
+        $"use ($root)/nexus-cleanup/config.nu *"
+        $"let items = \(open '($env.FILE_PWD)/fixtures/raw/path-derived-layout.json' | get items\)"
+        "let fetch = {|req|"
+        "    if $req.method == 'DELETE' {"
+        "        {status: 204, body: {}}"
+        "    } else if ($req.url | str contains '/service/rest/v1/repositories/') {"
+        "        {status: 404, body: {}}"
+        "    } else if ($req.url | str contains '/service/rest/v1/repositories') {"
+        "        {status: 200, body: [{name: 'raw-dates', format: 'raw', type: 'hosted'}, {name: 'raw-mirror', format: 'raw', type: 'proxy'}]}"
+        "    } else if ($req.url | str contains 'repository=raw-dates') {"
+        "        {status: 200, body: {items: $items, continuationToken: null}}"
+        "    } else {"
+        "        {status: 200, body: {items: [], continuationToken: null}}"
+        "    }"
+        "}"
+        $"let config = \(config resolve \({url: 'https://n.invalid', repositories: ['raw-dates'], allow_hosted: true} | merge ($settings | to nuon)\)\)"
+        "cleanup run $config (api client 'https://n.invalid' --backoff 0ms --fetch $fetch) | to json --raw | print"
+    ] | str join "\n" | save --force $script
+    let result = (^$nu.current-exe $script | complete)
+    rm -f $script
+    $result
+}
+
 run-suite "run" [
     # --- dry run is the default ---
     { name: "no deletion request is issued without --execute", run: {||
@@ -211,6 +288,73 @@ run-suite "run" [
         for u in $deleted {
             assert not ($u =~ '3\.2\.|12345678|app-at-top-level')
         }
+    } }
+
+    # --- raw hosted repositories ---
+    { name: "an executing run over a named raw hosted repository deletes exactly the oldest directories", run: {||
+        let log = (mktemp -t "deletes-XXXXXX")
+        let out = (run-with (hosted-cfg {from_path: $DATE_DIRS, version_scheme: "date", keep: 14, execute: true}) (hosted-fetch $log))
+        let deleted = (deleted-ids $log)
+        rm -f $log
+        assert equal $deleted (oldest-dirs)
+        assert equal $out.exit_code $EXIT_OK
+        assert equal $out.report.summary.repositories ["raw-dates"]
+        assert equal $out.report.summary.counts.deleted 12
+        let outside = ($out.report.records | where reason == "outside-pattern" | get component_id)
+        assert greater ($outside | length) 0
+        for id in $outside { assert not ($id in $deleted) $id }
+    } }
+    { name: "a named raw hosted repository is refused without the opt-in", run: {||
+        let log = (mktemp -t "deletes-XXXXXX")
+        let err = (try { run-with (hosted-cfg {allow_hosted: false}) (hosted-fetch $log); null } catch {|e| $e })
+        rm -f $log
+        assert not equal $err null
+        assert ($err.msg | str contains "--allow-hosted")
+    } }
+    { name: "without a path pattern nothing in a hosted repository is deleted, and stderr says why", run: {||
+        let log = (mktemp -t "deletes-XXXXXX")
+        let out = (run-with (hosted-cfg {execute: true}) (hosted-fetch $log))
+        assert equal (open --raw $log | str trim) ""
+        rm -f $log
+        assert equal $out.exit_code $EXIT_OK
+        assert equal ($out.report.records | get decision | uniq) ["keep"]
+        assert equal ($out.report.records | length) 104
+
+        let r = (hosted-subprocess {})
+        assert equal $r.exit_code 0
+        let lines = ($r.stderr | lines | where {|l| ($l | str contains "raw-dates") and ($l | str contains "--from-path") })
+        assert equal ($lines | length) 1 $r.stderr
+        assert equal ($r.stdout | from json | get exit_code) $EXIT_OK
+    } }
+    { name: "with a path pattern there is no such diagnostic", run: {||
+        let r = (hosted-subprocess {from_path: $DATE_DIRS, version_scheme: "date", keep: 14})
+        assert equal $r.exit_code 0
+        assert not ($r.stderr | str contains "--from-path") $r.stderr
+    } }
+    { name: "a pattern matching a hosted repository excludes it, with a note to name it", run: {||
+        let r = (hosted-subprocess {repositories: [], pattern: "raw-*"})
+        assert equal $r.exit_code 0
+        assert equal ($r.stdout | from json | get report.summary.repositories) ["raw-mirror"]
+        let note = ($r.stderr | lines | where {|l| $l | str contains "excluding 'raw-dates'" })
+        assert equal ($note | length) 1 $r.stderr
+        assert ($note.0 | str contains "hosted")
+        assert ($note.0 | str contains "by name")
+    } }
+    { name: "a failed deletion inside a directory leaves the others done and exits one", run: {||
+        let log = (mktemp -t "deletes-XXXXXX")
+        let failing = "raw-dates:/some_dir/20250101/app.sha256"
+        let out = (run-with (hosted-cfg {from_path: $DATE_DIRS, version_scheme: "date", keep: 14, execute: true}) (hosted-fetch $log --fail-id $failing))
+        let requested = (deleted-ids $log)
+        rm -f $log
+        assert equal $requested (oldest-dirs)
+        assert equal $out.exit_code $EXIT_DELETION_FAILURES
+        assert equal $out.report.summary.counts.deleted 11
+        assert equal $out.report.summary.counts.failed 1
+        let row = ($out.report.records | where component_id == $failing | first)
+        assert equal $row.deleted false
+        assert ($row.error | str contains "403")
+        let siblings = ($out.report.records | where {|r| ($r.component_id | str starts-with "raw-dates:/some_dir/20250101/") and $r.component_id != $failing })
+        assert equal ($siblings | get deleted | uniq) [true]
     } }
 
     # --- stdout hygiene ---

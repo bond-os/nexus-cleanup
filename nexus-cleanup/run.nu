@@ -44,14 +44,24 @@ export def "cleanup run" [config: record, client: record]: nothing -> record {
     if ($config.pattern | is-not-empty) {
         let excluded = ($all_repositories | where type != "proxy" | where {|r| $r.name =~ (api glob-to-regex $config.pattern) })
         for r in $excluded {
-            note $"excluding '($r.name)': it is a ($r.type) repository, not a proxy"
+            if $r.type == "hosted" {
+                note $"excluding '($r.name)': it is a hosted repository, and hosted repositories are selected only by name"
+            } else {
+                note $"excluding '($r.name)': it is a ($r.type) repository, not a proxy"
+            }
         }
     }
 
     mut components = []
     mut repo_configs = {}
     for repo in $selected {
-        note $"enumerating ($repo.name) [($repo.format)]"
+        note $"enumerating ($repo.name) [($repo.format) ($repo.type)]"
+        # Every raw component is a group of one without a path pattern, so the keep
+        # count retains all of it. Proceed — a dry run is a harmless inventory — but
+        # say so, lest a scheduled run look like a working cleanup.
+        if $repo.type == "hosted" and ($config.from_path? | default "" | is-empty) {
+            note $"'($repo.name)' is a hosted repository and no --from-path was given: nothing in it can be deleted"
+        }
         $repo_configs = ($repo_configs | insert $repo.name (api repository-config $client $repo))
         $components = ($components | append (api components $client $repo.name))
     }
