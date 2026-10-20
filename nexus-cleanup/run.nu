@@ -23,7 +23,7 @@ export def "cleanup run" [config: record, client: record]: nothing -> record {
     let started_at = (now)
 
     let all_repositories = (api repositories $client)
-    let selected = (api select-proxies $all_repositories $config.repositories --pattern $config.pattern)
+    let selected = (api select-repositories $all_repositories $config.repositories --pattern $config.pattern)
 
     if ($selected | is-empty) {
         note "the selection matched no proxy repository"
