@@ -1,0 +1,77 @@
+{
+  "items": [
+    {
+      "id": "cGFja2VyLWJhc2VzOmEyYTAxMGYz",
+      "repository": "packer-bases",
+      "format": "raw",
+      "group": "/ubuntu/noble/20260826",
+      "name": "/ubuntu/noble/20260826/noble-server-cloudimg-amd64.img",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/packer-bases/ubuntu/noble/20260826/noble-server-cloudimg-amd64.img",
+          "path": "/ubuntu/noble/20260826/noble-server-cloudimg-amd64.img",
+          "id": "cGFja2VyLWJhc2VzOjQ2ODk3Mzk",
+          "repository": "packer-bases",
+          "format": "raw",
+          "checksum": {
+            "md5": "253f8ad995aa4b735a5f8543b921363d",
+            "sha1": "48cd884bcc8eb6331db925505953bd919da01dbb",
+            "sha256": "d0fe84bb5f80853425fa6be28e2c106f30104c3cfe8611933f2e65c9b63f0e30",
+            "sha512": "a1f8dd635f0fb1441105a45cc268db2ae7608ab0751c9d51059f33d4670e23d3dbab7740506daf6e1bb04270de810d9eedeadfddd9f6991b9dd2ffc40a02906d"
+          },
+          "contentType": "application/octet-stream",
+          "lastModified": "2026-09-08T06:31:27.592+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 624829952,
+          "blobCreated": "2026-09-08T06:31:27.595+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:31:27.592+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "raw": {}
+        }
+      ]
+    },
+    {
+      "id": "cGFja2VyLWJhc2VzOmYxYmJjZGQw",
+      "repository": "packer-bases",
+      "format": "raw",
+      "group": "/ubuntu/noble/20260826",
+      "name": "/ubuntu/noble/20260826/noble-server-cloudimg-amd64.img.sha256",
+      "version": "",
+      "assets": [
+        {
+          "downloadUrl": "https://nexus.example.invalid/repository/packer-bases/ubuntu/noble/20260826/noble-server-cloudimg-amd64.img.sha256",
+          "path": "/ubuntu/noble/20260826/noble-server-cloudimg-amd64.img.sha256",
+          "id": "cGFja2VyLWJhc2VzOjUzODQ1NDE2",
+          "repository": "packer-bases",
+          "format": "raw",
+          "checksum": {
+            "md5": "eb84707639fe1791edda43421c8c8274",
+            "sha1": "fbbff5a3468c13c71c0c5c2bd96e3a03588046ba",
+            "sha256": "a1170ffc54fd5c528b8fab238903e64f7d9b58cbc520df0c4612eafda506e906",
+            "sha512": "ff444a1466ed83688eb229ac5bafdd93afb0b5653a0a216acb8bb4268ccdb28392b31c1f2c7c6cfd0230082534844825e42e0ebc3b44d3bfee7d1a025916fd0d"
+          },
+          "contentType": "text/plain",
+          "lastModified": "2026-09-08T06:31:33.245+00:00",
+          "lastDownloaded": null,
+          "uploader": "redacted-user",
+          "uploaderIp": "0.0.0.0",
+          "fileSize": 98,
+          "blobCreated": "2026-09-08T06:31:33.246+00:00",
+          "blobStoreName": "redacted-blobstore",
+          "blobUpdated": "2026-09-08T06:31:33.245+00:00",
+          "blobRef": "redacted-blobref",
+          "lastVerified": null,
+          "registryUrl": null,
+          "raw": {}
+        }
+      ]
+    }
+  ],
+  "continuationToken": null
+}

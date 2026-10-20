@@ -406,15 +406,6 @@
     }
   },
   {
-    "name": "docker-hosted-dev",
-    "format": "docker",
-    "type": "hosted",
-    "url": "https://nexus.example.invalid/repository/docker-hosted-dev",
-    "online": true,
-    "size": 0,
-    "attributes": {}
-  },
-  {
     "name": "conan-proxy-conan.io",
     "format": "conan",
     "type": "proxy",
@@ -597,6 +588,54 @@
     "format": "raw",
     "type": "hosted",
     "url": "https://nexus.example.invalid/repository/packer-bases",
+    "online": true,
+    "size": 0,
+    "attributes": {}
+  },
+  {
+    "name": "yum-proxy-packages.microsoft.com",
+    "format": "yum",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/yum-proxy-packages.microsoft.com",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://packages.microsoft.com/yumrepos/"
+      }
+    }
+  },
+  {
+    "name": "docker-proxy-quay.io",
+    "format": "docker",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/docker-proxy-quay.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://quay.io"
+      }
+    }
+  },
+  {
+    "name": "docker-proxy-registry.k8s.io",
+    "format": "docker",
+    "type": "proxy",
+    "url": "https://nexus.example.invalid/repository/docker-proxy-registry.k8s.io",
+    "online": true,
+    "size": 0,
+    "attributes": {
+      "proxy": {
+        "remoteUrl": "https://registry.k8s.io"
+      }
+    }
+  },
+  {
+    "name": "rh-downloads",
+    "format": "raw",
+    "type": "hosted",
+    "url": "https://nexus.example.invalid/repository/rh-downloads",
     "online": true,
     "size": 0,
     "attributes": {}
