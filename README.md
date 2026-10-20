@@ -182,6 +182,7 @@ Keys are the flag names without their dashes:
 | `max-deletions` | integer | `--max-deletions` |
 | `max-deletion-share` | number between 0 and 1 | `--max-deletion-share` |
 | `summary-out` | path, relative to the working directory | `--summary-out` |
+| `allow-hosted` | `true` / `false` | `--allow-hosted` |
 <!-- config-keys:end -->
 
 - **A flag overrides the file.** For `url` and `username` the environment sits in between:

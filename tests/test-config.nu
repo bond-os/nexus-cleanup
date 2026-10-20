@@ -51,6 +51,15 @@ run-suite "config: file layering" [
         assert equal (layered "connection.yaml" {fail_on_skip: true} | get fail_on_skip) true
         assert equal (layered "connection.yaml" {fail_on_skip: false} | get fail_on_skip) false
     } }
+    { name: "allow-hosted is on when either the flag or the file sets it", run: {||
+        assert equal (layered "allow-hosted.yaml" {allow_hosted: false} | get allow_hosted) true
+        assert equal (layered "connection.yaml" {allow_hosted: true} | get allow_hosted) true
+        assert equal (layered "connection.yaml" {allow_hosted: false} | get allow_hosted) false
+    } }
+    { name: "allow-hosted never makes a run execute", run: {||
+        assert equal (layered "allow-hosted.yaml" | get execute) false
+        assert equal (layered "connection.yaml" {allow_hosted: true} | get execute) false
+    } }
     { name: "names on the command line replace a file pattern", run: {||
         let c = (layered "pattern-only.yaml" {repositories: ["npm-proxy"]})
         assert equal $c.repositories ["npm-proxy"]
@@ -209,6 +218,10 @@ run-suite "config" [
     { name: "dry run is the resolved default", run: {||
         assert equal (resolve | get execute) false
         assert equal (resolve | get fail_on_skip) false
+    } }
+    { name: "hosted repositories are not allowed by default", run: {||
+        assert equal (resolve | get allow_hosted) false
+        assert equal (resolve {allow_hosted: true} | get allow_hosted) true
     } }
     { name: "credentials come from the environment", run: {||
         with-env {NEXUS_USERNAME: "u", NEXUS_PASSWORD: "p"} {

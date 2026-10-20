@@ -30,7 +30,7 @@ export const CONFIG_KEYS = [
     {key: "username", field: "username", type: "string", schema: {},
         description: "Nexus username; NEXUS_USERNAME and --username override it."}
     {key: "repositories", field: "repositories", type: "list<string>", schema: {},
-        description: "Proxy repositories to clean, by name."}
+        description: "Repositories to clean, by name: proxies, and raw hosted repositories under allow-hosted."}
     {key: "pattern", field: "pattern", type: "string", schema: {},
         description: "Select proxy repositories by glob instead of by name."}
     {key: "keep", field: "keep", type: "int", schema: {minimum: 1},
@@ -57,6 +57,8 @@ export const CONFIG_KEYS = [
         description: "Abort above this share of enumerated components (0 = off)."}
     {key: "summary-out", field: "summary_out", type: "string", schema: {},
         description: "Also write the aggregate here as JSON, relative to the working directory."}
+    {key: "allow-hosted", field: "allow_hosted", type: "bool", schema: {},
+        description: "Allow raw hosted repositories named in repositories; a pattern never selects one. Deletes nothing without --execute."}
 ]
 
 # Keys a file may never set, each with the reason given to the operator.
@@ -313,6 +315,8 @@ export def "config resolve" [
         # Never from the file: only the flag asks for deletion.
         execute: ($overrides.execute? | default false)
         fail_on_skip: (($overrides.fail_on_skip? | default false) or ($file_values.fail_on_skip? | default false))
+        # Widens what may be selected, never whether anything is deleted.
+        allow_hosted: (($overrides.allow_hosted? | default false) or ($file_values.allow_hosted? | default false))
         max_deletions: $max_deletions.value
         max_deletion_share: $max_deletion_share.value
         summary_out: (layer $overrides $file_values "summary_out" "" | get value)

@@ -10,7 +10,7 @@ use ./nexus-cleanup/run.nu *
 use ./nexus-cleanup/version.nu [VERSION]
 
 def main [
-    ...repositories: string             # proxy repositories to clean
+    ...repositories: string             # repositories to clean: proxies, or raw hosted with --allow-hosted
     --config: string                    # read settings from this YAML file; flags override it
     --url: string                       # Nexus base URL (default: $NEXUS_URL)
     --username: string                  # default: $NEXUS_USERNAME
@@ -24,6 +24,7 @@ def main [
     --scope-from-path: string           # regex with a (?P<scope>...) group
     --from-path: string                 # regex with (?P<name>...) and (?P<version>...)
     --execute                           # actually delete; omit for a dry run
+    --allow-hosted                      # allow named raw hosted repositories; deletes nothing without --execute
     --fail-on-skip                      # exit non-zero if any group was skipped
     --require-cap                       # refuse to run unless a deletion cap is set
     --max-deletions: int                # abort an executing run above this many (default 0 = off)
@@ -56,6 +57,7 @@ def main [
             scope_pattern: $scope_from_path
             from_path: $from_path
             execute: $execute
+            allow_hosted: $allow_hosted
             fail_on_skip: $fail_on_skip
             require_cap: $require_cap
             max_deletions: $max_deletions
