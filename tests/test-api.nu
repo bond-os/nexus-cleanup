@@ -14,6 +14,27 @@ def client-with [fetch: closure]: nothing -> record {
     api client "https://nexus.example.invalid" --username "u" --password "p" --backoff 0ms --fetch $fetch
 }
 
+# One repository of each kind the eligibility rules distinguish.
+const MIXED = [
+    {name: "proxy-a", format: "raw", type: "proxy"}
+    {name: "raw-builds", format: "raw", type: "hosted"}
+    {name: "docker-builds", format: "docker", type: "hosted"}
+    {name: "raw-group", format: "raw", type: "group"}
+]
+
+# The error a selection raises, or null when it is accepted.
+def refusal [repos: list<record>, names: list<string>, --allow-hosted]: nothing -> any {
+    try { api select-repositories $repos $names --allow-hosted=$allow_hosted; null } catch {|e| $e }
+}
+
+# A fetch closure that records every URL it is asked for into a file.
+def recording [log: string]: nothing -> closure {
+    {|req|
+        $"($req.url)\n" | save --append --raw $log
+        {status: 200, body: {apt: {distribution: "bookworm"}}}
+    }
+}
+
 run-suite "api client" [
     # --- construction ---
     { name: "constructing a client makes no request", run: {||
@@ -125,31 +146,62 @@ run-suite "api client" [
             {name: "h", format: "npm", type: "hosted"}
             {name: "g", format: "npm", type: "group"}
         ]
-        assert equal (api select-proxies $repos ["p"] | get name) ["p"]
+        assert equal (api select-repositories $repos ["p"] | get name) ["p"]
         for bad in ["h" "g"] {
-            let err = (try { api select-proxies $repos [$bad]; null } catch {|e| $e })
+            let err = (refusal $repos [$bad])
             assert not equal $err null
             assert ($err.msg | str contains $bad)
         }
     } }
     { name: "the refusal names the repository's actual type", run: {||
         let repos = [{name: "h", format: "npm", type: "hosted"}]
-        let err = (try { api select-proxies $repos ["h"]; null } catch {|e| $e })
-        assert ($err.msg | str contains "hosted")
+        assert ((refusal $repos ["h"]).msg | str contains "hosted")
     } }
     { name: "an unknown repository name is refused", run: {||
         let repos = [{name: "p", format: "npm", type: "proxy"}]
-        let err = (try { api select-proxies $repos ["nope"]; null } catch {|e| $e })
-        assert ($err.msg | str contains "nope")
+        assert ((refusal $repos ["nope"]).msg | str contains "nope")
+        assert ((refusal $repos ["nope"] --allow-hosted).msg | str contains "nope")
     } }
-    { name: "a pattern selects only proxies and reports the excluded ones", run: {||
+    { name: "a pattern selects only proxies", run: {||
         let repos = [
             {name: "yum-a", format: "yum", type: "proxy"}
             {name: "yum-b", format: "yum", type: "hosted"}
             {name: "npm-c", format: "npm", type: "proxy"}
         ]
-        let picked = (api select-proxies $repos [] --pattern "yum-*")
+        let picked = (api select-repositories $repos [] --pattern "yum-*")
         assert equal ($picked | get name) ["yum-a"]
+    } }
+
+    # --- hosted eligibility ---
+    { name: "a named proxy is accepted with and without the hosted opt-in", run: {||
+        assert equal (api select-repositories $MIXED ["proxy-a"] | get name) ["proxy-a"]
+        assert equal (api select-repositories $MIXED ["proxy-a"] --allow-hosted | get name) ["proxy-a"]
+    } }
+    { name: "a named raw hosted repository is accepted only with the opt-in", run: {||
+        assert equal (api select-repositories $MIXED ["raw-builds"] --allow-hosted | get name) ["raw-builds"]
+        let err = (refusal $MIXED ["raw-builds"])
+        assert not equal $err null
+        assert ($err.msg | str contains "raw-builds")
+        assert ($err.msg | str contains "hosted")
+        assert ($err.msg | str contains "--allow-hosted")
+    } }
+    { name: "a named hosted repository of another format is refused even with the opt-in", run: {||
+        let err = (refusal $MIXED ["docker-builds"] --allow-hosted)
+        assert not equal $err null
+        assert ($err.msg | str contains "docker-builds")
+        assert ($err.msg | str contains "docker")
+        assert ($err.msg | str contains "only raw")
+    } }
+    { name: "a group repository is refused with or without the opt-in", run: {||
+        for err in [(refusal $MIXED ["raw-group"]) (refusal $MIXED ["raw-group"] --allow-hosted)] {
+            assert not equal $err null
+            assert ($err.msg | str contains "raw-group")
+            assert ($err.msg | str contains "group")
+        }
+    } }
+    { name: "a pattern never selects a hosted repository, even with the opt-in", run: {||
+        assert equal (api select-repositories $MIXED [] --pattern "*" | get name) ["proxy-a"]
+        assert equal (api select-repositories $MIXED [] --pattern "*" --allow-hosted | get name) ["proxy-a"]
     } }
 
     # --- format-specific configuration ---
@@ -157,6 +209,17 @@ run-suite "api client" [
         let fetch = (canned [{match: "/repositories/apt/proxy/r", status: 200, body: {apt: {distribution: "bookworm"}}}])
         let cfg = (api repository-config (client-with $fetch) {name: "r", format: "apt", type: "proxy"})
         assert equal $cfg.distribution "bookworm"
+    } }
+    { name: "configuration is read from the endpoint for the repository's type", run: {||
+        let log = (mktemp -t "config-urls-XXXXXX")
+        api repository-config (client-with (recording $log)) {name: "h", format: "apt", type: "hosted"}
+        api repository-config (client-with (recording $log)) {name: "p", format: "apt", type: "proxy"}
+        let urls = (open --raw $log | str trim | lines)
+        rm -f $log
+        assert equal $urls [
+            "https://nexus.example.invalid/service/rest/v1/repositories/apt/hosted/h"
+            "https://nexus.example.invalid/service/rest/v1/repositories/apt/proxy/p"
+        ]
     } }
     { name: "an unreachable configuration yields no declared value rather than aborting", run: {||
         let fetch = {|req| {status: 403, body: {}} }

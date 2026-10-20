@@ -128,13 +128,16 @@ export def "api repositories" [client: record]: nothing -> list<record> {
     $r.body | default []
 }
 
-# Narrow a repository listing to the proxies the caller asked for. A named
-# repository that is not a proxy is refused rather than silently skipped; a
-# pattern simply excludes non-proxies.
-export def "api select-proxies" [
+# Narrow a repository listing to the eligible repositories the caller asked for.
+# A proxy is always eligible. A raw hosted repository is eligible only when named
+# and allowed: a pattern's reach grows whenever someone creates a repository, so
+# it never selects a hosted one. A named ineligible repository is refused rather
+# than silently skipped; a pattern simply excludes everything but proxies.
+export def "api select-repositories" [
     repositories: list<record>
     names: list<string>
     --pattern: string = ""
+    --allow-hosted                      # admit named raw hosted repositories
 ]: nothing -> list<record> {
     if ($names | is-not-empty) {
         # A `for` loop, not `each`: an error raised inside a closure is re-wrapped
@@ -145,8 +148,15 @@ export def "api select-proxies" [
             if $hit == null {
                 error make {msg: $"repository '($n)' does not exist on this instance"}
             }
-            if $hit.type != "proxy" {
-                error make {msg: $"repository '($n)' is a ($hit.type) repository, not a proxy; only proxy repositories can be cleaned"}
+            if $hit.type == "hosted" {
+                if not $allow_hosted {
+                    error make {msg: $"repository '($n)' is a hosted repository; pass --allow-hosted to clean a raw hosted repository by name"}
+                }
+                if $hit.format != "raw" {
+                    error make {msg: $"repository '($n)' is a ($hit.format) hosted repository; only raw hosted repositories can be cleaned"}
+                }
+            } else if $hit.type != "proxy" {
+                error make {msg: $"repository '($n)' is a ($hit.type) repository; only proxy repositories, and raw hosted repositories under --allow-hosted, can be cleaned"}
             }
             $picked = ($picked | append $hit)
         }
@@ -165,7 +175,7 @@ export def "api repository-config" [client: record, repository: record]: nothing
     let format = ($repository.format? | default "")
     if $format not-in $SCOPE_CONFIG_FORMATS { return {} }
 
-    let url = $"($client.base_url)/service/rest/v1/repositories/($format)/proxy/($repository.name)"
+    let url = $"($client.base_url)/service/rest/v1/repositories/($format)/($repository.type)/($repository.name)"
     let outcome = (try { request $client "GET" $url "reading repository configuration" } catch {|e| null })
     if $outcome == null or $outcome.status >= 400 { return {} }
     $outcome.body | get --optional $format | default {}
