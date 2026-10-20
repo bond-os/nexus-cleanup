@@ -2,7 +2,8 @@
 
 Conventions for `nexus-proxy-cleanup` — a Nushell tool that deletes obsolete component
 versions from Nexus 3 **proxy** repositories, keeping the newest N per component and
-architecture.
+architecture, and — only when named and explicitly allowed — dated build directories from **raw
+hosted** repositories.
 
 This file takes precedence over the global conventions where the two differ. Deliberate
 exceptions are recorded below **with their rationale** — do not "fix" them.
@@ -240,6 +241,13 @@ see the two rows below.
 | apt | `apt-proxy-deb.debian.org` | `hello` 2.10-2 / 2.10-3 / 2.10-5 × amd64 + arm64 = 6 components |
 | conan | primed the existing proxy | `zlib` 1.3.1 / 1.2.13 / 1.2.12 |
 
+One **raw hosted** repository is recorded too: `packer-bases`, two files under one dated
+directory (`raw-iso`, the other candidate, is empty). Its components have exactly the field shape
+of a raw proxy — `name` is the path, `group` the directory, `version` empty — which is the
+evidence that hosted raw needs no adapter of its own. It has no multi-directory layout; the dated
+layout is tested with the synthetic `raw/path-derived-layout.json` served from a stubbed listing
+that declares it hosted.
+
 ### Which asset attributes 3.96 actually populates
 
 Every asset carries `downloadUrl, path, id, repository, format, checksum, contentType,
@@ -294,7 +302,7 @@ repository has no version dimension at all.
 ### Re-recording fixtures
 
 ```bash
-nu tools/record-fixtures.nu --max-pages 1 apt-proxy-deb.debian.org conan-proxy-conan.io docker-proxy-hub yum-proxy-resources.ovirt.org yum-proxy-archives.fedoraproject.org npm-proxy-npm pypi-proxy nuget.org-proxy helm-jenkins raw-proxy-repo.almalinux.org proxy-hg
+nu tools/record-fixtures.nu --max-pages 1 apt-proxy-deb.debian.org conan-proxy-conan.io docker-proxy-hub yum-proxy-resources.ovirt.org yum-proxy-archives.fedoraproject.org npm-proxy-npm pypi-proxy nuget.org-proxy helm-jenkins raw-proxy-repo.almalinux.org proxy-hg packer-bases
 ```
 
 `NEXUS_URL`, `NEXUS_USERNAME` and `NEXUS_PASSWORD` must be set; keep them in a gitignored
@@ -347,8 +355,41 @@ There is deliberately **no `--dry-run` flag**. The safe mode is the one you get 
 flag, because the failure mode of this tool is mass deletion. Do not invert this polarity, and
 do not let any other flag or environment variable imply `--execute`.
 
-The deletion cap, the refusal of non-proxy repositories, and strict version ordering are the
-other three layers of the same guard. Treat them as a set.
+The deletion cap, the refusal of every repository that is neither a proxy nor an explicitly
+named, explicitly allowed raw hosted repository, and strict version ordering are the other three
+layers of the same guard. Treat them as a set.
+
+### Hosted repositories: raw only, by name only, behind an opt-in
+
+A proxy deletion costs a re-download; a hosted deletion is permanent, because hosted content is
+the only copy. Hosted support is therefore as narrow as its one use case — dated build
+directories in a raw repository — and each restriction is deliberate:
+
+- **Raw only.** A raw component is a file that nothing else refers to. Every other hosted format
+  couples components: docker manifest lists refer to per-platform manifests, maven metadata and
+  SNAPSHOT timestamps are rebuilt around files, npm dist-tags point at versions, yum repodata is
+  regenerated from what remains. Do not add a format without recorded hosted fixtures and an
+  analysis of that coupling; a general opt-in with per-format warnings was rejected, because a
+  warning is not a guard.
+- **By name only.** `api select-repositories` never lets a pattern select a hosted repository,
+  with or without the switch. A pattern's reach grows whenever someone creates a repository; a
+  scheduled `raw-*` run must not start pruning a hosted repository created next year.
+- **Opt-in, separate from `--execute`.** `--allow-hosted` widens what can be *selected*;
+  `--execute` alone decides whether anything is *deleted*. Because selection is what a
+  configuration file is for, `allow-hosted` is a file key — unlike `execute`. Never let it imply
+  `--execute`.
+- **No mandatory cap.** A hosted deletion already takes the switch, the name, a path pattern and
+  `--execute`. A mandatory number tends to be set high to silence the error, guarding nothing
+  while looking like a guard. The cap stays available, the README's hosted example sets it, and
+  `--require-cap` covers pipelines. Revisit if a hosted run ever deletes more than its operator
+  expected.
+- **No path pattern means a diagnostic, not a refusal.** Without `--from-path` every raw
+  component is a group of one and nothing is deleted. The run proceeds, so a dry run stays a
+  harmless inventory, and says so on stderr per repository; the report and exit code are
+  untouched.
+- **Partial deletion is reported, not prevented.** Nexus has no transaction across components.
+  Failed files stay, carry their error in the report and make the run exit 1; the next run
+  retries them. Do not add pre-checks that pretend to make a directory atomic.
 
 ### No Nexus version gating
 
