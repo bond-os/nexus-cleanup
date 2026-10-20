@@ -1,6 +1,7 @@
 use ./harness.nu *
 use ../nexus-cleanup/config.nu *
 use ../nexus-cleanup/run.nu *
+use ../nexus-cleanup/api.nu *
 use ../nexus-cleanup/report.nu [FIELDS]
 use ../nexus-cleanup/version.nu [VERSION]
 
@@ -106,6 +107,36 @@ run-suite "cli" [
         assert equal $r.exit_code $EXIT_API
         assert equal $r.stdout ""
         assert ($r.stderr | str contains "nexus-cleanup:")
+    } }
+    { name: "--allow-hosted is accepted and the run goes on to contact Nexus", run: {||
+        # The URL is unreachable: an unknown or rejected flag would exit with the usage code.
+        let r = (cli "--url" "http://127.0.0.1:9" "--max-attempts" "1" "--timeout" "2sec" "--allow-hosted" "raw-builds")
+        assert equal $r.exit_code $EXIT_API
+        assert not ($r.stderr | str contains "usage:")
+    } }
+    { name: "--allow-hosted without --execute is a dry run", run: {||
+        let log = (mktemp -t "deletes-XXXXXX")
+        let fetch = {|req|
+            if $req.method == "DELETE" {
+                $"($req.url)\n" | save --append --raw $log
+                {status: 204, body: {}}
+            } else if ($req.url | str contains "/service/rest/v1/repositories") {
+                {status: 200, body: [{name: "raw-builds", format: "raw", type: "hosted"}]}
+            } else {
+                {status: 200, body: {items: [], continuationToken: null}}
+            }
+        }
+        let config = (config resolve {url: "https://n.invalid", repositories: ["raw-builds"], allow_hosted: true})
+        let out = (cleanup run $config (api client "https://n.invalid" --backoff 0ms --fetch $fetch))
+        assert equal (open --raw $log | str trim) ""
+        rm -f $log
+        assert equal $out.report.summary.mode "dry-run"
+    } }
+    { name: "--help describes --allow-hosted", run: {||
+        let help = (cli "--help" | get stdout)
+        let line = ($help | lines | where {|l| $l | str contains "--allow-hosted" } | first)
+        assert ($line | str contains "raw hosted")
+        assert ($line | str contains "--execute")
     } }
     { name: "a usage failure names the setting without echoing the password", run: {||
         let r = (with-env {NEXUS_URL: "", NEXUS_PASSWORD: "hunter2"} {
