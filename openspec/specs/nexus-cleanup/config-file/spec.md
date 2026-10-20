@@ -33,9 +33,9 @@ flag without its leading dashes. One file SHALL describe exactly one run.
 
 The file SHALL accept exactly these keys: `url`, `username`, `repositories`, `pattern`, `keep`,
 `timeout`, `max-attempts`, `format`, `version-scheme`, `scope-from-path`, `from-path`,
-`fail-on-skip`, `max-deletions`, `max-deletion-share` and `summary-out`, plus a `$schema` key,
-which SHALL be a string and SHALL otherwise be ignored. Any other key SHALL be refused with a
-usage error naming the key and the file, before any request is made.
+`fail-on-skip`, `max-deletions`, `max-deletion-share`, `summary-out` and `allow-hosted`, plus a
+`$schema` key, which SHALL be a string and SHALL otherwise be ignored. Any other key SHALL be
+refused with a usage error naming the key and the file, before any request is made.
 
 #### Scenario: Misspelt key refused
 
@@ -58,6 +58,18 @@ usage error naming the key and the file, before any request is made.
 
 - **WHEN** a configuration file contains `$schema: 3`
 - **THEN** the run aborts with a usage error naming `$schema` and the file
+
+#### Scenario: Hosted opt-in described by the schema
+
+- **WHEN** a configuration file containing `allow-hosted: true` is validated against the schema of a release that includes this change
+- **THEN** it is valid
+- **AND** `allow-hosted: "yes"` is invalid
+
+#### Scenario: Hosted opt-in from the file
+
+- **WHEN** a configuration file contains `allow-hosted: true` and `repositories: [raw-builds]`, where `raw-builds` is a raw hosted repository
+- **THEN** `raw-builds` is processed
+- **AND** the run is a dry run unless the execute flag is passed
 
 ### Requirement: Execution is never a file setting
 
@@ -108,8 +120,9 @@ variable to use instead, and SHALL NOT include the offending value in any messag
 
 Each key SHALL take a value of the type its flag takes: `repositories` a list of strings;
 `keep`, `max-attempts` and `max-deletions` integers; `max-deletion-share` a number;
-`fail-on-skip` a boolean; `timeout` a string holding a duration such as `30sec`; every other key
-a string. A value of the wrong type SHALL be a usage error naming the key and the file.
+`fail-on-skip` and `allow-hosted` booleans; `timeout` a string holding a duration such as
+`30sec`; every other key a string. A value of the wrong type SHALL be a usage error naming the
+key and the file.
 
 #### Scenario: Duration given as text
 
