@@ -7,6 +7,10 @@
       "description": "Address of this schema, for editors. Read and ignored by the tool.",
       "type": "string"
     },
+    "allow-hosted": {
+      "description": "Allow raw hosted repositories named in repositories; a pattern never selects one. Deletes nothing without --execute.",
+      "type": "boolean"
+    },
     "execute": {
       "description": "Deletion is requested only by the --execute flag, never by a configuration file.",
       "not": {}
@@ -58,7 +62,7 @@
       "type": "string"
     },
     "repositories": {
-      "description": "Proxy repositories to clean, by name.",
+      "description": "Repositories to clean, by name: proxies, and raw hosted repositories under allow-hosted.",
       "items": {
         "type": "string"
       },

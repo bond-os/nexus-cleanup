@@ -39,6 +39,10 @@ run-suite "config schema" [
         }
         assert equal (prop "repositories" | get items) {type: "string"}
     } }
+    { name: "the hosted opt-in is a boolean", run: {||
+        assert equal (prop "allow-hosted" | get type) "boolean"
+        assert equal (open $"(root)/schema/config.schema.json" | get properties."allow-hosted".type) "boolean"
+    } }
     { name: "ranges and enums match the tool's own constants", run: {||
         assert equal (prop "keep" | get minimum) 1
         assert equal (prop "max-attempts" | get minimum) 1

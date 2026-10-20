@@ -38,6 +38,13 @@ run-suite "config file" [
         assert equal $v.max_deletions 200
         assert equal $v.max_deletion_share 0.5
         assert equal $v.summary_out "summary.json"
+        assert equal $v.allow_hosted true
+    } }
+    { name: "the hosted opt-in is read from the file", run: {||
+        assert equal ((config load (fixture "allow-hosted.yaml")).values.allow_hosted) true
+    } }
+    { name: "a hosted opt-in given as text is refused, naming the key", run: {||
+        assert-refused "allow-hosted-as-text.yaml" "allow-hosted" "allow-hosted-as-text.yaml"
     } }
     { name: "the schema reference is accepted and ignored", run: {||
         assert not ("$schema" in ((config load (fixture "full.yaml")).values | columns))
