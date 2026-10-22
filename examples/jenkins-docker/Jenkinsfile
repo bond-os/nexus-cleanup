@@ -1,0 +1,146 @@
+// nexus-cleanup — declarative pipeline using the Docker Pipeline plugin.
+//
+// Needs:
+//   - the Docker Pipeline plugin (`agent { docker { … } }`)
+//   - an agent labelled `docker` that can run containers
+//   - a "Username with password" credential with the id `nexus-cleanup`
+//   - max-deletions or max-deletion-share in every configuration file: the loop
+//     passes --require-cap, so a file without a cap fails the dry run
+//
+// Written by `nexus-cleanup init --ci jenkins-docker`. The repository holds the
+// configuration files, one YAML file per cleanup under configs/, and
+// ci/run-configs.sh, the loop that runs the tool once per file. Adding a file needs
+// no change here. Without the plugin, use `init --ci jenkins-sh` instead.
+//
+// The tool comes from the published image, pinned to an exact release. Bump the
+// pinned version deliberately, after reading CHANGELOG.md, and move the schema
+// address in configs/ to the same release.
+//
+// Every build performs a dry run of every configuration file and archives the
+// reports. Deletion happens only in a build started by hand with EXECUTE ticked,
+// only after someone approves the dry-run reports, and never in a build started by
+// the timer.
+//
+// The plugin runs the container as the agent's uid (`-u uid:gid`), which works
+// with a rootful Docker daemon. If the agent's `docker` is rootless Podman, that
+// uid is remapped and cannot write the workspace: append `--userns=keep-id` to
+// both `args` lines, so the agent's uid stays itself inside the container.
+
+pipeline {
+    // Per-stage agents, so the approval prompt waits without holding an executor.
+    agent none
+
+    options {
+        disableConcurrentBuilds()
+        // Each stage checks out this repository: the configuration files and the
+        // loop script live in it.
+        buildDiscarder(logRotator(numToKeepStr: '60'))
+    }
+
+    triggers {
+        cron('H 3 * * *')
+    }
+
+    parameters {
+        booleanParam(name: 'EXECUTE', defaultValue: false,
+                     description: 'Delete after the dry run is approved. Ignored on timer-triggered builds.')
+    }
+
+    environment {
+        NEXUS_URL = 'https://nexus.example.com'
+    }
+
+    stages {
+        stage('Dry run') {
+            agent {
+                docker {
+                    label 'docker'
+                    // An exact release, never a floating tag.
+                    image 'ghcr.io/bond-os/nexus-cleanup:0.1.0' // x-release-please-version
+                    // The image's entrypoint is the tool; the plugin must start the
+                    // container with its own command. The tool is on PATH.
+                    args '--entrypoint='
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'nexus-cleanup',
+                        usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    script {
+                        handleExit(sh(returnStatus: true, script: '''
+                            sh ci/run-configs.sh
+                        '''))
+                    }
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'reports/*.dry-run*.json', allowEmptyArchive: true
+                }
+            }
+        }
+
+        stage('Execute') {
+            when {
+                beforeAgent true
+                beforeInput true
+                allOf {
+                    expression { params.EXECUTE }
+                    not { triggeredBy 'TimerTrigger' }
+                }
+            }
+            options {
+                timeout(time: 24, unit: 'HOURS')
+            }
+            input {
+                message 'Delete the components marked "delete" in the dry-run reports?'
+                ok 'Delete'
+                // submitter 'nexus-admins'
+            }
+            agent {
+                docker {
+                    label 'docker'
+                    image 'ghcr.io/bond-os/nexus-cleanup:0.1.0' // x-release-please-version
+                    args '--entrypoint='
+                }
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'nexus-cleanup',
+                        usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    script {
+                        handleExit(sh(returnStatus: true, script: '''
+                            sh ci/run-configs.sh --execute
+                        '''))
+                    }
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'reports/*.execute*.json', allowEmptyArchive: true
+                }
+            }
+        }
+    }
+}
+
+// Maps the exit codes documented in README.md onto build results. The loop ends
+// with the first code other than 0 and 4, else 4, else 0, so the same mapping holds.
+void handleExit(int status) {
+    switch (status) {
+        case 0:
+            return
+        case 1:
+            unstable 'some deletions failed; see the report'
+            return
+        case 4:
+            unstable 'some groups were skipped; see the report'
+            return
+        case 2:
+            error 'usage or configuration error; nothing was enumerated'
+        case 3:
+            error 'Nexus unreachable or enumeration failed; nothing was deleted'
+        case 5:
+            error 'deletion cap exceeded; nothing was deleted'
+        default:
+            error "nexus-cleanup exited with ${status}"
+    }
+}

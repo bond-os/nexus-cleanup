@@ -27,6 +27,70 @@
         },
         {
           "type": "generic",
+          "path": "examples/gitlab/.gitlab-ci.yml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/gitlab/configs/example.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/gitlab/.vscode/settings.json"
+        },
+        {
+          "type": "generic",
+          "path": "examples/gitlab/.idea/jsonSchemas.xml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/forgejo/.forgejo/workflows/nexus-cleanup.yml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/forgejo/configs/example.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/forgejo/.vscode/settings.json"
+        },
+        {
+          "type": "generic",
+          "path": "examples/forgejo/.idea/jsonSchemas.xml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-docker/Jenkinsfile"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-docker/configs/example.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-docker/.vscode/settings.json"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-docker/.idea/jsonSchemas.xml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-sh/Jenkinsfile"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-sh/configs/example.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-sh/.vscode/settings.json"
+        },
+        {
+          "type": "generic",
+          "path": "examples/jenkins-sh/.idea/jsonSchemas.xml"
+        },
+        {
+          "type": "generic",
           "path": "README.md"
         }
       ],

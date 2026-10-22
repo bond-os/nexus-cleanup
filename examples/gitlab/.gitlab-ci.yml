@@ -1,0 +1,75 @@
+# nexus-cleanup — GitLab CI pipeline.
+#
+# Written by `nexus-cleanup init --ci gitlab`. The repository holds the configuration
+# files, one YAML file per cleanup under configs/, and ci/run-configs.sh, the loop
+# that runs the tool once per file. Adding a file needs no change here.
+#
+# Runs the published image, pinned to an exact release. Bump the pinned version
+# deliberately, after reading the release notes in CHANGELOG.md, and move the
+# schema address in configs/ to the same release.
+#
+# Needs:
+#   - CI/CD variables NEXUS_USERNAME and NEXUS_PASSWORD, masked and protected
+#     (protected variables reach pipelines on protected branches only)
+#   - a pipeline schedule on a protected branch for the nightly dry run
+#   - max-deletions or max-deletion-share in every configuration file: the loop
+#     passes --require-cap, so a file without a cap fails the dry run
+#
+# Every pipeline performs a dry run of every file and keeps the reports as
+# artifacts. Deletion happens only in a pipeline started from "Run pipeline" with
+# EXECUTE=true, and only once someone presses play on the blocked manual job after
+# reading those reports. A scheduled pipeline never deletes.
+
+variables:
+  NEXUS_URL: https://nexus.example.com
+  EXECUTE:
+    value: "false"
+    options: ["false", "true"]
+    description: Offer the manual deletion job after the dry run
+
+stages:
+  - dry-run
+  - execute
+
+.nexus-cleanup:
+  image:
+    # An exact release, never a floating tag. The image's entrypoint is the tool;
+    # the runner needs a shell entrypoint to run `script`, and the tool is on PATH.
+    name: ghcr.io/bond-os/nexus-cleanup:0.1.0 # x-release-please-version
+    entrypoint: [""]
+  resource_group: nexus-cleanup
+
+nexus-cleanup:dry-run:
+  extends: .nexus-cleanup
+  stage: dry-run
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web"
+  script:
+    - sh ci/run-configs.sh
+  # Exit 4: some groups were skipped. Worth a warning, not a red pipeline.
+  allow_failure:
+    exit_codes: [4]
+  artifacts:
+    when: always
+    expire_in: 30 days
+    paths:
+      - reports/
+
+nexus-cleanup:execute:
+  extends: .nexus-cleanup
+  stage: execute
+  needs: [nexus-cleanup:dry-run]
+  rules:
+    # A manual job from `rules` blocks the pipeline until someone runs it. To limit
+    # who may, add an `environment:` here and protect that environment.
+    - if: $CI_PIPELINE_SOURCE == "web" && $EXECUTE == "true"
+      when: manual
+  interruptible: false
+  script:
+    - sh ci/run-configs.sh --execute
+  artifacts:
+    when: always
+    expire_in: 90 days
+    paths:
+      - reports/
