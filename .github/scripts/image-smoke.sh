@@ -112,12 +112,17 @@ run --entrypoint nu "$image" -c 'use /opt/nexus-cleanup/nexus-cleanup'
 [ "$code" -eq 0 ] && [ ! -s "$out" ] && [ ! -s "$err" ] || fail "importing the module was not inert"
 pass "importing the module prints nothing"
 
-# 9. The image holds the tool and nothing else from the repository.
+# 9. The image holds the tool and nothing else from the repository: the templates
+#    `init` writes, inside the module, but no development tool.
 run --entrypoint nu "$image" -c 'ls /opt/nexus-cleanup | get name | path basename | sort | str join ","'
 [ "$(cat "$out")" = "nexus-cleanup,nexus-cleanup.nu" ] || fail "/opt/nexus-cleanup holds: $(cat "$out")"
 run --entrypoint nu "$image" -c 'ls -a /work | length'
 [ "$(cat "$out")" = "0" ] || fail "/work is not empty"
-pass "only the entrypoint and the module are installed; /work is empty"
+run --entrypoint sh "$image" -c 'test -f /opt/nexus-cleanup/nexus-cleanup/templates/ci/gitlab/.gitlab-ci.yml'
+[ "$code" -eq 0 ] || fail "the init templates are missing from the module"
+run --entrypoint sh "$image" -c 'find / -xdev \( -name render-examples.nu -o -name generate-config-schema.nu -o -name record-fixtures.nu \) 2>/dev/null'
+[ ! -s "$out" ] || fail "development tools are in the image: $(cat "$out")"
+pass "only the entrypoint and the module, templates included, are installed; /work is empty"
 
 # 10. The version label agrees with the tool.
 label=$("$engine" image inspect --format '{{ index .Config.Labels "org.opencontainers.image.version" }}' "$image")
@@ -158,5 +163,40 @@ rm -rf "$ws"
 [ "$code" -eq 0 ] || fail "writing the summary as the caller exited $code: $(cat "$err")"
 [ "$owned" = yes ] || fail "the summary is missing from the workspace or not owned by the caller"
 pass "a caller-owned workspace receives the summary, owned by the caller (${as_caller[*]})"
+
+# 14. init writes a configuration repository into the mounted workspace, pinned to
+#     the image's own version: as an arbitrary uid with group 0 on a read-only root
+#     with no capabilities, and as the caller with the documented user mapping.
+check_init() { # DIR LABEL
+  [ "$code" -eq 0 ] || fail "init ($2) exited $code: $(cat "$err")"
+  [ ! -s "$out" ] || fail "init ($2) wrote to stdout: $(cat "$out")"
+  for f in .gitlab-ci.yml ci/run-configs.sh configs/example.yaml .editorconfig .gitattributes; do
+    [ -f "$1/$f" ] || fail "init ($2) did not write $f"
+    grep -q -- "$f" "$err" || fail "init ($2) did not list $f on stderr"
+  done
+  grep -q "ghcr.io/bond-os/nexus-cleanup:$expected\$" "$1/.gitlab-ci.yml" \
+    || fail "init ($2) did not pin the image to $expected"
+  grep -q "/v$expected/schema/config.schema.json\$" "$1/configs/example.yaml" \
+    || fail "init ($2) did not pin the schema to v$expected"
+}
+ws=$(mktemp -d)
+chmod 0777 "$ws"
+run "${hardened[@]}" -v "$ws:/work" "$image" init --ci gitlab
+check_init "$ws" "arbitrary uid"
+# The directories init created belong to that uid, so the caller cannot empty
+# them. Their owner opens up everything below the workspace (the workspace itself
+# is the caller's); the caller then removes it.
+"$engine" run --rm "${hardened[@]}" -v "$ws:/work" --entrypoint find "$image" \
+  /work -mindepth 1 -exec chmod a+rwX {} +
+rm -rf "$ws"
+pass "init as an arbitrary uid on a read-only root writes the repository, pinned to $expected"
+
+ws=$(mktemp -d)
+run "${as_caller[@]}" -v "$ws:/work" "$image" init --ci gitlab
+check_init "$ws" "as the caller"
+not_owned=$(find "$ws" ! -user "$(id -u)")
+rm -rf "$ws"
+[ -z "$not_owned" ] || fail "init wrote files the caller does not own: $not_owned"
+pass "init into a caller-owned workspace writes files owned by the caller (${as_caller[*]})"
 
 echo "image smoke check passed: $image"
