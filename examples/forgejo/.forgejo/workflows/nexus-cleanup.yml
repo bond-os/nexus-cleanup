@@ -1,0 +1,102 @@
+# nexus-cleanup — Forgejo Actions workflow.
+#
+# Written by `nexus-cleanup init --ci forgejo`. The repository holds the
+# configuration files, one YAML file per cleanup under configs/, and
+# ci/run-configs.sh, the loop that runs the tool once per file. Adding a file needs
+# no change here.
+#
+# Needs:
+#   - a runner with the `docker` label
+#   - repository variable NEXUS_URL, secrets NEXUS_USERNAME and NEXUS_PASSWORD
+#   - max-deletions or max-deletion-share in every configuration file: the loop
+#     passes --require-cap, so a file without a cap fails the dry run
+#
+# Every run performs a dry run of every file and uploads the reports. Deletion
+# happens only in a run started by hand with `execute` ticked, and a scheduled run never deletes. Forgejo
+# has no approval gate inside a run, so read a dry-run report before ticking
+# `execute`: each file's deletion cap is what stands between a surprise and the
+# repository.
+#
+# The job image is a node image rather than the published nexus-cleanup one: Forgejo
+# runs JavaScript actions (upload-artifact) inside the job container, and that image
+# has no node. So the tool is fetched at an exact release tag instead, and Nushell is
+# installed at the pinned version, verified by checksum. Release tags are immutable,
+# so the tag always names the same code. Bump NEXUS_CLEANUP_VERSION deliberately,
+# after reading CHANGELOG.md, and move the schema address in configs/ to the same
+# release.
+#
+# The Nushell binary is x86_64; on an arm64 runner use the
+# aarch64-unknown-linux-musl asset and its checksum.
+
+name: nexus-cleanup
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+    inputs:
+      execute:
+        description: Delete after the dry run
+        type: boolean
+        default: false
+
+concurrency:
+  group: nexus-cleanup
+
+jobs:
+  cleanup:
+    runs-on: docker
+    container:
+      image: node:24-bookworm
+    env:
+      NEXUS_URL: ${{ vars.NEXUS_URL }}
+      # An exact release of nexus-cleanup, never a branch.
+      NEXUS_CLEANUP_VERSION: v0.1.0 # x-release-please-version
+      NEXUS_CLEANUP: nu /opt/nexus-cleanup/nexus-cleanup.nu
+      # The Nushell release nexus-cleanup is tested with.
+      NU_VERSION: 0.115.1
+      NU_SHA256: 8a9722177ddd421eba927b4baae4ae341a4d1c3434504be7b1b17d998bafdd87
+    steps:
+      - uses: https://code.forgejo.org/actions/checkout@v4
+
+      - name: Fetch nexus-cleanup
+        run: |
+          git clone --quiet --depth 1 --branch "$NEXUS_CLEANUP_VERSION" \
+            https://github.com/bond-os/nexus-cleanup.git /opt/nexus-cleanup
+
+      - name: Install Nushell
+        run: |
+          asset="nu-${NU_VERSION}-x86_64-unknown-linux-musl"
+          curl -fsSL -o /tmp/nu.tar.gz \
+            "https://github.com/nushell/nushell/releases/download/${NU_VERSION}/${asset}.tar.gz"
+          echo "${NU_SHA256}  /tmp/nu.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/nu.tar.gz -C /usr/local/bin --strip-components=1 "${asset}/nu"
+          nu --version
+
+      - name: Dry run
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+        # Exit 4: some groups were skipped. A warning in the reports, not a reason to
+        # stop the run before the execute step.
+        run: sh ci/run-configs.sh || [ $? -eq 4 ]
+
+      - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
+        if: always()
+        with:
+          name: dry-run
+          path: reports/*.dry-run*.json
+
+      - name: Execute
+        # A boolean input can arrive as a string, depending on the Forgejo version.
+        if: github.event_name == 'workflow_dispatch' && (inputs.execute == true || inputs.execute == 'true')
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+        run: sh ci/run-configs.sh --execute
+
+      - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
+        if: always() && hashFiles('reports/*.execute.json') != ''
+        with:
+          name: execute
+          path: reports/*.execute*.json
