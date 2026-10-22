@@ -7,7 +7,35 @@
 use ./nexus-cleanup/config.nu *
 use ./nexus-cleanup/api.nu *
 use ./nexus-cleanup/run.nu *
+use ./nexus-cleanup/scaffold.nu *
 use ./nexus-cleanup/version.nu [VERSION]
+
+# Write a configuration repository: a pipeline, the loop it calls, an example
+# configuration and, on request, editor settings. See `init --help`.
+#
+# Like --version, it reads no run configuration and contacts no Nexus. Its
+# arguments are parsed by `scaffold init-args`, so that every mistake — a run flag
+# such as --execute included — exits with the usage code.
+def --wrapped "main init" [...args: string] {
+    let outcome = (try {
+        let options = (scaffold init-args $args)
+        if $options.help {
+            {help: true}
+        } else {
+            let plan = (scaffold plan --ci $options.ci --editor $options.editors --version $VERSION)
+            scaffold write $plan (if ($options.dir | is-empty) { "." } else { $options.dir }) --force=$options.force
+            {help: false}
+        }
+    } catch {|e| {err: ($e.msg? | default "init failed")} })
+
+    if ("err" in ($outcome | columns)) {
+        print --stderr $"nexus-cleanup: ($outcome.err)"
+        exit $EXIT_USAGE
+    }
+    if $outcome.help {
+        print --no-newline (scaffold init-help $VERSION)
+    }
+}
 
 def main [
     ...repositories: string             # repositories to clean: proxies, or raw hosted with --allow-hosted

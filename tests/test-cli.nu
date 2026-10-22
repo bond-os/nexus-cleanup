@@ -179,3 +179,146 @@ run-suite "cli" [
         rm -f $summary_path
     } }
 ]
+
+# Run the entrypoint from `dir`, with the same clean environment as `cli`.
+def cli-in [dir: string, ...args: string]: nothing -> record {
+    let ep = (entrypoint)
+    with-env {NEXUS_URL: "", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
+        cd $dir
+        ^$nu.current-exe $ep ...$args | complete
+    }
+}
+
+def tree [dir: string]: nothing -> list<string> {
+    glob $"($dir)/**/*" --no-dir | path relative-to $dir | sort
+}
+
+# Run `init` with these arguments in a fresh directory; returns the result and the
+# files left behind.
+def init-in-empty [...args: string]: nothing -> record {
+    let dir = (mktemp -d -t "init-XXXXXX")
+    let r = (cli-in $dir "init" ...$args)
+    let files = (tree $dir)
+    rm -rf $dir
+    $r | insert files $files
+}
+
+const GITLAB_TREE = [".editorconfig" ".gitattributes" ".gitlab-ci.yml" "ci/run-configs.sh" "configs/example.yaml"]
+
+run-suite "cli: init" [
+    { name: "init writes the repository with no NEXUS_URL and no selection", run: {||
+        let r = (init-in-empty "--ci" "gitlab")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $r.stdout ""
+        assert equal $r.files $GITLAB_TREE
+        assert ($r.stderr | str contains "configs/example.yaml")
+    } }
+    { name: "init writes into a named directory, creating it", run: {||
+        let base = (mktemp -d -t "init-XXXXXX")
+        let r = (cli-in $base "init" "--ci" "gitlab" "cleanup-repo")
+        let files = (tree ($base | path join "cleanup-repo"))
+        let beside = (ls -a $base | get name | path basename)
+        rm -rf $base
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $files $GITLAB_TREE
+        assert equal $beside ["cleanup-repo"]
+    } }
+    { name: "the files pin the running tool's version", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        let r = (cli-in $dir "init" "--ci" "gitlab")
+        let pipeline = (open --raw ($dir | path join ".gitlab-ci.yml") | decode utf-8)
+        let example = (open --raw ($dir | path join "configs" "example.yaml") | decode utf-8)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($pipeline | str contains $"ghcr.io/bond-os/nexus-cleanup:($VERSION)")
+        assert ($example | str contains $"/v($VERSION)/schema/config.schema.json")
+    } }
+    { name: "--editor is repeatable, in either spelling", run: {||
+        let r = (init-in-empty "--ci=jenkins-sh" "--editor" "vscode" "--editor=intellij")
+        assert equal $r.exit_code 0 $r.stderr
+        assert ("Jenkinsfile" in $r.files)
+        assert (".vscode/settings.json" in $r.files)
+        assert (".vscode/extensions.json" in $r.files)
+        assert (".idea/jsonSchemas.xml" in $r.files)
+    } }
+    { name: "init without --ci exits with the usage code, lists the choices, writes nothing", run: {||
+        let r = (init-in-empty)
+        assert equal $r.exit_code $EXIT_USAGE
+        for c in ["gitlab" "forgejo" "jenkins-docker" "jenkins-sh"] { assert ($r.stderr | str contains $c) $c }
+        assert equal $r.files []
+    } }
+    { name: "an unknown CI system exits with the usage code, naming it", run: {||
+        let r = (init-in-empty "--ci" "github")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "github")
+        for c in ["gitlab" "forgejo" "jenkins-docker" "jenkins-sh"] { assert ($r.stderr | str contains $c) $c }
+        assert equal $r.files []
+    } }
+    { name: "an unknown editor exits with the usage code, listing the editors", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--editor" "emacs")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "emacs")
+        assert ($r.stderr | str contains "vscode")
+        assert ($r.stderr | str contains "intellij")
+        assert equal $r.files []
+    } }
+    { name: "a run flag given to init exits with the usage code and writes nothing", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--execute")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--execute")
+        assert equal $r.files []
+    } }
+    { name: "a flag missing its value exits with the usage code", run: {||
+        let r = (init-in-empty "--ci")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert equal $r.files []
+    } }
+    { name: "two target directories exit with the usage code", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "a" "b")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert equal $r.files []
+    } }
+    { name: "existing files exit with the usage code; --force overwrites them", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        "mine\n" | save ($dir | path join ".gitlab-ci.yml")
+        let refused = (cli-in $dir "init" "--ci" "gitlab")
+        let after_refusal = (tree $dir)
+        let forced = (cli-in $dir "init" "--ci" "gitlab" "--force")
+        let after_force = (tree $dir)
+        rm -rf $dir
+        assert equal $refused.exit_code $EXIT_USAGE
+        assert ($refused.stderr | str contains ".gitlab-ci.yml")
+        assert equal $after_refusal [".gitlab-ci.yml"]
+        assert equal $forced.exit_code 0 $forced.stderr
+        assert equal $after_force $GITLAB_TREE
+    } }
+    { name: "init --help describes its options and writes nothing", run: {||
+        let r = (init-in-empty "--help")
+        assert equal $r.exit_code 0
+        for word in ["--ci" "--editor" "--force" "gitlab" "jenkins-sh" "vscode" "intellij"] {
+            assert ($r.stdout | str contains $word) $word
+        }
+        assert equal $r.files []
+    } }
+    { name: "a repository named init is still selected by --pattern", run: {||
+        # Through the entrypoint, `--pattern init` is a cleanup run: it reaches the
+        # (unreachable) Nexus instead of initialising anything.
+        let dir = (mktemp -d -t "init-XXXXXX")
+        let run = (cli-in $dir "--url" "http://127.0.0.1:9" "--max-attempts" "1" "--timeout" "2sec" "--pattern" "init")
+        let files = (tree $dir)
+        rm -rf $dir
+        assert equal $run.exit_code $EXIT_API $run.stderr
+        assert equal $files []
+        # And the selection it makes picks the repository named init.
+        let fetch = {|req|
+            if ($req.url | str ends-with "/service/rest/v1/repositories") {
+                {status: 200, body: [{name: "init", format: "npm", type: "proxy"}]}
+            } else {
+                {status: 200, body: {items: [], continuationToken: null}}
+            }
+        }
+        let config = (config resolve {url: "https://n.invalid", pattern: "init"})
+        let out = (cleanup run $config (api client "https://n.invalid" --backoff 0ms --fetch $fetch))
+        assert equal $out.report.summary.repositories ["init"]
+    } }
+]
