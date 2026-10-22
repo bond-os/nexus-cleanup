@@ -50,18 +50,22 @@ nexus-cleanup/
   policy.nu               # grouping, ordering, keep/delete/skip decisions
   report.nu               # record schema, aggregate, json/csv encoding
   run.nu                  # orchestration: enumerate, plan, delete, emit
+  scaffold.nu             # `init`: render the templates, write them without overwriting
+  templates/              # what `init` writes, stored at the path it is written to
+    common/               # always: ci/run-configs.sh, configs/example.yaml, dotfiles
+    ci/<system>/          # gitlab, forgejo, jenkins-docker, jenkins-sh
+    editors/<editor>/     # vscode, intellij
   version.nu              # VERSION; rewritten by release-please, never by hand
 tools/
   record-fixtures.nu      # development only; records redacted fixtures from a live Nexus
   generate-config-schema.nu # development only; writes schema/ from the config key table
+  render-examples.nu      # development only; writes examples/<system>/ from the templates
 schema/
   config.schema.json      # generated; JSON Schema for --config files, pinned by release tag
-examples/                 # CI pipelines: dry run on schedule, deletion only by hand
-  ci/run-configs.sh       # the loop every pipeline calls: one run per configs/*.yaml
-  configs/                # example configuration files
-  gitlab-ci/
-  forgejo/
-  jenkins/                # Docker Pipeline plugin and plain `sh` variants
+examples/
+  configs/                # gallery of configuration files
+  gitlab/ forgejo/ jenkins-docker/ jenkins-sh/
+                          # generated: `init` output plus release markers; never edit by hand
 tests/
   fixtures/<format>/      # recorded, redacted Nexus API responses
   test-*.nu               # std assert tests
@@ -559,13 +563,49 @@ SchemaStore, which serves one floating schema — the `latest` problem again. It
 into the image either: nothing there reads it. Example files pin it inside release-please
 block markers, and their paths are listed as `generic` extra-files, so a release moves the pin.
 
-### Example pipelines loop over a directory through one script
+### Generated pipelines loop over a directory through one script
 
-Every example pipeline calls `examples/ci/run-configs.sh`, which runs the tool once per
-`*.yaml` file, keeps going past a failing file, and ends with the first exit code other than 0
-and 4, else 4, else 0. Adding a configuration needs no pipeline edit, and the loop is tested once
-(`tests/test-run-configs.nu`) rather than in four CI dialects. It is glue, not a tool feature:
-one file stays one run, and the tool has no multi-run mode.
+Every pipeline `init` writes calls `ci/run-configs.sh` (from
+`nexus-cleanup/templates/common/ci/`), which runs the tool once per `*.yaml` file in `configs/`,
+keeps going past a failing file, and ends with the first exit code other than 0 and 4, else 4,
+else 0. Adding a configuration needs no pipeline edit, and the loop is tested once
+(`tests/test-run-configs.nu`) rather than in four CI dialects. It is POSIX `sh`, invoked as
+`sh ci/run-configs.sh` so that no executable bit is needed — `save` cannot set one. It is glue,
+not a tool feature: one file stays one run, and the tool has no multi-run mode.
+
+### `init`: the templates are the single source of the examples
+
+- **Templates, not code.** Each template under `nexus-cleanup/templates/` is a whole file stored
+  at the path it is written to. Rendering replaces `{{version}}`, `{{image}}` and
+  `{{schema_url}}` and nothing else — no conditionals, no loops — so a template reads as the file
+  it becomes. Placeholders have no spaces inside the braces; Forgejo's own `${{ … }}`
+  expressions pass through untouched. Do not add a template language.
+- **`examples/<system>/` is generated.** `tools/render-examples.nu` writes each tree as
+  `init --ci <system> --editor vscode --editor intellij` would at `VERSION`, and
+  `tests/test-examples.nu` fails when a committed file differs by one byte or a file is extra or
+  missing. Change a template and re-render; never edit an example tree. `examples/configs/` is
+  the hand-written gallery and stays outside this.
+- **The renderer always writes release markers; `init` never does.** Markers mean nothing outside
+  this repository. The renderer marks every template line holding a placeholder: inline in the
+  file's comment syntax, except the modeline, which must stay one URL and is wrapped in
+  `x-release-please-start-version` / `x-release-please-end` lines. Every marked example file is a
+  `generic` extra-file in `release-please-config.json`, which the test also enforces. Its
+  emulation of the updater was checked once against release-please 17.11.2's own `Generic`
+  updater.
+- **The example configuration selects `replace-me`**, a repository that cannot exist, and sets a
+  deletion cap. An unedited repository then fails its first dry run naming the placeholder
+  (exit 3). A placeholder pattern would match nothing and exit 0 — a green pipeline doing
+  nothing — and without the cap `--require-cap` would stop it first with a usage error that does
+  not say the file was never edited.
+- **`init` writes no `AGENTS.md` or `README.md`.** The generated repository belongs to its
+  operators; its pipeline header is its documentation. It never merges into an existing file
+  either: `--force` overwrites exactly the files `init` writes and nothing else.
+- **`init` parses its own arguments** (`def --wrapped`, `scaffold init-args`). Nushell keeps only
+  the last of a repeated flag, and `--editor` repeats; and it exits 1 on an unknown flag, where
+  `init --execute` must exit with the usage code. Every `init` failure, a filesystem error
+  included, exits 2: each is the operator's arguments or environment, never Nexus.
+- **A repository named `init` cannot be given positionally** — it selects the subcommand. It
+  stays reachable through `--pattern init` or a configuration file's `repositories`.
 
 ### Report fields are only ever appended
 
