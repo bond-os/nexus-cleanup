@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "{{schema_url}}": ["configs/*.yaml", "configs/*.yml"]
+  }
+}

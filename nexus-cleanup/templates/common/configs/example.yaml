@@ -1,0 +1,34 @@
+# yaml-language-server: $schema={{schema_url}}
+#
+# One cleanup run. The pipeline runs the tool once per *.yaml file in configs/, so a
+# second target is a second file here and no pipeline change. Settings are the
+# tool's flags without their dashes; the pipeline adds --require-cap to every run,
+# and only its manual execute job adds --execute.
+#
+# `replace-me` does not exist on any Nexus: until this file names a real repository,
+# the pipeline fails naming it rather than passing having cleaned nothing.
+repositories: [replace-me]
+
+# Or select proxies by glob instead of naming them (a pattern never selects a
+# hosted repository):
+# pattern: "yum-proxy-*"
+
+# Newest versions to keep per group:
+# keep: 1
+
+# Required by the pipeline: an executing run that would delete more than this
+# aborts and deletes nothing. max-deletion-share caps a share instead.
+max-deletions: 100
+# max-deletion-share: 0.5
+
+# Fail the job when a group cannot be ordered and is skipped:
+# fail-on-skip: true
+
+# Dated build directories in a raw repository, keeping the 14 newest per parent:
+# from-path: '^/(?P<name>builds)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
+# version-scheme: date
+# keep: 14
+
+# A raw hosted repository must be named above and allowed here; nothing is
+# deleted without --execute:
+# allow-hosted: true

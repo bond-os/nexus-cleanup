@@ -1,7 +1,7 @@
 # nexus-cleanup — Forgejo Actions workflow.
 #
-# Copy to .forgejo/workflows/nexus-cleanup.yml in a private repository that holds the
-# configuration files: one YAML file per cleanup under CONFIG_DIR, and
+# Written by `nexus-cleanup init --ci forgejo`. The repository holds the
+# configuration files, one YAML file per cleanup under configs/, and
 # ci/run-configs.sh, the loop that runs the tool once per file. Adding a file needs
 # no change here.
 #
@@ -11,8 +11,8 @@
 #   - max-deletions or max-deletion-share in every configuration file: the loop
 #     passes --require-cap, so a file without a cap fails the dry run
 #
-# Every run performs a dry run of every file and uploads the reports. Deletion happens only in a run
-# started by hand with `execute` ticked, and a scheduled run never deletes. Forgejo
+# Every run performs a dry run of every file and uploads the reports. Deletion
+# happens only in a run started by hand with `execute` ticked, and a scheduled run never deletes. Forgejo
 # has no approval gate inside a run, so read a dry-run report before ticking
 # `execute`: each file's deletion cap is what stands between a surprise and the
 # repository.
@@ -22,7 +22,8 @@
 # has no node. So the tool is fetched at an exact release tag instead, and Nushell is
 # installed at the pinned version, verified by checksum. Release tags are immutable,
 # so the tag always names the same code. Bump NEXUS_CLEANUP_VERSION deliberately,
-# after reading CHANGELOG.md.
+# after reading CHANGELOG.md, and move the schema address in configs/ to the same
+# release.
 #
 # The Nushell binary is x86_64; on an arm64 runner use the
 # aarch64-unknown-linux-musl asset and its checksum.
@@ -50,12 +51,9 @@ jobs:
     env:
       NEXUS_URL: ${{ vars.NEXUS_URL }}
       # An exact release of nexus-cleanup, never a branch.
-      NEXUS_CLEANUP_VERSION: v0.1.0
-      # In your own repository this is `configs`; this example reads the files
-      # shipped beside it.
-      CONFIG_DIR: examples/configs
+      NEXUS_CLEANUP_VERSION: v{{version}}
       NEXUS_CLEANUP: nu /opt/nexus-cleanup/nexus-cleanup.nu
-      # Pinned to the version floor in AGENTS.md.
+      # The Nushell release nexus-cleanup is tested with.
       NU_VERSION: 0.115.1
       NU_SHA256: 8a9722177ddd421eba927b4baae4ae341a4d1c3434504be7b1b17d998bafdd87
     steps:
@@ -81,7 +79,7 @@ jobs:
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
         # Exit 4: some groups were skipped. A warning in the reports, not a reason to
         # stop the run before the execute step.
-        run: sh examples/ci/run-configs.sh || [ $? -eq 4 ]
+        run: sh ci/run-configs.sh || [ $? -eq 4 ]
 
       - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
         if: always()
@@ -95,7 +93,7 @@ jobs:
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-        run: sh examples/ci/run-configs.sh --execute
+        run: sh ci/run-configs.sh --execute
 
       - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
         if: always() && hashFiles('reports/*.execute.json') != ''

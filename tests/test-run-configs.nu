@@ -1,10 +1,10 @@
 use ./harness.nu *
+use ../nexus-cleanup/scaffold.nu *
+use ../nexus-cleanup/version.nu [VERSION]
 
-# Exercises examples/ci/run-configs.sh, the loop every example pipeline calls, with a
-# stub in place of the tool. The script is POSIX sh by design, so this suite runs it
-# with `sh` — BusyBox's in the pinned image.
-
-def script []: nothing -> string { $"($env.FILE_PWD | path dirname)/examples/ci/run-configs.sh" }
+# Exercises ci/run-configs.sh, the loop every generated pipeline calls, as `init`
+# writes it, with a stub in place of the tool. The script is POSIX sh by design, so
+# this suite runs it with `sh` — BusyBox's in the pinned image.
 
 # The stub logs its arguments, writes the summary where asked as the tool does, and
 # exits with the code named in the config file's `# stub-exit: N` line (0 when absent).
@@ -20,19 +20,22 @@ code=$(sed -n "s/^# stub-exit: //p" "$f")
 exit "${code:-0}"
 '
 
-# Run the script in a scratch workspace holding one config file per exit code.
+# Run the script in a repository written by `init`, its example configuration
+# replaced by one file per exit code. CONFIG_DIR and REPORT_DIR are left unset, so
+# the script's own defaults are what is tested.
 def run-loop [codes: list<int>, ...args: string]: nothing -> record {
     let work = (mktemp -d -t "run-configs-XXXXXX")
-    mkdir $"($work)/configs"
+    scaffold write (scaffold plan --ci gitlab --version $VERSION) $work --quiet
+    rm $"($work)/configs/example.yaml"
     for i in 0..<($codes | length) {
         $"# stub-exit: ($codes | get $i)\nrepositories: [r]\n" | save $"($work)/configs/c($i).yaml"
     }
     $STUB | save $"($work)/stub.sh"
     let log = $"($work)/log"
     "" | save $log
-    let r = (with-env {NEXUS_CLEANUP: $"sh ($work)/stub.sh", STUB_LOG: $log, CONFIG_DIR: "configs", REPORT_DIR: "reports"} {
+    let r = (with-env {NEXUS_CLEANUP: $"sh ($work)/stub.sh", STUB_LOG: $log} {
         cd $work
-        ^sh (script) ...$args | complete
+        ^sh ci/run-configs.sh ...$args | complete
     })
     let calls = (open --raw $log | lines | where {|l| $l | is-not-empty })
     let reports = (if ($"($work)/reports" | path exists) { ls $"($work)/reports" | get name | each {|p| $p | path basename } | sort } else { [] })
@@ -83,45 +86,65 @@ run-suite "run-configs.sh" [
     } }
 ]
 
-def examples []: nothing -> string { $"($env.FILE_PWD | path dirname)/examples" }
+# A system's rendered pipeline, as `init` writes it.
+def pipeline [ci: string]: nothing -> string {
+    scaffold plan --ci $ci --version $VERSION | where path == ($CI_SYSTEMS | get $ci) | get content.0
+}
 
-run-suite "example pipelines" [
-    { name: "GitLab: only the manual execute job passes --execute", run: {||
-        let p = (open $"(examples)/gitlab-ci/nexus-cleanup.gitlab-ci.yml")
+run-suite "generated pipelines" [
+    { name: "GitLab: parses; only the manual execute job passes --execute; a schedule runs the dry run only", run: {||
+        let p = (pipeline gitlab | from yaml)
         let dry = ($p | get "nexus-cleanup:dry-run")
         let exec = ($p | get "nexus-cleanup:execute")
         assert not ($dry.script | any {|l| $l | str contains "--execute" })
-        assert ($exec.script | any {|l| $l | str contains "run-configs.sh --execute" })
+        assert ($dry.script | any {|l| $l == "sh ci/run-configs.sh" })
+        assert ($dry.rules | any {|r| $r.if | str contains '"schedule"' })
+        assert equal $exec.script ["sh ci/run-configs.sh --execute"]
         assert ($exec.rules | all {|r| ($r.when? | default "") == "manual" })
         assert not ($exec.rules | any {|r| $r.if | str contains "schedule" })
-        assert ($"(examples | path dirname)/($p.variables.CONFIG_DIR)" | path exists)
+        assert ($exec.rules | all {|r| $r.if | str contains '$CI_PIPELINE_SOURCE == "web"' })
+        let others = ($p | transpose job body | where job not-in ["nexus-cleanup:dry-run" "nexus-cleanup:execute"])
+        assert not ($others | any {|j| $j.body | to yaml | str contains "--execute" })
     } }
-    { name: "Forgejo: only the dispatched execute step passes --execute", run: {||
-        let p = (open $"(examples)/forgejo/nexus-cleanup.yml")
-        let job = ($p.jobs.cleanup)
-        let steps = ($job.steps | where {|s| ($s.run? | default "") | str contains "run-configs.sh" })
+    { name: "Forgejo: parses; only the dispatched execute step passes --execute", run: {||
+        let p = (pipeline forgejo | from yaml)
+        # YAML 1.1 reads the `on` key as true in some parsers; accept either.
+        let triggers = ($p | get --optional on | default ($p | get --optional true))
+        assert ("schedule" in ($triggers | columns))
+        assert equal ($triggers.workflow_dispatch.inputs.execute.default) false
+        let steps = ($p.jobs.cleanup.steps | where {|s| ($s.run? | default "") | str contains "run-configs.sh" })
         assert equal ($steps | length) 2
-        assert not (($steps | where name == "Dry run" | first).run | str contains "--execute")
+        let dry = ($steps | where name == "Dry run" | first)
+        assert not ($dry.run | str contains "--execute")
+        assert ($dry.if? == null) "the dry run must run on every trigger"
         let exec = ($steps | where name == "Execute" | first)
-        assert ($exec.run | str contains "--execute")
-        assert ($exec.if | str contains "workflow_dispatch")
-        assert ($"(examples | path dirname)/($job.env.CONFIG_DIR)" | path exists)
+        assert ($exec.run | str contains "sh ci/run-configs.sh --execute")
+        assert ($exec.if | str contains "github.event_name == 'workflow_dispatch'")
+        assert ($exec.if | str contains "inputs.execute")
     } }
-    { name: "Jenkins: --execute appears only in the Execute stage, after the input step", run: {||
-        for f in ["Jenkinsfile.docker-plugin" "Jenkinsfile.sh"] {
-            let text = (open --raw $"(examples)/jenkins/($f)")
+    { name: "Jenkins: --execute only in the Execute stage, behind an input step, never on the timer", run: {||
+        for ci in ["jenkins-docker" "jenkins-sh"] {
+            let text = (pipeline $ci)
             let parts = ($text | split row "stage('Execute')")
-            assert equal ($parts | length) 2 $f
-            assert not ($parts.0 | str contains "--execute") $f
+            assert equal ($parts | length) 2 $ci
+            assert not ($parts.0 | str contains "--execute") $ci
+            assert ($parts.0 | str contains "ci/run-configs.sh") $ci
             let exec = $parts.1
-            assert (($exec | str index-of "input {") < ($exec | str index-of "run-configs.sh --execute")) $f
-            assert ($exec | str contains "not { triggeredBy 'TimerTrigger' }") $f
+            assert (($exec | str index-of "input {") < ($exec | str index-of "ci/run-configs.sh --execute")) $ci
+            assert ($exec | str contains "not { triggeredBy 'TimerTrigger' }") $ci
+            assert ($exec | str contains "expression { params.EXECUTE }") $ci
+            assert ($text | str contains "booleanParam(name: 'EXECUTE', defaultValue: false") $ci
         }
     } }
-    { name: "every pipeline calls the loop script that exists", run: {||
-        assert ($"(examples)/ci/run-configs.sh" | path exists)
-        for f in (glob $"(examples)/{gitlab-ci,forgejo,jenkins}/*") {
-            assert (open --raw $f | str contains "examples/ci/run-configs.sh") ($f | path basename)
+    { name: "every pipeline calls the loop init writes beside it, and reads configs/", run: {||
+        for ci in ($CI_SYSTEMS | columns) {
+            let plan = (scaffold plan --ci $ci --version $VERSION)
+            assert ("ci/run-configs.sh" in ($plan | get path)) $ci
+            let text = (pipeline $ci)
+            # jenkins-sh runs it as `docker run --entrypoint sh IMAGE ci/run-configs.sh`.
+            assert ($text =~ "\\bsh\\b[^\\n]* ci/run-configs\\.sh") $ci
+            assert not ($text | str contains "examples/") $ci
+            assert not ($text | str contains "CONFIG_DIR") $ci
         }
     } }
 ]
