@@ -106,6 +106,61 @@ unrelated subordinate uid that cannot write your workspace. Podman's `--userns=k
 your uid to itself, but without `--user` the container still runs as the image's uid 1000.
 That only works if your own uid happens to be 1000.
 
+## Getting started
+
+The intended setup is a small private repository holding one [configuration
+file](#configuration-files) per cleanup and one pipeline that runs them all. `init` writes that
+repository, with every version pin matching the image you run it from:
+
+```bash
+mkdir nexus-cleanup-configs && cd nexus-cleanup-configs
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
+  ghcr.io/bond-os/nexus-cleanup:0.1.0 init --ci gitlab --editor vscode
+```
+
+`--user` lets the container write your directory, as in [Who the container runs
+as](#who-the-container-runs-as): under rootless Podman add `--userns=keep-id`, under rootless
+Docker use `--user 0:0` instead. `init` needs no Nexus, no credentials and no `NEXUS_*`
+variables, and lists every file it writes on stderr:
+
+| File | Written |
+|---|---|
+| `.gitlab-ci.yml`, `.forgejo/workflows/nexus-cleanup.yml` or `Jenkinsfile` | the pipeline for `--ci` |
+| `ci/run-configs.sh` | always: the loop the pipeline calls, one run per `configs/*.yaml` |
+| `configs/example.yaml` | always: a starting configuration, with the schema modeline |
+| `.editorconfig`, `.gitattributes` | always: UTF-8 and LF, so a Windows checkout cannot put CR into the pipeline's shell |
+| `.vscode/settings.json`, `.vscode/extensions.json` | with `--editor vscode` |
+| `.idea/jsonSchemas.xml` | with `--editor intellij` |
+
+- **`--ci` is required**: `gitlab`, `forgejo`, `jenkins-docker` (the Docker Pipeline plugin) or
+  `jenkins-sh` (plain `sh` steps calling `docker run`). [CI](#ci) describes how they differ.
+- **`--editor vscode` and `--editor intellij`** may be given together; none is the default. Each
+  maps the schema to `configs/*.yaml` and `configs/*.yml`, so a new file gets completion before
+  it has a modeline. VS Code is pointed at Red Hat's YAML extension, which it recommends
+  installing; IntelliJ-based IDEs need nothing extra.
+- **A directory argument** writes there instead of the working directory — `/work`, your mounted
+  directory, in the image — and creates it if needed.
+- **Nothing is overwritten unasked.** If any file `init` would write already exists, it lists
+  them all and writes nothing. `--force` overwrites exactly those files and touches nothing else;
+  it does not merge. If you already have a `.vscode/settings.json`, leave out `--editor vscode`
+  and copy the `yaml.schemas` entry from
+  [`examples/gitlab/.vscode/settings.json`](examples/gitlab/.vscode/settings.json) into yours.
+- **Commit `.idea/jsonSchemas.xml` explicitly.** `.idea/` is often in a global gitignore, which
+  would keep the mapping from your colleagues: `git add -f .idea/jsonSchemas.xml`.
+
+Then edit `configs/example.yaml`. Until it names a real repository it selects `replace-me`, so
+the first pipeline run fails naming it rather than passing having cleaned nothing. Set the CI
+variables or credentials the pipeline's header lists, commit and push.
+
+`init` does not upgrade a repository it wrote earlier. To move to a newer release, bump the pins
+by hand — the pipeline's image tag and the schema address in each file — or run the newer
+image's `init --force` and read the diff before committing.
+
+Each [`examples/<system>/`](examples/) directory is what `init --ci <system> --editor vscode
+--editor intellij` writes, for reading before you run it. Its pinned lines also carry
+`x-release-please` comments, which keep the examples current at each release and which `init`
+does not write.
+
 ## Configuration
 
 | Setting | Environment | Flag |
@@ -226,6 +281,14 @@ never move, so the schema always matches the tool that reads the file. A JSON fi
 same address in a top-level `$schema` key, which the tool accepts and ignores. The schema is an
 aid, not the authority: where it cannot express a rule exactly — whether a regex compiles, say —
 it is looser than the tool, which still refuses the file.
+
+A repository written by `init --editor vscode` or `--editor intellij` also maps the schema to
+every file in `configs/` in the editor's project settings, so a new file is completed and
+checked before it has a modeline; see [Getting started](#getting-started). Checked with VS Code
+1.142.0 with Red Hat's YAML extension 2.0.0, IntelliJ IDEA 2026.2.3 and Rider 2026.2.3.1: keys
+complete, and a misspelt key or `execute` is flagged with its description, in a file without a
+modeline. The `.idea/jsonSchemas.xml` that `init` writes is identical to the one IntelliJ IDEA
+2026.2.3 writes for the same mapping.
 
 ## Exit codes
 
@@ -398,9 +461,9 @@ report shows which happened.
 
 ## CI
 
-Complete pipelines live in `examples/`. Each is meant to be the pipeline of a private
-repository that holds the [configuration files](#configuration-files), and each calls
-[`examples/ci/run-configs.sh`](examples/ci/run-configs.sh), which runs the tool once per
+`init` writes one of four pipelines (see [Getting started](#getting-started)); each is meant to
+be the pipeline of a private repository that holds the [configuration
+files](#configuration-files). Each calls `ci/run-configs.sh`, which runs the tool once per
 `*.yaml` file in `CONFIG_DIR` (`configs` by default). Adding a file needs no pipeline change.
 They share one shape:
 
@@ -421,16 +484,15 @@ reads the output of.
 
 | CI system | File | Runs in | Approval before deleting |
 |---|---|---|---|
-| GitLab CI | `examples/gitlab-ci/nexus-cleanup.gitlab-ci.yml` | the release image, entrypoint cleared | a blocked manual job |
-| Forgejo Actions | `examples/forgejo/nexus-cleanup.yml` | a node image; the release tag cloned, Nushell installed by checksum | none; each file's cap is the guard |
-| Jenkins, Docker Pipeline plugin | `examples/jenkins/Jenkinsfile.docker-plugin` | the release image, entrypoint cleared | an `input` step |
-| Jenkins, plain `sh` | `examples/jenkins/Jenkinsfile.sh` | the release image via `docker run` | an `input` step |
+| GitLab CI (`--ci gitlab`) | [`.gitlab-ci.yml`](examples/gitlab/.gitlab-ci.yml) | the release image, entrypoint cleared | a blocked manual job |
+| Forgejo Actions (`--ci forgejo`) | [`.forgejo/workflows/nexus-cleanup.yml`](examples/forgejo/.forgejo/workflows/nexus-cleanup.yml) | a node image; the release tag cloned, Nushell installed by checksum | none; each file's cap is the guard |
+| Jenkins, Docker Pipeline plugin (`--ci jenkins-docker`) | [`Jenkinsfile`](examples/jenkins-docker/Jenkinsfile) | the release image, entrypoint cleared | an `input` step |
+| Jenkins, plain `sh` (`--ci jenkins-sh`) | [`Jenkinsfile`](examples/jenkins-sh/Jenkinsfile) | the release image via `docker run` | an `input` step |
 
-Every example pins an exact release (`ghcr.io/bond-os/nexus-cleanup:0.1.0`, or the tag `v0.1.0`
-for Forgejo). Bump the pin deliberately, after reading `CHANGELOG.md`. To adopt one, copy it,
-`examples/ci/run-configs.sh` to `ci/run-configs.sh` and your configuration files to `configs/`,
-then point the pipeline's script calls at `ci/run-configs.sh` and drop its `CONFIG_DIR` line,
-which only makes the example read `examples/configs/`.
+Every pipeline pins an exact release (`ghcr.io/bond-os/nexus-cleanup:0.1.0`, or the tag `v0.1.0`
+for Forgejo): the release whose `init` wrote it. Bump the pin deliberately, after reading
+`CHANGELOG.md`, together with the schema address in your configuration files. The links above
+go to the rendered examples, one complete repository per CI system under `examples/`.
 
 Two container details matter. A CI system that runs a shell script inside the image needs its
 entrypoint cleared (`entrypoint: [""]` in GitLab, `args '--entrypoint='` for the Jenkins plugin);
