@@ -61,11 +61,13 @@ jobs:
         with:
           persist-credentials: false
 
-      # Uses the runner's preinstalled Node. ajv-cli expands the glob itself.
+      # Uses the runner's preinstalled Node. ajv-cli expands the globs itself: the
+      # gallery, and the example configuration in each rendered example repository.
       - name: Validate the example configuration files
         run: |
           npx --yes -p "$AJV_CLI" ajv validate --spec=draft2020 --strict=true \
-            -s schema/config.schema.json -d "examples/configs/*.yaml"
+            -s schema/config.schema.json \
+            -d "examples/configs/*.yaml" -d "examples/*/configs/*.yaml"
 
   # Builds the image exactly as a release would and smoke-checks it. Pushes nothing.
   image:
