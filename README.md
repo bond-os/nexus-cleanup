@@ -208,7 +208,7 @@ The regexes live in reviewed YAML rather than in shell quoting inside CI jobs.
 
 ```yaml
 # x-release-please-start-version
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.1.0/schema/config.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.2.0/schema/config.schema.json
 # x-release-please-end
 repositories: [raw-builds]
 from-path: '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
