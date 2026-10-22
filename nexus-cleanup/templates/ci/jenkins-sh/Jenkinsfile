@@ -7,11 +7,14 @@
 //   - max-deletions or max-deletion-share in every configuration file: the loop
 //     passes --require-cap, so a file without a cap fails the dry run
 //
-// Use as the Jenkinsfile of a private repository that holds the configuration
-// files: one YAML file per cleanup under CONFIG_DIR, and ci/run-configs.sh, the
-// loop that runs the tool once per file. Adding a file needs no change here.
+// Written by `nexus-cleanup init --ci jenkins-sh`. The repository holds the
+// configuration files, one YAML file per cleanup under configs/, and
+// ci/run-configs.sh, the loop that runs the tool once per file. Adding a file needs
+// no change here.
+//
 // The tool comes from the published image, pinned to an exact release. Bump the
-// pinned version deliberately, after reading CHANGELOG.md.
+// pinned version deliberately, after reading CHANGELOG.md, and move the schema
+// address in configs/ to the same release.
 //
 // The workspace is bind-mounted into the container, so if the agent itself runs
 // in a container talking to the host's daemon, $WORKSPACE must be a path that
@@ -44,11 +47,8 @@ pipeline {
 
     environment {
         NEXUS_URL = 'https://nexus.example.com'
-        // In your own repository this is `configs`; this example reads the files
-        // shipped beside it.
-        CONFIG_DIR = 'examples/configs'
         // An exact release, never a floating tag.
-        NEXUS_CLEANUP_IMAGE = 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
+        NEXUS_CLEANUP_IMAGE = '{{image}}'
     }
 
     // In both `docker run` calls below:
@@ -75,8 +75,8 @@ pipeline {
                             docker run --rm \
                                 --user "$(id -u):$(id -g)" \
                                 --volume "$WORKSPACE:/work" --workdir /work \
-                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD --env CONFIG_DIR \
-                                --entrypoint sh "$NEXUS_CLEANUP_IMAGE" examples/ci/run-configs.sh
+                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD \
+                                --entrypoint sh "$NEXUS_CLEANUP_IMAGE" ci/run-configs.sh
                         '''))
                     }
                 }
@@ -114,8 +114,8 @@ pipeline {
                             docker run --rm \
                                 --user "$(id -u):$(id -g)" \
                                 --volume "$WORKSPACE:/work" --workdir /work \
-                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD --env CONFIG_DIR \
-                                --entrypoint sh "$NEXUS_CLEANUP_IMAGE" examples/ci/run-configs.sh --execute
+                                --env NEXUS_URL --env NEXUS_USERNAME --env NEXUS_PASSWORD \
+                                --entrypoint sh "$NEXUS_CLEANUP_IMAGE" ci/run-configs.sh --execute
                         '''))
                     }
                 }

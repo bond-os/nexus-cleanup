@@ -1,0 +1,202 @@
+# Repository initialisation: renders the files `init` writes from ./templates and
+# writes them into a directory without overwriting anything unasked.
+#
+# Templates are whole files stored at the path they are written to, below the
+# area that selects them: common/ always, ci/<system>/ for the chosen CI system,
+# editors/<editor>/ for each chosen editor. Rendering replaces three placeholders
+# and nothing else, so each template reads as the file it becomes.
+
+# Located from this file at parse time, so it holds from any working directory.
+const TEMPLATES = path self templates
+
+# The pipeline each CI system reads, at the path it reads it from.
+export const CI_SYSTEMS = {
+    gitlab: ".gitlab-ci.yml"
+    forgejo: ".forgejo/workflows/nexus-cleanup.yml"
+    jenkins-docker: "Jenkinsfile"
+    jenkins-sh: "Jenkinsfile"
+}
+
+export const EDITORS = {
+    vscode: [".vscode/settings.json" ".vscode/extensions.json"]
+    intellij: [".idea/jsonSchemas.xml"]
+}
+
+const COMMON = ["ci/run-configs.sh" "configs/example.yaml" ".editorconfig" ".gitattributes"]
+
+const MARKER = "x-release-please-version"
+
+def usage-error [message: string] {
+    error make {msg: $"usage: ($message)"}
+}
+
+def choices [record: record]: nothing -> string { $record | columns | str join ", " }
+
+# The comment that carries a release marker in a file of this kind.
+def marker-comment [path: string, text: string]: nothing -> string {
+    let name = ($path | path basename)
+    if ($name | str ends-with ".xml") {
+        $"<!-- ($text) -->"
+    } else if ($name == "Jenkinsfile") or ($name | str ends-with ".json") {
+        $"// ($text)"
+    } else {
+        $"# ($text)"
+    }
+}
+
+# Marks every template line holding a placeholder, so that release-please moves the
+# pin it becomes. A modeline must stay exactly one URL, so it is wrapped in block
+# markers on lines of their own; every other line takes the marker inline.
+def add-markers [path: string, template: string]: nothing -> string {
+    # `split row`, not `lines`: a template's final newline, or its absence, is kept.
+    $template | split row "\n" | each {|line|
+        if not ($line =~ '\{\{(version|image|schema_url)\}\}') {
+            $line
+        } else if ($line | str starts-with "# yaml-language-server:") {
+            ["# x-release-please-start-version" $line "# x-release-please-end"] | str join "\n"
+        } else {
+            $"($line) (marker-comment $path $MARKER)"
+        }
+    } | str join "\n"
+}
+
+def render [template: string, version: string]: nothing -> string {
+    let image = $"ghcr.io/bond-os/nexus-cleanup:($version)"
+    let schema_url = $"https://raw.githubusercontent.com/bond-os/nexus-cleanup/v($version)/schema/config.schema.json"
+    $template
+    | str replace --all "{{image}}" $image
+    | str replace --all "{{schema_url}}" $schema_url
+    | str replace --all "{{version}}" $version
+}
+
+# The files `init` writes for these choices, as [{path, content}] with paths
+# relative to the target directory. Reads only the templates; writes nothing.
+#
+# --release-markers is for tools/render-examples.nu alone: `init` never writes
+# markers, which mean nothing outside this repository.
+export def "scaffold plan" [
+    --ci: string                    # gitlab, forgejo, jenkins-docker or jenkins-sh
+    --editor: list<string> = []     # vscode and/or intellij
+    --version: string               # the version every pin names
+    --release-markers               # mark pinned lines for release-please
+]: nothing -> list<record<path: string, content: string>> {
+    if ($ci | is-empty) {
+        usage-error $"--ci is required: one of (choices $CI_SYSTEMS)"
+    }
+    if not ($ci in $CI_SYSTEMS) {
+        usage-error $"unknown CI system '($ci)': choose one of (choices $CI_SYSTEMS)"
+    }
+    for e in $editor {
+        if not ($e in $EDITORS) {
+            usage-error $"unknown editor '($e)': choose from (choices $EDITORS)"
+        }
+    }
+    if ($version | is-empty) {
+        error make {msg: "scaffold plan: --version is required"}
+    }
+
+    let sources = (
+        [{area: $"ci/($ci)", path: ($CI_SYSTEMS | get $ci)}]
+        | append ($COMMON | each {|p| {area: "common", path: $p} })
+        | append ($editor | uniq | each {|e| $EDITORS | get $e | each {|p| {area: $"editors/($e)", path: $p} } } | flatten)
+    )
+    $sources | each {|s|
+        let template = (open --raw ($TEMPLATES | path join $s.area $s.path) | decode utf-8)
+        let marked = (if $release_markers { add-markers $s.path $template } else { $template })
+        {path: $s.path, content: (render $marked $version)}
+    }
+}
+
+# Writes a plan into `dir`, creating it and any parent it lacks. Every path is
+# checked before anything is written: if any exists, nothing is written and every
+# such path is named, unless --force, which overwrites exactly those paths. No other
+# file is read, changed or removed. Each written path goes to stderr unless
+# --quiet; stdout stays empty. A failure part-way (disk full, permission denied)
+# stops and names what was already written, since there is no undoing it.
+export def "scaffold write" [
+    plan: list<record<path: string, content: string>>
+    dir: string
+    --force                         # overwrite files that already exist
+    --quiet                         # do not list written paths
+]: nothing -> nothing {
+    # `path type`, not `path exists`: a dangling symlink is still something in the way.
+    # It raises when a parent is not a directory; the write then reports why.
+    let existing = ($plan | get path | where {|p| (try { $dir | path join $p | path type } catch { null }) != null })
+    if ($existing | is-not-empty) and not $force {
+        usage-error $"($dir): these files already exist: ($existing | str join ', '). Nothing was written; --force overwrites them and nothing else."
+    }
+
+    mut written = []
+    for f in $plan {
+        let target = ($dir | path join $f.path)
+        let failure = (try {
+            mkdir ($target | path dirname)
+            $f.content | save --force --raw $target
+            null
+        } catch {|e| $e.msg? | default "write failed" })
+        if $failure != null {
+            let done = (if ($written | is-empty) { "none" } else { $written | str join ", " })
+            usage-error $"($dir): cannot write ($f.path): ($failure). Files already written: ($done)."
+        }
+        if not $quiet { print --stderr $"wrote ($f.path)" }
+        $written = ($written | append $f.path)
+    }
+}
+
+# `init`'s own arguments. Parsed by hand because Nushell keeps only the last of a
+# repeated flag (--editor is repeatable) and exits 1, not with the usage code, on
+# an unknown one such as a cleanup run's --execute.
+# Returns {help, ci, editors, force, dir}; ci and dir are empty when not given.
+export def "scaffold init-args" [args: list<string>]: nothing -> record {
+    mut options = {help: false, ci: "", editors: [], force: false, dir: ""}
+    mut rest = $args
+    while ($rest | is-not-empty) {
+        let arg = ($rest | first)
+        $rest = ($rest | skip 1)
+        let split = ($arg | parse --regex '^(?P<flag>--[a-z-]+)=(?P<value>.*)$' | get --optional 0)
+        let flag = (if $split != null { $split.flag } else { $arg })
+        match $flag {
+            "--ci" | "--editor" => {
+                let value = (if $split != null { $split.value } else if ($rest | is-not-empty) { $rest | first } else { null })
+                if $value == null {
+                    usage-error $"($flag) needs a value"
+                }
+                if $split == null { $rest = ($rest | skip 1) }
+                if $flag == "--ci" {
+                    $options.ci = $value
+                } else {
+                    $options.editors = ($options.editors | append $value)
+                }
+            }
+            "--force" if $split == null => { $options.force = true }
+            "--help" | "-h" => { $options.help = true }
+            _ => {
+                if ($arg | str starts-with "-") {
+                    usage-error $"init does not take ($arg); its options are --ci, --editor and --force"
+                }
+                if ($options.dir | is-not-empty) {
+                    usage-error $"init takes one target directory, not '($options.dir)' and '($arg)'"
+                }
+                $options.dir = $arg
+            }
+        }
+    }
+    $options
+}
+
+# Help for `init`, which, being parsed by hand, has no generated --help.
+export def "scaffold init-help" [version: string]: nothing -> string {
+    $"Write a configuration repository for nexus-cleanup into DIR, the working directory
+by default: the pipeline, ci/run-configs.sh, configs/example.yaml, .editorconfig and
+.gitattributes, with every version pinned to ($version). Needs no Nexus and no credentials.
+
+Usage:
+  nexus-cleanup init --ci <system> [--editor <editor>]... [--force] [DIR]
+
+Options:
+  --ci <system>      required: (choices $CI_SYSTEMS)
+  --editor <editor>  also write schema settings for (choices $EDITORS); repeatable
+  --force            overwrite files init writes that already exist; nothing else is touched
+  -h, --help         show this help
+"
+}

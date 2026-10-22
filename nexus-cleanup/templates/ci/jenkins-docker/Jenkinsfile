@@ -7,13 +7,14 @@
 //   - max-deletions or max-deletion-share in every configuration file: the loop
 //     passes --require-cap, so a file without a cap fails the dry run
 //
-// Use as the Jenkinsfile of a private repository that holds the configuration
-// files: one YAML file per cleanup under CONFIG_DIR, and ci/run-configs.sh, the
-// loop that runs the tool once per file. Adding a file needs no change here.
-// Without the plugin, use Jenkinsfile.sh next to it instead.
+// Written by `nexus-cleanup init --ci jenkins-docker`. The repository holds the
+// configuration files, one YAML file per cleanup under configs/, and
+// ci/run-configs.sh, the loop that runs the tool once per file. Adding a file needs
+// no change here. Without the plugin, use `init --ci jenkins-sh` instead.
 //
 // The tool comes from the published image, pinned to an exact release. Bump the
-// pinned version deliberately, after reading CHANGELOG.md.
+// pinned version deliberately, after reading CHANGELOG.md, and move the schema
+// address in configs/ to the same release.
 //
 // Every build performs a dry run of every configuration file and archives the
 // reports. Deletion happens only in a build started by hand with EXECUTE ticked,
@@ -47,9 +48,6 @@ pipeline {
 
     environment {
         NEXUS_URL = 'https://nexus.example.com'
-        // In your own repository this is `configs`; this example reads the files
-        // shipped beside it.
-        CONFIG_DIR = 'examples/configs'
     }
 
     stages {
@@ -58,7 +56,7 @@ pipeline {
                 docker {
                     label 'docker'
                     // An exact release, never a floating tag.
-                    image 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
+                    image '{{image}}'
                     // The image's entrypoint is the tool; the plugin must start the
                     // container with its own command. The tool is on PATH.
                     args '--entrypoint='
@@ -69,7 +67,7 @@ pipeline {
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
                         handleExit(sh(returnStatus: true, script: '''
-                            sh examples/ci/run-configs.sh
+                            sh ci/run-configs.sh
                         '''))
                     }
                 }
@@ -101,7 +99,7 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    image 'ghcr.io/bond-os/nexus-cleanup:0.1.0'
+                    image '{{image}}'
                     args '--entrypoint='
                 }
             }
@@ -110,7 +108,7 @@ pipeline {
                         usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                     script {
                         handleExit(sh(returnStatus: true, script: '''
-                            sh examples/ci/run-configs.sh --execute
+                            sh ci/run-configs.sh --execute
                         '''))
                     }
                 }

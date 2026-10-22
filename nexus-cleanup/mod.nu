@@ -11,3 +11,4 @@ export use ./policy.nu *
 export use ./api.nu *
 export use ./config.nu *
 export use ./report.nu *
+export use ./scaffold.nu *
