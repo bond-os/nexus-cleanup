@@ -286,7 +286,8 @@ a misspelt or refused key while you type, given the modeline at the top of the f
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/vX.Y.Z/schema/config.schema.json
 ```
 
-**Pin the tag of the release your pipeline runs** — `v0.2.0` with image `nexus-cleanup:0.2.0` <!-- x-release-please-version -->
+**Pin the tag of the release your pipeline runs** — `v0.2.0` <!-- x-release-please-version -->
+with image `nexus-cleanup:0.2.0` <!-- x-release-please-version -->
 — release tags never move, so the schema always matches the tool that reads the file. A JSON
 file can carry the same address in a top-level `$schema` key, which the tool accepts and
 ignores. The schema is an aid, not the authority: where it cannot express a rule exactly —
@@ -523,7 +524,8 @@ reads the output of.
 | Jenkins, plain `sh` (`--ci jenkins-sh`) | [`Jenkinsfile`](examples/jenkins-sh/Jenkinsfile) | the release image via `docker run` | an `input` step |
 
 Every pipeline pins the exact release whose `init` wrote it —
-`ghcr.io/bond-os/nexus-cleanup:0.2.0`, or the tag `v0.2.0` for Forgejo. <!-- x-release-please-version -->
+`ghcr.io/bond-os/nexus-cleanup:0.2.0`, <!-- x-release-please-version -->
+or the tag `v0.2.0` for Forgejo. <!-- x-release-please-version -->
 Bump the pin deliberately, after reading `CHANGELOG.md`, together with the schema address in
 your configuration files. The links above go to the rendered examples, one complete repository
 per CI system under `examples/`.

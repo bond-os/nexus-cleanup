@@ -591,7 +591,8 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   `x-release-please-start-version` / `x-release-please-end` lines. Every marked example file is a
   `generic` extra-file in `release-please-config.json`, which the test also enforces. Its
   emulation of the updater was checked once against release-please 17.11.2's own `Generic`
-  updater.
+  updater. That updater moves only the **first** X.Y.Z on each marked line, inline or inside a
+  block, so a marked line — in an example or in the README — holds exactly one pin.
 - **The example configuration selects `replace-me`**, a repository that cannot exist, and sets a
   deletion cap. An unedited repository then fails its first dry run naming the placeholder
   (exit 3). A placeholder pattern would match nothing and exit 0 — a green pipeline doing
