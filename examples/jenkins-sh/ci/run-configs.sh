@@ -48,10 +48,21 @@ for file in "$@"; do
     echo "run-configs: $file ($mode)" >&2
     # $tool and $execute are unquoted on purpose: the tool may be a command with
     # arguments, and an empty $execute must vanish.
+    report="$report_dir/$name.$mode"
     $tool --config "$file" --require-cap $execute \
-        --summary-out "$report_dir/$name.$mode.summary.json" \
-        > "$report_dir/$name.$mode.json"
+        --summary-out "$report.summary.json" \
+        > "$report.out"
     code=$?
+    # The file chooses the report's format and only the tool reads the file, so
+    # name the report after what the tool wrote: a CSV report always opens with its
+    # header, whose first column is `repository`. Anything else, an empty report
+    # included, is JSON.
+    first=""
+    IFS= read -r first < "$report.out" || true
+    case "$first" in
+        repository,*) mv "$report.out" "$report.csv" ;;
+        *) mv "$report.out" "$report.json" ;;
+    esac
     case "$code" in
         0) ;;
         4) skipped=1; echo "run-configs: $file: some groups were skipped" >&2 ;;
