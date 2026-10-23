@@ -74,7 +74,7 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'reports/*.dry-run*.json', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'reports/*.dry-run.*', allowEmptyArchive: true
                 }
             }
         }
@@ -115,7 +115,7 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'reports/*.execute*.json', allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'reports/*.execute.*', allowEmptyArchive: true
                 }
             }
         }

@@ -6,8 +6,10 @@ use ../nexus-cleanup/version.nu [VERSION]
 # writes it, with a stub in place of the tool. The script is POSIX sh by design, so
 # this suite runs it with `sh` — BusyBox's in the pinned image.
 
-# The stub logs its arguments, writes the summary where asked as the tool does, and
-# exits with the code named in the config file's `# stub-exit: N` line (0 when absent).
+# The stub logs its arguments, writes the summary where asked as the tool does,
+# prints a report in the config file's `format` (JSON when absent; a CSV report opens
+# with its header, as the tool's does), and exits with the code named in the file's
+# `# stub-exit: N` line (0 when absent).
 const STUB = '
 echo "$*" >> "$STUB_LOG"
 prev=""
@@ -16,6 +18,7 @@ for a in "$@"; do
     if [ "$prev" = "--summary-out" ]; then echo "{}" > "$a"; fi
     prev="$a"
 done
+if grep -q "^format: csv" "$f"; then echo "repository,format"; else echo "{}"; fi
 code=$(sed -n "s/^# stub-exit: //p" "$f")
 exit "${code:-0}"
 '
@@ -23,12 +26,13 @@ exit "${code:-0}"
 # Run the script in a repository written by `init`, its example configuration
 # replaced by one file per exit code. CONFIG_DIR and REPORT_DIR are left unset, so
 # the script's own defaults are what is tested.
-def run-loop [codes: list<int>, ...args: string]: nothing -> record {
+def run-loop [codes: list<int>, ...args: string, --csv: list<int> = []]: nothing -> record {
     let work = (mktemp -d -t "run-configs-XXXXXX")
     scaffold write (scaffold plan --ci gitlab --version $VERSION) $work --quiet
     rm $"($work)/configs/example.yaml"
     for i in 0..<($codes | length) {
-        $"# stub-exit: ($codes | get $i)\nrepositories: [r]\n" | save $"($work)/configs/c($i).yaml"
+        let format = (if $i in $csv { "format: csv\n" } else { "" })
+        $"# stub-exit: ($codes | get $i)\nrepositories: [r]\n($format)" | save $"($work)/configs/c($i).yaml"
     }
     $STUB | save $"($work)/stub.sh"
     let log = $"($work)/log"
@@ -78,6 +82,12 @@ run-suite "run-configs.sh" [
         let r = (run-loop [0] "--execute")
         assert ($r.calls | all {|c| $c | str contains "--execute" })
         assert equal $r.reports ["c0.execute.json" "c0.execute.summary.json"]
+    } }
+    { name: "each report is named after the format its file asked for", run: {||
+        let r = (run-loop [0 0] --csv [1])
+        assert equal $r.reports ["c0.dry-run.json" "c0.dry-run.summary.json" "c1.dry-run.csv" "c1.dry-run.summary.json"]
+        let r = (run-loop [0] "--execute" --csv [0])
+        assert equal $r.reports ["c0.execute.csv" "c0.execute.summary.json"]
     } }
     { name: "any other argument is refused before anything runs", run: {||
         let r = (run-loop [0] "--keep" "1")

@@ -85,7 +85,7 @@ jobs:
         if: always()
         with:
           name: dry-run
-          path: reports/*.dry-run*.json
+          path: reports/*.dry-run.*
 
       - name: Execute
         # A boolean input can arrive as a string, depending on the Forgejo version.
@@ -96,7 +96,7 @@ jobs:
         run: sh ci/run-configs.sh --execute
 
       - uses: https://code.forgejo.org/forgejo/upload-artifact@v4
-        if: always() && hashFiles('reports/*.execute.json') != ''
+        if: always() && hashFiles('reports/*.execute.*') != ''
         with:
           name: execute
-          path: reports/*.execute*.json
+          path: reports/*.execute.*

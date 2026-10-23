@@ -501,8 +501,8 @@ files](#configuration-files). Each calls `ci/run-configs.sh`, which runs the too
 They share one shape:
 
 - **Every run is a dry run first**, on a nightly schedule, and keeps one report and summary per
-  configuration file (`reports/<name>.dry-run.json`, `reports/<name>.dry-run.summary.json`) as
-  build artifacts.
+  configuration file (`reports/<name>.dry-run.json`, or `.csv` for a file with `format: csv`,
+  and `reports/<name>.dry-run.summary.json`) as build artifacts.
 - **Deletion needs a person.** Only a run started by hand with an explicit execute switch
   deletes. A scheduled run never deletes.
 - **Every file needs a deletion cap.** The loop passes `--require-cap`, so a file without
