@@ -56,7 +56,7 @@ pipeline {
                 docker {
                     label 'docker'
                     // An exact release, never a floating tag.
-                    image 'ghcr.io/bond-os/nexus-cleanup:0.2.0' // x-release-please-version
+                    image 'ghcr.io/bond-os/nexus-cleanup:0.2.1' // x-release-please-version
                     // The image's entrypoint is the tool; the plugin must start the
                     // container with its own command. The tool is on PATH.
                     args '--entrypoint='
@@ -99,7 +99,7 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    image 'ghcr.io/bond-os/nexus-cleanup:0.2.0' // x-release-please-version
+                    image 'ghcr.io/bond-os/nexus-cleanup:0.2.1' // x-release-please-version
                     args '--entrypoint='
                 }
             }

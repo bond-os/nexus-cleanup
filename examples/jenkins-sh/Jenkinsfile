@@ -48,7 +48,7 @@ pipeline {
     environment {
         NEXUS_URL = 'https://nexus.example.com'
         // An exact release, never a floating tag.
-        NEXUS_CLEANUP_IMAGE = 'ghcr.io/bond-os/nexus-cleanup:0.2.0' // x-release-please-version
+        NEXUS_CLEANUP_IMAGE = 'ghcr.io/bond-os/nexus-cleanup:0.2.1' // x-release-please-version
     }
 
     // In both `docker run` calls below:

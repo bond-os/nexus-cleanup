@@ -1,5 +1,5 @@
 # x-release-please-start-version
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.2.0/schema/config.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.2.1/schema/config.schema.json
 # x-release-please-end
 #
 # One cleanup run. The pipeline runs the tool once per *.yaml file in configs/, so a
