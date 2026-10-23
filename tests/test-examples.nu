@@ -130,3 +130,36 @@ run-suite "examples" [
         assert equal $missing [] "an extra-file that does not exist"
     } }
 ]
+
+# The README names the current release in its examples and prose; release-please
+# moves each mention only if a marker covers it.
+def readme []: nothing -> string { read ($env.FILE_PWD | path dirname | path join "README.md") }
+
+# Lines holding VERSION as a whole X.Y.Z, so that 10.2.0 or 0.2.0.1 do not count.
+def version-lines [text: string, version: string]: nothing -> list<string> {
+    let re = '(?<![0-9.])' + ($version | str replace --all "." '\.') + '(?![0-9])'
+    $text | lines | where {|l| $l =~ $re }
+}
+
+# Every X.Y.Z the README gives as the tool's: an image tag or a release tag.
+def tool-versions [text: string]: nothing -> list<string> {
+    $text | parse --regex '(?:nexus-cleanup:|(?<![\w.])v)(?P<v>[0-9]+\.[0-9]+\.[0-9]+)' | get v
+}
+
+run-suite "README" [
+    { name: "every image and release tag in the README is the current release", run: {||
+        let found = (tool-versions (readme))
+        assert greater ($found | length) 0
+        assert equal ($found | where {|v| $v != $VERSION } | uniq) [] "update the README to the current release"
+    } }
+    { name: "a release bump leaves no mention of the previous release", run: {||
+        assert equal (version-lines (bump (readme) "9.8.7") $VERSION) [] "add an x-release-please marker"
+    } }
+    { name: "a release bump changes the tool's version only", run: {||
+        let before = (readme | lines)
+        let after = (bump (readme) "9.8.7" | lines)
+        let changed = ($before | zip $after | where {|p| $p.0 != $p.1 })
+        let foreign = ($changed | where {|p| ($p.0 | str replace --all $VERSION "9.8.7") != $p.1 } | each {|p| $p.0 })
+        assert equal $foreign [] "a marked line holding another X.Y.Z"
+    } }
+]

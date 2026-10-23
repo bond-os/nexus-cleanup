@@ -32,13 +32,15 @@ nu nexus-cleanup.nu --pattern 'yum-proxy-*' --keep 2 --max-deletions 500 --execu
 Each release is published as a multi-platform image (`linux/amd64`, `linux/arm64`,
 `linux/arm/v7`). Its entrypoint is the tool, so flags follow the image name directly:
 
+<!-- x-release-please-start-version -->
 ```bash
 docker run --rm -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/bond-os/nexus-cleanup:0.1.0 --pattern 'yum-proxy-*' > report.json
+  ghcr.io/bond-os/nexus-cleanup:0.2.0 --pattern 'yum-proxy-*' > report.json
 ```
+<!-- x-release-please-end -->
 
-**Pin an exact version** (`0.1.0`), or a digest (`@sha256:…`) for full reproducibility, and bump
-it deliberately after reading `CHANGELOG.md`. Each release also moves an `X.Y` tag (`0.1`) to its
+**Pin an exact version** (`X.Y.Z`), or a digest (`@sha256:…`) for full reproducibility, and bump
+it deliberately after reading `CHANGELOG.md`. Each release also moves an `X.Y` tag to its
 newest patch. There is deliberately **no `latest`**: a scheduled cleanup on a floating tag would
 pick up new deletion behaviour that nobody has read about.
 
@@ -47,26 +49,32 @@ The working directory is an empty `/work`; mount your workspace there and relati
 mount cannot hide it. `--user` lets the container write your directory. For rootless runtimes,
 see [Who the container runs as](#who-the-container-runs-as).
 
+<!-- x-release-please-start-version -->
 ```bash
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/bond-os/nexus-cleanup:0.1.0 --pattern 'yum-proxy-*' --summary-out summary.json > report.json
+  ghcr.io/bond-os/nexus-cleanup:0.2.0 --pattern 'yum-proxy-*' --summary-out summary.json > report.json
 ```
+<!-- x-release-please-end -->
 
 CI systems that run a shell script inside the image (GitLab, the Jenkins Docker Pipeline plugin)
 clear the entrypoint and call the tool by name — it is on `PATH` as `nexus-cleanup` and behaves
 exactly like the entrypoint:
 
+<!-- x-release-please-start-version -->
 ```bash
 docker run --rm --entrypoint "" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/bond-os/nexus-cleanup:0.1.0 sh -c "nexus-cleanup --pattern 'yum-proxy-*'"
+  ghcr.io/bond-os/nexus-cleanup:0.2.0 sh -c "nexus-cleanup --pattern 'yum-proxy-*'"
 ```
+<!-- x-release-please-end -->
 
 Every image carries a build provenance attestation tying it to the commit and workflow run that
 built it:
 
+<!-- x-release-please-start-version -->
 ```bash
-gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup:0.1.0 --repo bond-os/nexus-cleanup
+gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup:0.2.0 --repo bond-os/nexus-cleanup
 ```
+<!-- x-release-please-end -->
 
 To run an unreleased revision, use the stock Nushell image with a checkout mounted — that
 image's entrypoint is `nu`, so the script path comes first:
@@ -112,11 +120,13 @@ The intended setup is a small private repository holding one [configuration
 file](#configuration-files) per cleanup and one pipeline that runs them all. `init` writes that
 repository, with every version pin matching the image you run it from:
 
+<!-- x-release-please-start-version -->
 ```bash
 mkdir nexus-cleanup-configs && cd nexus-cleanup-configs
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
-  ghcr.io/bond-os/nexus-cleanup:0.1.0 init --ci gitlab --editor vscode
+  ghcr.io/bond-os/nexus-cleanup:0.2.0 init --ci gitlab --editor vscode
 ```
+<!-- x-release-please-end -->
 
 `--user` lets the container write your directory, as in [Who the container runs
 as](#who-the-container-runs-as): under rootless Podman add `--userns=keep-id`, under rootless
@@ -276,11 +286,11 @@ a misspelt or refused key while you type, given the modeline at the top of the f
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/vX.Y.Z/schema/config.schema.json
 ```
 
-**Pin the tag of the release your pipeline runs** (`v0.1.0` with image `0.1.0`): release tags
-never move, so the schema always matches the tool that reads the file. A JSON file can carry the
-same address in a top-level `$schema` key, which the tool accepts and ignores. The schema is an
-aid, not the authority: where it cannot express a rule exactly — whether a regex compiles, say —
-it is looser than the tool, which still refuses the file.
+**Pin the tag of the release your pipeline runs** — `v0.2.0` with image `nexus-cleanup:0.2.0` <!-- x-release-please-version -->
+— release tags never move, so the schema always matches the tool that reads the file. A JSON
+file can carry the same address in a top-level `$schema` key, which the tool accepts and
+ignores. The schema is an aid, not the authority: where it cannot express a rule exactly —
+whether a regex compiles, say — it is looser than the tool, which still refuses the file.
 
 A repository written by `init --editor vscode` or `--editor intellij` also maps the schema to
 every file in `configs/` in the editor's project settings, so a new file is completed and
@@ -512,10 +522,11 @@ reads the output of.
 | Jenkins, Docker Pipeline plugin (`--ci jenkins-docker`) | [`Jenkinsfile`](examples/jenkins-docker/Jenkinsfile) | the release image, entrypoint cleared | an `input` step |
 | Jenkins, plain `sh` (`--ci jenkins-sh`) | [`Jenkinsfile`](examples/jenkins-sh/Jenkinsfile) | the release image via `docker run` | an `input` step |
 
-Every pipeline pins an exact release (`ghcr.io/bond-os/nexus-cleanup:0.1.0`, or the tag `v0.1.0`
-for Forgejo): the release whose `init` wrote it. Bump the pin deliberately, after reading
-`CHANGELOG.md`, together with the schema address in your configuration files. The links above
-go to the rendered examples, one complete repository per CI system under `examples/`.
+Every pipeline pins the exact release whose `init` wrote it —
+`ghcr.io/bond-os/nexus-cleanup:0.2.0`, or the tag `v0.2.0` for Forgejo. <!-- x-release-please-version -->
+Bump the pin deliberately, after reading `CHANGELOG.md`, together with the schema address in
+your configuration files. The links above go to the rendered examples, one complete repository
+per CI system under `examples/`.
 
 Two container details matter. A CI system that runs a shell script inside the image needs its
 entrypoint cleared (`entrypoint: [""]` in GitLab, `args '--entrypoint='` for the Jenkins plugin);
