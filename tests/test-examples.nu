@@ -17,7 +17,8 @@ def read [path: string]: nothing -> string { open --raw $path | decode utf-8 }
 
 # What release-please's `generic` updater does to a file: on a line carrying
 # x-release-please-version, and on every line between x-release-please-start-version
-# and x-release-please-end, each X.Y.Z becomes the new version.
+# and x-release-please-end, the first X.Y.Z becomes the new version. Only the first:
+# its VERSION_REGEX has no `g` flag, so a second pin on the same line never moves.
 def bump [text: string, version: string]: nothing -> string {
     mut in_block = false
     mut out = []
@@ -29,7 +30,7 @@ def bump [text: string, version: string]: nothing -> string {
             $in_block = false
             $out = ($out | append $line)
         } else if $in_block or ($line | str contains "x-release-please-version") {
-            $out = ($out | append ($line | str replace --all --regex '\d+\.\d+\.\d+' $version))
+            $out = ($out | append ($line | str replace --regex '\d+\.\d+\.\d+' $version))
         } else {
             $out = ($out | append $line)
         }
