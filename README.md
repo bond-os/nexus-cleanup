@@ -367,6 +367,29 @@ date comes first and respins follow in natural order (`20250103` < `20250103-hot
 (`20250229`) makes its parent's group unorderable, so nothing under that parent is deleted.
 `date` is never chosen automatically; pass `--version-scheme date`.
 
+**What the `version` group captures decides what counts as one version.** Retention ranks the
+distinct strings the group captures, so whether a respin's suffix is inside it or after it
+changes what `--keep` counts:
+
+| Pattern ends with | `20250103/` and `20250103-hotfix/` are | `--keep` counts |
+|---|---|---|
+| `(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/` | two versions, the respin newer | directories |
+| `(?P<version>[0-9]{8})(?:[^0-9./][^/]*)?/` | one version, kept or deleted together | days |
+
+**Keep anything that is not a date out of the match.** A directory such as `03012025-hotfix`
+(day first) still matches `[0-9]{8}`, is not a real `YYYYMMDD` date, and makes its whole group
+unorderable — nothing under that parent is deleted. Requiring a plausible year, month and day
+leaves it outside the pattern instead, untouched like every other unmatched directory:
+
+```
+(?P<version>20[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12][0-9]|3[01])(?:[^0-9./][^/]*)?)
+```
+
+A date the pattern cannot rule out, such as `20250231`, still makes its group unorderable.
+
+**Asset paths begin with `/`.** Anchor the pattern as `^/…`; `^builds/` matches nothing, and
+every component is reported `outside-pattern`.
+
 ## Raw hosted repositories
 
 Build pipelines often publish into a **raw hosted** repository as dated directories —
