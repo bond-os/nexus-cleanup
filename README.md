@@ -35,7 +35,7 @@ Each release is published as a multi-platform image (`linux/amd64`, `linux/arm64
 <!-- x-release-please-start-version -->
 ```bash
 docker run --rm -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/bond-os/nexus-cleanup:0.2.0 --pattern 'yum-proxy-*' > report.json
+  ghcr.io/bond-os/nexus-cleanup:0.2.1 --pattern 'yum-proxy-*' > report.json
 ```
 <!-- x-release-please-end -->
 
@@ -52,7 +52,7 @@ see [Who the container runs as](#who-the-container-runs-as).
 <!-- x-release-please-start-version -->
 ```bash
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/bond-os/nexus-cleanup:0.2.0 --pattern 'yum-proxy-*' --summary-out summary.json > report.json
+  ghcr.io/bond-os/nexus-cleanup:0.2.1 --pattern 'yum-proxy-*' --summary-out summary.json > report.json
 ```
 <!-- x-release-please-end -->
 
@@ -63,7 +63,7 @@ exactly like the entrypoint:
 <!-- x-release-please-start-version -->
 ```bash
 docker run --rm --entrypoint "" -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/bond-os/nexus-cleanup:0.2.0 sh -c "nexus-cleanup --pattern 'yum-proxy-*'"
+  ghcr.io/bond-os/nexus-cleanup:0.2.1 sh -c "nexus-cleanup --pattern 'yum-proxy-*'"
 ```
 <!-- x-release-please-end -->
 
@@ -72,7 +72,7 @@ built it:
 
 <!-- x-release-please-start-version -->
 ```bash
-gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup:0.2.0 --repo bond-os/nexus-cleanup
+gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup:0.2.1 --repo bond-os/nexus-cleanup
 ```
 <!-- x-release-please-end -->
 
@@ -124,7 +124,7 @@ repository, with every version pin matching the image you run it from:
 ```bash
 mkdir nexus-cleanup-configs && cd nexus-cleanup-configs
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" \
-  ghcr.io/bond-os/nexus-cleanup:0.2.0 init --ci gitlab --editor vscode
+  ghcr.io/bond-os/nexus-cleanup:0.2.1 init --ci gitlab --editor vscode
 ```
 <!-- x-release-please-end -->
 
@@ -218,7 +218,7 @@ The regexes live in reviewed YAML rather than in shell quoting inside CI jobs.
 
 ```yaml
 # x-release-please-start-version
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.2.0/schema/config.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.2.1/schema/config.schema.json
 # x-release-please-end
 repositories: [raw-builds]
 from-path: '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
@@ -286,8 +286,8 @@ a misspelt or refused key while you type, given the modeline at the top of the f
 # yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/vX.Y.Z/schema/config.schema.json
 ```
 
-**Pin the tag of the release your pipeline runs** — `v0.2.0` <!-- x-release-please-version -->
-with image `nexus-cleanup:0.2.0` <!-- x-release-please-version -->
+**Pin the tag of the release your pipeline runs** — `v0.2.1` <!-- x-release-please-version -->
+with image `nexus-cleanup:0.2.1` <!-- x-release-please-version -->
 — release tags never move, so the schema always matches the tool that reads the file. A JSON
 file can carry the same address in a top-level `$schema` key, which the tool accepts and
 ignores. The schema is an aid, not the authority: where it cannot express a rule exactly —
@@ -524,8 +524,8 @@ reads the output of.
 | Jenkins, plain `sh` (`--ci jenkins-sh`) | [`Jenkinsfile`](examples/jenkins-sh/Jenkinsfile) | the release image via `docker run` | an `input` step |
 
 Every pipeline pins the exact release whose `init` wrote it —
-`ghcr.io/bond-os/nexus-cleanup:0.2.0`, <!-- x-release-please-version -->
-or the tag `v0.2.0` for Forgejo. <!-- x-release-please-version -->
+`ghcr.io/bond-os/nexus-cleanup:0.2.1`, <!-- x-release-please-version -->
+or the tag `v0.2.1` for Forgejo. <!-- x-release-please-version -->
 Bump the pin deliberately, after reading `CHANGELOG.md`, together with the schema address in
 your configuration files. The links above go to the rendered examples, one complete repository
 per CI system under `examples/`.
