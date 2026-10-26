@@ -1,6 +1,7 @@
-# Pinned: Nushell breaks compatibility between minor releases, so the CI image
-# and the developer floor move together and deliberately.
-FROM ghcr.io/nushell/nushell:0.115.1-alpine
+# Pinned by tag and digest, so a re-pushed tag cannot change what is built. Every
+# Nushell pin moves together in one Renovate pull request; see "Dependency
+# updates" in AGENTS.md.
+FROM ghcr.io/nushell/nushell:0.115.1-alpine@sha256:f938ac013d373f4de002900cdc594dab3f2dd55696333e29ed73f48ae724cb77
 
 # Set by the build from nexus-cleanup/version.nu; the release job checks that it
 # equals the release being published.
