@@ -51,7 +51,7 @@ jobs:
     env:
       NEXUS_URL: ${{ vars.NEXUS_URL }}
       # An exact release of nexus-cleanup, never a branch.
-      NEXUS_CLEANUP_VERSION: v0.2.0 # x-release-please-version
+      NEXUS_CLEANUP_VERSION: v0.2.1 # x-release-please-version
       NEXUS_CLEANUP: nu /opt/nexus-cleanup/nexus-cleanup.nu
       # The Nushell release nexus-cleanup is tested with.
       NU_VERSION: 0.115.1

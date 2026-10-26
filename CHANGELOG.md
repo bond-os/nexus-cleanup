@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/bond-os/nexus-cleanup/compare/v0.2.0...v0.2.1) (2026-10-26)
+
+
+### Bug Fixes
+
+* name each run-configs report after its format ([dc3fc95](https://github.com/bond-os/nexus-cleanup/commit/dc3fc95441398af8a80b76f7d7d436c87dd9939d))
+
 ## [0.2.0](https://github.com/bond-os/nexus-cleanup/compare/v0.1.0...v0.2.0) (2026-10-22)
 
 
