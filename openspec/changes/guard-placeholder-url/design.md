@@ -1,0 +1,73 @@
+## Context
+
+See proposal.md for why. What exists today:
+
+- `config resolve` resolves the URL first — flag, then `NEXUS_URL`, then the file's `url` — and
+  keeps the source's name for messages (`--url`, `NEXUS_URL`, `'url' in <file>`). Its only check
+  is that the value starts with `http`. The file loader separately refuses a `url` carrying
+  credentials.
+- The GitLab and both Jenkins templates set `NEXUS_URL` to `https://nexus.example.com` in the
+  pipeline file. The Forgejo template reads `${{ vars.NEXUS_URL }}`, which is empty when the
+  variable is unset, and the tool already refuses an empty URL.
+- 29 places in `tests/` use `https://nexus.example.invalid` or `https://from-env.invalid` as a
+  URL that is never contacted, most of them through `config resolve`.
+
+## Goals / Non-Goals
+
+**Goals:**
+
+- One check, applied to the resolved value whatever its source, before the first request.
+- No false refusal of an address that could reach a real Nexus.
+
+**Non-Goals:**
+
+- DNS resolution or a probe request: either one makes the check depend on the network, and a
+  name that resolves is not thereby a Nexus.
+
+## Decisions
+
+### Match the host's labels against the reserved names, nothing looser
+
+The host is taken from the URL with Nushell's `url parse` (so a port, IPv6 brackets or a path
+cannot confuse it), lower-cased and stripped of one trailing dot, then refused when it equals a
+reserved name or ends in `.` plus one: `example`, `example.com`, `example.net`, `example.org`,
+`invalid`. Matching on whole labels is what keeps `example.company.com` and `myexample.com`
+acceptable.
+
+Alternatives: matching only the literal template value `https://nexus.example.com` would miss an
+operator's own placeholder (`https://nexus.example.org`, `https://changeme.invalid`) for no
+benefit; matching any host containing `example` would refuse real hosts.
+
+### `.test`, `.localhost` and addresses stay allowed
+
+They are reserved as well, but for real local use: the reference instance is reached as
+`localhost`, and `.test` names are a common way to run a Nexus in a lab. Refusing them would
+break legitimate runs to catch placeholders nobody writes.
+
+### Placed after source resolution, before every other check
+
+The check runs right after the existing `http` prefix check, so its message can name the source
+and so it fires before keep, timeout or pattern errors: an unedited pipeline gets the one message
+that explains it. It is a usage error (exit 2) like every other configuration fault.
+
+### Templates keep `https://nexus.example.com`
+
+It is now refused, which is the point: the unedited pipeline fails in its first dry run naming
+the placeholder, the same pattern as `replace-me` in the starting configuration. A distinctive
+spelling such as `https://replace-me.invalid` was considered; `nexus.example.com` reads as an
+address to fill in and is equally caught, and keeping it leaves the rendered examples unchanged.
+
+### Tests move to `.test` hosts
+
+Tests that need a URL accepted use `https://nexus.test` (and `https://from-env.test` where the
+source matters). `tests/test-api.nu` builds its client without `config resolve` and may keep its
+URLs, but is moved too so that one convention holds across the suite.
+
+## Risks / Trade-offs
+
+- [An internal DNS zone that serves a real Nexus under a reserved name] → Such a name violates
+  RFC 2606 and RFC 6761 and cannot be relied on elsewhere either; the message says the address is
+  reserved, which tells the operator why. No override is offered: an escape hatch for a
+  configuration mistake would be used to silence it.
+- [An operator's placeholder outside the reserved names, such as `https://nexus.company`] → Not
+  caught, and fails as today with exit 3. The check removes the common case, not every case.
