@@ -71,6 +71,21 @@ jobs:
             -s schema/config.schema.json \
             -d "examples/configs/*.yaml" -d "examples/*/configs/*.yaml"
 
+  # The Forgejo template installs Nushell from a release tarball it pins by version
+  # and checksum. Renovate moves the version but cannot compute the checksum, so a
+  # Nushell update PR stays red here until the checksum is amended in. Needs
+  # github.com; maintenance automation only, nothing here reaches the image.
+  nushell-checksum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify the Forgejo template's Nushell checksum
+        run: .github/scripts/nushell-checksum.sh
+
   # Builds the image exactly as a release would and smoke-checks it. Pushes nothing.
   image:
     # Pinned rather than ubuntu-latest: the rootless Podman pass relies on the
