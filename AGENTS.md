@@ -16,7 +16,7 @@ The repository holds code in three areas, and the language rule differs between 
 |---|---|---|
 | **The tool** | `nexus-cleanup.nu`, `nexus-cleanup/`, everything inside the container image | Nushell only, no external binaries (below) |
 | **Tests and dev tools** | `tests/`, `tools/` | Nushell — they exercise the tool and share its runtime |
-| **Maintenance automation** | release, commit checks, image build and smoke check (`.github/`, release and commitlint config) | established third-party tools, *configured rather than written*; shell only as glue around them |
+| **Maintenance automation** | release, commit checks, image build and smoke check, dependency updates (`.github/`, release, commitlint and Renovate config) | established third-party tools, *configured rather than written*; shell only as glue around them |
 
 The Nushell-only rule exists so that the tool runs from an image holding nothing but Nushell. It
 does not extend to the machinery that releases the tool: reimplementing a release bot or a commit
@@ -26,14 +26,16 @@ maintenance area may enter the image or become a runtime dependency of the tool.
 For the tool, tests and dev tools:
 
 - **Nushell only.** Version floor **0.115.1**. Pinned CI image:
-  `ghcr.io/nushell/nushell:0.115.1-alpine`.
+  `ghcr.io/nushell/nushell:0.115.1-alpine` — referenced by tag and digest in CI and the
+  `Containerfile`; see [Dependency updates](#dependency-updates).
 - The floor is set by features the tool relies on: `sort-by --custom` with a two-argument
   comparator closure, and `http get`/`http delete` with `--full`, `--allow-errors`,
   `--max-time` and `--user`/`--password`.
 - No external binaries at runtime — no `curl`, no `jq`, no Python. A complete run must work in
   an image that holds only Nushell and its standard library.
 - Nushell breaks compatibility between minor releases. Raising the floor means re-running the
-  suite in the new image, not just bumping a number.
+  suite in the new image, not just bumping a number — which is what the Nushell update pull
+  request's required checks do.
 
 ## Layout
 
@@ -77,7 +79,9 @@ packaging/
 .github/
   workflows/              # tests (+ image check), commits, release
   scripts/image-smoke.sh  # hermetic image checks, shared by PR CI and release
+  scripts/nushell-checksum.sh # the Forgejo template's Nushell tarball against its checksum
 release-please-config.json, .release-please-manifest.json, .commitlintrc.yaml
+renovate.json             # dependency updates, read by the hosted Mend Renovate App
 ```
 
 `tools/` is development-time only. The shipped module never reads it and the container image
@@ -206,13 +210,70 @@ delete any forged release and its tag (an administrator can, despite immutabilit
 - Merge buttons: rebase merging only; squash and merge commits disabled.
 - Branch ruleset on `main`, **no bypass actors**: require a pull request (0 approvals — a sole
   maintainer cannot approve their own); allowed merge method rebase; required checks `test`,
-  `config-schema`, `image`, `commitlint`, branches up to date; block force pushes and deletion.
+  `config-schema`, `nushell-checksum`, `image`, `commitlint`, branches up to date; block force
+  pushes and deletion.
 - Tag ruleset on `refs/tags/v*`: restrict creation (the release App is the only bypass actor),
   restrict updates and deletion (no bypass actors).
 - Release immutability enabled.
 - Environment `release`: deployment branches `main` only, no required reviewers, secrets
   `RELEASE_APP_CLIENT_ID` and `RELEASE_APP_PRIVATE_KEY`.
 - The GHCR package `nexus-cleanup` is public and linked to this repository.
+- The Mend Renovate GitHub App is installed on this repository only.
+
+## Dependency updates
+
+Renovate proposes updates of every pinned external component (`renovate.json`; requirements in
+`openspec/specs/nexus-cleanup/distribution/spec.md`). It runs as the **hosted Mend Renovate
+App**, a deliberate trade: a third party holds write access, in exchange for no key to rotate and
+no workflow to maintain. It cannot land code on `main` — the ruleset has no bypass actors and the
+App is not one. Self-hosting under a narrow App, like the release App, was the rejected
+alternative; revisit it if the trust trade stops being acceptable.
+
+- **Three pull requests, weekly** (Monday before 9:00, Europe/Warsaw), listed on the Dependency
+  Dashboard issue:
+  - **Nushell** — every Nushell pin in one PR, committed as `fix(deps)`: it changes what
+    operators run, so it belongs in the changelog and leads to a patch release. The pins are the
+    `Containerfile`, the `test` job container, the README's unreleased-revision command, the image
+    and floor in [Runtime](#runtime), and `NU_VERSION` in the Forgejo template and
+    `examples/forgejo/`. They are moved in place, never consolidated — the regex managers in
+    `renovate.json` find them by their exact wording, so rewording one of those lines means
+    updating its manager, and a local dry run (below) must still find seven.
+  - **GitHub Actions** — SHA and `# vX.Y.Z` comment, runners included, majors included, one PR,
+    `ci(deps)`.
+  - **commitlint** — the CI strings and the hook command in
+    [Commits and merging](#commits-and-merging) together, `ci(deps)`. ajv-cli gets its own PR.
+- **Nothing merges automatically.** Every update passes the same required checks and is
+  rebase-merged by a maintainer. Do not add `automerge`, for any update type.
+- **npm releases wait three days**; Nushell does not wait. Its digest can only come from ghcr,
+  which gives Renovate no release timestamps, so a wait would hold every Nushell update back
+  forever. With no automerge a wait only delays when a PR appears.
+- **The image's base is pinned by tag and digest** in the `Containerfile` and the `test` job
+  container, so a re-pushed upstream tag cannot change what is built or tested, and a re-run
+  `publish` builds the same base. A digest-only refresh is a Nushell update like any other
+  (`fix`). Documentation and templates name the version only: they document, they build nothing.
+- **Out of the updater's reach**: the tool's own `nexus-cleanup:X.Y.Z` and schema `vX.Y.Z` pins
+  (release-please's), `tests/fixtures/`, `openspec/`, and every pin in `nexus-cleanup/templates/`
+  and `examples/` other than `NU_VERSION` — those belong to the operators' repositories.
+  `renovate.json` replaces the preset's `ignorePaths` and disables the native managers there; do
+  not restore the preset's list, which ignores `examples/` and would leave the Forgejo example
+  behind its template.
+
+**Merging a Nushell update.** The Forgejo template pins the Nushell tarball by `NU_SHA256`, which
+Renovate cannot compute, so the `nushell-checksum` check fails on every version change and prints
+the actual checksum. Put it in `NU_SHA256` in the template and in `examples/forgejo/`, **amend**
+the Renovate commit rather than adding one, so the changelog gets one line, and push with
+`--force-with-lease`; Renovate then leaves the branch alone. If the suite fails in the new image,
+fix the code on that branch with `fix:` commits, or close the PR to stay where you are.
+
+**Checking `renovate.json` locally.** The npm proxy configured on development machines may lack
+Renovate's dependencies; use the published image instead. Renovate's local platform only sees
+files git tracks, so stage a new or changed `renovate.json` first. The version below is the one
+this configuration was last checked with; any later release will do.
+
+```bash
+docker run --rm -v "$PWD:/repo:ro" -w /repo ghcr.io/renovatebot/renovate:44.186.1 renovate-config-validator --strict
+docker run --rm -v "$PWD:/repo:ro" -w /repo -e LOG_LEVEL=debug ghcr.io/renovatebot/renovate:44.186.1 renovate --platform=local --dry-run=extract
+```
 
 ## Reference Nexus
 

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Dependency updates for nexus-cleanup. Decisions and their reasons: openspec/specs/nexus-cleanup/distribution/spec.md and \"Dependency updates\" in AGENTS.md.",
+  "extends": ["config:best-practices"],
+  "timezone": "Europe/Warsaw",
+  "schedule": ["before 9am on monday"],
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "deps",
+  "enabledManagers": ["github-actions", "dockerfile", "custom.regex"],
+  "ignorePaths": ["tests/fixtures/**", "openspec/**"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Nushell image references in documentation, tag only",
+      "managerFilePatterns": ["/^README\\.md$/", "/^AGENTS\\.md$/"],
+      "matchStrings": ["ghcr\\.io/nushell/nushell:(?<currentValue>\\d+\\.\\d+\\.\\d+-alpine)"],
+      "depNameTemplate": "ghcr.io/nushell/nushell",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Nushell version floor in AGENTS.md",
+      "managerFilePatterns": ["/^AGENTS\\.md$/"],
+      "matchStrings": ["Version floor \\*\\*(?<currentValue>\\d+\\.\\d+\\.\\d+)\\*\\*"],
+      "depNameTemplate": "ghcr.io/nushell/nushell",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Nushell version the generated Forgejo pipeline installs, in the template and its rendered example",
+      "managerFilePatterns": [
+        "/^nexus-cleanup/templates/ci/forgejo/\\.forgejo/workflows/nexus-cleanup\\.yml$/",
+        "/^examples/forgejo/\\.forgejo/workflows/nexus-cleanup\\.yml$/"
+      ],
+      "matchStrings": ["NU_VERSION: (?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "ghcr.io/nushell/nushell",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "npm CLIs run through npx from workflow env strings",
+      "managerFilePatterns": ["/^\\.github/workflows/.+\\.ya?ml$/"],
+      "matchStrings": ["[A-Z_]+: \"(?<depName>(?:@[a-z0-9-]+/)?[a-z0-9.-]+)@(?<currentValue>\\d+\\.\\d+\\.\\d+)\""],
+      "datasourceTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "description": "commitlint versions in the optional commit hook in AGENTS.md",
+      "managerFilePatterns": ["/^AGENTS\\.md$/"],
+      "matchStrings": ["-p (?<depName>@commitlint/[a-z0-9-]+)@(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
+      "datasourceTemplate": "npm"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Everything is a CI change unless a rule below says otherwise; the changelog hides ci.",
+      "matchPackageNames": ["*"],
+      "semanticCommitType": "ci"
+    },
+    {
+      "description": "Pins in the init templates and the generated examples belong to the operators' repositories. Only the Nushell regex manager reaches them.",
+      "matchFileNames": ["nexus-cleanup/templates/**", "examples/**"],
+      "matchManagers": ["github-actions", "dockerfile"],
+      "enabled": false
+    },
+    {
+      "description": "Digests only where an image is built or tested; documentation and templates stay tag-only.",
+      "matchManagers": ["custom.regex"],
+      "pinDigests": false
+    },
+    {
+      "description": "Actions and runners in one pull request, majors included.",
+      "matchManagers": ["github-actions"],
+      "matchDepTypes": ["action", "github-runner"],
+      "groupName": "GitHub Actions",
+      "separateMajorMinor": false
+    },
+    {
+      "description": "The commit hook and the CI check must run the same commitlint.",
+      "matchDatasources": ["npm"],
+      "matchPackageNames": ["@commitlint/**"],
+      "groupName": "commitlint"
+    },
+    {
+      "description": "A three-day wait for npm releases. Not for Nushell: ghcr supplies no release timestamps.",
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "3 days"
+    },
+    {
+      "description": "Every Nushell pin moves in one pull request, as a fix: it changes what operators run.",
+      "matchPackageNames": ["ghcr.io/nushell/nushell"],
+      "groupName": "Nushell",
+      "semanticCommitType": "fix",
+      "prBodyNotes": [
+        "**Before merging this Nushell update:**\n\n1. Check that every Nushell pin moved: `Containerfile` and the `test` job container (tag and digest), README.md, AGENTS.md (image and version floor), and `NU_VERSION` in the Forgejo template and `examples/forgejo/`.\n2. On a version change the `nushell-checksum` check fails and prints the actual checksum. Put it in `NU_SHA256` in the template and in `examples/forgejo/`, **amend** this commit rather than adding one, and push with `--force-with-lease`, so the changelog gets one line.\n3. If the suite fails in the new image, fix the code on this branch with `fix:` commits, or close this pull request to stay on the current version."
+      ]
+    }
+  ]
+}
