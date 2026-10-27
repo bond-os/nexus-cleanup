@@ -112,9 +112,10 @@ done.
 
 ### Requirement: A disabled file is still validated
 
-Every check that a run performs before its first request SHALL apply to a disabled file and to
-the command line it is run with, and a failure SHALL be the usage error it would be without the
-key. A disabled file SHALL never hide a configuration fault that would fail it once re-enabled.
+Every check that a run performs before its first request SHALL apply to a disabled file, to the
+command line it is run with and to the environment it is run in, and a failure SHALL be the usage
+error it would be without the key. A disabled file SHALL never hide a configuration fault that
+would fail it once re-enabled.
 
 #### Scenario: Misspelt key in a disabled file
 
@@ -130,3 +131,13 @@ key. A disabled file SHALL never hide a configuration fault that would fail it o
 
 - **WHEN** a configuration file contains `disabled: true` and no deletion cap, and the switch that requires a cap is passed
 - **THEN** the run aborts with the usage error for a missing cap
+
+#### Scenario: Nexus URL still required
+
+- **WHEN** a configuration file contains `disabled: true` and no `url`, and neither `NEXUS_URL` nor the URL flag is set
+- **THEN** the run aborts with exit code 2 and the usage error for a missing Nexus URL
+
+#### Scenario: Placeholder Nexus URL still refused
+
+- **WHEN** a configuration file contains `disabled: true` and `NEXUS_URL` is `https://nexus.example.com`
+- **THEN** the run aborts with exit code 2 and the placeholder refusal naming `NEXUS_URL`

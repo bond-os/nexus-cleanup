@@ -57,6 +57,19 @@ applies. This is deliberate: a file is usually disabled for a while and re-enabl
 must not come back broken. Disabling a file that does not validate is not supported; such a file
 already fails the pipeline and is fixed or removed.
 
+"Everything" includes the environment and the command line, not only the file: a disabled file
+run without `NEXUS_URL`, with a placeholder `NEXUS_URL` (once `guard-placeholder-url` has landed,
+which the agreed build order puts first), or with `--keep 0` fails as an enabled one would. In CI
+the environment is shared by every file in the job, so the enabled files fail for the same reason
+and the disabled one adds nothing misleading; locally, `varlock run` or one export supplies the
+URL. The password is the exception: `config resolve` never checks it, because only a request can,
+so a disabled run without `NEXUS_PASSWORD` succeeds while an enabled one fails at its first
+request.
+
+Alternative: validate only the file's own keys when disabled. Rejected: it would split
+`config resolve` into file and environment checks, `--require-cap` must apply to a disabled file
+regardless, and all it buys is relief for a local run without `NEXUS_URL`.
+
 ### The aggregate always carries `disabled`
 
 The field is appended after `config_file` and is `false` on every enabled run, so consumers see
