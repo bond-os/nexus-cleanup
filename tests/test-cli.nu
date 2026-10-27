@@ -501,3 +501,64 @@ run-suite "cli: init --env" [
         assert equal $notes "mine\n"
     } }
 ]
+
+run-suite "cli: upgrade" [
+    { name: "upgrade moves an init-written repository's pins to this release, listing the files", run: {||
+        let dir = (mktemp -d -t "upgrade-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" "--editor" "vscode" | ignore
+        for f in [".gitlab-ci.yml" "configs/example.yaml" ".vscode/settings.json"] {
+            let p = ($dir | path join $f)
+            open --raw $p | decode utf-8 | str replace --all $VERSION "0.0.1" | save --force --raw $p
+        }
+        let r = (cli-in $dir "upgrade")
+        let pipeline = (open --raw ($dir | path join ".gitlab-ci.yml") | decode utf-8)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $r.stdout ""
+        for f in [".gitlab-ci.yml" "configs/example.yaml" ".vscode/settings.json"] {
+            assert ($r.stderr | str contains $"updated ($f)") $f
+        }
+        assert ($pipeline | str contains $"nexus-cleanup:($VERSION)")
+        assert not ($pipeline | str contains "0.0.1")
+    } }
+    { name: "upgrade takes a directory argument", run: {||
+        let base = (mktemp -d -t "upgrade-XXXXXX")
+        cli-in $base "init" "--ci" "jenkins-sh" "repo" | ignore
+        let r = (cli-in $base "upgrade" "repo")
+        rm -rf $base
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($r.stderr | str contains "nothing to update")
+    } }
+    { name: "a run flag given to upgrade exits with the usage code and writes nothing", run: {||
+        let dir = (mktemp -d -t "upgrade-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        let p = ($dir | path join ".gitlab-ci.yml")
+        open --raw $p | decode utf-8 | str replace --all $VERSION "0.0.1" | save --force --raw $p
+        let r = (cli-in $dir "upgrade" "--execute")
+        let kept = (open --raw $p | decode utf-8 | str contains "0.0.1")
+        rm -rf $dir
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--execute")
+        assert $kept "upgrade --execute changed a file"
+    } }
+    { name: "a missing directory exits with the usage code", run: {||
+        let r = (cli "upgrade" "/nonexistent/nexus-cleanup-upgrade")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "not a directory")
+    } }
+    { name: "upgrade --help names the version it upgrades to", run: {||
+        let r = (cli "upgrade" "--help")
+        assert equal $r.exit_code 0
+        assert ($r.stdout | str contains "nexus-cleanup upgrade [DIR]")
+        assert ($r.stdout | str contains $VERSION)
+    } }
+    { name: "upgrade ignores a placeholder or missing NEXUS_URL", run: {||
+        let dir = (mktemp -d -t "upgrade-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        let placeholder = (cli-with-url "https://nexus.example.com" "upgrade" $dir)
+        let unset = (cli "upgrade" $dir)
+        rm -rf $dir
+        assert equal $placeholder.exit_code 0 $placeholder.stderr
+        assert equal $unset.exit_code 0 $unset.stderr
+    } }
+]
