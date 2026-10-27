@@ -29,11 +29,11 @@ def stub-fetch [--delete-status: int = 204, --record-deletes: string = ""]: noth
 }
 
 def cfg [extra: record = {}]: nothing -> record {
-    config resolve ({url: "https://nexus.example.invalid", repositories: ["npm-proxy"]} | merge $extra)
+    config resolve ({url: "https://nexus.test", repositories: ["npm-proxy"]} | merge $extra)
 }
 
 def client-for [fetch: closure]: nothing -> record {
-    api client "https://nexus.example.invalid" --backoff 0ms --fetch $fetch
+    api client "https://nexus.test" --backoff 0ms --fetch $fetch
 }
 
 def run-with [config: record, fetch: closure]: nothing -> record {
@@ -78,7 +78,7 @@ def hosted-fetch [log: string, --fail-id: string = ""]: nothing -> closure {
 }
 
 def hosted-cfg [extra: record = {}]: nothing -> record {
-    config resolve ({url: "https://nexus.example.invalid", repositories: ["raw-dates"], allow_hosted: true} | merge $extra)
+    config resolve ({url: "https://nexus.test", repositories: ["raw-dates"], allow_hosted: true} | merge $extra)
 }
 
 def deleted-ids [log: string]: nothing -> list<string> {
@@ -109,8 +109,8 @@ def hosted-subprocess [settings: record]: nothing -> record {
         "        {status: 200, body: {items: [], continuationToken: null}}"
         "    }"
         "}"
-        $"let config = \(config resolve \({url: 'https://n.invalid', repositories: ['raw-dates'], allow_hosted: true} | merge ($settings | to nuon)\)\)"
-        "cleanup run $config (api client 'https://n.invalid' --backoff 0ms --fetch $fetch) | to json --raw | print"
+        $"let config = \(config resolve \({url: 'https://n.test', repositories: ['raw-dates'], allow_hosted: true} | merge ($settings | to nuon)\)\)"
+        "cleanup run $config (api client 'https://n.test' --backoff 0ms --fetch $fetch) | to json --raw | print"
     ] | str join "\n" | save --force $script
     let result = (^$nu.current-exe $script | complete)
     rm -f $script
@@ -226,7 +226,7 @@ run-suite "run" [
     } }
     { name: "an unreachable Nexus raises rather than reporting success", run: {||
         let fetch = {|req| {status: 503, body: {}} }
-        assert error {|| cleanup run (cfg) (api client "https://n.invalid" --max-attempts 1 --backoff 0ms --fetch $fetch) }
+        assert error {|| cleanup run (cfg) (api client "https://n.test" --max-attempts 1 --backoff 0ms --fetch $fetch) }
     } }
     { name: "skipped groups are tolerated by default", run: {||
         let versions = ([ "1.0.0" "2.0.0" "latest" ] | each {|v| {
@@ -266,7 +266,7 @@ run-suite "run" [
             }
         }
         let config = (config resolve {
-            url: "https://nexus.example.invalid"
+            url: "https://nexus.test"
             repositories: ["raw-dates"]
             from_path: '^/(?P<name>some_dir|some_other_dir)/(?P<version>[0-9]{8}(?:[^0-9./][^/]*)?)/'
             version_scheme: "date"
@@ -375,8 +375,8 @@ run-suite "run" [
             "        {status: 200, body: {items: [], continuationToken: null}}"
             "    }"
             "}"
-            "let config = (config resolve {url: 'https://n.invalid', repositories: ['r']})"
-            "cleanup run $config (api client 'https://n.invalid' --backoff 0ms --fetch $fetch) | ignore"
+            "let config = (config resolve {url: 'https://n.test', repositories: ['r']})"
+            "cleanup run $config (api client 'https://n.test' --backoff 0ms --fetch $fetch) | ignore"
         ] | str join "\n" | save --force $script
         let result = (^$nu.current-exe $script | complete)
         rm -f $script

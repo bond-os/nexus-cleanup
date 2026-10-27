@@ -1,14 +1,14 @@
 use ./harness.nu *
 use ../nexus-cleanup/config.nu *
 
-def base []: nothing -> record { {url: "https://nexus.example.invalid", repositories: ["r"]} }
+def base []: nothing -> record { {url: "https://nexus.test", repositories: ["r"]} }
 def resolve [extra: record = {}]: nothing -> record { config resolve ((base) | merge $extra) }
 
 def fixture [name: string]: nothing -> string { $"($env.FILE_PWD)/fixtures/config/($name)" }
 
 # Resolve flags over a configuration fixture, with the connection environment cleared.
 def layered [name: string, flags: record = {}]: nothing -> record {
-    with-env {NEXUS_URL: "https://nexus.example.invalid", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
+    with-env {NEXUS_URL: "https://nexus.test", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
         config resolve $flags --file (config load (fixture $name))
     }
 }
@@ -32,17 +32,17 @@ run-suite "config: file layering" [
     } }
     { name: "NEXUS_URL overrides the file's url, and a URL flag overrides both", run: {||
         let loaded = (config load (fixture "connection.yaml"))
-        with-env {NEXUS_URL: "https://from-env.invalid", NEXUS_USERNAME: "env-user"} {
+        with-env {NEXUS_URL: "https://from-env.test", NEXUS_USERNAME: "env-user"} {
             let c = (config resolve {} --file $loaded)
-            assert equal $c.url "https://from-env.invalid"
+            assert equal $c.url "https://from-env.test"
             assert equal $c.username "env-user"
-            assert equal (config resolve {url: "https://from-flag.invalid"} --file $loaded | get url) "https://from-flag.invalid"
+            assert equal (config resolve {url: "https://from-flag.test"} --file $loaded | get url) "https://from-flag.test"
         }
     } }
     { name: "the file's url and username apply when nothing overrides them", run: {||
         with-env {NEXUS_URL: "", NEXUS_USERNAME: ""} {
             let c = (config resolve {} --file (config load (fixture "connection.yaml")))
-            assert equal $c.url "https://from-file.invalid"
+            assert equal $c.url "https://from-file.test"
             assert equal $c.username "file-user"
         }
     } }
@@ -123,13 +123,13 @@ run-suite "config: file layering" [
 
 run-suite "config" [
     { name: "a flag overrides the environment", run: {||
-        with-env {NEXUS_URL: "https://from-env.invalid"} {
-            assert equal (resolve {url: "https://from-flag.invalid"} | get url) "https://from-flag.invalid"
+        with-env {NEXUS_URL: "https://from-env.test"} {
+            assert equal (resolve {url: "https://from-flag.test"} | get url) "https://from-flag.test"
         }
     } }
     { name: "the environment is used when no flag is given", run: {||
-        with-env {NEXUS_URL: "https://from-env.invalid"} {
-            assert equal (config resolve {repositories: ["r"]} | get url) "https://from-env.invalid"
+        with-env {NEXUS_URL: "https://from-env.test"} {
+            assert equal (config resolve {repositories: ["r"]} | get url) "https://from-env.test"
         }
     } }
     { name: "a missing URL is a usage error", run: {||
@@ -140,7 +140,7 @@ run-suite "config" [
         }
     } }
     { name: "a trailing slash on the URL is normalised away", run: {||
-        assert equal (resolve {url: "https://n.invalid/"} | get url) "https://n.invalid"
+        assert equal (resolve {url: "https://n.test/"} | get url) "https://n.test"
     } }
     { name: "a non-positive keep count is refused", run: {||
         for k in [0 (-1)] {
@@ -198,12 +198,12 @@ run-suite "config" [
         assert equal (resolve | get from_path) ""
     } }
     { name: "no repository selection is a usage error", run: {||
-        let err = (try { config resolve {url: "https://n.invalid"}; null } catch {|e| $e })
+        let err = (try { config resolve {url: "https://n.test"}; null } catch {|e| $e })
         assert not equal $err null
         assert ($err.msg | str contains "repository")
     } }
     { name: "a pattern alone is a valid selection", run: {||
-        assert equal (config resolve {url: "https://n.invalid", pattern: "yum-*"} | get pattern) "yum-*"
+        assert equal (config resolve {url: "https://n.test", pattern: "yum-*"} | get pattern) "yum-*"
     } }
     { name: "a negative deletion cap is refused", run: {||
         let err = (try { resolve {max_deletions: -1}; null } catch {|e| $e })
@@ -229,5 +229,83 @@ run-suite "config" [
             assert equal $c.username "u"
             assert equal $c.password "p"
         }
+    } }
+]
+
+# The usage error `config resolve` raises for a URL, with the environment cleared so
+# only the given source supplies it.
+def url-error [flags: record, --env-url: string = "", --file-url: string = ""]: nothing -> any {
+    let file = {path: "configs/a.yaml", values: (if ($file_url | is-empty) { {} } else { {url: $file_url} })}
+    with-env {NEXUS_URL: $env_url, NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
+        try { config resolve ({repositories: ["r"]} | merge $flags) --file $file; null } catch {|e| $e.msg }
+    }
+}
+
+def accepted [url: string]: nothing -> bool { (url-error {url: $url}) == null }
+
+run-suite "config: Nexus URL" [
+    { name: "an unparseable URL from the environment names NEXUS_URL and quotes the value", run: {||
+        let msg = (url-error {} --env-url "http//nexus")
+        assert ($msg | str contains "usage: NEXUS_URL must be an http or https URL, got 'http//nexus'")
+    } }
+    { name: "a URL without a host is refused naming the flag", run: {||
+        assert ((url-error {url: "https://"}) | str contains "usage: --url must be an http or https URL")
+    } }
+    { name: "an unparseable URL from a file names the file's key", run: {||
+        let msg = (url-error {} --file-url "http//nexus")
+        assert ($msg | str contains "usage: 'url' in configs/a.yaml must be an http or https URL")
+    } }
+    { name: "a scheme other than http or https is refused", run: {||
+        for u in ["httpx://nexus.test" "ftp://nexus.test"] {
+            assert ((url-error {url: $u}) | str contains $"must be an http or https URL, got '($u)'")
+        }
+    } }
+    { name: "an empty host or an out-of-range port does not parse and is refused", run: {||
+        for u in ["http://:8081" "https://nexus.test:99999"] {
+            assert ((url-error {url: $u}) | str contains "must be an http or https URL")
+        }
+    } }
+    { name: "ordinary URLs are accepted", run: {||
+        for u in ["https://nexus.test" "http://nexus.test:8081/" "https://nexus.test/nexus" "http://[::1]:8081"] {
+            assert (accepted $u) $"($u) was refused"
+        }
+    } }
+    { name: "an unparseable URL is reported before an invalid keep count", run: {||
+        assert ((url-error {url: "http//nexus", keep: 0}) | str contains "must be an http or https URL")
+    } }
+    { name: "a placeholder from the environment names NEXUS_URL and says where to set it", run: {||
+        let msg = (url-error {} --env-url "https://nexus.example.com")
+        assert ($msg | str contains "usage: NEXUS_URL is 'https://nexus.example.com', a placeholder")
+        assert ($msg | str contains "address of your Nexus in your CI variables")
+    } }
+    { name: "a placeholder from the flag names --url", run: {||
+        let msg = (url-error {url: "https://example.org"})
+        assert ($msg | str contains "usage: --url is 'https://example.org', a placeholder")
+        assert not ($msg | str contains "CI variables")
+    } }
+    { name: "a placeholder from a file names the file's key", run: {||
+        let msg = (url-error {} --file-url "https://nexus.example.net")
+        assert ($msg | str contains "usage: 'url' in configs/a.yaml is 'https://nexus.example.net', a placeholder")
+    } }
+    { name: "every reserved name is refused, in any case, with a port or a trailing dot", run: {||
+        let hosts = ["example" "nexus.example" "example.com" "a.b.example.com" "example.net" "example.org" "invalid" "nexus.example.invalid"]
+        for h in $hosts {
+            for u in [$"https://($h)" $"https://($h | str uppercase)" $"http://($h):8081/" $"https://($h)./" $"http://($h | str uppercase).:8081"] {
+                assert ((url-error {url: $u}) | str contains "a placeholder") $"($u) was not refused as a placeholder"
+            }
+        }
+    } }
+    { name: "look-alike names are accepted", run: {||
+        for h in ["example.company.com" "myexample.com" "nexus.examples.org"] {
+            assert (accepted $"https://($h)") $"($h) was refused"
+        }
+    } }
+    { name: "local development names are accepted", run: {||
+        for h in ["localhost" "nexus.localhost" "nexus.test" "127.0.0.1" "[::1]"] {
+            assert (accepted $"http://($h):8081") $"($h) was refused"
+        }
+    } }
+    { name: "a placeholder is reported before an invalid keep count", run: {||
+        assert ((url-error {url: "https://nexus.example.com", keep: 0}) | str contains "a placeholder")
     } }
 ]

@@ -23,7 +23,7 @@ run-suite "config file" [
         let loaded = (config load (fixture "full.yaml"))
         assert equal $loaded.path (fixture "full.yaml")
         let v = $loaded.values
-        assert equal $v.url "https://nexus.example.invalid"
+        assert equal $v.url "https://nexus.test"
         assert equal $v.username "cleanup-bot"
         assert equal $v.repositories ["yum-proxy-a" "yum-proxy-b"]
         assert equal $v.pattern "yum-proxy-*"
@@ -107,7 +107,7 @@ run-suite "config file" [
         let files = (glob $"($env.FILE_PWD | path dirname)/examples/configs/*.yaml")
         assert greater ($files | length) 1
         for f in $files {
-            with-env {NEXUS_URL: "https://nexus.example.invalid"} {
+            with-env {NEXUS_URL: "https://nexus.test"} {
                 config resolve {require_cap: true} --file (config load $f)
             }
         }
@@ -135,7 +135,7 @@ run-suite "config file" [
         let loaded = (config load (fixture "scheme-as-bare-no.yaml"))
         assert equal $loaded.values.version_scheme "no"
         let err = (try {
-            config resolve {url: "https://n.invalid"} --file $loaded; null
+            config resolve {url: "https://n.test"} --file $loaded; null
         } catch {|e| $e })
         assert ($err.msg | str contains "version-scheme")
     } }

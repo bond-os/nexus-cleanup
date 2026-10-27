@@ -106,6 +106,19 @@ contacts a Nexus. Run it inside the pinned image before calling work done.
 Importing the module must stay inert: `nu -c 'use nexus-cleanup'` makes no request and prints
 nothing.
 
+**Test hosts are chosen by meaning, from two reserved names:**
+
+- **`.invalid` — never usable.** The recorded fixtures' redaction placeholder
+  (`nexus.example.invalid`, `PLACEHOLDER_HOST`) and inputs the URL checks must refuse.
+- **`.test` — accepted, never contacted.** Every URL a test expects the tool to accept: base
+  URLs in tests (`https://nexus.test`, `https://from-env.test` where the source matters) and
+  URLs in the configuration fixtures under `tests/fixtures/config/`.
+
+`config resolve` refuses `.invalid` hosts as placeholders, so a redacted fixture URL that ever
+reached a configuration would be refused before any request. Do not "unify" the two by moving
+the fixtures to `.test`: that rewrites hundreds of recorded lines whose diffs are meant to show
+only what Nexus changed, and makes a redacted URL look like a working address.
+
 ## Commits and merging
 
 Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) and are

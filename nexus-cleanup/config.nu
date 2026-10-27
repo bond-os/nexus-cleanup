@@ -15,6 +15,11 @@ export const EXIT_CAP = 5
 
 export const FORMATS = ["json" "csv"]
 
+# Domains reserved for documentation and for invalid use (RFC 2606, RFC 6761): a Nexus URL
+# whose host is one of them, or under one, can never be real. `.test`, `.localhost` and
+# addresses are reserved too, but for real local setups, so they are not listed.
+export const PLACEHOLDER_DOMAINS = ["example" "example.com" "example.net" "example.org" "invalid"]
+
 # Duration spellings `into duration` accepts — `30sec`, `1.5min`, `1hr 30min`, `1_000ms` —
 # written loosely enough to admit every one of them: the schema may be looser than the
 # tool, never stricter.
@@ -212,8 +217,14 @@ export def "config resolve" [
     if ($url_file | is-not-empty) and $url.name != $"'url' in ($path)" {
         note $"the url in ($path) is overridden by ($url.name)"
     }
-    if not ($url.value | str starts-with "http") {
+    let parsed = (try { $url.value | url parse } catch { null })
+    if ($parsed == null) or ($parsed.host | is-empty) or ($parsed.scheme not-in ["http" "https"]) {
         usage-error $"($url.name) must be an http or https URL, got '($url.value)'"
+    }
+    let host = ($parsed.host | str lowercase | str replace --regex '\.$' '')
+    if ($PLACEHOLDER_DOMAINS | any {|d| $host == $d or ($host | str ends-with $".($d)") }) {
+        let where = if $url.name == "NEXUS_URL" { " in your CI variables" } else { "" }
+        usage-error $"($url.name) is '($url.value)', a placeholder address that cannot be a real Nexus; set it to the address of your Nexus($where)"
     }
 
     let username_flag = ($overrides.username? | default null)

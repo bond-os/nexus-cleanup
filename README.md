@@ -160,7 +160,9 @@ variables, and lists every file it writes on stderr:
 
 Then edit `configs/example.yaml`. Until it names a real repository it selects `replace-me`, so
 the first pipeline run fails naming it rather than passing having cleaned nothing. Set the CI
-variables or credentials the pipeline's header lists, commit and push.
+variables or credentials the pipeline's header lists, commit and push. The GitLab and Jenkins
+pipelines set `NEXUS_URL` to `https://nexus.example.com`, which you must replace with your
+Nexus: until you do, every run fails with exit 2 naming the placeholder, before any request.
 
 `init` does not upgrade a repository it wrote earlier. To move to a newer release, bump the pins
 by hand — the pipeline's image tag and the schema address in each file — or run the newer
@@ -181,6 +183,12 @@ does not write.
 
 A flag overrides the environment. Everything is validated before a single component is
 enumerated. Credentials never appear in the report, in diagnostics, or in any error message.
+
+The URL must parse as an `http` or `https` URL with a host. A host reserved for examples or
+invalid use — `example`, `example.com`, `example.net`, `example.org`, `invalid`, or any name
+under them — is refused as a placeholder, since it can never be a real Nexus. Either refusal
+exits 2, names where the URL came from, and happens before any request. Local names such as
+`localhost`, `*.localhost`, `*.test` and IP addresses are accepted.
 
 | Flag | Default | Meaning |
 |---|---|---|
