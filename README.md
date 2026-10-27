@@ -172,8 +172,8 @@ variables or credentials the pipeline's header lists, commit and push. The GitLa
 pipelines set `NEXUS_URL` to `https://nexus.example.com`, which you must replace with your
 Nexus: until you do, every run fails with exit 2 naming the placeholder, before any request.
 
-`init` does not upgrade a repository it wrote earlier; [Upgrading](#upgrading) moves every pin to
-a newer release with one command.
+`init` does not upgrade a repository it wrote earlier; its sibling `upgrade` moves every pin to a
+newer release with one command, as described in [Upgrading](#upgrading).
 
 Each [`examples/<system>/`](examples/) directory is what `init --ci <system> --editor vscode
 --editor intellij --env varlock` writes, for reading before you run it. Its pinned lines also carry
@@ -186,8 +186,9 @@ A configuration repository pins one release in several places: the pipeline's im
 `NEXUS_CLEANUP_VERSION` for Forgejo), and the schema address in every file under `configs/`,
 in `.vscode/settings.json` and in `.idea/jsonSchemas.xml`. A pin left behind validates your
 files against another release's schema. Read `CHANGELOG.md` first, then run the *new* release's
-image in the repository; it moves every pin to its own version, so the command names the
-version once and cannot write another:
+`upgrade` in the repository; it moves every pin to its own version, so the command names the
+version once and cannot write another. It needs no Nexus and no credentials, and touches no
+file `init` does not write:
 
 - **Tags only.** An image pin keeps its precision: `X.Y` moves to the new `X.Y`, `X.Y.Z` to the
   new `X.Y.Z`, under any registry, a mirror included. A digest pin (`:X.Y.Z@sha256:…` or
@@ -202,51 +203,14 @@ version once and cannot write another:
 
 <!-- x-release-please-start-version -->
 ```bash
-docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint nu \
-  ghcr.io/bond-os/nexus-cleanup:0.2.1 -c '
-let v = (nexus-cleanup --version | str trim)
-let xy = ($v | split row "." | first 2 | str join ".")
-let forgejo = (open --raw /opt/nexus-cleanup/nexus-cleanup/templates/ci/forgejo/.forgejo/workflows/nexus-cleanup.yml)
-let nu_version = ($forgejo | parse --regex `NU_VERSION: (\S+)` | get capture0.0)
-let nu_sha = ($forgejo | parse --regex `NU_SHA256: (\S+)` | get capture0.0)
-let pin = "(^|[/\"\\s]|\\x27)nexus-cleanup"
-let digest = $"($pin)\(:[0-9.]+\)?@sha256:[0-9a-f]{64}"
-let files = (glob "{.gitlab-ci.yml,Jenkinsfile,.forgejo/workflows/nexus-cleanup.yml,configs/*.yaml,configs/*.yml,.vscode/settings.json,.idea/jsonSchemas.xml}" | path relative-to $env.PWD | sort)
-for f in $files {
-    let text = (open --raw $f | decode utf-8)
-    let new = ($text | split row "\n" | enumerate | each {|l|
-        mut s = $l.item
-        if ($s =~ $digest) {
-            print --stderr $"($f):($l.index + 1): digest pin replaced by the tag ($v); re-add a digest once you have verified it"
-            $s = ($s | str replace --all --regex $"($pin):[0-9]+\\.[0-9]+@sha256:[0-9a-f]{64}" $"${1}nexus-cleanup:($xy)")
-            $s = ($s | str replace --all --regex $digest $"${1}nexus-cleanup:($v)")
-        }
-        $s = ($s | str replace --all --regex $"($pin):[0-9]+\\.[0-9]+\\.[0-9]+" $"${1}nexus-cleanup:($v)")
-        $s = ($s | str replace --all --regex $"($pin):[0-9]+\\.[0-9]+\([^.0-9]|$\)" $"${1}nexus-cleanup:($xy)${2}")
-        $s = ($s | str replace --all --regex `NEXUS_CLEANUP_VERSION: v[0-9]+\.[0-9]+\.[0-9]+` $"NEXUS_CLEANUP_VERSION: v($v)")
-        $s = ($s | str replace --all --regex `nexus-cleanup/v[0-9]+\.[0-9]+\.[0-9]+/schema/` $"nexus-cleanup/v($v)/schema/")
-        $s
-    } | str join "\n")
-    let new = if not ($new =~ `NU_VERSION: `) {
-        $new
-    } else if ($new =~ `asset="nu-\$\{NU_VERSION\}-x86_64-unknown-linux-musl"`) {
-        $new | str replace --regex `NU_VERSION: \S+` $"NU_VERSION: ($nu_version)" | str replace --regex `NU_SHA256: \S+` $"NU_SHA256: ($nu_sha)"
-    } else {
-        print --stderr $"($f): not the x86_64 Nushell binary; update NU_VERSION and NU_SHA256 by hand"
-        $new
-    }
-    if $new != $text {
-        $new | save --force --raw $f
-        print $f
-    }
-}
-'
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" ghcr.io/bond-os/nexus-cleanup:0.2.1 upgrade
 ```
 <!-- x-release-please-end -->
 
-The command lists each file it changed. Under rootless Podman add `--userns=keep-id`; under
-rootless Docker use `--user 0:0` instead, as in [Who the container runs
-as](#who-the-container-runs-as). Read `git diff` before committing.
+`upgrade` lists each file it changed, or says there was nothing to update; to upgrade a
+directory other than the working one, name it after `upgrade`. Under rootless Podman add
+`--userns=keep-id`; under rootless Docker use `--user 0:0` instead, as in [Who the container
+runs as](#who-the-container-runs-as). Read `git diff` before committing.
 
 The alternative is the new image's `init --force` with the same options you first gave `init`:
 it rewrites every file `init` writes, your edits to them included, so read the diff before

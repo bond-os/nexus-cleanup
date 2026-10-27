@@ -18,8 +18,11 @@ See proposal.md for why. What exists today:
   header tells arm64 users to switch the asset and its checksum.
 - The README allows an image pinned by `X.Y.Z`, by `X.Y`, or by digest. The GitLab template
   also uses `nexus-cleanup:` in job names (`nexus-cleanup:dry-run`, `.nexus-cleanup:`).
-- The image holds the templates of its own release under
-  `/opt/nexus-cleanup/nexus-cleanup/templates/`.
+- `scaffold.nu` already names every file `init` writes (`CI_SYSTEMS`, `EDITORS`, the common
+  files) and holds the templates of its own release, the Forgejo workflow with its literal
+  `NU_VERSION` and `NU_SHA256` among them. `init` is a subcommand with its own argument parsing
+  (`scaffold init-args`), exit 2 for every failure, and a repository named `init` reachable only
+  through `--pattern` or a configuration file.
 - The README is a release-please extra-file; a marked line moves its first X.Y.Z only.
 
 ## Goals / Non-Goals
@@ -27,8 +30,8 @@ See proposal.md for why. What exists today:
 **Goals:**
 
 - Every privilege the README names is one the reference instance showed to be needed.
-- One upgrade command that moves every pin `init` writes and can never write a version other
-  than the image's own.
+- One short upgrade command that moves every pin `init` writes and can never write a version
+  other than the tool's own, tested in the hermetic suite like the rest of the tool.
 
 **Non-Goals:**
 
@@ -66,19 +69,26 @@ explains why it is avoided for delete.
 
 The README warns that `init --force` rewrites these edits.
 
-### Upgrade: one command run from the new image, which supplies the version itself
+### Upgrade: an `upgrade` subcommand, run from the new image
 
 ```
-docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint nu \
-  ghcr.io/bond-os/nexus-cleanup:X.Y.Z -c '<script>'
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" ghcr.io/bond-os/nexus-cleanup:X.Y.Z upgrade
 ```
 
-The script asks the image for its version (`nexus-cleanup --version`) and rewrites, in the files
-that exist among the pin locations above, every image pin, `NEXUS_CLEANUP_VERSION: v<version>`
-and `nexus-cleanup/v<version>/schema/` to that version. The release appears once, as the image
-tag on the line release-please moves; the old version is matched by pattern. The image cannot
-write a version it is not, and an operator cannot pass a mismatched one. Running from the image
-needs no Nushell or `sed` on the host and avoids GNU/BSD `sed -i` differences. The block sits
+`nexus-cleanup upgrade [DIR]` rewrites, in the files that exist among the pin locations above —
+the pipeline for each CI system, `configs/*.yaml` and `configs/*.yml`, and the editor files —
+every image pin, `NEXUS_CLEANUP_VERSION: v<version>` and `nexus-cleanup/v<version>/schema/` to
+the tool's own `VERSION`. No other file is read or written. It needs no Nexus and no
+credentials, lists each file it changed on stderr as `init` does, and exits 0, including when
+nothing needed changing. Its arguments are parsed by hand as `init`'s are: one optional
+directory, `--help`, and exit 2 for anything else or for a directory that cannot be read or
+written. Like `init`, it makes a repository named `upgrade` reachable only through `--pattern`
+or a configuration file.
+
+The release appears once in the README, as the image tag on the line release-please moves; the
+old version is matched by pattern. The tool cannot write a version it is not, and an operator
+cannot pass a mismatched one. Running from the image needs no Nushell or `sed` on the host and
+avoids GNU/BSD `sed -i` differences. The block sits
 between `x-release-please-start-version` and `-end` markers, as the "Getting started" command
 does, and is followed by the same sentence as there: under rootless Podman add
 `--userns=keep-id`, under rootless Docker use `--user 0:0`, with a link to "Who the container
@@ -99,7 +109,7 @@ re-add a digest after verifying it (`docker buildx imagetools inspect` for the i
 shows the change. Alternatives:
 
 - *Fetch the new digest* — possible in pure Nushell through the registry API, but a digest the
-  script looked up itself carries the trust of the tag at that moment, which is exactly what a
+  command looked up itself carries the trust of the tag at that moment, which is exactly what a
   digest pin exists to avoid: a re-run `publish` pushes the same tag to a rebuilt image. It
   would also fail behind a mirror or a blocked ghcr.io.
 - *Refuse and write nothing* — safe, but it makes the operator who pinned by digest do the whole
@@ -108,18 +118,27 @@ shows the change. Alternatives:
   new schema: the drift this command exists to prevent.
 - *Accept a digest passed in* — a pasted digest that exists but is wrong (an older release, an
   amd64-only manifest) would pin the wrong image while every file names the new version, and the
-  script cannot tell.
+  command cannot tell.
 
-**Forgejo's Nushell.** `NU_VERSION` and `NU_SHA256` are copied from the image's own Forgejo
+**Forgejo's Nushell.** `NU_VERSION` and `NU_SHA256` are copied from the tool's own Forgejo
 template, which is the Nushell that release is tested with: one source, nothing computed. They
 are copied only while the workflow's `asset=` line names `x86_64-unknown-linux-musl`. Otherwise
 the operator switched to another binary, the template's checksum would be wrong for it, and the
-script leaves both values alone and says on stderr that `NU_VERSION` and its checksum must be
+command leaves both values alone and says on stderr that `NU_VERSION` and its checksum must be
 updated by hand.
 
-Alternatives: a `sed` one-liner (portability, and it would hold the version twice); a tool
-subcommand (code and tests for a one-off edit, and it would need to know the operator's
-repository layout). `init --force` stays documented for those who want to diff the whole tree.
+Alternatives:
+
+- *A Nushell script inline in the README*, run with `--entrypoint nu -c '…'`. Written and
+  checked first, then dropped: some forty lines an operator must copy exactly, restricted to
+  text without a single quote, and tested only by hand — a Nushell update could break it with
+  the suite still green. As a subcommand the same rules are tested in the pinned image on every
+  pull request.
+- *A `sed` one-liner* — portability, and it would hold the version twice.
+
+The earlier objection to a subcommand — that it would need to know the operator's repository
+layout — does not hold: the layout is the list of files `init` writes, which `scaffold.nu`
+already owns. `init --force` stays documented for those who want to diff the whole tree.
 
 ### Renovate is named, not configured
 
@@ -132,7 +151,7 @@ is shipped — it would be another template to keep current, for a minority of u
 - [Nexus changes privilege semantics in a later version] → The README names the version the
   table was checked with; "No Nexus version gating" means the tool will not adapt, the table is
   re-checked when the reference instance is upgraded.
-- [The upgrade script rewrites something that only looks like a pin] → Image pins need `:` and a
+- [The upgrade rewrites something that only looks like a pin] → Image pins need `:` and a
   digit after `nexus-cleanup`, the other patterns are anchored on `NEXUS_CLEANUP_VERSION: v` and
   `nexus-cleanup/v…/schema/`, and the advice to read `git diff` before committing stays.
 - [An operator who pinned by digest loses the pin] → Deliberate: the command supports tags only.
@@ -140,12 +159,11 @@ is shipped — it would be another template to keep current, for a minority of u
   says so before the command.
 - [An arm64 Forgejo runner] → Its Nushell pins are left alone with a note; copying the x86_64
   checksum would break the install step.
-- [A future template that renders `NU_VERSION` from a placeholder] → The script reads the
-  template's text, so the copy would carry `{{…}}`; the verification in tasks.md runs the script
-  against the rendered example and would fail.
-- [`nexus-cleanup --version` inside `nu -c` fails because the launcher is not on that `PATH`] →
-  Checked against the published image while writing the section; the launcher lives in
-  `/usr/local/bin`.
+- [A future template that renders `NU_VERSION` from a placeholder] → The command reads the
+  template's text, so the copy would carry `{{…}}`; the tests compare an upgraded tree with the
+  rendered example and would fail.
+- [An operator runs `upgrade` from the old image] → Nothing moves: every pin already names that
+  version, and the command says it changed nothing. The README runs it from the new tag.
 
 ## Findings
 
