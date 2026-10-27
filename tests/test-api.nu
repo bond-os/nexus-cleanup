@@ -162,6 +162,10 @@ run-suite "api client" [
         assert ((refusal $repos ["nope"]).msg | str contains "nope")
         assert ((refusal $repos ["nope"] --allow-hosted).msg | str contains "nope")
     } }
+    { name: "an unknown repository may also be one this user cannot see", run: {||
+        let repos = [{name: "p", format: "npm", type: "proxy"}]
+        assert equal (refusal $repos ["nope"]).msg "repository 'nope' does not exist on this instance, or this user cannot see it"
+    } }
     { name: "a pattern selects only proxies", run: {||
         let repos = [
             {name: "yum-a", format: "yum", type: "proxy"}

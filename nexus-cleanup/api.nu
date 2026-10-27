@@ -146,7 +146,7 @@ export def "api select-repositories" [
         for n in $names {
             let hit = ($repositories | where name == $n | get --optional 0)
             if $hit == null {
-                error make {msg: $"repository '($n)' does not exist on this instance"}
+                error make {msg: $"repository '($n)' does not exist on this instance, or this user cannot see it"}
             }
             if $hit.type == "hosted" {
                 if not $allow_hosted {
