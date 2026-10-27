@@ -133,6 +133,12 @@ run-suite "scaffold example configuration" [
         })
         rm -f $path
         assert equal $resolved.repositories ["replace-me"]
+        assert equal $resolved.disabled false
+    } }
+    { name: "the example shows how to disable it, commented out", run: {||
+        let content = (file (scaffold plan --ci gitlab --version "0.3.0") "configs/example.yaml")
+        assert ($content | lines | any {|l| $l == "# disabled: true" })
+        assert ($content | str contains "every run skips it")
     } }
     { name: "an unedited example fails naming replace-me before any component request", run: {||
         let path = (example-file)

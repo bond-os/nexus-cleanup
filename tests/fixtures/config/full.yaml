@@ -16,3 +16,4 @@ max-deletions: 200
 max-deletion-share: 0.5
 summary-out: summary.json
 allow-hosted: true
+disabled: false

@@ -11,6 +11,10 @@
       "description": "Allow raw hosted repositories named in repositories; a pattern never selects one. Deletes nothing without --execute.",
       "type": "boolean"
     },
+    "disabled": {
+      "description": "Skip this file on every run until removed: nothing is requested or deleted. Never enables anything.",
+      "type": "boolean"
+    },
     "execute": {
       "description": "Deletion is requested only by the --execute flag, never by a configuration file.",
       "not": {}

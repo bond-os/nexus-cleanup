@@ -385,3 +385,48 @@ run-suite "run" [
         assert ($result.stderr | str contains "nexus-cleanup:")
     } }
 ]
+
+# Run a configuration fixture in a child process, so its stderr can be read, with a
+# fetch that fails on any request. Returns the child's result with the run parsed.
+def run-file [name: string, flags: record = {}]: nothing -> record {
+    let script = (mktemp -t "disabled-run-XXXXXX.nu")
+    let root = ($env.FILE_PWD | path dirname)
+    [
+        $"use ($root)/nexus-cleanup/run.nu *"
+        $"use ($root)/nexus-cleanup/api.nu *"
+        $"use ($root)/nexus-cleanup/config.nu *"
+        "let fetch = {|req| error make {msg: $'unexpected request: ($req.method) ($req.url)'} }"
+        $"let config = \(config resolve \({url: 'https://n.test'} | merge ($flags | to nuon)\) --file \(config load '($env.FILE_PWD)/fixtures/config/($name)'\)\)"
+        "cleanup run $config (api client 'https://n.test' --max-attempts 1 --backoff 0ms --fetch $fetch) | to json --raw | print"
+    ] | str join "\n" | save --force $script
+    let result = (with-env {NEXUS_URL: "", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} { ^$nu.current-exe $script | complete })
+    rm -f $script
+    assert equal $result.exit_code 0 $result.stderr
+    $result | insert out ($result.stdout | from json)
+}
+
+run-suite "run: disabled" [
+    { name: "a disabled file makes no request, reports nothing and exits 0", run: {||
+        let r = (run-file "disabled.yaml")
+        assert equal $r.out.exit_code 0
+        assert equal $r.out.report.records []
+        assert equal $r.out.report.summary.disabled true
+        assert equal $r.out.report.summary.mode "dry-run"
+        assert equal $r.out.report.summary.repositories []
+        assert equal $r.out.report.summary.counts.components_total 0
+        assert ($r.stderr | str contains "disabled.yaml is disabled; nothing was done")
+    } }
+    { name: "--execute does not override a disabled file, and the mode says it was asked for", run: {||
+        let r = (run-file "disabled.yaml" {execute: true})
+        assert equal $r.out.exit_code 0
+        assert equal $r.out.report.summary.mode "execute"
+        assert equal $r.out.report.summary.counts.deleted 0
+        assert ($r.stderr | str contains "is disabled; nothing was done")
+    } }
+    { name: "a repository named on the command line does not override a disabled file", run: {||
+        let r = (run-file "disabled.yaml" {repositories: ["npm-proxy"]})
+        assert equal $r.out.exit_code 0
+        assert equal $r.out.report.records []
+        assert ($r.stderr | str contains "is disabled; nothing was done")
+    } }
+]

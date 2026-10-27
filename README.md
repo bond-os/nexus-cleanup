@@ -261,6 +261,7 @@ Keys are the flag names without their dashes:
 | `max-deletion-share` | number between 0 and 1 | `--max-deletion-share` |
 | `summary-out` | path, relative to the working directory | `--summary-out` |
 | `allow-hosted` | `true` / `false` | `--allow-hosted` |
+| `disabled` | `true` / `false` | — |
 <!-- config-keys:end -->
 
 - **A flag overrides the file.** For `url` and `username` the environment sits in between:
@@ -279,6 +280,13 @@ Keys are the flag names without their dashes:
 - **`--require-cap`** refuses a run, dry or executing, unless `max-deletions` or
   `max-deletion-share` is set by the file or a flag. The example pipelines pass it to every run,
   so a file without a cap fails in the nightly dry run rather than when someone executes.
+- **`disabled: true` pauses a file** without deleting it. Every run of it — dry, `--execute`, or
+  with repositories named on the command line — sends no request, deletes nothing and exits 0,
+  saying on stderr that the file is disabled. The report is still written, empty, and its summary
+  carries `disabled: true`, so a pipeline keeps a report per file. The file is still checked in
+  full first, as are the environment and flags it runs with, so a paused file cannot rot: a typo in
+  it, or a missing `NEXUS_URL`, still fails. No flag overrides the key; to run the file, remove
+  the line. `disabled: false` is the same as leaving it out.
 
 The file is always parsed as YAML, whatever its extension; JSON, being YAML, works too. The
 report's summary records the path given to `--config` as `config_file`.
@@ -461,10 +469,12 @@ decision, reason, rank, size_bytes, last_modified, deleted, error, path`. Fields
 apply are present and empty rather than omitted. New fields are only ever appended, so CSV
 column positions never move; `path` was added last.
 
-The `summary` block (and the `--summary-out` file) ends with `tool_version`, the version of the
-tool that produced the report — the same string `--version` prints. Keep it with archived reports:
-it is what tells you which release made a given deletion decision. Summary fields, like record
-fields, are only ever appended.
+The `summary` block (and the `--summary-out` file) ends with `tool_version`, `config_file` and
+`disabled`. `tool_version` is the version of the tool that produced the report — the same string
+`--version` prints. Keep it with archived reports: it is what tells you which release made a given
+deletion decision. `config_file` is the path given to `--config`, empty without one, and
+`disabled` is `true` only when that file paused the run. Summary fields, like record fields, are
+only ever appended.
 
 `decision` is one of `keep`, `delete`, `skip`. `reason` is one of:
 

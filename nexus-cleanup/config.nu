@@ -27,7 +27,8 @@ export const DURATION_PATTERN = '^\s*[-+]?[0-9.][0-9_.eE+-]*\s*(?:ns|us|µs|ms|s
 
 # One row per configuration-file key: its flag spelling, the setting it fills, its
 # type, the JSON Schema constraints it adds, and the description editors show.
-# Mapping, type checks, the schema and the README table all derive from this.
+# Mapping, type checks, the schema and the README table all derive from this. A row
+# with `flag: false` is set only by a file: no flag overrides it.
 export const CONFIG_KEYS = [
     {key: "url", field: "url", type: "string",
         schema: {pattern: "^http", not: {pattern: "^[a-zA-Z][a-zA-Z0-9+.-]*://[^/?#]*@"}},
@@ -64,6 +65,8 @@ export const CONFIG_KEYS = [
         description: "Also write the aggregate here as JSON, relative to the working directory."}
     {key: "allow-hosted", field: "allow_hosted", type: "bool", schema: {},
         description: "Allow raw hosted repositories named in repositories; a pattern never selects one. Deletes nothing without --execute."}
+    {key: "disabled", field: "disabled", type: "bool", flag: false, schema: {},
+        description: "Skip this file on every run until removed: nothing is requested or deleted. Never enables anything."}
 ]
 
 # Keys a file may never set, each with the reason given to the operator.
@@ -332,5 +335,7 @@ export def "config resolve" [
         max_deletion_share: $max_deletion_share.value
         summary_out: (layer $overrides $file_values "summary_out" "" | get value)
         config_file: $path
+        # Never from a flag: a file pauses itself, and can only stop a run.
+        disabled: ($file_values.disabled? | default false)
     }
 }
