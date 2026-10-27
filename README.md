@@ -39,8 +39,9 @@ docker run --rm -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
 ```
 <!-- x-release-please-end -->
 
-**Pin an exact version** (`X.Y.Z`), or a digest (`@sha256:…`) for full reproducibility, and bump
-it deliberately after reading `CHANGELOG.md`. Each release also moves an `X.Y` tag to its
+**Pin an exact version** (`X.Y.Z`), or a digest (`@sha256:…`) for full reproducibility, and move
+it deliberately after reading `CHANGELOG.md`; [Upgrading](#upgrading) does it for a configuration
+repository. Each release also moves an `X.Y` tag to its
 newest patch. There is deliberately **no `latest`**: a scheduled cleanup on a floating tag would
 pick up new deletion behaviour that nobody has read about.
 
@@ -171,14 +172,88 @@ variables or credentials the pipeline's header lists, commit and push. The GitLa
 pipelines set `NEXUS_URL` to `https://nexus.example.com`, which you must replace with your
 Nexus: until you do, every run fails with exit 2 naming the placeholder, before any request.
 
-`init` does not upgrade a repository it wrote earlier. To move to a newer release, bump the pins
-by hand — the pipeline's image tag and the schema address in each file — or run the newer
-image's `init --force` and read the diff before committing.
+`init` does not upgrade a repository it wrote earlier; [Upgrading](#upgrading) moves every pin to
+a newer release with one command.
 
 Each [`examples/<system>/`](examples/) directory is what `init --ci <system> --editor vscode
 --editor intellij --env varlock` writes, for reading before you run it. Its pinned lines also carry
 `x-release-please` comments, which keep the examples current at each release and which `init`
 does not write.
+
+## Upgrading
+
+A configuration repository pins one release in several places: the pipeline's image tag (or
+`NEXUS_CLEANUP_VERSION` for Forgejo), and the schema address in every file under `configs/`,
+in `.vscode/settings.json` and in `.idea/jsonSchemas.xml`. A pin left behind validates your
+files against another release's schema. Read `CHANGELOG.md` first, then run the *new* release's
+image in the repository; it moves every pin to its own version, so the command names the
+version once and cannot write another:
+
+- **Tags only.** An image pin keeps its precision: `X.Y` moves to the new `X.Y`, `X.Y.Z` to the
+  new `X.Y.Z`, under any registry, a mirror included. A digest pin (`:X.Y.Z@sha256:…` or
+  `@sha256:…`) is replaced by the new tag, with a warning naming each line. Re-add a digest
+  only after verifying it: `docker buildx imagetools inspect` shows the new tag's index digest,
+  and `gh attestation verify oci://ghcr.io/bond-os/nexus-cleanup@sha256:… --repo
+  bond-os/nexus-cleanup` checks that this repository's release workflow built it. The command
+  never looks a digest up itself: one fetched for a tag is only as trustworthy as the tag.
+- **Forgejo's Nushell moves with it.** `NU_VERSION` and `NU_SHA256` are copied from the new
+  release's own Forgejo template — unless your workflow installs the arm64 binary, in which
+  case they are left alone and the command says to update them by hand.
+
+<!-- x-release-please-start-version -->
+```bash
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" --entrypoint nu \
+  ghcr.io/bond-os/nexus-cleanup:0.2.1 -c '
+let v = (nexus-cleanup --version | str trim)
+let xy = ($v | split row "." | first 2 | str join ".")
+let forgejo = (open --raw /opt/nexus-cleanup/nexus-cleanup/templates/ci/forgejo/.forgejo/workflows/nexus-cleanup.yml)
+let nu_version = ($forgejo | parse --regex `NU_VERSION: (\S+)` | get capture0.0)
+let nu_sha = ($forgejo | parse --regex `NU_SHA256: (\S+)` | get capture0.0)
+let pin = "(^|[/\"\\s]|\\x27)nexus-cleanup"
+let digest = $"($pin)\(:[0-9.]+\)?@sha256:[0-9a-f]{64}"
+let files = (glob "{.gitlab-ci.yml,Jenkinsfile,.forgejo/workflows/nexus-cleanup.yml,configs/*.yaml,configs/*.yml,.vscode/settings.json,.idea/jsonSchemas.xml}" | path relative-to $env.PWD | sort)
+for f in $files {
+    let text = (open --raw $f | decode utf-8)
+    let new = ($text | split row "\n" | enumerate | each {|l|
+        mut s = $l.item
+        if ($s =~ $digest) {
+            print --stderr $"($f):($l.index + 1): digest pin replaced by the tag ($v); re-add a digest once you have verified it"
+            $s = ($s | str replace --all --regex $"($pin):[0-9]+\\.[0-9]+@sha256:[0-9a-f]{64}" $"${1}nexus-cleanup:($xy)")
+            $s = ($s | str replace --all --regex $digest $"${1}nexus-cleanup:($v)")
+        }
+        $s = ($s | str replace --all --regex $"($pin):[0-9]+\\.[0-9]+\\.[0-9]+" $"${1}nexus-cleanup:($v)")
+        $s = ($s | str replace --all --regex $"($pin):[0-9]+\\.[0-9]+\([^.0-9]|$\)" $"${1}nexus-cleanup:($xy)${2}")
+        $s = ($s | str replace --all --regex `NEXUS_CLEANUP_VERSION: v[0-9]+\.[0-9]+\.[0-9]+` $"NEXUS_CLEANUP_VERSION: v($v)")
+        $s = ($s | str replace --all --regex `nexus-cleanup/v[0-9]+\.[0-9]+\.[0-9]+/schema/` $"nexus-cleanup/v($v)/schema/")
+        $s
+    } | str join "\n")
+    let new = if not ($new =~ `NU_VERSION: `) {
+        $new
+    } else if ($new =~ `asset="nu-\$\{NU_VERSION\}-x86_64-unknown-linux-musl"`) {
+        $new | str replace --regex `NU_VERSION: \S+` $"NU_VERSION: ($nu_version)" | str replace --regex `NU_SHA256: \S+` $"NU_SHA256: ($nu_sha)"
+    } else {
+        print --stderr $"($f): not the x86_64 Nushell binary; update NU_VERSION and NU_SHA256 by hand"
+        $new
+    }
+    if $new != $text {
+        $new | save --force --raw $f
+        print $f
+    }
+}
+'
+```
+<!-- x-release-please-end -->
+
+The command lists each file it changed. Under rootless Podman add `--userns=keep-id`; under
+rootless Docker use `--user 0:0` instead, as in [Who the container runs
+as](#who-the-container-runs-as). Read `git diff` before committing.
+
+The alternative is the new image's `init --force` with the same options you first gave `init`:
+it rewrites every file `init` writes, your edits to them included, so read the diff before
+committing. If you already run [Renovate](https://docs.renovatebot.com/), a regex manager
+over the image pin and the `nexus-cleanup/vX.Y.Z/schema/` address, with
+`ghcr.io/bond-os/nexus-cleanup` as its Docker datasource, proposes the same change as a pull
+request.
 
 ## Configuration
 
@@ -311,7 +386,8 @@ a misspelt or refused key while you type, given the modeline at the top of the f
 
 **Pin the tag of the release your pipeline runs** — `v0.2.1` <!-- x-release-please-version -->
 with image `nexus-cleanup:0.2.1` <!-- x-release-please-version -->
-— release tags never move, so the schema always matches the tool that reads the file. A JSON
+— release tags never move, so the schema always matches the tool that reads the file, and
+[Upgrading](#upgrading) moves it together with the image. A JSON
 file can carry the same address in a top-level `$schema` key, which the tool accepts and
 ignores. The schema is an aid, not the authority: where it cannot express a rule exactly —
 whether a regex compiles, say — it is looser than the tool, which still refuses the file.
@@ -567,6 +643,126 @@ absent, and paging follows the continuation token alone. On an instance that exp
 attributes, the variant layer degrades to filename parsing or the implicit variant, and the
 report shows which happened.
 
+## Nexus permissions
+
+Give the tool an account of its own, never an admin. With an admin account a leaked CI variable
+is full control of the instance, and Nexus takes no part in the tool's guards; with a narrow one,
+Nexus refuses what the account was not granted, whatever the tool or a pipeline asks.
+
+### What the tool needs
+
+The tool makes four calls, and each needs one privilege on each repository it cleans. Checked
+on Nexus 3.97.1 Community, adding one privilege at a time:
+
+| Call | When | Privilege |
+|---|---|---|
+| `GET /v1/repositories` | every run | `nx-repository-view-<format>-<repository>-browse` — Nexus lists only repositories the user holds a privilege on, and `read` alone does not make one visible |
+| `GET /v1/components` | every run | the same `browse`; `read` is not needed, since the tool never downloads an asset |
+| `GET /v1/repositories/apt/proxy/<repository>` | apt repositories only | `nx-repository-admin-apt-<repository>-read` |
+| `DELETE /v1/components/<id>` | `--execute` only | `nx-repository-view-<format>-<repository>-delete` |
+
+These are the privileges Nexus creates for every repository; nothing needs to be defined. Two
+roles follow from the table: one for the scheduled dry run, which can only look, and one for the
+execute job, which may also delete. For proxies `yum-proxy-a` and `apt-proxy-b`:
+
+```json
+{
+  "id": "nexus-cleanup-dry-run",
+  "name": "nexus-cleanup-dry-run",
+  "description": "nexus-cleanup: list and enumerate the repositories it cleans",
+  "privileges": [
+    "nx-repository-view-yum-yum-proxy-a-browse",
+    "nx-repository-view-apt-apt-proxy-b-browse",
+    "nx-repository-admin-apt-apt-proxy-b-read"
+  ],
+  "roles": []
+}
+```
+
+```json
+{
+  "id": "nexus-cleanup-execute",
+  "name": "nexus-cleanup-execute",
+  "description": "nexus-cleanup: also delete from the repositories it cleans",
+  "privileges": [
+    "nx-repository-view-yum-yum-proxy-a-browse",
+    "nx-repository-view-yum-yum-proxy-a-delete",
+    "nx-repository-view-apt-apt-proxy-b-browse",
+    "nx-repository-view-apt-apt-proxy-b-delete",
+    "nx-repository-admin-apt-apt-proxy-b-read"
+  ],
+  "roles": []
+}
+```
+
+Create each with `POST /service/rest/v1/security/roles` as an administrator, then one user per
+role with `POST /service/rest/v1/security/users` (`userId`, `firstName`, `lastName`,
+`emailAddress`, `password`, `"status": "active"`, `"roles": ["nexus-cleanup-dry-run"]`). In the
+UI the same is Administration → Security → Roles → Create role → Nexus role: enter the ID and
+name, add the privileges above by name, save; then Users → Create local user, status Active,
+granted that one role. Give the dry-run user's credentials to the scheduled job and the execute
+user's to the manual one, as below.
+
+**Name the repositories in the delete privileges.** A Nexus privilege knows a repository's
+format but not whether it is a proxy or hosted, so a wildcard such as
+`nx-repository-view-raw-*-delete` also allows deleting from every raw *hosted* repository —
+checked: it does. The tool's own refusal of hosted repositories would then be the only guard
+left. This costs something with `--pattern`: a proxy created later that matches the pattern is
+not cleaned until its privileges are added. With `browse` granted per repository it is invisible
+and the pattern simply does not select it; with `browse` granted by wildcard it is selected, and
+every deletion in it fails at `--execute`. Naming the repositories in the configuration file as
+well keeps the two lists in step.
+
+**What a missing privilege looks like:**
+
+- **No `browse`:** the run stops with exit 3 and `repository '<name>' does not exist on this
+  instance, or this user cannot see it`, before any component is read.
+- **No `delete`:** an executing run records `HTTP 403` against each component in the report,
+  deletes nothing in that repository and exits 1; a dry run is unaffected.
+- **No apt `read`:** the run succeeds, but the report's `scope` is `*` instead of the
+  repository's distribution, such as `bookworm`. Only the label changes: an apt proxy serves one
+  distribution, so its components are grouped the same way either way.
+
+### Separate credentials for the execute job
+
+The generated pipelines give both jobs one pair of credentials. Giving the execute job its own
+user — the only one allowed to delete — means a deletion that ever slipped past `--execute`
+would be refused by Nexus. Each CI system needs one edit; `init --force` rewrites it, so redo it
+after an `init --force` upgrade.
+
+- **GitLab.** Give the execute job an environment, below its `rules:`:
+
+  ```yaml
+  nexus-cleanup:execute:
+    environment: nexus-cleanup-execute
+  ```
+
+  Then add `NEXUS_USERNAME` and `NEXUS_PASSWORD` a second time under Settings → CI/CD →
+  Variables, with the environment scope `nexus-cleanup-execute` and the execute user's values.
+  A job with that environment gets them; the dry-run job, which has none, keeps the `*`-scoped
+  pair. Where your GitLab tier offers protected environments, protecting this one also limits
+  who may start the job, as the comment in the pipeline says.
+- **Jenkins** (both variants). Add a second "Username with password" credential, say
+  `nexus-cleanup-execute`, and name it in the Execute stage only:
+
+  ```groovy
+  withCredentials([usernamePassword(credentialsId: 'nexus-cleanup-execute',
+          usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+  ```
+- **Forgejo.** Add secrets `NEXUS_EXECUTE_USERNAME` and `NEXUS_EXECUTE_PASSWORD` and use them
+  in the Execute step:
+
+  ```yaml
+      - name: Execute
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_EXECUTE_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_EXECUTE_PASSWORD }}
+  ```
+
+  This separates less than it looks: every step of every workflow in the repository can read
+  every repository secret. On Forgejo, the delete privileges naming each repository are the
+  real limit.
+
 ## CI
 
 `init` writes one of four pipelines (see [Getting started](#getting-started)); each is meant to
@@ -600,8 +796,8 @@ reads the output of.
 Every pipeline pins the exact release whose `init` wrote it —
 `ghcr.io/bond-os/nexus-cleanup:0.2.1`, <!-- x-release-please-version -->
 or the tag `v0.2.1` for Forgejo. <!-- x-release-please-version -->
-Bump the pin deliberately, after reading `CHANGELOG.md`, together with the schema address in
-your configuration files. The links above go to the rendered examples, one complete repository
+Move it deliberately, after reading `CHANGELOG.md`, together with the schema address in your
+configuration files: [Upgrading](#upgrading) does both. The links above go to the rendered examples, one complete repository
 per CI system under `examples/`.
 
 Two container details matter. A CI system that runs a shell script inside the image needs its
