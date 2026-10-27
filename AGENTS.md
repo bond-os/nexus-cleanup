@@ -37,6 +37,13 @@ For the tool, tests and dev tools:
   suite in the new image, not just bumping a number — which is what the Nushell update pull
   request's required checks do.
 
+**varlock is an optional external wrapper**, like Docker: it injects `NEXUS_*` into one command
+(`varlock run -- …`) for developers recording fixtures and operators trying a file locally. It
+is not a dev tool this project writes, so the Nushell rule does not apply to it, and it never
+enters the image, the tool or a generated pipeline. The tool reads only its process environment;
+exported variables work everywhere varlock does. The repository's `.env.schema` and the
+`init --env varlock` template are data for it, not code.
+
 ## Layout
 
 ```
@@ -57,6 +64,7 @@ nexus-cleanup/
     common/               # always: ci/run-configs.sh, configs/example.yaml, dotfiles
     ci/<system>/          # gitlab, forgejo, jenkins-docker, jenkins-sh
     editors/<editor>/     # vscode, intellij
+    env/<tool>/           # varlock: .env.schema and .gitignore, with --env only
   version.nu              # VERSION; rewritten by release-please, never by hand
 tools/
   record-fixtures.nu      # development only; records redacted fixtures from a live Nexus
@@ -380,11 +388,14 @@ repository has no version dimension at all.
 ### Re-recording fixtures
 
 ```bash
-nu tools/record-fixtures.nu --max-pages 1 apt-proxy-deb.debian.org conan-proxy-conan.io docker-proxy-hub yum-proxy-resources.ovirt.org yum-proxy-archives.fedoraproject.org npm-proxy-npm pypi-proxy nuget.org-proxy helm-jenkins raw-proxy-repo.almalinux.org proxy-hg packer-bases
+varlock run -- nu tools/record-fixtures.nu --max-pages 1 apt-proxy-deb.debian.org conan-proxy-conan.io docker-proxy-hub yum-proxy-resources.ovirt.org yum-proxy-archives.fedoraproject.org npm-proxy-npm pypi-proxy nuget.org-proxy helm-jenkins raw-proxy-repo.almalinux.org proxy-hg packer-bases
 ```
 
-`NEXUS_URL`, `NEXUS_USERNAME` and `NEXUS_PASSWORD` must be set; keep them in a gitignored
-`.nexus.env` (see `.nexus.env.example`) rather than in your shell history.
+`NEXUS_URL`, `NEXUS_USERNAME` and `NEXUS_PASSWORD` must be set, and should not come from your
+shell history. `.env.schema` declares them for varlock, with the reference instance's URL and
+user as defaults; put the password in a gitignored `.env.local` or resolve it with `keychain()`,
+and prefix the command with `varlock run --`. Exported variables still work, and win over every
+varlock file.
 
 Recording is **idempotent**: two runs against an unchanged instance produce byte-identical
 files, so `git diff` after a re-record shows exactly what Nexus changed and nothing else. That
@@ -665,7 +676,7 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   it becomes. Placeholders have no spaces inside the braces; Forgejo's own `${{ … }}`
   expressions pass through untouched. Do not add a template language.
 - **`examples/<system>/` is generated.** `tools/render-examples.nu` writes each tree as
-  `init --ci <system> --editor vscode --editor intellij` would at `VERSION`, and
+  `init --ci <system> --editor vscode --editor intellij --env varlock` would at `VERSION`, and
   `tests/test-examples.nu` fails when a committed file differs by one byte or a file is extra or
   missing. Change a template and re-render; never edit an example tree. `examples/configs/` is
   the hand-written gallery and stays outside this.
@@ -685,8 +696,14 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
 - **`init` writes no `AGENTS.md` or `README.md`.** The generated repository belongs to its
   operators; its pipeline header is its documentation. It never merges into an existing file
   either: `--force` overwrites exactly the files `init` writes and nothing else.
+- **`templates/env/varlock/.gitignore` and its copies in `examples/<system>/` are live
+  `.gitignore` files in this repository**, by design. They ignore only varlock value files in
+  their own directories, which also keeps a value file made while checking an example out of a
+  commit here. Storing the template as `gitignore` and renaming it on write was rejected: it
+  would break "a template is stored at the path it is written to" and give `init` and the
+  renderer their first special case. Do not rename it.
 - **`init` parses its own arguments** (`def --wrapped`, `scaffold init-args`). Nushell keeps only
-  the last of a repeated flag, and `--editor` repeats; and it exits 1 on an unknown flag, where
+  the last of a repeated flag, and `--editor` and `--env` repeat; and it exits 1 on an unknown flag, where
   `init --execute` must exit with the usage code. Every `init` failure, a filesystem error
   included, exits 2: each is the operator's arguments or environment, never Nexus.
 - **A repository named `init` cannot be given positionally** — it selects the subcommand. It

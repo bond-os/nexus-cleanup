@@ -141,6 +141,7 @@ variables, and lists every file it writes on stderr:
 | `.editorconfig`, `.gitattributes` | always: UTF-8 and LF, so a Windows checkout cannot put CR into the pipeline's shell |
 | `.vscode/settings.json`, `.vscode/extensions.json` | with `--editor vscode` |
 | `.idea/jsonSchemas.xml` | with `--editor intellij` |
+| `.env.schema`, `.gitignore` | with `--env varlock`: see [Running locally](#running-locally) |
 
 - **`--ci` is required**: `gitlab`, `forgejo`, `jenkins-docker` (the Docker Pipeline plugin) or
   `jenkins-sh` (plain `sh` steps calling `docker run`). [CI](#ci) describes how they differ.
@@ -148,6 +149,12 @@ variables, and lists every file it writes on stderr:
   maps the schema to `configs/*.yaml` and `configs/*.yml`, so a new file gets completion before
   it has a modeline. VS Code is pointed at Red Hat's YAML extension, which it recommends
   installing; IntelliJ-based IDEs need nothing extra.
+- **`--env varlock`** adds what a [local run](#running-locally) through
+  [varlock](https://varlock.dev) needs: an `.env.schema` declaring `NEXUS_URL`, `NEXUS_USERNAME`
+  and `NEXUS_PASSWORD` with no values, and a `.gitignore` holding exactly `.env`, `.env.local`
+  and `.env.*.local`, so a password put in `.env.local` cannot be committed. None is the default,
+  and no pipeline uses them. If you already have a `.gitignore`, leave out `--env varlock` —
+  `--force` would replace your file, not merge into it — and add those three lines yourself.
 - **A directory argument** writes there instead of the working directory — `/work`, your mounted
   directory, in the image — and creates it if needed.
 - **Nothing is overwritten unasked.** If any file `init` would write already exists, it lists
@@ -169,7 +176,7 @@ by hand — the pipeline's image tag and the schema address in each file — or 
 image's `init --force` and read the diff before committing.
 
 Each [`examples/<system>/`](examples/) directory is what `init --ci <system> --editor vscode
---editor intellij` writes, for reading before you run it. Its pinned lines also carry
+--editor intellij --env varlock` writes, for reading before you run it. Its pinned lines also carry
 `x-release-please` comments, which keep the examples current at each release and which `init`
 does not write.
 
@@ -316,6 +323,55 @@ checked before it has a modeline; see [Getting started](#getting-started). Check
 complete, and a misspelt key or `execute` is flagged with its description, in a file without a
 modeline. The `.idea/jsonSchemas.xml` that `init` writes is identical to the one IntelliJ IDEA
 2026.2.3 writes for the same mapping.
+
+## Running locally
+
+To see what an edited configuration file would do before you push it, run that one file from
+your configuration repository. [varlock](https://varlock.dev) keeps the connection settings out
+of your shell: a repository written with `init --env varlock` declares them in `.env.schema`, and
+you supply the values in a gitignored `.env.local` or resolve them — the password from the OS
+keychain with `keychain()`, from a prompt with `varlock(prompt)`, or from a secret manager
+through a plugin.
+
+<!-- x-release-please-start-version -->
+```bash
+varlock run -- docker run --rm -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
+  -v "$PWD/configs:/work/configs:ro" \
+  ghcr.io/bond-os/nexus-cleanup:0.2.1 --config configs/yum.yaml > report.json
+```
+<!-- x-release-please-end -->
+
+`-e NAME` without a value forwards what varlock injected, so no secret appears on the command
+line, and varlock refuses to start the container while `NEXUS_URL` or `NEXUS_PASSWORD` is
+missing. The run is a dry run, as always without `--execute`. The report goes to standard output
+and nothing is written into the read-only mount, so no `--user` mapping is needed. On an SELinux
+host, mount with `:ro,z` instead of `:ro`. Exporting the three variables instead of using varlock
+works just as well; the tool only reads its environment.
+
+- **A Nexus on your own machine** is `host.docker.internal` from inside the container, not
+  `localhost`, which is the container itself. On Linux, add
+  `--add-host=host.docker.internal:host-gateway` to `docker run`.
+- **A file that sets `summary-out`** cannot write into a read-only mount. Run it with the
+  writable workspace mount shown in [In a container](#in-a-container): an empty `--summary-out`
+  on the command line counts as not given, so the file's value still applies.
+- **Running every file is the pipeline's job.** `ci/run-configs.sh` writes its reports into the
+  workspace and is not meant for local use.
+
+**One set of files against staging and production.** varlock picks an environment with
+`@currentEnv`: declare a variable such as `NEXUS_ENV=staging` in `.env.schema`, add
+`# @currentEnv=$NEXUS_ENV` to its header, and commit `.env.staging` and `.env.production`, each
+holding that instance's `NEXUS_URL`. `NEXUS_ENV=production varlock run -- docker run …` then
+runs against production. `init` does not write these files. Later sources win, in this order:
+`.env.schema`, `.env`, `.env.local`, `.env.<env>`, `.env.<env>.local`, then the variables
+already exported in your shell. Two consequences:
+
+- A `NEXUS_PASSWORD` or `NEXUS_URL` still exported in your shell beats every file, `keychain()`
+  included. `NEXUS_URL=http://host.docker.internal:8081 varlock run -- docker run …` is
+  therefore the way to point one run elsewhere; a forgotten `export` silently does the same.
+- A committed `.env.production` beats `.env.local`, so a per-machine override for one
+  environment goes in `.env.production.local`, which the generated `.gitignore` also ignores.
+
+Checked with varlock 1.23.0, run as a standalone binary.
 
 ## Exit codes
 
