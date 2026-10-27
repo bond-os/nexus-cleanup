@@ -69,9 +69,9 @@ The report SHALL include an aggregate block covering the run mode, the start and
 timestamps, the Nexus base URL, the repositories processed, the keep count in effect, and
 counts of components total, kept, marked for deletion, deleted, skipped and failed, together
 with the reclaimable and actually reclaimed byte totals, the version of the tool that
-produced the report, and the configuration file the run was given. Counts SHALL be internally
-consistent with the records. Fields added to the aggregate SHALL be appended after the existing
-ones.
+produced the report, the configuration file the run was given, and whether that file disabled
+the run. Counts SHALL be internally consistent with the records. Fields added to the aggregate
+SHALL be appended after the existing ones.
 
 #### Scenario: Counts match the records
 
@@ -100,12 +100,23 @@ ones.
 
 - **WHEN** a run is given the configuration file `configs/yum.yaml`
 - **THEN** the aggregate block's configuration file field is `configs/yum.yaml`, exactly as passed
-- **AND** that field is the last field of the aggregate block, after the tool version
+- **AND** that field immediately follows the tool version
 
 #### Scenario: No configuration file
 
 - **WHEN** a run is given no configuration file
 - **THEN** the configuration file field is present and empty
+
+#### Scenario: Report records a disabled run
+
+- **WHEN** a run is given a configuration file containing `disabled: true`
+- **THEN** the aggregate block's disabled field is `true`
+- **AND** that field is the last field of the aggregate block, after the configuration file
+
+#### Scenario: Enabled run
+
+- **WHEN** a run is given no configuration file, or one without `disabled: true`
+- **THEN** the disabled field is present and `false`
 
 #### Scenario: Records and CSV columns unaffected
 
@@ -188,3 +199,24 @@ skipped and why — without any further call to Nexus.
 
 - **WHEN** a consumer is given only the report document
 - **THEN** it can produce a per-repository breakdown of kept, deleted and skipped counts with byte totals and skip reasons
+
+### Requirement: A disabled run still emits its report
+
+A run disabled by its configuration file SHALL emit the report of a run that processed nothing,
+in the selected format, and SHALL write the aggregate to the requested path when one is given,
+so that every file a pipeline runs leaves a report and a disabled one says so.
+
+#### Scenario: JSON report of a disabled run
+
+- **WHEN** a disabled file is run with JSON output
+- **THEN** standard output is a valid JSON document with an empty record array, zero counts and the disabled field `true`
+
+#### Scenario: CSV report of a disabled run
+
+- **WHEN** a disabled file selects CSV output
+- **THEN** standard output is the CSV header row and nothing else
+
+#### Scenario: Aggregate written for a disabled run
+
+- **WHEN** a disabled file is run with a path for the aggregate
+- **THEN** the aggregate is written to that path with the disabled field `true` and an empty repository list
