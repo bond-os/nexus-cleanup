@@ -29,6 +29,11 @@ keychain or device-local encryption, and injects them into one command without t
   The report goes to standard output; nothing is written into the mount, so no `--user` mapping
   is needed. Running every file stays the pipeline's job: `ci/run-configs.sh` is not adapted for
   local use. The command's image pin carries a release marker and is the only pin on its line.
+  The section sits next to "Configuration files" and says three more things: a Nexus on the
+  operator's own machine is `host.docker.internal` from inside the container, not `localhost`
+  (on Linux with `--add-host=host.docker.internal:host-gateway`); a file that sets `summary-out`
+  needs the writable mount from "In a container"; and varlock's precedence, in which an exported
+  variable beats every file.
 - **The README shows per-environment files** — `@currentEnv` with tracked `.env.staging` and
   `.env.production` holding each instance's URL — as the varlock counterpart of the existing
   "one set of files against staging and production" layering. `init` does not write them.
@@ -58,19 +63,20 @@ any other environment tool.
 
 - `nexus-cleanup/config-repository`: a new requirement for environment-tool support on request —
   the `--env` option, its one choice `varlock`, the two files and their content guarantees (no
-  URL value, the password sensitive, value files ignored), and the usage error for an unknown
-  choice; "Existing files are protected" covers the new files.
+  URL value, the password sensitive, value files ignored), the usage error for an unknown
+  choice, and the same protection of existing files as every other file `init` writes.
 
 ## Impact
 
-- **Code**: `nexus-cleanup/scaffold.nu` (argument parsing, file selection), `tests/test-init.nu`
-  or its equivalent.
+- **Code**: `nexus-cleanup/scaffold.nu` (argument parsing, file selection),
+  `tests/test-scaffold.nu`.
 - **Templates**: new `nexus-cleanup/templates/env/varlock/` with `.env.schema` and `.gitignore`.
 - **Generated**: `examples/<system>/` re-rendered by `tools/render-examples.nu`;
   `tests/test-examples.nu` must still pass.
 - **This repository**: `.env.schema` added, `.nexus.env.example` removed, `.gitignore`
-  extended; `tools/record-fixtures.nu` header comment; AGENTS.md "Runtime" and "Re-recording
-  fixtures".
+  extended; `tools/record-fixtures.nu` header comment; AGENTS.md "Runtime", "Re-recording
+  fixtures" and the `init` decisions (the template's `.gitignore` and its rendered copies are
+  live in this repository by design).
 - **Docs**: README "Getting started" (`--env`), a new "Running locally" section,
   `x-release-please` marker on the local-run command.
 - **Dependencies**: none for the tool or the image. varlock is an optional operator and

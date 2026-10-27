@@ -45,7 +45,9 @@ help text would stop listing choices in one place.
 be a docs URL, and it has none — so it needs no rendering and no release marker, and an upgrade
 never touches it. The root decorators set `@defaultSensitive=false` and `@defaultRequired=false`,
 and each item states its own `@required` / `@sensitive`, so the file reads correctly item by item
-without knowing varlock's defaults (which are the opposite: sensitive by default).
+without knowing varlock's defaults: `@defaultSensitive` defaults to `true`, and
+`@defaultRequired` to `infer` — required exactly when the schema gives the item a value, which
+would make every value-less item here optional.
 
 ### `init` writes a `.gitignore`, and it holds only varlock's value files
 
@@ -55,6 +57,14 @@ directories are the operator's choice, and a broader file would collide with mor
 An existing `.gitignore` is refused like any other existing file, and `--force` overwrites it
 without merging — the README tells operators with a `.gitignore` to leave out `--env` and add the
 three lines themselves, as it already does for `.vscode/settings.json`.
+
+The template `nexus-cleanup/templates/env/varlock/.gitignore` and its rendered copies in
+`examples/<system>/` are live `.gitignore` files in this repository. That is deliberate: they
+only ignore varlock value files in their own directories, which also keeps a value file made
+during the manual check out of a commit here. Storing the template as `gitignore` and renaming it
+on write was rejected: it would break "a template is stored at the path it is written to" and
+give the renderer and `init` their first special case. AGENTS.md records this beside the other
+`init` decisions, so it is not "fixed" later.
 
 ### Local runs mount only `configs/`, read-only
 
@@ -67,9 +77,34 @@ standard output — so the container's user needs read access only, and no `--us
 rootless variant is needed. The line carries one image pin and an `x-release-please-version`
 marker.
 
+The README places the section next to "Configuration files" — it is for trying an edited file —
+and adds:
+
+- **A Nexus on the operator's own machine** is `host.docker.internal` from inside the container,
+  not `localhost`, which is the container itself; on Linux this needs
+  `--add-host=host.docker.internal:host-gateway`. Because the process environment beats every
+  varlock file, a one-off `NEXUS_URL=http://host.docker.internal:8081 varlock run -- docker run …`
+  overrides the schema's value for that run only.
+- **A file that sets `summary-out`** cannot write into the read-only mount and needs the writable
+  mount from "In a container". It cannot be switched off from the command line: an empty
+  `--summary-out ""` counts as not given, so the file's value wins. Few files set it, since the CI
+  loop passes `--summary-out` itself.
+
+"In a container" already shows a local run with a writable workspace mount; the two commands
+differ on purpose and the new section links back to it rather than repeating it.
+
 Alternative: running `ci/run-configs.sh` locally. Rejected in exploration: the loop writes
 summaries into the mount, which needs a `--user` mapping that an unevaluated `$NEXUS_CLEANUP`
 cannot express.
+
+### Per-environment files: shown with their precedence
+
+The README's per-environment paragraph (`@currentEnv` with tracked `.env.staging` and
+`.env.production`) states varlock's order in one line — `.env.schema` < `.env` < `.env.local` <
+`.env.<env>` < `.env.<env>.local` < the process environment — and its two consequences for this
+tool: a `NEXUS_PASSWORD` still exported in the shell silently beats `.env.local` and `keychain()`,
+and a tracked `.env.production` beats `.env.local`, so a per-machine override for one
+environment goes in `.env.production.local`.
 
 ### This repository's `.env.schema` replaces `.nexus.env.example`
 
@@ -95,5 +130,9 @@ the varlock version used is recorded in the README.
   since nothing in this repository executes it.
 - [Read-only bind mounts on SELinux hosts are denied without a relabel] → The README adds
   `:ro,z` as the variant for such hosts.
+- [varlock's `url` type refuses `http://`] → Not yet confirmed either way; the reference instance
+  is `http://localhost:8081` and many internal Nexus instances are plain http. Checked in
+  tasks.md; if it refuses, `@type=url` is dropped from both schema files and the reason recorded,
+  since the tool's own URL check runs anyway.
 - [`--force` replaces an operator's `.gitignore`] → Only when they asked for both `--env varlock`
   and `--force`; the `init` message lists every file it writes, and the README warns.
