@@ -255,6 +255,15 @@ run-suite "api client" [
         assert equal $r.deleted false
         assert ($r.error | str contains "403")
     } }
+    { name: "a refused deletion with an empty or text body is still a per-component failure", run: {||
+        # Nexus refuses a DELETE without the delete privilege with no JSON body.
+        for body in ["" "Forbidden"] {
+            let fetch = {|req| {status: 403, body: $body} }
+            let r = (api delete-component (client-with $fetch) "id-1")
+            assert equal $r.deleted false
+            assert equal $r.error "HTTP 403"
+        }
+    } }
 
     # --- credentials never surface ---
     { name: "a failure message carries neither password nor authorization header", run: {||
