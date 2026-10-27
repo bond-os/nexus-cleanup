@@ -1,6 +1,6 @@
 # Every recognised key, each with a valid value.
 $schema: https://example.invalid/config.schema.json
-url: https://nexus.example.invalid
+url: https://nexus.test
 username: cleanup-bot
 repositories: [yum-proxy-a, yum-proxy-b]
 pattern: "yum-proxy-*"

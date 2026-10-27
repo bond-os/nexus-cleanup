@@ -39,8 +39,9 @@ error naming the source and quoting the value, instead of the unhandled "Unsuppo
 error `url parse` raises — which would exit 1 and read as a crash. A parse failure and a wrong
 scheme share one message, so an operator never has to tell them apart. Observed on the pinned
 0.115.1 and on 0.116.1: `http//nexus` and `https://` fail to parse, as do `http://:8081` and
-`https://nexus.test:99999` on 0.116.1. A parsed value whose scheme is not `http` or `https`
-(such as `httpx://nexus`) is refused with the message the prefix check already uses ("must be an
+`https://nexus.test:99999` on both (checked in the pinned image during implementation; the
+suite tests them). A parsed value whose scheme is not `http` or `https` (such as
+`httpx://nexus`) is refused with the message the prefix check already uses ("must be an
 http or https URL, got '…'"), so existing assertions on that wording keep holding. The
 `str starts-with "http"` check is removed: the scheme check covers it and is exact.
 

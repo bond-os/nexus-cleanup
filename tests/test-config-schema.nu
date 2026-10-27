@@ -66,7 +66,7 @@ run-suite "config schema" [
         for f in $files {
             # Accepted means accepted by the tool as a whole: loaded, then resolved.
             let accepted = (try {
-                with-env {NEXUS_URL: "https://nexus.example.invalid"} {
+                with-env {NEXUS_URL: "https://nexus.test"} {
                     config resolve {repositories: ["r"]} --file (config load $f)
                 }
                 true
@@ -85,8 +85,8 @@ run-suite "config schema" [
     } }
     { name: "the url pattern refuses credentials and accepts a plain address", run: {||
         let p = (prop "url")
-        assert (matches "https://nexus.example.invalid/path@x" $p.pattern)
-        assert not (matches "https://nexus.example.invalid/path@x" $p.not.pattern)
+        assert (matches "https://nexus.test/path@x" $p.pattern)
+        assert not (matches "https://nexus.test/path@x" $p.not.pattern)
         assert (matches "https://bot:pw@nexus.example.invalid" $p.not.pattern)
     } }
     { name: "the path pattern needs both groups", run: {||

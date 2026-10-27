@@ -80,18 +80,18 @@ run-suite "cli" [
         assert ($r.stderr | str contains "NEXUS_URL")
     } }
     { name: "an invalid keep count exits with the usage code before any request", run: {||
-        let r = (cli "--url" "https://nexus.example.invalid" "--keep" "0" "repo")
+        let r = (cli "--url" "https://nexus.test" "--keep" "0" "repo")
         assert equal $r.exit_code $EXIT_USAGE
         assert equal $r.stdout ""
         assert ($r.stderr | str contains "--keep")
     } }
     { name: "an invalid output format exits with the usage code", run: {||
-        let r = (cli "--url" "https://nexus.example.invalid" "--format" "yaml" "repo")
+        let r = (cli "--url" "https://nexus.test" "--format" "yaml" "repo")
         assert equal $r.exit_code $EXIT_USAGE
         assert ($r.stderr | str contains "--format")
     } }
     { name: "a scope pattern without a scope group exits with the usage code", run: {||
-        let r = (cli "--url" "https://nexus.example.invalid" "--scope-from-path" "^/(x)" "repo")
+        let r = (cli "--url" "https://nexus.test" "--scope-from-path" "^/(x)" "repo")
         assert equal $r.exit_code $EXIT_USAGE
         assert ($r.stderr | str contains "--scope-from-path")
     } }
@@ -126,8 +126,8 @@ run-suite "cli" [
                 {status: 200, body: {items: [], continuationToken: null}}
             }
         }
-        let config = (config resolve {url: "https://n.invalid", repositories: ["raw-builds"], allow_hosted: true})
-        let out = (cleanup run $config (api client "https://n.invalid" --backoff 0ms --fetch $fetch))
+        let config = (config resolve {url: "https://n.test", repositories: ["raw-builds"], allow_hosted: true})
+        let out = (cleanup run $config (api client "https://n.test" --backoff 0ms --fetch $fetch))
         assert equal (open --raw $log | str trim) ""
         rm -f $log
         assert equal $out.report.summary.mode "dry-run"
@@ -140,7 +140,7 @@ run-suite "cli" [
     } }
     { name: "a usage failure names the setting without echoing the password", run: {||
         let r = (with-env {NEXUS_URL: "", NEXUS_PASSWORD: "hunter2"} {
-            ^$nu.current-exe (entrypoint) "--url" "https://n.invalid" "--keep" "0" "repo" | complete
+            ^$nu.current-exe (entrypoint) "--url" "https://n.test" "--keep" "0" "repo" | complete
         })
         assert not ($r.stderr | str contains "hunter2")
     } }
@@ -317,8 +317,64 @@ run-suite "cli: init" [
                 {status: 200, body: {items: [], continuationToken: null}}
             }
         }
-        let config = (config resolve {url: "https://n.invalid", pattern: "init"})
-        let out = (cleanup run $config (api client "https://n.invalid" --backoff 0ms --fetch $fetch))
+        let config = (config resolve {url: "https://n.test", pattern: "init"})
+        let out = (cleanup run $config (api client "https://n.test" --backoff 0ms --fetch $fetch))
         assert equal $out.report.summary.repositories ["init"]
+    } }
+]
+
+# Run the entrypoint from a fresh directory with NEXUS_URL set to `url`; returns the
+# result and the files left behind.
+def cli-with-url [url: string, ...args: string]: nothing -> record {
+    let dir = (mktemp -d -t "url-XXXXXX")
+    let ep = (entrypoint)
+    let r = (with-env {NEXUS_URL: $url, NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
+        cd $dir
+        ^$nu.current-exe $ep ...$args | complete
+    })
+    let files = (tree $dir)
+    rm -rf $dir
+    $r | insert files $files
+}
+
+# Resolve and run in-process with NEXUS_URL set to `url` and a fetch stub that fails
+# the test on any request; returns the error message.
+def refused-in-process [url: string, flags: record]: nothing -> string {
+    let fetch = {|req| error make {msg: $"unexpected request: ($req.method) ($req.url)"} }
+    let err = (try {
+        let config = (with-env {NEXUS_URL: $url, NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
+            config resolve ({repositories: ["repo"]} | merge $flags)
+        })
+        cleanup run $config (api client $url --max-attempts 1 --backoff 0ms --fetch $fetch)
+        null
+    } catch {|e| $e })
+    assert not equal $err null "the run succeeded"
+    assert not ($err.msg | str contains "unexpected request") $err.msg
+    $err.msg
+}
+
+run-suite "cli: Nexus URL" [
+    { name: "a placeholder NEXUS_URL exits with the usage code before an invalid keep count", run: {||
+        let r = (cli-with-url "https://nexus.example.com" "--keep" "0" "repo")
+        assert equal $r.exit_code $EXIT_USAGE $r.stderr
+        assert equal $r.stdout ""
+        assert ($r.stderr | str contains "NEXUS_URL is 'https://nexus.example.com', a placeholder")
+        assert ((refused-in-process "https://nexus.example.com" {keep: 0}) | str contains "a placeholder")
+    } }
+    { name: "an unparseable NEXUS_URL exits with the usage code, quoting it", run: {||
+        let r = (cli-with-url "http//nexus" "repo")
+        assert equal $r.exit_code $EXIT_USAGE $r.stderr
+        assert ($r.stderr | str contains "NEXUS_URL must be an http or https URL, got 'http//nexus'")
+        assert ((refused-in-process "http//nexus" {}) | str contains "must be an http or https URL")
+    } }
+    { name: "--version ignores a placeholder NEXUS_URL", run: {||
+        let r = (cli-with-url "https://nexus.example.com" "--version")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stdout | str trim) $VERSION
+    } }
+    { name: "init ignores a placeholder NEXUS_URL", run: {||
+        let r = (cli-with-url "https://nexus.example.com" "init" "--ci" "gitlab")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $r.files $GITLAB_TREE
     } }
 ]

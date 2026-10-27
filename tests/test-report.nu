@@ -28,7 +28,7 @@ def sample-run []: nothing -> record {
         mode: "dry-run"
         started_at: "2026-09-08T00:00:00+00:00"
         finished_at: "2026-09-08T00:00:10+00:00"
-        nexus_url: "https://nexus.example.invalid"
+        nexus_url: "https://nexus.test"
         repositories: ["r"]
         keep: 1
     }
@@ -284,7 +284,7 @@ run-suite "report" [
         assert equal $s.bytes_reclaimed 6000   # (300 * 20)
     } }
     { name: "no credential appears anywhere in the report", run: {||
-        let run = (sample-run | merge {nexus_url: "https://someone:hunter2@nexus.example.invalid"})
+        let run = (sample-run | merge {nexus_url: "https://someone:hunter2@nexus.test"})
         let doc = (report encode {summary: (report summary (report records (sample-plan)) $run), records: (report records (sample-plan))})
         assert not ($doc | str contains "hunter2")
         assert not ($doc | str contains "someone")

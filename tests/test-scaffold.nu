@@ -128,7 +128,7 @@ run-suite "scaffold example configuration" [
     { name: "the rendered example is accepted by config load and by --require-cap", run: {||
         let path = (example-file)
         let loaded = (config load $path)
-        let resolved = (with-env {NEXUS_URL: "https://nexus.example.invalid"} {
+        let resolved = (with-env {NEXUS_URL: "https://nexus.test"} {
             config resolve {require_cap: true} --file $loaded
         })
         rm -f $path
@@ -145,15 +145,15 @@ run-suite "scaffold example configuration" [
                 {status: 200, body: {items: [], continuationToken: null}}
             }
         }
-        let config = (with-env {NEXUS_URL: "https://n.invalid"} {
+        let config = (with-env {NEXUS_URL: "https://n.test"} {
             config resolve {require_cap: true} --file (config load $path)
         })
-        let err = (raised { cleanup run $config (api client "https://n.invalid" --backoff 0ms --fetch $fetch) })
+        let err = (raised { cleanup run $config (api client "https://n.test" --backoff 0ms --fetch $fetch) })
         let requests = (open --raw $log | lines)
         rm -f $path $log
         assert not equal $err null "the run succeeded"
         assert ($err.msg | str contains "'replace-me' does not exist") $err.msg
-        assert equal $requests ["GET https://n.invalid/service/rest/v1/repositories"]
+        assert equal $requests ["GET https://n.test/service/rest/v1/repositories"]
     } }
 ]
 
@@ -300,5 +300,29 @@ run-suite "scaffold editor files" [
     { name: "the VS Code recommendations name Red Hat's YAML extension", run: {||
         let ext = (file (editor-plan) ".vscode/extensions.json" | from json)
         assert equal $ext.recommendations ["redhat.vscode-yaml"]
+    } }
+]
+
+# The Nexus URL a planned pipeline sets for itself, or null when it sets none.
+def pipeline-url [ci: string]: nothing -> any {
+    let content = (file (scaffold plan --ci $ci --version "0.3.0") ($PIPELINES | get $ci))
+    $content | parse --regex `NEXUS_URL(?::|\s*=)\s*'?(?P<url>https?://[^'\s]+)` | get --optional 0.url
+}
+
+run-suite "scaffold pipeline URL" [
+    { name: "a pipeline that sets the URL itself sets a placeholder the tool refuses", run: {||
+        for ci in ["gitlab" "jenkins-docker" "jenkins-sh"] {
+            let url = (pipeline-url $ci)
+            assert not equal $url null $"($ci) sets no NEXUS_URL"
+            let err = (raised {
+                with-env {NEXUS_URL: $url, NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} { config resolve {repositories: ["r"]} }
+            })
+            assert-usage $err "NEXUS_URL" $url "a placeholder"
+        }
+    } }
+    { name: "the Forgejo pipeline reads the URL from a variable with no default", run: {||
+        assert equal (pipeline-url "forgejo") null
+        let content = (file (scaffold plan --ci forgejo --version "0.3.0") ($PIPELINES | get forgejo))
+        assert ($content | str contains 'NEXUS_URL: ${{ vars.NEXUS_URL }}')
     } }
 ]

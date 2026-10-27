@@ -11,7 +11,7 @@ def canned [responses: list<record>]: nothing -> closure {
 }
 
 def client-with [fetch: closure]: nothing -> record {
-    api client "https://nexus.example.invalid" --username "u" --password "p" --backoff 0ms --fetch $fetch
+    api client "https://nexus.test" --username "u" --password "p" --backoff 0ms --fetch $fetch
 }
 
 # One repository of each kind the eligibility rules distinguish.
@@ -39,12 +39,12 @@ run-suite "api client" [
     # --- construction ---
     { name: "constructing a client makes no request", run: {||
         let fetch = {|req| error make {msg: "the client must not call fetch while being constructed"} }
-        let c = (api client "https://nexus.example.invalid" --fetch $fetch)
-        assert equal $c.base_url "https://nexus.example.invalid"
+        let c = (api client "https://nexus.test" --fetch $fetch)
+        assert equal $c.base_url "https://nexus.test"
     } }
     { name: "a trailing slash on the base URL is normalised away", run: {||
-        let c = (api client "https://nexus.example.invalid/" --fetch {|req| {status: 200, body: {}} })
-        assert equal $c.base_url "https://nexus.example.invalid"
+        let c = (api client "https://nexus.test/" --fetch {|req| {status: 200, body: {}} })
+        assert equal $c.base_url "https://nexus.test"
     } }
 
     # --- pagination ---
@@ -103,7 +103,7 @@ run-suite "api client" [
     # --- retry classification ---
     { name: "a retryable status is retried up to the attempt limit", run: {||
         let fetch = {|req| {status: 503, body: {}} }
-        let c = (api client "https://n.invalid" --max-attempts 3 --backoff 0ms --fetch $fetch)
+        let c = (api client "https://n.test" --max-attempts 3 --backoff 0ms --fetch $fetch)
         let err = (try { api repositories $c; null } catch {|e| $e })
         assert not equal $err null
         assert ($err.msg | str contains "3")
@@ -111,13 +111,13 @@ run-suite "api client" [
     } }
     { name: "429 is retryable", run: {||
         let fetch = {|req| {status: 429, body: {}} }
-        let c = (api client "https://n.invalid" --max-attempts 2 --backoff 0ms --fetch $fetch)
+        let c = (api client "https://n.test" --max-attempts 2 --backoff 0ms --fetch $fetch)
         let err = (try { api repositories $c; null } catch {|e| $e })
         assert ($err.msg | str contains "2")
     } }
     { name: "an authentication failure is not retried", run: {||
         let fetch = {|req| {status: 401, body: {}} }
-        let c = (api client "https://n.invalid" --max-attempts 5 --backoff 0ms --fetch $fetch)
+        let c = (api client "https://n.test" --max-attempts 5 --backoff 0ms --fetch $fetch)
         let err = (try { api repositories $c; null } catch {|e| $e })
         assert ($err.msg | str contains "401")
         assert ($err.msg | str contains "1 attempt")
@@ -125,7 +125,7 @@ run-suite "api client" [
     { name: "400, 403 and 404 are not retried either", run: {||
         for status in [400 403 404] {
             let fetch = {|req| {status: $status, body: {}} }
-            let c = (api client "https://n.invalid" --max-attempts 5 --backoff 0ms --fetch $fetch)
+            let c = (api client "https://n.test" --max-attempts 5 --backoff 0ms --fetch $fetch)
             let err = (try { api repositories $c; null } catch {|e| $e })
             assert ($err.msg | str contains "1 attempt")
         }
@@ -217,8 +217,8 @@ run-suite "api client" [
         let urls = (open --raw $log | str trim | lines)
         rm -f $log
         assert equal $urls [
-            "https://nexus.example.invalid/service/rest/v1/repositories/apt/hosted/h"
-            "https://nexus.example.invalid/service/rest/v1/repositories/apt/proxy/p"
+            "https://nexus.test/service/rest/v1/repositories/apt/hosted/h"
+            "https://nexus.test/service/rest/v1/repositories/apt/proxy/p"
         ]
     } }
     { name: "an unreachable configuration yields no declared value rather than aborting", run: {||
@@ -255,14 +255,14 @@ run-suite "api client" [
     # --- credentials never surface ---
     { name: "a failure message carries neither password nor authorization header", run: {||
         let fetch = {|req| {status: 500, body: {}} }
-        let c = (api client "https://n.invalid" --username "admin" --password "hunter2" --max-attempts 1 --backoff 0ms --fetch $fetch)
+        let c = (api client "https://n.test" --username "admin" --password "hunter2" --max-attempts 1 --backoff 0ms --fetch $fetch)
         let err = (try { api repositories $c; null } catch {|e| $e })
         assert not ($err.msg | str contains "hunter2")
         assert not ($err.msg | str contains "Basic ")
     } }
     { name: "no rendering of an enumeration failure carries the password", run: {||
         let fetch = {|req| {status: 500, body: {}} }
-        let c = (api client "https://n.invalid" --username "admin" --password "hunter2" --max-attempts 1 --backoff 0ms --fetch $fetch)
+        let c = (api client "https://n.test" --username "admin" --password "hunter2" --max-attempts 1 --backoff 0ms --fetch $fetch)
         let err = (try { api components $c "repo"; null } catch {|e| $e })
         for text in [$err.msg, ($err.debug | into string), ($err.rendered | into string)] {
             assert not ($text | str contains "hunter2")

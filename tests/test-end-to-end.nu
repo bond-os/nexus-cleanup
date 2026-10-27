@@ -52,19 +52,19 @@ def fixture-fetch [--delete-status: int = 204]: nothing -> closure {
 
 def run-all [extra: record = {}]: nothing -> record {
     let config = (config resolve ({
-        url: "https://nexus.example.invalid"
+        url: "https://nexus.test"
         repositories: ($REPOS | get name)
     } | merge $extra))
-    cleanup run $config (api client "https://nexus.example.invalid" --backoff 0ms --fetch (fixture-fetch))
+    cleanup run $config (api client "https://nexus.test" --backoff 0ms --fetch (fixture-fetch))
 }
 
 # The same run as `run-dates`, configured from a file instead of flags.
 def run-from-file [extra: record = {}]: nothing -> record {
     let file = (config load $"((fixtures-root))/config/end-to-end.yaml")
-    let config = (with-env {NEXUS_URL: "https://nexus.example.invalid", NEXUS_USERNAME: ""} {
+    let config = (with-env {NEXUS_URL: "https://nexus.test", NEXUS_USERNAME: ""} {
         config resolve $extra --file $file
     })
-    cleanup run $config (api client "https://nexus.example.invalid" --backoff 0ms --fetch (fixture-fetch))
+    cleanup run $config (api client "https://nexus.test" --backoff 0ms --fetch (fixture-fetch))
 }
 
 def decisions [out: record]: nothing -> list {
