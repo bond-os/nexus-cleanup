@@ -146,3 +146,24 @@ is shipped — it would be another template to keep current, for a minority of u
 - [`nexus-cleanup --version` inside `nu -c` fails because the launcher is not on that `PATH`] →
   Checked against the published image while writing the section; the launcher lives in
   `/usr/local/bin`.
+
+## Findings
+
+Checked on the reference instance, by then Nexus 3.97.1 Community, with a test role changed
+one privilege at a time:
+
+- `browse` alone lists and enumerates a repository; `read` is needed by no call, not even
+  `DELETE`. `read` alone leaves the repository invisible, which the tool reports as unknown
+  (exit 3).
+- The apt configuration needs `nx-repository-admin-apt-<repository>-read`; without it the scope
+  falls back to `*`.
+- `nx-repository-view-raw-*-delete` deletes from a raw hosted repository, as feared.
+- A refused `DELETE` comes back as 403 with an empty body. The tool raised on that body and
+  exited 3 instead of recording the failure and exiting 1; fixed in this change (`fix:`), and
+  the README describes the fixed behaviour.
+- The `--pattern` conflict depends on how `browse` is granted. Per repository, a new matching
+  proxy is invisible and silently not cleaned; only with `browse` by wildcard is it selected and
+  its deletions fail at `--execute`. The README states both.
+
+Deletions were exercised only on probe files uploaded to `packer-bases` and removed afterwards;
+no proxy or real hosted component was deleted.
