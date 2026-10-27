@@ -22,6 +22,24 @@ def now []: nothing -> string {
 export def "cleanup run" [config: record, client: record]: nothing -> record {
     let started_at = (now)
 
+    # Everything `config resolve` checks has already passed, so a paused file cannot
+    # come back broken. Stop before the first request; the mode stays as requested,
+    # so a report shows when someone tried to execute a paused file.
+    if ($config.disabled? | default false) {
+        note $"($config.config_file) is disabled; nothing was done"
+        let summary = (report summary [] {
+            mode: (if $config.execute { "execute" } else { "dry-run" })
+            started_at: $started_at
+            finished_at: (now)
+            nexus_url: $config.url
+            repositories: []
+            keep: $config.keep
+            config_file: $config.config_file
+            disabled: true
+        })
+        return {report: {summary: $summary, records: []}, exit_code: $EXIT_OK}
+    }
+
     let all_repositories = (api repositories $client)
     let selected = (api select-repositories $all_repositories $config.repositories
         --pattern $config.pattern

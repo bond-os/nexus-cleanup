@@ -378,3 +378,73 @@ run-suite "cli: Nexus URL" [
         assert equal $r.files $GITLAB_TREE
     } }
 ]
+
+# The URL is unreachable throughout: a run that sent a request would exit with the
+# API code, so exit 0 or 2 shows that none was sent.
+run-suite "cli: disabled file" [
+    { name: "JSON output is a valid report of nothing, marked disabled", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled.yaml"))
+        assert equal $r.exit_code 0 $r.stderr
+        let doc = ($r.stdout | from json)
+        assert equal $doc.records []
+        assert equal $doc.summary.disabled true
+        assert equal ($doc.summary.counts | values | math sum) 0
+        assert ($r.stderr | str contains "disabled.yaml is disabled; nothing was done")
+    } }
+    { name: "CSV output is the header row alone", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled-csv.yaml"))
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stdout | str trim | lines) [($FIELDS | str join ",")]
+    } }
+    { name: "--summary-out writes the aggregate, marked disabled", run: {||
+        let out = (mktemp -t "summary-XXXXXX.json")
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled.yaml") "--summary-out" $out)
+        let s = (open $out)
+        rm -f $out
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $s.disabled true
+        assert equal $s.repositories []
+    } }
+    { name: "--execute exits 0 having deleted nothing", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled.yaml") "--execute")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stdout | from json | get summary.counts.deleted) 0
+    } }
+    { name: "a misspelt key in a disabled file is still a usage error", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled-misspelt.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "keeep")
+    } }
+    { name: "a refused key in a disabled file is still a usage error", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled-execute.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--execute")
+    } }
+    { name: "--require-cap still requires a cap of a disabled file", run: {||
+        let r = (cli "--url" "http://127.0.0.1:9" "--require-cap" "--config" (fixture "disabled-uncapped.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--require-cap")
+    } }
+    { name: "a disabled file still needs a Nexus URL", run: {||
+        let r = (cli "--config" (fixture "disabled.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "NEXUS_URL is not set")
+    } }
+    { name: "a disabled file still refuses a placeholder NEXUS_URL", run: {||
+        let r = (cli-with-url "https://nexus.example.com" "--config" (fixture "disabled.yaml"))
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "NEXUS_URL is 'https://nexus.example.com', a placeholder")
+    } }
+    { name: "a disabled run needs no password", run: {||
+        # `cli` clears NEXUS_PASSWORD.
+        let r = (cli "--url" "http://127.0.0.1:9" "--config" (fixture "disabled.yaml"))
+        assert equal $r.exit_code 0 $r.stderr
+    } }
+    { name: "disabled: false runs as if the key were absent", run: {||
+        let off = (cli "--url" "http://127.0.0.1:9" "--max-attempts" "1" "--timeout" "2sec" "--config" (fixture "disabled-false.yaml"))
+        let absent = (cli "--url" "http://127.0.0.1:9" "--max-attempts" "1" "--timeout" "2sec" "--config" (fixture "capped.yaml"))
+        assert equal $off.exit_code $EXIT_API
+        assert equal $absent.exit_code $EXIT_API
+        assert not ($off.stderr | str contains "is disabled")
+    } }
+]

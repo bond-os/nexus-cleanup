@@ -128,6 +128,7 @@ export def "report summary" [records: list<record>, run: record]: nothing -> rec
         # Appended in order, like every aggregate field: consumers may rely on it.
         tool_version: $VERSION
         config_file: ($run.config_file? | default "")
+        disabled: ($run.disabled? | default false)
     }
 }
 

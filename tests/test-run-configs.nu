@@ -158,3 +158,37 @@ run-suite "generated pipelines" [
         }
     } }
 ]
+
+# Run the script with the real tool over the given files (name -> content), against an
+# unreachable Nexus, so a file that sends a request exits with the API code.
+def run-real [files: record]: nothing -> record {
+    let work = (mktemp -d -t "run-configs-real-XXXXXX")
+    let root = ($env.FILE_PWD | path dirname)
+    scaffold write (scaffold plan --ci gitlab --version $VERSION) $work --quiet
+    rm $"($work)/configs/example.yaml"
+    $files | items {|name, content| $content | save $"($work)/configs/($name).yaml" } | ignore
+    let r = (with-env {NEXUS_CLEANUP: $"($nu.current-exe) ($root)/nexus-cleanup.nu", NEXUS_URL: "http://127.0.0.1:9", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
+        cd $work
+        ^sh ci/run-configs.sh | complete
+    })
+    let reports = (ls $"($work)/reports" | get name | each {|p| $p | path basename } | sort)
+    let summaries = ($reports | where {|p| $p | str ends-with ".summary.json" } | each {|p| {file: $p, disabled: (open $"($work)/reports/($p)" | get disabled)} })
+    rm -rf $work
+    {exit_code: $r.exit_code, stderr: $r.stderr, reports: $reports, summaries: $summaries}
+}
+
+run-suite "run-configs.sh with the tool" [
+    { name: "a disabled file is run and reported beside an ordinary one, whose code ends the job", run: {||
+        let r = (run-real {
+            a-paused: "repositories: [r]\nmax-deletions: 10\ndisabled: true\n"
+            b-active: "repositories: [r]\nmax-deletions: 10\nmax-attempts: 1\ntimeout: 2sec\n"
+        })
+        assert equal $r.exit_code 3 $r.stderr
+        # A run that fails at the API writes no summary; its report file is still kept.
+        assert equal $r.reports ["a-paused.dry-run.json" "a-paused.dry-run.summary.json" "b-active.dry-run.json"]
+        assert equal $r.summaries [{file: "a-paused.dry-run.summary.json", disabled: true}]
+        assert ($r.stderr | str contains "a-paused.yaml is disabled; nothing was done")
+        assert ($r.stderr | str contains "b-active.yaml: exited 3")
+        assert not ($r.stderr | str contains "a-paused.yaml: exited")
+    } }
+]

@@ -601,6 +601,14 @@ someone edited a file in a repository. `password` is refused too, and so is a `u
 credentials: they belong in `NEXUS_PASSWORD` or a secret store. Do not add an `execute` key,
 an "allow execute" key, or any key that switches the run mode.
 
+**The one exception is `disabled`**, and it is deliberate: `disabled: true` stops the run before
+its first request, so the key can only make a run do *less*. That is the whole of the reasoning
+— it does not license a key that enables, widens or resumes anything. It is named for what it
+stops, never `enabled`, so it cannot be read as permission beside the refused `execute`. It has
+no flag, and nothing overrides it: a command line that wanted to skip a file would not run it.
+A disabled file is still validated in full, environment and flags included, so it cannot come
+back broken; the branch sits in `cleanup run`, after `config resolve`, not in either of them.
+
 ### Configuration files: how they are read and layered
 
 - **Always parsed as YAML** (`open --raw | from yaml`), never by extension. Plain `open` would
@@ -615,7 +623,9 @@ an "allow execute" key, or any key that switches the run mode.
 - **The selection is one unit.** Names or a pattern on the command line replace the file's
   `repositories` and `pattern` together, never per key.
 - **One key table** (`CONFIG_KEYS` in `config.nu`) drives mapping, type checks, the schema and
-  the README table. Add a key there, never in three places.
+  the README table. Add a key there, never in three places. A row may have no flag
+  (`flag: false`, shown as `—` in the README): its value comes from the file or its default,
+  never from the command line. `disabled` is the only such row.
 
 ### `--require-cap` is a flag, never a file key
 

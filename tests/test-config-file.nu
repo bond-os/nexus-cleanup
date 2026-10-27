@@ -39,6 +39,7 @@ run-suite "config file" [
         assert equal $v.max_deletion_share 0.5
         assert equal $v.summary_out "summary.json"
         assert equal $v.allow_hosted true
+        assert equal $v.disabled false
     } }
     { name: "the hosted opt-in is read from the file", run: {||
         assert equal ((config load (fixture "allow-hosted.yaml")).values.allow_hosted) true
@@ -77,6 +78,16 @@ run-suite "config file" [
     } }
     { name: "a misspelt key is refused, naming the key and the path", run: {||
         assert-refused "misspelt-key.yaml" "keeep" "misspelt-key.yaml"
+    } }
+    { name: "disabled is read from the file as true or false", run: {||
+        assert equal ((config load (fixture "disabled.yaml")).values.disabled) true
+        assert equal ((config load (fixture "disabled-false.yaml")).values.disabled) false
+    } }
+    { name: "a reason given as the disabled value is refused, naming the key", run: {||
+        assert-refused "disabled-reason.yaml" "disabled" "disabled-reason.yaml" "true or false"
+    } }
+    { name: "enabled is refused as an unknown key, listing disabled", run: {||
+        assert-refused "enabled-false.yaml" "unknown key 'enabled'" "disabled"
     } }
     { name: "a keep count given as text is refused, naming the key", run: {||
         assert-refused "keep-as-text.yaml" "keep" "keep-as-text.yaml"
@@ -148,6 +159,12 @@ run-suite "config file: documentation" [
         let table = (readme | split row "<!-- config-keys:start -->" | get 1 | split row "<!-- config-keys:end -->" | get 0)
         let keys = ($table | parse --regex '(?m)^\| `(?P<k>[^`]+)` \|' | get k)
         assert equal $keys ($CONFIG_KEYS | get key)
+    } }
+    { name: "the README's key table shows no flag exactly for a key without one", run: {||
+        let table = (readme | split row "<!-- config-keys:start -->" | get 1 | split row "<!-- config-keys:end -->" | get 0)
+        let rows = ($table | parse --regex '(?m)^\| `(?P<k>[^`]+)` \|.*\| (?P<flag>[^|]+) \|$')
+        let flagless = ($CONFIG_KEYS | where {|r| not ($r.flag? | default true) } | get key)
+        assert equal ($rows | where flag == "—" | get k) $flagless
     } }
     { name: "the README's worked file is the raw example, without its comments", run: {||
         let block = (readme | split row "## Configuration files" | get 1 | split row "```yaml\n" | get 1 | split row "```" | get 0)

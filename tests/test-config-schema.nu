@@ -43,6 +43,10 @@ run-suite "config schema" [
         assert equal (prop "allow-hosted" | get type) "boolean"
         assert equal (open $"(root)/schema/config.schema.json" | get properties."allow-hosted".type) "boolean"
     } }
+    { name: "disabled is a boolean, and enabled is not a key", run: {||
+        assert equal (prop "disabled" | get type) "boolean"
+        assert not ("enabled" in (schema | get properties | columns))
+    } }
     { name: "ranges and enums match the tool's own constants", run: {||
         assert equal (prop "keep" | get minimum) 1
         assert equal (prop "max-attempts" | get minimum) 1

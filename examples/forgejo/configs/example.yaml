@@ -34,3 +34,7 @@ max-deletions: 100
 # A raw hosted repository must be named above and allowed here; nothing is
 # deleted without --execute:
 # allow-hosted: true
+
+# Pause this file without deleting it: every run skips it, sending no request and
+# exiting 0, until the line is removed. It is still checked, so it cannot rot.
+# disabled: true

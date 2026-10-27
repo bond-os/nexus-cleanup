@@ -1,0 +1,3 @@
+repositories: [r]
+max-deletions: 200
+disabled: false

@@ -364,15 +364,15 @@ run-suite "report" [
         assert equal $s.counts.groups_total 2
     } }
     # --- tool version ---
-    { name: "the aggregate ends with the tool version and then the configuration file", run: {||
+    { name: "the aggregate ends with the tool version, the configuration file and disabled", run: {||
         let s = (report summary (report records (sample-plan)) (sample-run))
-        assert equal ($s | columns | last 2) ["tool_version" "config_file"]
+        assert equal ($s | columns | last 3) ["tool_version" "config_file" "disabled"]
         assert equal ($s | columns | take until {|c| $c == "tool_version" } | last) "bytes_reclaimed"
         assert equal $s.tool_version $VERSION
     } }
-    { name: "an empty run's aggregate also ends with the tool version and the configuration file", run: {||
+    { name: "an empty run's aggregate also ends with the tool version, the configuration file and disabled", run: {||
         let s = (report summary [] (sample-run))
-        assert equal ($s | columns | last 2) ["tool_version" "config_file"]
+        assert equal ($s | columns | last 3) ["tool_version" "config_file" "disabled"]
         assert equal $s.tool_version $VERSION
     } }
     { name: "the configuration file is recorded verbatim", run: {||
@@ -381,6 +381,16 @@ run-suite "report" [
     } }
     { name: "without a configuration file the field is present and empty", run: {||
         assert equal (report summary [] (sample-run) | get config_file) ""
+    } }
+    { name: "disabled is false unless the run says so", run: {||
+        assert equal (report summary [] (sample-run) | get disabled) false
+        assert equal (report summary [] (sample-run | merge {disabled: true}) | get disabled) true
+    } }
+    { name: "disabled never becomes a CSV column", run: {||
+        let records = (report records (sample-plan))
+        let doc = (report encode {summary: (report summary $records (sample-run | merge {disabled: true})), records: $records} --format csv)
+        assert equal ($doc | lines | first) ($FIELDS | str join ",")
+        assert not ($doc | str contains "disabled")
     } }
     { name: "the configuration file never becomes a CSV column", run: {||
         let records = (report records (sample-plan))

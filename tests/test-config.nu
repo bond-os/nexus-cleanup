@@ -119,6 +119,16 @@ run-suite "config: file layering" [
     { name: "a file never makes a run execute", run: {||
         assert equal (layered "full.yaml" | get execute) false
     } }
+    { name: "disabled comes from the file and is false without it", run: {||
+        assert equal (layered "disabled.yaml" | get disabled) true
+        assert equal (layered "disabled-false.yaml" | get disabled) false
+        assert equal (layered "settings.yaml" | get disabled) false
+        assert equal (resolve | get disabled) false
+    } }
+    { name: "no flag sets or clears disabled", run: {||
+        assert equal (layered "disabled.yaml" {disabled: false} | get disabled) true
+        assert equal (layered "settings.yaml" {disabled: true} | get disabled) false
+    } }
 ]
 
 run-suite "config" [
