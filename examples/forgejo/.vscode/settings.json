@@ -1,5 +1,5 @@
 {
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.2.1/schema/config.schema.json": ["configs/*.yaml", "configs/*.yml"] // x-release-please-version
+    "https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.3.0/schema/config.schema.json": ["configs/*.yaml", "configs/*.yml"] // x-release-please-version
   }
 }
