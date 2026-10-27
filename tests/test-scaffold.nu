@@ -332,3 +332,46 @@ run-suite "scaffold pipeline URL" [
         assert ($content | str contains 'NEXUS_URL: ${{ vars.NEXUS_URL }}')
     } }
 ]
+
+def varlock-file [path: string]: nothing -> string {
+    file (scaffold plan --ci gitlab --env-tool [varlock] --version "0.3.0") $path
+}
+
+run-suite "scaffold varlock files" [
+    { name: "the schema declares exactly the three variables, each with its own decorators", run: {||
+        let schema = (varlock-file ".env.schema")
+        let items = ($schema | lines | where {|l| $l =~ '^[A-Z_]+=' })
+        assert equal $items ["NEXUS_URL=" "NEXUS_USERNAME=" "NEXUS_PASSWORD="]
+        # The decorator comment directly above each item.
+        let above = {|name: string|
+            let ls = ($schema | lines)
+            let i = ($ls | enumerate | where item == $"($name)=" | get index.0)
+            $ls | get ($i - 1)
+        }
+        assert equal (do $above "NEXUS_URL") "# @required @type=url"
+        assert not ((do $above "NEXUS_USERNAME") | str contains "@")
+        assert equal (do $above "NEXUS_PASSWORD") "# @required @sensitive"
+        assert ($schema | lines | any {|l| $l == "# @defaultSensitive=false @defaultRequired=false" })
+    } }
+    { name: "the schema holds no address and no version, and points to the resolvers", run: {||
+        let schema = (varlock-file ".env.schema")
+        let code = ($schema | lines | where {|l| not ($l | str starts-with "#") } | str join "\n")
+        assert not ($code | str contains "://")
+        assert not ($schema =~ '[0-9]+\.[0-9]+\.[0-9]+')
+        assert not ($schema | str contains "0.3.0")
+        for resolver in ["keychain()" "varlock(prompt)" "plugin"] {
+            assert ($schema | str contains $resolver) $resolver
+        }
+        assert ($schema | str contains "varlock run --")
+    } }
+    { name: "the ignore file holds exactly varlock's value files", run: {||
+        assert equal (varlock-file ".gitignore") ".env\n.env.local\n.env.*.local\n"
+    } }
+    { name: "the varlock files need no rendering and carry no release marker", run: {||
+        let marked = (scaffold plan --ci gitlab --env-tool [varlock] --version "0.3.0" --release-markers)
+        for p in [".env.schema" ".gitignore"] {
+            assert not ((file $marked $p) | str contains "x-release-please") $p
+            assert equal (file $marked $p) (varlock-file $p) $p
+        }
+    } }
+]

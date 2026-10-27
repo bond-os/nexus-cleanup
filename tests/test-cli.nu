@@ -7,7 +7,7 @@ use ../nexus-cleanup/version.nu [VERSION]
 
 def entrypoint []: nothing -> string { $"($env.FILE_PWD | path dirname)/nexus-cleanup.nu" }
 
-# Run the entrypoint with a clean environment so the developer's own .nexus.env
+# Run the entrypoint with a clean environment so the developer's own NEXUS_* variables
 # cannot make a usage test pass by accident.
 def cli [...args: string]: nothing -> record {
     with-env {NEXUS_URL: "", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
@@ -446,5 +446,58 @@ run-suite "cli: disabled file" [
         assert equal $off.exit_code $EXIT_API
         assert equal $absent.exit_code $EXIT_API
         assert not ($off.stderr | str contains "is disabled")
+    } }
+]
+
+run-suite "cli: init --env" [
+    { name: "without --env, init writes neither varlock file", run: {||
+        let r = (init-in-empty "--ci" "gitlab")
+        assert not (".env.schema" in $r.files)
+        assert not (".gitignore" in $r.files)
+    } }
+    { name: "--env varlock writes both files beside the others and lists them", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--env" "varlock")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $r.files ($GITLAB_TREE | append [".env.schema" ".gitignore"] | sort)
+        assert ($r.stderr | str contains "wrote .env.schema")
+        assert ($r.stderr | str contains "wrote .gitignore")
+    } }
+    { name: "a repeated --env varlock writes each file once", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--env=varlock" "--env" "varlock")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stderr | lines | where {|l| $l == "wrote .gitignore" } | length) 1
+    } }
+    { name: "an unknown environment tool exits with the usage code, lists varlock, writes nothing", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--env" "dotenv")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "dotenv")
+        assert ($r.stderr | str contains "varlock")
+        assert equal $r.files []
+    } }
+    { name: "--env without a value exits with the usage code", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--env")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--env needs a value")
+    } }
+    { name: "init --help lists --env and its choice", run: {||
+        let r = (init-in-empty "--help")
+        assert ($r.stdout | lines | any {|l| ($l | str contains "--env <tool>") and ($l | str contains "varlock") })
+    } }
+    { name: "an existing .gitignore is refused, and --force overwrites only what init writes", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        "reports/\n" | save ($dir | path join ".gitignore")
+        "mine\n" | save ($dir | path join "notes.txt")
+        let refused = (cli-in $dir "init" "--ci" "gitlab" "--env" "varlock")
+        let after_refusal = (tree $dir)
+        let forced = (cli-in $dir "init" "--ci" "gitlab" "--env" "varlock" "--force")
+        let ignore = (open --raw ($dir | path join ".gitignore"))
+        let notes = (open --raw ($dir | path join "notes.txt"))
+        rm -rf $dir
+        assert equal $refused.exit_code $EXIT_USAGE
+        assert ($refused.stderr | str contains ".gitignore")
+        assert equal $after_refusal [".gitignore" "notes.txt"]
+        assert equal $forced.exit_code 0 $forced.stderr
+        assert equal $ignore ".env\n.env.local\n.env.*.local\n"
+        assert equal $notes "mine\n"
     } }
 ]
