@@ -5,8 +5,9 @@
 # image does not need it. Re-run it against an upgraded Nexus and read the diff
 # when a response shape changes.
 #
-#   NEXUS_URL / NEXUS_USERNAME / NEXUS_PASSWORD must be set.
-#   nu tools/record-fixtures.nu [repo ...] [--out tests/fixtures] [--max-pages N]
+#   NEXUS_URL / NEXUS_USERNAME / NEXUS_PASSWORD must be set: through varlock, from
+#   .env.schema and a gitignored .env.local or keychain(), or exported.
+#   varlock run -- nu tools/record-fixtures.nu [repo ...] [--out tests/fixtures] [--max-pages N]
 
 export const PLACEHOLDER_HOST = "nexus.example.invalid"
 

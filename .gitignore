@@ -1,4 +1,8 @@
-# Local Nexus credentials for fixture recording and smoke runs. Never committed.
+# Local Nexus credentials for fixture recording and smoke runs. Never committed:
+# varlock value files beside .env.schema, and the older .nexus.env.
+.env
+.env.local
+.env.*.local
 .nexus.env
 
 # Scratch output from local runs.
