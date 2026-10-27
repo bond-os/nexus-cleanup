@@ -38,6 +38,16 @@ and a pin left behind silently validates files against the wrong release's schem
   reading `CHANGELOG.md` and the diff before committing stays the advice. `init --force` remains
   the documented alternative, and a Renovate regex manager is named as the way to automate it in
   the operator's own repository.
+  - **Image pins under any registry**, a mirror included, keeping the precision the operator
+    chose: an `X.Y` pin moves to the new `X.Y`, an `X.Y.Z` pin to the new `X.Y.Z`.
+  - **Tags only.** A digest pin — `:X.Y.Z@sha256:…` or a tagless `@sha256:…` — is replaced by
+    the new tag, with a warning per line saying the digest was dropped and should be re-added
+    after verifying it. The command never fetches a digest: one it looked up itself would carry
+    no more trust than the tag.
+  - **Forgejo's Nushell moves with the tool.** `NU_VERSION` and `NU_SHA256` are copied from the
+    image's own Forgejo template, so a release that moved Nushell does not leave the workflow
+    on the old one — unless the workflow was switched to the arm64 binary, in which case they
+    are left alone and the command says so.
 
 Non-goals: changing the generated pipelines to take separate credentials; a tool subcommand that
 rewrites pins; reading or checking the account's privileges at run time.
