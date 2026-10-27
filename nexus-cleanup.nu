@@ -37,6 +37,31 @@ def --wrapped "main init" [...args: string] {
     }
 }
 
+# Move every version pin `init` writes, in a configuration repository, to this
+# release. See `upgrade --help`.
+#
+# Like `init`, it reads no run configuration, contacts no Nexus, and parses its own
+# arguments, so that every mistake exits with the usage code.
+def --wrapped "main upgrade" [...args: string] {
+    let outcome = (try {
+        let options = (scaffold upgrade-args $args)
+        if $options.help {
+            {help: true}
+        } else {
+            scaffold upgrade (if ($options.dir | is-empty) { "." } else { $options.dir }) --version $VERSION | ignore
+            {help: false}
+        }
+    } catch {|e| {err: ($e.msg? | default "upgrade failed")} })
+
+    if ("err" in ($outcome | columns)) {
+        print --stderr $"nexus-cleanup: ($outcome.err)"
+        exit $EXIT_USAGE
+    }
+    if $outcome.help {
+        print --no-newline (scaffold upgrade-help $VERSION)
+    }
+}
+
 def main [
     ...repositories: string             # repositories to clean: proxies, or raw hosted with --allow-hosted
     --config: string                    # read settings from this YAML file; flags override it

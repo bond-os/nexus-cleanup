@@ -3,6 +3,7 @@ use ../nexus-cleanup/scaffold.nu *
 use ../nexus-cleanup/config.nu *
 use ../nexus-cleanup/api.nu *
 use ../nexus-cleanup/run.nu *
+use ../nexus-cleanup/version.nu [VERSION]
 
 const PIPELINES = {
     gitlab: ".gitlab-ci.yml"
@@ -373,5 +374,146 @@ run-suite "scaffold varlock files" [
             assert not ((file $marked $p) | str contains "x-release-please") $p
             assert equal (file $marked $p) (varlock-file $p) $p
         }
+    } }
+]
+
+# A copy of examples/<ci>/ with `edits` applied: [[file from to]] plain replacements,
+# all occurrences. Returns the copy's directory; the caller removes its parent.
+def example-copy [ci: string, edits: list = []]: nothing -> string {
+    let base = (mktemp -d -t "upgrade-XXXXXX")
+    let dir = ($base | path join "repo")
+    cp -r ($env.FILE_PWD | path dirname | path join "examples" $ci) $dir
+    for e in $edits {
+        let f = ($dir | path join $e.0)
+        open --raw $f | str replace --all $e.1 $e.2 | save --force --raw $f
+    }
+    $dir
+}
+
+# Every pinned file of an example, for edits that move all of its pins back.
+def pinned-files [dir: string]: nothing -> list<string> {
+    glob $"($dir)/**/*" --no-dir | path relative-to $dir | where {|p| open --raw ($dir | path join $p) | str contains $VERSION }
+}
+
+# Run `scaffold upgrade` on `dir` at VERSION in a child process, so its stderr can be read.
+def upgrade-in [dir: string]: nothing -> record {
+    let module = ($env.FILE_PWD | path dirname | path join "nexus-cleanup" "scaffold.nu")
+    ^$nu.current-exe -c $"use '($module)' *
+        try { scaffold upgrade '($dir)' --version '($VERSION)' | to nuon | print } catch {|e| print --stderr $e.msg; exit 2 }" | complete
+}
+
+def drop-copy [dir: string] { rm -rf ($dir | path dirname) }
+
+def same-tree [a: string, b: string]: nothing -> bool {
+    let files = (glob $"($a)/**/*" --no-dir | path relative-to $a | sort)
+    ($files == (glob $"($b)/**/*" --no-dir | path relative-to $b | sort)) and ($files | all {|f| (open --raw ($a | path join $f)) == (open --raw ($b | path join $f)) })
+}
+
+const OLD_SHA = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+const DIGEST = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+run-suite "scaffold upgrade" [
+    { name: "a repository pinned at an older release comes back as this release writes it", run: {||
+        for ci in ($PIPELINES | columns) {
+            let example = ($env.FILE_PWD | path dirname | path join "examples" $ci)
+            let dir = (example-copy $ci)
+            let pinned = (pinned-files $dir)
+            for f in $pinned { open --raw ($dir | path join $f) | str replace --all $VERSION "0.0.1" | save --force --raw ($dir | path join $f) }
+            if $ci == "forgejo" {
+                let wf = ($dir | path join ".forgejo/workflows/nexus-cleanup.yml")
+                open --raw $wf | str replace --regex 'NU_VERSION: \S+' "NU_VERSION: 0.110.0" | str replace --regex 'NU_SHA256: \S+' $"NU_SHA256: ($OLD_SHA)" | save --force --raw $wf
+            }
+            let r = (upgrade-in $dir)
+            let same = (same-tree $example $dir)
+            drop-copy $dir
+            assert equal $r.exit_code 0 $r.stderr
+            assert $same $"($ci): the upgraded tree differs from the example"
+            assert equal ($r.stdout | from nuon | sort) ($pinned | sort) $ci
+            for f in $pinned { assert ($r.stderr | str contains $"updated ($f)") $"($ci): ($f) not listed" }
+        }
+    } }
+    { name: "another Nushell binary in the Forgejo workflow is left alone, with a note", run: {||
+        let dir = (example-copy forgejo [[".forgejo/workflows/nexus-cleanup.yml" "x86_64-unknown-linux-musl" "aarch64-unknown-linux-musl"] [".forgejo/workflows/nexus-cleanup.yml" $"v($VERSION)" "v0.0.1"]])
+        let wf = ($dir | path join ".forgejo/workflows/nexus-cleanup.yml")
+        open --raw $wf | str replace --regex 'NU_VERSION: \S+' "NU_VERSION: 0.110.0" | str replace --regex 'NU_SHA256: \S+' $"NU_SHA256: ($OLD_SHA)" | save --force --raw $wf
+        let r = (upgrade-in $dir)
+        let text = (open --raw $wf)
+        drop-copy $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($text | str contains "NU_VERSION: 0.110.0")
+        assert ($text | str contains $"NU_SHA256: ($OLD_SHA)")
+        assert ($text | str contains $"NEXUS_CLEANUP_VERSION: v($VERSION)")
+        assert ($r.stderr | str contains "by hand")
+    } }
+    { name: "an X.Y pin moves to this release's X.Y", run: {||
+        let dir = (example-copy gitlab [[".gitlab-ci.yml" $"nexus-cleanup:($VERSION)" "nexus-cleanup:0.0"]])
+        upgrade-in $dir | ignore
+        let text = (open --raw ($dir | path join ".gitlab-ci.yml"))
+        drop-copy $dir
+        let xy = ($VERSION | split row "." | first 2 | str join ".")
+        assert ($text | str contains $"ghcr.io/bond-os/nexus-cleanup:($xy) #")
+    } }
+    { name: "both digest forms become this release's tag, with one warning per line", run: {||
+        let dir = (example-copy jenkins-docker)
+        let file = ($dir | path join "Jenkinsfile")
+        let ls = (open --raw $file | decode utf-8 | split row "\n")
+        let at = ($ls | enumerate | where {|l| $l.item | str contains $"nexus-cleanup:($VERSION)" } | get index)
+        let edited = ($ls | enumerate | each {|l|
+            if $l.index == $at.0 { $l.item | str replace $"nexus-cleanup:($VERSION)" $"nexus-cleanup:0.0.1@sha256:($DIGEST)" } else if $l.index == $at.1 { $l.item | str replace $"nexus-cleanup:($VERSION)" $"nexus-cleanup@sha256:($DIGEST)" } else { $l.item }
+        } | str join "\n")
+        $edited | save --force --raw $file
+        let r = (upgrade-in $dir)
+        let same = (open --raw $file) == (open --raw ($env.FILE_PWD | path dirname | path join "examples" "jenkins-docker" "Jenkinsfile"))
+        drop-copy $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert $same "the digest pins did not become the tag"
+        assert equal ($r.stderr | lines | where {|l| $l | str contains "digest pin replaced" } | length) 2
+        assert ($r.stderr | str contains $"Jenkinsfile:($at.0 + 1):")
+    } }
+    { name: "a mirror prefix is kept and its tag moves", run: {||
+        let dir = (example-copy gitlab [[".gitlab-ci.yml" $"ghcr.io/bond-os/nexus-cleanup:($VERSION)" "nexus.corp:5000/bond-os/nexus-cleanup:0.0.1"]])
+        upgrade-in $dir | ignore
+        let text = (open --raw ($dir | path join ".gitlab-ci.yml"))
+        drop-copy $dir
+        assert ($text | str contains $"nexus.corp:5000/bond-os/nexus-cleanup:($VERSION) #")
+    } }
+    { name: "GitLab job names that look like pins are never changed", run: {||
+        let dir = (example-copy gitlab [[".gitlab-ci.yml" $"nexus-cleanup:($VERSION)" "nexus-cleanup:0.0.1"]])
+        upgrade-in $dir | ignore
+        let ls = (open --raw ($dir | path join ".gitlab-ci.yml") | lines)
+        drop-copy $dir
+        assert ($ls | any {|l| $l == ".nexus-cleanup:" })
+        assert ($ls | any {|l| $l == "nexus-cleanup:dry-run:" })
+        assert ($ls | any {|l| $l == "nexus-cleanup:execute:" })
+        assert ($ls | any {|l| $l | str contains "needs: [nexus-cleanup:dry-run]" })
+    } }
+    { name: "a file init does not write is neither read nor changed", run: {||
+        let dir = (example-copy gitlab [[".gitlab-ci.yml" $"nexus-cleanup:($VERSION)" "nexus-cleanup:0.0.1"]])
+        let other = ($dir | path join "notes.md")
+        "image ghcr.io/bond-os/nexus-cleanup:0.0.1\n" | save $other
+        upgrade-in $dir | ignore
+        let kept = (open --raw $other)
+        drop-copy $dir
+        assert equal $kept "image ghcr.io/bond-os/nexus-cleanup:0.0.1\n"
+    } }
+    { name: "a second run changes nothing and says so", run: {||
+        let dir = (example-copy gitlab)
+        let r = (upgrade-in $dir)
+        drop-copy $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stdout | from nuon) []
+        assert ($r.stderr | str contains "nothing to update")
+    } }
+    { name: "a directory that does not exist is a usage error", run: {||
+        let r = (upgrade-in "/nonexistent/nexus-cleanup-upgrade")
+        assert equal $r.exit_code 2
+        assert ($r.stderr | str contains "usage:")
+    } }
+    { name: "upgrade's arguments: one directory, --help, nothing else", run: {||
+        assert equal (scaffold upgrade-args []) {help: false, dir: ""}
+        assert equal (scaffold upgrade-args ["repo"]) {help: false, dir: "repo"}
+        assert equal (scaffold upgrade-args ["-h"] | get help) true
+        assert-usage (raised { scaffold upgrade-args ["--execute"] }) "--execute"
+        assert-usage (raised { scaffold upgrade-args ["a" "b"] }) "one directory"
     } }
 ]

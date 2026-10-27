@@ -215,3 +215,133 @@ Options:
   -h, --help         show this help
 "
 }
+
+# An image pin: `nexus-cleanup` after a registry path, a quote or whitespace, so that
+# GitLab job names such as `nexus-cleanup:dry-run` never match.
+const PIN = "(^|[/\"'\\s])nexus-cleanup"
+
+# The files `upgrade` may change, relative to `dir`, that exist there: the pipelines and
+# editor files `init` writes, and every configuration file.
+def upgrade-candidates [dir: string]: nothing -> list<string> {
+    let written = ($CI_SYSTEMS | values | append ($EDITORS | values | flatten) | uniq)
+    let root = ($dir | path expand)
+    let configs = (glob ($root | path join "configs" "*.{yaml,yml}") --no-dir | path relative-to $root)
+    $written | where {|p| ($dir | path join $p | path type) == "file" } | append $configs | uniq | sort
+}
+
+# One line with its pins moved to `version`; returns the line and whether a digest went.
+def upgrade-line [line: string, version: string]: nothing -> record<line: string, digest: bool> {
+    let xy = ($version | split row "." | first 2 | str join ".")
+    let digest = $"($PIN)\(:[0-9.]+\)?@sha256:[0-9a-f]{64}"
+    let had_digest = ($line =~ $digest)
+    let moved = (
+        $line
+        # A digest goes first, keeping an X.Y tag's precision; a tagless one becomes X.Y.Z.
+        | str replace --all --regex $"($PIN):[0-9]+\\.[0-9]+@sha256:[0-9a-f]{64}" $"${1}nexus-cleanup:($xy)"
+        | str replace --all --regex $digest $"${1}nexus-cleanup:($version)"
+        | str replace --all --regex $"($PIN):[0-9]+\\.[0-9]+\\.[0-9]+" $"${1}nexus-cleanup:($version)"
+        | str replace --all --regex $"($PIN):[0-9]+\\.[0-9]+\([^.0-9]|$\)" $"${1}nexus-cleanup:($xy)${2}"
+        | str replace --all --regex 'NEXUS_CLEANUP_VERSION: v[0-9]+\.[0-9]+\.[0-9]+' $"NEXUS_CLEANUP_VERSION: v($version)"
+        | str replace --all --regex 'nexus-cleanup/v[0-9]+\.[0-9]+\.[0-9]+/schema/' $"nexus-cleanup/v($version)/schema/"
+    )
+    {line: $moved, digest: $had_digest}
+}
+
+# Moves every pin `init` writes, in the files of the repository at `dir` that exist, to
+# `version`: image tags under any registry, keeping X.Y or X.Y.Z precision; digests,
+# replaced by the tag with a warning, since a digest looked up here would be only as
+# trustworthy as the tag; the Forgejo release tag; schema addresses; and Forgejo's
+# Nushell, copied from this release's own template unless the workflow installs another
+# binary than the template's. Writes only files that change and lists them on stderr
+# unless --quiet. Returns the changed paths. Reads no other file and makes no request.
+export def "scaffold upgrade" [
+    dir: string
+    --version: string               # the version every pin names afterwards
+    --quiet                         # do not list changed paths or warnings
+]: nothing -> list<string> {
+    if ($version | is-empty) {
+        error make {msg: "scaffold upgrade: --version is required"}
+    }
+    if (try { $dir | path type } catch { null }) != "dir" {
+        usage-error $"($dir): not a directory"
+    }
+    let forgejo = (open --raw ($TEMPLATES | path join "ci" "forgejo" ($CI_SYSTEMS | get forgejo)) | decode utf-8)
+    let nu_version = ($forgejo | parse --regex 'NU_VERSION: (\S+)' | get capture0.0)
+    let nu_sha256 = ($forgejo | parse --regex 'NU_SHA256: (\S+)' | get capture0.0)
+    let note = {|text: string| if not $quiet { print --stderr $text } }
+
+    let candidates = (upgrade-candidates $dir)
+    let changes = ($candidates | each {|path|
+        let text = (try { open --raw ($dir | path join $path) | decode utf-8 } catch {
+            usage-error $"($dir): cannot read ($path)"
+        })
+        # `split row`, not `lines`: a file's final newline, or its absence, is kept.
+        let moved = ($text | split row "\n" | enumerate | each {|l|
+            let m = (upgrade-line $l.item $version)
+            if $m.digest {
+                do $note $"($path):($l.index + 1): digest pin replaced by the tag; re-add a digest once you have verified it"
+            }
+            $m.line
+        } | str join "\n")
+        let moved = if not ($moved =~ '(?m)^\s*NU_VERSION: ') {
+            $moved
+        } else if ($moved =~ 'asset="nu-\$\{NU_VERSION\}-x86_64-unknown-linux-musl"') {
+            $moved
+            | str replace --regex '(?m)^(\s*NU_VERSION: )\S+' $"${1}($nu_version)"
+            | str replace --regex '(?m)^(\s*NU_SHA256: )\S+' $"${1}($nu_sha256)"
+        } else {
+            do $note $"($path): installs another Nushell binary than the template's; update NU_VERSION and NU_SHA256 by hand"
+            $moved
+        }
+        {path: $path, text: $moved, changed: ($moved != $text)}
+    } | where changed)
+
+    for c in $changes {
+        try { $c.text | save --force --raw ($dir | path join $c.path) } catch {|e|
+            usage-error $"($dir): cannot write ($c.path): ($e.msg? | default 'write failed')"
+        }
+        do $note $"updated ($c.path)"
+    }
+    if ($changes | is-empty) {
+        if ($candidates | is-empty) {
+            do $note $"($dir): none of the files init writes is here; nothing to update"
+        } else {
+            do $note $"nothing to update: every pin already names ($version)"
+        }
+    }
+    $changes | get path
+}
+
+# `upgrade`'s own arguments, parsed by hand for the same reasons as `init`'s.
+# Returns {help, dir}; dir is empty when not given.
+export def "scaffold upgrade-args" [args: list<string>]: nothing -> record {
+    mut options = {help: false, dir: ""}
+    for arg in $args {
+        if $arg in ["--help" "-h"] {
+            $options.help = true
+        } else if ($arg | str starts-with "-") {
+            usage-error $"upgrade does not take ($arg); its only option is --help"
+        } else if ($options.dir | is-not-empty) {
+            usage-error $"upgrade takes one directory, not '($options.dir)' and '($arg)'"
+        } else {
+            $options.dir = $arg
+        }
+    }
+    $options
+}
+
+# Help for `upgrade`, parsed by hand like `init`.
+export def "scaffold upgrade-help" [version: string]: nothing -> string {
+    $"Move every version pin `init` writes, in the configuration repository in DIR, the
+working directory by default, to ($version): the pipeline's image tag \(or Forgejo's
+release tag and Nushell\), and the schema address in configs/ and the editor settings.
+Image pins keep their X.Y or X.Y.Z precision; a digest pin becomes the tag, with a
+warning. Lists each file it changed. Needs no Nexus and no credentials.
+
+Usage:
+  nexus-cleanup upgrade [DIR]
+
+Options:
+  -h, --help         show this help
+"
+}
