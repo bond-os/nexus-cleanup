@@ -223,7 +223,10 @@ export def "api delete-component" [client: record, id: string]: nothing -> recor
         return {id: $id, deleted: true, note: "component was already absent", error: ""}
     }
     if $outcome.status >= 400 {
-        let message = ($outcome.body.message? | default "")
+        # A refusal may come without a JSON body: Nexus answers a DELETE the user may
+        # not make with an empty one, and a cell path on a string raises.
+        let body = $outcome.body
+        let message = if (($body | describe) | str starts-with "record") { $body.message? | default "" } else { "" }
         let detail = if ($message | is-empty) { "" } else { $": ($message)" }
         return {id: $id, deleted: false, note: "", error: $"HTTP ($outcome.status)($detail)"}
     }
