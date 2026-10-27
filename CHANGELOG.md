@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.0](https://github.com/bond-os/nexus-cleanup/compare/v0.2.1...v0.3.0) (2026-10-27)
+
+
+### Features
+
+* add an upgrade subcommand that moves a configuration repository's pins ([00ed377](https://github.com/bond-os/nexus-cleanup/commit/00ed3773cd5461db85c610cf7c45ae098c46247e))
+* let a configuration file pause itself with disabled: true ([a802f45](https://github.com/bond-os/nexus-cleanup/commit/a802f45668a9f0c681c1630ba9cdd0167cab6729))
+* refuse an unparseable or placeholder Nexus URL before any request ([81ed40c](https://github.com/bond-os/nexus-cleanup/commit/81ed40c49f2acdec2de54f47f5e402c7c101c945))
+* write varlock files on request with init --env varlock ([a537ecc](https://github.com/bond-os/nexus-cleanup/commit/a537eccc227b33b0cec6960573fe2a10feea3a63))
+
+
+### Bug Fixes
+
+* report a refused deletion without a JSON body as a failure ([f7ea7e1](https://github.com/bond-os/nexus-cleanup/commit/f7ea7e1a91ed2b3782d2fa97169ff74562586efc))
+* say an unknown repository may be one the user cannot see ([5766183](https://github.com/bond-os/nexus-cleanup/commit/5766183f1665d4cd0a637fe565e9f25d67967346))
+
 ## [0.2.1](https://github.com/bond-os/nexus-cleanup/compare/v0.2.0...v0.2.1) (2026-10-26)
 
 

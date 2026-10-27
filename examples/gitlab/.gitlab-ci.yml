@@ -35,7 +35,7 @@ stages:
   image:
     # An exact release, never a floating tag. The image's entrypoint is the tool;
     # the runner needs a shell entrypoint to run `script`, and the tool is on PATH.
-    name: ghcr.io/bond-os/nexus-cleanup:0.2.1 # x-release-please-version
+    name: ghcr.io/bond-os/nexus-cleanup:0.3.0 # x-release-please-version
     entrypoint: [""]
   resource_group: nexus-cleanup
 
