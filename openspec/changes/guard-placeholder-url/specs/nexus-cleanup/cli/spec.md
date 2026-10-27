@@ -2,6 +2,45 @@
 
 ## ADDED Requirements
 
+### Requirement: Nexus URL must parse as http or https
+
+After the Nexus URL is resolved from any source, the tool SHALL refuse it with a usage error when
+it cannot be parsed as a URL with a host, or when its scheme is neither `http` nor `https`. The
+error SHALL name the source of the value, quote the value, and be raised before any request is
+made.
+
+#### Scenario: Unparseable URL from the environment
+
+- **WHEN** `NEXUS_URL` is `http//nexus` and no URL flag is passed
+- **THEN** the run aborts with exit code 2
+- **AND** the message names `NEXUS_URL` and quotes `http//nexus`
+- **AND** no HTTP request is made
+
+#### Scenario: URL without a host
+
+- **WHEN** the URL flag is `https://`
+- **THEN** the run aborts with exit code 2 and the message names `--url`
+
+#### Scenario: Unparseable URL from a configuration file
+
+- **WHEN** the configuration file `configs/a.yaml` contains `url: http//nexus` and neither the flag nor `NEXUS_URL` is set
+- **THEN** the run aborts with exit code 2 and the message names `'url' in configs/a.yaml`
+
+#### Scenario: Scheme other than http or https
+
+- **WHEN** the URL is `httpx://nexus.test` or `ftp://nexus.test`
+- **THEN** the run aborts with exit code 2 and the message states that the URL must be an http or https URL
+
+#### Scenario: Ordinary URLs accepted
+
+- **WHEN** the URL is `https://nexus.test`, `http://nexus.test:8081/`, `https://nexus.test/nexus` or `http://[::1]:8081`
+- **THEN** the URL is accepted
+
+#### Scenario: Parse failure precedes other validation
+
+- **WHEN** the URL cannot be parsed and the keep count is also invalid
+- **THEN** the run aborts with exit code 2 and the message is the URL refusal
+
 ### Requirement: Placeholder Nexus URL refused
 
 After the Nexus URL is resolved from any source, the tool SHALL refuse it with a usage error when
