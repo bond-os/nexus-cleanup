@@ -30,14 +30,16 @@ and a pin left behind silently validates files against the wrong release's schem
 - **The unknown-repository error admits the other cause.** "Repository 'x' does not exist on
   this instance" becomes "does not exist, or this user cannot see it", because Nexus lists only
   the repositories the user has a privilege on.
-- **README: upgrading a configuration repository.** One command, run from the *new* image with
-  Nushell as the entrypoint, moves every schema address — modelines and `$schema` keys in
-  `configs/`, `.vscode/settings.json`, `.idea/jsonSchemas.xml` — to the new release, matching
-  any old version by pattern so that the command itself holds only the new version, one pin on
-  its marked line. The same command moves the pipeline's image tag (or the Forgejo tag), and
-  reading `CHANGELOG.md` and the diff before committing stays the advice. `init --force` remains
-  the documented alternative, and a Renovate regex manager is named as the way to automate it in
-  the operator's own repository.
+- **`nexus-cleanup upgrade`: upgrading a configuration repository.** A subcommand beside
+  `init`, run from the *new* release's image as one line —
+  `docker run --rm --user … -v "$PWD:/work" ghcr.io/bond-os/nexus-cleanup:X.Y.Z upgrade` — moves
+  every pin `init` writes to the tool's own version: the pipeline's image tag (or the Forgejo
+  tag) and every schema address — modelines and `$schema` keys in `configs/`,
+  `.vscode/settings.json`, `.idea/jsonSchemas.xml` — matching any old version by pattern. It needs
+  no Nexus and no credentials, lists each file it changed and touches no other file. The README
+  documents the one line, with one pin on its marked line; reading `CHANGELOG.md` and the diff
+  before committing stays the advice. `init --force` remains the documented alternative, and a
+  Renovate regex manager is named as the way to automate it in the operator's own repository.
   - **Image pins under any registry**, a mirror included, keeping the precision the operator
     chose: an `X.Y` pin moves to the new `X.Y`, an `X.Y.Z` pin to the new `X.Y.Z`.
   - **Tags only.** A digest pin — `:X.Y.Z@sha256:…` or a tagless `@sha256:…` — is replaced by
@@ -45,12 +47,13 @@ and a pin left behind silently validates files against the wrong release's schem
     after verifying it. The command never fetches a digest: one it looked up itself would carry
     no more trust than the tag.
   - **Forgejo's Nushell moves with the tool.** `NU_VERSION` and `NU_SHA256` are copied from the
-    image's own Forgejo template, so a release that moved Nushell does not leave the workflow
+    tool's own Forgejo template, so a release that moved Nushell does not leave the workflow
     on the old one — unless the workflow was switched to the arm64 binary, in which case they
     are left alone and the command says so.
 
-Non-goals: changing the generated pipelines to take separate credentials; a tool subcommand that
-rewrites pins; reading or checking the account's privileges at run time.
+Non-goals: changing the generated pipelines to take separate credentials; reading or checking
+the account's privileges at run time; upgrading a repository `init` did not write, or files
+`init` does not write.
 
 ## Capabilities
 
@@ -63,13 +66,20 @@ rewrites pins; reading or checking the account's privileges at run time.
 - `nexus-cleanup/nexus-api-client`: "Repository discovery and eligibility" — the error for a
   named repository the instance does not expose also says the user may lack the privilege to
   see it.
+- `nexus-cleanup/config-repository`: a new requirement for the `upgrade` subcommand — which pins
+  it moves and how, tags only with a warning for a digest, Forgejo's Nushell unless arm64,
+  nothing else touched, no Nexus needed, usage errors.
 
 ## Impact
 
-- **Code**: `nexus-cleanup/api.nu` (`api select-repositories` message); the tests asserting it.
+- **Code**: `nexus-cleanup/api.nu` (`api select-repositories` message); `nexus-cleanup/scaffold.nu`
+  (`scaffold upgrade`, `scaffold upgrade-args`) and the entrypoint (`main upgrade`); the tests
+  for both.
 - **Docs**: README gains "Nexus permissions" and "Upgrading" sections; "Getting started" points
   to the latter instead of describing the bump inline.
 - **Release machinery**: the upgrade command's line carries an `x-release-please-version`
-  marker; README is already an extra-file, so no configuration change is expected — confirmed
-  when the line is written.
-- **Verification**: needs the reference Nexus instance with a test role, not the hermetic suite.
+  marker; README is already an extra-file, so no configuration change is needed.
+- **AGENTS.md**: the `init` decisions cover `upgrade` too, including that a repository named
+  `upgrade` cannot be given positionally.
+- **Verification**: the privileges need the reference Nexus instance with a test role; `upgrade`
+  is covered by the hermetic suite.

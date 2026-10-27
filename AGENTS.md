@@ -59,7 +59,8 @@ nexus-cleanup/
   policy.nu               # grouping, ordering, keep/delete/skip decisions
   report.nu               # record schema, aggregate, json/csv encoding
   run.nu                  # orchestration: enumerate, plan, delete, emit
-  scaffold.nu             # `init`: render the templates, write them without overwriting
+  scaffold.nu             # `init`: render the templates, write them without overwriting;
+                          # `upgrade`: move the pins `init` wrote to this release
   templates/              # what `init` writes, stored at the path it is written to
     common/               # always: ci/run-configs.sh, configs/example.yaml, dotfiles
     ci/<system>/          # gitlab, forgejo, jenkins-docker, jenkins-sh
@@ -702,12 +703,20 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   commit here. Storing the template as `gitignore` and renaming it on write was rejected: it
   would break "a template is stored at the path it is written to" and give `init` and the
   renderer their first special case. Do not rename it.
-- **`init` parses its own arguments** (`def --wrapped`, `scaffold init-args`). Nushell keeps only
-  the last of a repeated flag, and `--editor` and `--env` repeat; and it exits 1 on an unknown flag, where
-  `init --execute` must exit with the usage code. Every `init` failure, a filesystem error
+- **`init` and `upgrade` parse their own arguments** (`def --wrapped`, `scaffold init-args`,
+  `scaffold upgrade-args`). Nushell keeps only the last of a repeated flag, and `--editor` and
+  `--env` repeat; and it exits 1 on an unknown flag, where `init --execute` and
+  `upgrade --execute` must exit with the usage code. Every failure of either, a filesystem error
   included, exits 2: each is the operator's arguments or environment, never Nexus.
-- **A repository named `init` cannot be given positionally** — it selects the subcommand. It
-  stays reachable through `--pattern init` or a configuration file's `repositories`.
+- **A repository named `init` or `upgrade` cannot be given positionally** — it selects the
+  subcommand. It stays reachable through `--pattern` or a configuration file's `repositories`.
+- **`upgrade` moves pins, nothing else, and is a subcommand rather than a README script.** It
+  reads only the files `init` writes plus `configs/*.yaml|yml`, moves image pins (keeping `X.Y`
+  or `X.Y.Z` precision), the Forgejo release tag, schema addresses and — for the x86_64 binary
+  only — Forgejo's Nushell, and replaces a digest pin by the tag with a warning rather than
+  looking a digest up: one fetched for a tag is only as trustworthy as the tag. An inline
+  `nu -c` script in the README was written first and dropped: forty lines to copy, no single
+  quotes allowed, and no test. Keep it in the module, where the suite runs it.
 
 ### Report fields are only ever appended
 
