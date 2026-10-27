@@ -22,7 +22,7 @@ def --wrapped "main init" [...args: string] {
         if $options.help {
             {help: true}
         } else {
-            let plan = (scaffold plan --ci $options.ci --editor $options.editors --version $VERSION)
+            let plan = (scaffold plan --ci $options.ci --editor $options.editors --env-tool $options.envs --version $VERSION)
             scaffold write $plan (if ($options.dir | is-empty) { "." } else { $options.dir }) --force=$options.force
             {help: false}
         }

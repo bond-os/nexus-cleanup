@@ -3,8 +3,9 @@
 #
 # Templates are whole files stored at the path they are written to, below the
 # area that selects them: common/ always, ci/<system>/ for the chosen CI system,
-# editors/<editor>/ for each chosen editor. Rendering replaces three placeholders
-# and nothing else, so each template reads as the file it becomes.
+# editors/<editor>/ for each chosen editor, env/<tool>/ for each chosen environment
+# tool. Rendering replaces three placeholders and nothing else, so each template
+# reads as the file it becomes.
 
 # Located from this file at parse time, so it holds from any working directory.
 const TEMPLATES = path self templates
@@ -20,6 +21,11 @@ export const CI_SYSTEMS = {
 export const EDITORS = {
     vscode: [".vscode/settings.json" ".vscode/extensions.json"]
     intellij: [".idea/jsonSchemas.xml"]
+}
+
+# Environment tools for local runs. Never used by a generated pipeline.
+export const ENV_TOOLS = {
+    varlock: [".env.schema" ".gitignore"]
 }
 
 const COMMON = ["ci/run-configs.sh" "configs/example.yaml" ".editorconfig" ".gitattributes"]
@@ -77,6 +83,7 @@ def render [template: string, version: string]: nothing -> string {
 export def "scaffold plan" [
     --ci: string                    # gitlab, forgejo, jenkins-docker or jenkins-sh
     --editor: list<string> = []     # vscode and/or intellij
+    --env-tool: list<string> = []   # varlock
     --version: string               # the version every pin names
     --release-markers               # mark pinned lines for release-please
 ]: nothing -> list<record<path: string, content: string>> {
@@ -91,6 +98,11 @@ export def "scaffold plan" [
             usage-error $"unknown editor '($e)': choose from (choices $EDITORS)"
         }
     }
+    for e in $env_tool {
+        if not ($e in $ENV_TOOLS) {
+            usage-error $"unknown environment tool '($e)': choose from (choices $ENV_TOOLS)"
+        }
+    }
     if ($version | is-empty) {
         error make {msg: "scaffold plan: --version is required"}
     }
@@ -99,6 +111,7 @@ export def "scaffold plan" [
         [{area: $"ci/($ci)", path: ($CI_SYSTEMS | get $ci)}]
         | append ($COMMON | each {|p| {area: "common", path: $p} })
         | append ($editor | uniq | each {|e| $EDITORS | get $e | each {|p| {area: $"editors/($e)", path: $p} } } | flatten)
+        | append ($env_tool | uniq | each {|e| $ENV_TOOLS | get $e | each {|p| {area: $"env/($e)", path: $p} } } | flatten)
     )
     $sources | each {|s|
         let template = (open --raw ($TEMPLATES | path join $s.area $s.path) | decode utf-8)
@@ -146,9 +159,9 @@ export def "scaffold write" [
 # `init`'s own arguments. Parsed by hand because Nushell keeps only the last of a
 # repeated flag (--editor is repeatable) and exits 1, not with the usage code, on
 # an unknown one such as a cleanup run's --execute.
-# Returns {help, ci, editors, force, dir}; ci and dir are empty when not given.
+# Returns {help, ci, editors, envs, force, dir}; ci and dir are empty when not given.
 export def "scaffold init-args" [args: list<string>]: nothing -> record {
-    mut options = {help: false, ci: "", editors: [], force: false, dir: ""}
+    mut options = {help: false, ci: "", editors: [], envs: [], force: false, dir: ""}
     mut rest = $args
     while ($rest | is-not-empty) {
         let arg = ($rest | first)
@@ -156,23 +169,23 @@ export def "scaffold init-args" [args: list<string>]: nothing -> record {
         let split = ($arg | parse --regex '^(?P<flag>--[a-z-]+)=(?P<value>.*)$' | get --optional 0)
         let flag = (if $split != null { $split.flag } else { $arg })
         match $flag {
-            "--ci" | "--editor" => {
+            "--ci" | "--editor" | "--env" => {
                 let value = (if $split != null { $split.value } else if ($rest | is-not-empty) { $rest | first } else { null })
                 if $value == null {
                     usage-error $"($flag) needs a value"
                 }
                 if $split == null { $rest = ($rest | skip 1) }
-                if $flag == "--ci" {
-                    $options.ci = $value
-                } else {
-                    $options.editors = ($options.editors | append $value)
+                match $flag {
+                    "--ci" => { $options.ci = $value }
+                    "--editor" => { $options.editors = ($options.editors | append $value) }
+                    _ => { $options.envs = ($options.envs | append $value) }
                 }
             }
             "--force" if $split == null => { $options.force = true }
             "--help" | "-h" => { $options.help = true }
             _ => {
                 if ($arg | str starts-with "-") {
-                    usage-error $"init does not take ($arg); its options are --ci, --editor and --force"
+                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env and --force"
                 }
                 if ($options.dir | is-not-empty) {
                     usage-error $"init takes one target directory, not '($options.dir)' and '($arg)'"
@@ -191,11 +204,13 @@ by default: the pipeline, ci/run-configs.sh, configs/example.yaml, .editorconfig
 .gitattributes, with every version pinned to ($version). Needs no Nexus and no credentials.
 
 Usage:
-  nexus-cleanup init --ci <system> [--editor <editor>]... [--force] [DIR]
+  nexus-cleanup init --ci <system> [--editor <editor>]... [--env <tool>]... [--force] [DIR]
 
 Options:
   --ci <system>      required: (choices $CI_SYSTEMS)
   --editor <editor>  also write schema settings for (choices $EDITORS); repeatable
+  --env <tool>       also write files for running locally with (choices $ENV_TOOLS): its schema
+                     of the NEXUS_* variables and a .gitignore for its value files; repeatable
   --force            overwrite files init writes that already exist; nothing else is touched
   -h, --help         show this help
 "
