@@ -82,7 +82,7 @@ image's entrypoint is `nu`, so the script path comes first:
 
 ```bash
 docker run --rm -v "$PWD:/work" -w /work -e NEXUS_URL -e NEXUS_USERNAME -e NEXUS_PASSWORD \
-  ghcr.io/nushell/nushell:0.115.1-alpine \
+  ghcr.io/nushell/nushell:0.116.1-alpine \
   nexus-cleanup.nu --pattern 'yum-proxy-*'
 ```
 
