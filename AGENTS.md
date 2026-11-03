@@ -145,7 +145,7 @@ The CI check is the gate (`.github/workflows/commits.yml`, which pins exact comm
 the hook below uses the same ones). A local hook is optional:
 
 ```bash
-printf '#!/bin/sh\nexec npx --yes -p @commitlint/cli@21.2.3 -p @commitlint/config-conventional@21.2.3 commitlint --edit "$1"\n' > .git/hooks/commit-msg
+printf '#!/bin/sh\nexec npx --yes -p @commitlint/cli@21.2.4 -p @commitlint/config-conventional@21.2.4 commitlint --edit "$1"\n' > .git/hooks/commit-msg
 chmod +x .git/hooks/commit-msg
 ```
 
