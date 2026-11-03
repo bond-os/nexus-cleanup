@@ -82,6 +82,7 @@ refused rather than silently ignored.
 
 - **WHEN** the caller names a repository that the Nexus instance does not expose
 - **THEN** the client reports an error identifying the unknown name
+- **AND** the error states that the repository either does not exist or is not visible to the authenticated user
 
 ### Requirement: Complete component enumeration via continuation tokens
 
