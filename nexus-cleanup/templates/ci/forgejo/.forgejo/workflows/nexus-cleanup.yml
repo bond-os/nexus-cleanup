@@ -54,8 +54,8 @@ jobs:
       NEXUS_CLEANUP_VERSION: v{{version}}
       NEXUS_CLEANUP: nu /opt/nexus-cleanup/nexus-cleanup.nu
       # The Nushell release nexus-cleanup is tested with.
-      NU_VERSION: 0.115.1
-      NU_SHA256: 8a9722177ddd421eba927b4baae4ae341a4d1c3434504be7b1b17d998bafdd87
+      NU_VERSION: 0.116.1
+      NU_SHA256: 13ef75df08df30f8d7b031df538e82a52c6e74ce839b1a9091c3a3f1969c3742
     steps:
       - uses: https://code.forgejo.org/actions/checkout@v4
 

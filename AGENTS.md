@@ -25,8 +25,8 @@ maintenance area may enter the image or become a runtime dependency of the tool.
 
 For the tool, tests and dev tools:
 
-- **Nushell only.** Version floor **0.115.1**. Pinned CI image:
-  `ghcr.io/nushell/nushell:0.115.1-alpine` — referenced by tag and digest in CI and the
+- **Nushell only.** Version floor **0.116.1**. Pinned CI image:
+  `ghcr.io/nushell/nushell:0.116.1-alpine` — referenced by tag and digest in CI and the
   `Containerfile`; see [Dependency updates](#dependency-updates).
 - The floor is set by features the tool relies on: `sort-by --custom` with a two-argument
   comparator closure, and `http get`/`http delete` with `--full`, `--allow-errors`,
