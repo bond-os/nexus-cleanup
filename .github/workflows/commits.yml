@@ -20,8 +20,8 @@ jobs:
     env:
       # Exact versions: published npm versions are immutable, so this pins what
       # runs. Bump both together, deliberately.
-      COMMITLINT_CLI: "@commitlint/cli@21.2.3"
-      COMMITLINT_CONFIG: "@commitlint/config-conventional@21.2.3"
+      COMMITLINT_CLI: "@commitlint/cli@21.2.4"
+      COMMITLINT_CONFIG: "@commitlint/config-conventional@21.2.4"
       BASE_SHA: ${{ github.event.pull_request.base.sha }}
       HEAD_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
