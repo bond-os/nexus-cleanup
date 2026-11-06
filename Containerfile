@@ -1,7 +1,7 @@
 # Pinned by tag and digest, so a re-pushed tag cannot change what is built. Every
 # Nushell pin moves together in one Renovate pull request; see "Dependency
 # updates" in AGENTS.md.
-FROM ghcr.io/nushell/nushell:0.116.1-alpine@sha256:06a4f0c9c5f36af218be6fd4590403da93f137a20a938c8ec0d9bc348c9f3c85
+FROM ghcr.io/nushell/nushell:0.116.1-alpine@sha256:9e1440d2b78d296364b474b4113623ba1118336592cc1d2a595bb817966998ed
 
 # Set by the build from nexus-cleanup/version.nu; the release job checks that it
 # equals the release being published.
