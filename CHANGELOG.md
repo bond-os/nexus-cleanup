@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/bond-os/nexus-cleanup/compare/v0.3.0...v0.3.1) (2026-11-06)
+
+
+### Bug Fixes
+
+* **deps:** update ghcr.io/nushell/nushell:0.116.1-alpine docker digest to 9e1440d ([a3a7bb6](https://github.com/bond-os/nexus-cleanup/commit/a3a7bb67ea34b8a27054ad7ec1b751a7a5394956))
+
 ## [0.3.0](https://github.com/bond-os/nexus-cleanup/compare/v0.2.1...v0.3.0) (2026-11-03)
 
 
