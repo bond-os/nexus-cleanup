@@ -718,6 +718,12 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   pipeline calls it. Merging them would make refreshing the script overwrite the operator's URL.
 - **`--skip-existing` was chosen over an `extend` subcommand.** `extend` would mainly infer `--ci`,
   and both Jenkins variants write `Jenkinsfile`, so it cannot.
+- **The check option is `--check`, never `--dry-run`.** The tool records that it has no `--dry-run`
+  flag, and the word on a subcommand would invite a "fix". It exits 0 whatever it finds: exit 2 is
+  the operator's arguments or environment, and a repository differing from its templates is normal.
+  `--check` and a write share one decision per file (`decide` in `scaffold.nu`), so the report
+  cannot drift from what a run does. It has no line-by-line diff: Nushell has no diff command, and a
+  diff would mix the operator's edits with the release's changes anyway.
 - **`init` warns about stale pins and does not refuse.** Mixed pins work and `upgrade` fixes them in
   one step. The warning reuses `upgrade`'s pin moving, so there is one definition of a pin.
 - **`init` and `upgrade` parse their own arguments** (`def --wrapped`, `scaffold init-args`,

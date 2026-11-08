@@ -181,6 +181,10 @@ variables, and lists every file it writes on stderr:
   | `editor` | the files of each `--editor` |
   | `env` | the files of each `--env` |
 
+- **Seeing first.** `--check` writes nothing and prints what the same command would do, one line per
+  file: `new`, `identical` or `differs`, then `write`, `skip`, `overwrite` or `refuse`, then the
+  group and path. It exits 0 unless the arguments are wrong. It compares with this release's
+  template, so a pipeline holding your URL always shows as `differs`.
 - **A warning names older pins.** When `init` finds files around it that pin another version, it
   says so and leaves them; run `upgrade` first to avoid that.
 - **Commit `.idea/jsonSchemas.xml` explicitly.** `.idea/` is often in a global gitignore, which
@@ -231,7 +235,8 @@ docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" ghcr.io/bond-os/nexus
 <!-- x-release-please-end -->
 
 `upgrade` lists each file it changed, or says there was nothing to update; to upgrade a
-directory other than the working one, name it after `upgrade`. Under rootless Podman add
+directory other than the working one, name it after `upgrade`. `upgrade --check` prints the files
+it would change and writes nothing. Under rootless Podman add
 `--userns=keep-id`; under rootless Docker use `--user 0:0` instead, as in [Who the container
 runs as](#who-the-container-runs-as). Read `git diff` before committing.
 
@@ -240,7 +245,8 @@ reach you through it. To pick those up, run `upgrade` first, so that nothing is 
 another version, then `init` with the same `--ci`:
 
 - `init --ci <system> --skip-existing` adds the files you do not have yet.
-- `init --ci <system> --only runner --force` refreshes `ci/run-configs.sh`.
+- `init --ci <system> --only runner --force` refreshes `ci/run-configs.sh`. Use `--check` first to
+  see what would change.
 - `init --ci <system> --only example --force` replaces an older enabled `configs/example.yaml` with
   the disabled reference. Move any real settings out of that file first.
 
