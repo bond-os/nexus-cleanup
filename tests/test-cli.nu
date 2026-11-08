@@ -577,6 +577,63 @@ def init-then [edit: closure, ...args: string]: nothing -> record {
     $r | insert files $files | insert pipeline $text
 }
 
+def edited []: string -> string { $in + "# mine\n" }
+
+run-suite "cli: init --skip-existing" [
+    { name: "writes what is missing, keeps what exists and says so", run: {||
+        let r = (init-then {|t| $t | edited } "init" "--ci" "gitlab" "--editor" "intellij" "--skip-existing")
+        assert equal $r.exit_code 0 $r.stderr
+        assert (".idea/jsonSchemas.xml" in $r.files)
+        assert ($r.stderr | str contains "wrote .idea/jsonSchemas.xml")
+        assert ($r.stderr | str contains "kept .gitlab-ci.yml")
+        assert ($r.pipeline | str ends-with "# mine\n")
+        assert equal $r.stdout ""
+    } }
+    { name: "with nothing missing it writes nothing and exits 0", run: {||
+        let r = (init-then {|t| $t | edited } "init" "--ci" "gitlab" "--skip-existing")
+        assert equal $r.exit_code 0 $r.stderr
+        assert not ($r.stderr | str contains "wrote ")
+        for p in $GITLAB_TREE { assert ($r.stderr | str contains $"kept ($p)") $p }
+        assert ($r.pipeline | str ends-with "# mine\n")
+    } }
+    { name: "a removed example comes back beside a real file, which stays as it was", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        rm ($dir | path join "configs" "example.yaml")
+        "repositories: [prod]\n" | save ($dir | path join "configs" "prod.yaml")
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--skip-existing")
+        let prod = (open --raw ($dir | path join "configs" "prod.yaml") | decode utf-8)
+        let example = (open --raw ($dir | path join "configs" "example.yaml") | decode utf-8)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $prod "repositories: [prod]\n"
+        assert ($example | lines | any {|l| $l == "disabled: true" })
+    } }
+    { name: "a dangling symlink is kept like any existing file", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        ^ln -s nowhere ($dir | path join ".gitattributes")
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--skip-existing")
+        let kind = ($dir | path join ".gitattributes" | path type)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $kind "symlink"
+        assert ($r.stderr | str contains "kept .gitattributes")
+    } }
+    { name: "combined with --force it is a usage error naming both, and nothing is written", run: {||
+        let r = (init-in-empty "--ci" "gitlab" "--skip-existing" "--force")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains "--skip-existing")
+        assert ($r.stderr | str contains "--force")
+        assert equal $r.files []
+    } }
+    { name: "init --help describes the new options and the groups", run: {||
+        let r = (init-in-empty "--help")
+        for word in ["--only" "--skip-existing" "pipeline" "runner" "base" "example" "editor" "env" ".gitignore"] {
+            assert ($r.stdout | str contains $word) $word
+        }
+    } }
+]
+
 run-suite "cli: init --only" [
     { name: "--only runner --force overwrites that file and leaves an edited pipeline", run: {||
         let dir = (mktemp -d -t "init-XXXXXX")

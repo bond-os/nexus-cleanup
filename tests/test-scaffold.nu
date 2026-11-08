@@ -567,9 +567,11 @@ run-suite "scaffold groups" [
     { name: "an unknown group is a usage error naming it and listing the groups", run: {||
         assert-usage (raised { scaffold plan --ci gitlab --only [docs] --version "0.3.0" }) "docs" ...$GROUPS
     } }
-    { name: "--only reaches init's arguments, in either spelling", run: {||
-        let o = (scaffold init-args ["--ci" "gitlab" "--only" "runner" "--only=base"])
+    { name: "--only and the write modes reach init's arguments, in either spelling", run: {||
+        let o = (scaffold init-args ["--ci" "gitlab" "--only" "runner" "--only=base" "--skip-existing"])
         assert equal $o.only ["runner" "base"]
+        assert equal $o.skip_existing true
         assert-usage (raised { scaffold init-args ["--only"] }) "--only needs a value"
+        assert-usage (raised { scaffold init-args ["--skip-existing=yes"] }) "--skip-existing=yes"
     } }
 ]
