@@ -25,6 +25,9 @@ def --wrapped "main init" [...args: string] {
             let plan = (scaffold plan --ci $options.ci --editor $options.editors --env-tool $options.envs --only $options.only --version $VERSION)
             let dir = (if ($options.dir | is-empty) { "." } else { $options.dir })
             scaffold write $plan $dir --force=$options.force --skip-existing=$options.skip_existing
+            for path in (scaffold stale-pins $dir --version $VERSION) {
+                print --stderr $"warning: ($path) pins another version than ($VERSION); `upgrade` moves every pin to this release"
+            }
             {help: false}
         }
     } catch {|e| {err: ($e.msg? | default "init failed")} })

@@ -296,9 +296,21 @@ Options:
 "
 }
 
+# The Nushell release the Forgejo template of this tool installs.
+def forgejo-nushell []: nothing -> record<version: string, sha256: string> {
+    let forgejo = (open --raw ($TEMPLATES | path join "ci" "forgejo" ($CI_SYSTEMS | get forgejo)) | decode utf-8)
+    {
+        version: ($forgejo | parse --regex 'NU_VERSION: (\S+)' | get capture0.0)
+        sha256: ($forgejo | parse --regex 'NU_SHA256: (\S+)' | get capture0.0)
+    }
+}
+
 # An image pin: `nexus-cleanup` after a registry path, a quote or whitespace, so that
 # GitLab job names such as `nexus-cleanup:dry-run` never match.
 const PIN = "(^|[/\"'\\s])nexus-cleanup"
+
+# An image pin by digest, with or without a tag.
+const DIGEST_PIN = $"($PIN)\(:[0-9.]+\)?@sha256:[0-9a-f]{64}"
 
 # The files `upgrade` may change, relative to `dir`, that exist there: the pipelines and
 # editor files `init` writes, and every configuration file.
@@ -312,19 +324,59 @@ def upgrade-candidates [dir: string]: nothing -> list<string> {
 # One line with its pins moved to `version`; returns the line and whether a digest went.
 def upgrade-line [line: string, version: string]: nothing -> record<line: string, digest: bool> {
     let xy = ($version | split row "." | first 2 | str join ".")
-    let digest = $"($PIN)\(:[0-9.]+\)?@sha256:[0-9a-f]{64}"
-    let had_digest = ($line =~ $digest)
+    let had_digest = ($line =~ $DIGEST_PIN)
     let moved = (
         $line
         # A digest goes first, keeping an X.Y tag's precision; a tagless one becomes X.Y.Z.
         | str replace --all --regex $"($PIN):[0-9]+\\.[0-9]+@sha256:[0-9a-f]{64}" $"${1}nexus-cleanup:($xy)"
-        | str replace --all --regex $digest $"${1}nexus-cleanup:($version)"
+        | str replace --all --regex $DIGEST_PIN $"${1}nexus-cleanup:($version)"
         | str replace --all --regex $"($PIN):[0-9]+\\.[0-9]+\\.[0-9]+" $"${1}nexus-cleanup:($version)"
         | str replace --all --regex $"($PIN):[0-9]+\\.[0-9]+\([^.0-9]|$\)" $"${1}nexus-cleanup:($xy)${2}"
         | str replace --all --regex 'NEXUS_CLEANUP_VERSION: v[0-9]+\.[0-9]+\.[0-9]+' $"NEXUS_CLEANUP_VERSION: v($version)"
         | str replace --all --regex 'nexus-cleanup/v[0-9]+\.[0-9]+\.[0-9]+/schema/' $"nexus-cleanup/v($version)/schema/"
     )
     {line: $moved, digest: $had_digest}
+}
+
+# A file's text with every pin moved to `version`. `note` receives what the operator
+# should be told about the file.
+def move-pins [path: string, text: string, version: string, nushell: record, note: closure]: nothing -> string {
+    # `split row`, not `lines`: a file's final newline, or its absence, is kept.
+    let moved = ($text | split row "\n" | enumerate | each {|l|
+        let m = (upgrade-line $l.item $version)
+        if $m.digest {
+            do $note $"($path):($l.index + 1): digest pin replaced by the tag; re-add a digest once you have verified it"
+        }
+        $m.line
+    } | str join "\n")
+    if not ($moved =~ '(?m)^\s*NU_VERSION: ') {
+        $moved
+    } else if ($moved =~ 'asset="nu-\$\{NU_VERSION\}-x86_64-unknown-linux-musl"') {
+        $moved
+        | str replace --regex '(?m)^(\s*NU_VERSION: )\S+' $"${1}($nushell.version)"
+        | str replace --regex '(?m)^(\s*NU_SHA256: )\S+' $"${1}($nushell.sha256)"
+    } else {
+        do $note $"($path): installs another Nushell binary than the template's; update NU_VERSION and NU_SHA256 by hand"
+        $moved
+    }
+}
+
+# The files of the repository at `dir` that `upgrade` handles and that pin another
+# version than `version`. Losing a digest is what `upgrade` does to every digest pin, not
+# a sign that the pin is stale, so the comparison leaves digests out. Reads those files
+# only and raises nothing: this only decides whether to warn.
+export def "scaffold stale-pins" [dir: string, --version: string]: nothing -> list<string> {
+    let nushell = (forgejo-nushell)
+    let candidates = (try { upgrade-candidates $dir } catch { [] })
+    $candidates | where {|path|
+        try {
+            let text = (
+                open --raw ($dir | path join $path) | decode utf-8
+                | str replace --all --regex $DIGEST_PIN "${1}nexus-cleanup${2}"
+            )
+            (move-pins $path $text $version $nushell {|_| }) != $text
+        } catch { false }
+    }
 }
 
 # Moves every pin `init` writes, in the files of the repository at `dir` that exist, to
@@ -345,9 +397,7 @@ export def "scaffold upgrade" [
     if (try { $dir | path type } catch { null }) != "dir" {
         usage-error $"($dir): not a directory"
     }
-    let forgejo = (open --raw ($TEMPLATES | path join "ci" "forgejo" ($CI_SYSTEMS | get forgejo)) | decode utf-8)
-    let nu_version = ($forgejo | parse --regex 'NU_VERSION: (\S+)' | get capture0.0)
-    let nu_sha256 = ($forgejo | parse --regex 'NU_SHA256: (\S+)' | get capture0.0)
+    let nushell = (forgejo-nushell)
     let note = {|text: string| if not $quiet { print --stderr $text } }
 
     let candidates = (upgrade-candidates $dir)
@@ -355,24 +405,7 @@ export def "scaffold upgrade" [
         let text = (try { open --raw ($dir | path join $path) | decode utf-8 } catch {
             usage-error $"($dir): cannot read ($path)"
         })
-        # `split row`, not `lines`: a file's final newline, or its absence, is kept.
-        let moved = ($text | split row "\n" | enumerate | each {|l|
-            let m = (upgrade-line $l.item $version)
-            if $m.digest {
-                do $note $"($path):($l.index + 1): digest pin replaced by the tag; re-add a digest once you have verified it"
-            }
-            $m.line
-        } | str join "\n")
-        let moved = if not ($moved =~ '(?m)^\s*NU_VERSION: ') {
-            $moved
-        } else if ($moved =~ 'asset="nu-\$\{NU_VERSION\}-x86_64-unknown-linux-musl"') {
-            $moved
-            | str replace --regex '(?m)^(\s*NU_VERSION: )\S+' $"${1}($nu_version)"
-            | str replace --regex '(?m)^(\s*NU_SHA256: )\S+' $"${1}($nu_sha256)"
-        } else {
-            do $note $"($path): installs another Nushell binary than the template's; update NU_VERSION and NU_SHA256 by hand"
-            $moved
-        }
+        let moved = (move-pins $path $text $version $nushell $note)
         {path: $path, text: $moved, changed: ($moved != $text)}
     } | where changed)
 
