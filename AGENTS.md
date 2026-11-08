@@ -716,6 +716,8 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
 - **Groups follow what is safe to overwrite, not what a file is about.** The pipeline is the one
   file every operator edits, so `run-configs.sh` is the separate `runner` group even though the
   pipeline calls it. Merging them would make refreshing the script overwrite the operator's URL.
+- **`--skip-existing` was chosen over an `extend` subcommand.** `extend` would mainly infer `--ci`,
+  and both Jenkins variants write `Jenkinsfile`, so it cannot.
 - **`init` and `upgrade` parse their own arguments** (`def --wrapped`, `scaffold init-args`,
   `scaffold upgrade-args`). Nushell keeps only the last of a repeated flag, and `--editor`, `--env`
   and `--only` repeat; and it exits 1 on an unknown flag, where `init --execute` and

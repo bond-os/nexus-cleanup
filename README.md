@@ -163,6 +163,9 @@ variables, and lists every file it writes on stderr:
   it does not merge. If you already have a `.vscode/settings.json`, leave out `--editor vscode`
   and copy the `yaml.schemas` entry from
   [`examples/gitlab/.vscode/settings.json`](examples/gitlab/.vscode/settings.json) into yours.
+- **Adding to a repository `init` already wrote.** `--skip-existing` keeps every file that exists,
+  lists them and writes the rest. This is how to pick up an editor chosen later or a file added by
+  a newer release; give the same `--ci` as before.
 - **Acting on part of a repository.** `--only <group>`, repeatable, narrows the run to groups of the
   files you selected, and the rules above apply to those files alone. So
   `init --ci gitlab --only runner --force` refreshes `ci/run-configs.sh` and leaves your pipeline.
@@ -230,9 +233,10 @@ directory other than the working one, name it after `upgrade`. Under rootless Po
 `--userns=keep-id`; under rootless Docker use `--user 0:0` instead, as in [Who the container
 runs as](#who-the-container-runs-as). Read `git diff` before committing.
 
-`upgrade` moves pins and changes nothing else, so a corrected file in the release does not
+`upgrade` moves pins and changes nothing else, so a new or corrected file in the release does not
 reach you through it. To pick those up, run `init` with the same `--ci`:
 
+- `init --ci <system> --skip-existing` adds the files you do not have yet.
 - `init --ci <system> --only runner --force` refreshes `ci/run-configs.sh`.
 - `init --ci <system> --only example --force` replaces an older enabled `configs/example.yaml` with
   the disabled reference. Move any real settings out of that file first.

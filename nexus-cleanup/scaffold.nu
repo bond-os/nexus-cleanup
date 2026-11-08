@@ -145,27 +145,74 @@ export def "scaffold plan" [
     }
 }
 
+# Whether a planned file is absent, matches its plan or differs from it.
+def file-state [dir: string, file: record]: nothing -> string {
+    let target = ($dir | path join $file.path)
+    # `path type`, not `path exists`: a dangling symlink is still something in the way.
+    # It raises when a parent is not a directory; the write then reports why.
+    if (try { $target | path type } catch { null }) == null {
+        return "new"
+    }
+    # A directory or an unreadable file in the way cannot match.
+    let same = (try { (open --raw $target | decode utf-8) == $file.content } catch { false })
+    if $same { "identical" } else { "differs" }
+}
+
+# What this mode does with each planned file, as the plan's records with `state` and
+# `action` added: the one decision. Without
+# --force or --skip-existing one existing file refuses the whole plan, so every
+# action is then `refuse`, for the files that are new as well.
+def decide [
+    plan: list
+    dir: string
+    --force
+    --skip-existing
+]: nothing -> list {
+    if $force and $skip_existing {
+        usage-error "--force and --skip-existing cannot be combined: one overwrites what exists, the other keeps it"
+    }
+    let states = ($plan | each {|f| $f | insert state (file-state $dir $f) })
+    let refused = (not $force) and (not $skip_existing) and ($states | any {|f| $f.state != "new" })
+    $states | each {|f|
+        let action = (if $refused {
+            "refuse"
+        } else if $f.state == "new" {
+            "write"
+        } else if $force {
+            "overwrite"
+        } else {
+            "skip"
+        })
+        $f | insert action $action
+    }
+}
+
 # Writes a plan into `dir`, creating it and any parent it lacks. Every path is
 # checked before anything is written: if any exists, nothing is written and every
-# such path is named, unless --force, which overwrites exactly those paths. No other
-# file is read, changed or removed. Each written path goes to stderr unless
-# --quiet; stdout stays empty. A failure part-way (disk full, permission denied)
-# stops and names what was already written, since there is no undoing it.
+# such path is named, unless --force, which overwrites exactly those paths, or
+# --skip-existing, which keeps them and names them. No other file is read, changed or
+# removed. Each written path goes to stderr unless --quiet; stdout stays empty. A
+# failure part-way (disk full, permission denied) stops and names what was already
+# written, since there is no undoing it.
 export def "scaffold write" [
     plan: list<record<path: string, group: string, content: string>>
     dir: string
     --force                         # overwrite files that already exist
-    --quiet                         # do not list written paths
+    --skip-existing                 # keep files that already exist and write the rest
+    --quiet                         # do not list written or kept paths
 ]: nothing -> nothing {
-    # `path type`, not `path exists`: a dangling symlink is still something in the way.
-    # It raises when a parent is not a directory; the write then reports why.
-    let existing = ($plan | get path | where {|p| (try { $dir | path join $p | path type } catch { null }) != null })
-    if ($existing | is-not-empty) and not $force {
-        usage-error $"($dir): these files already exist: ($existing | str join ', '). Nothing was written; --force overwrites them and nothing else."
+    let decisions = (decide $plan $dir --force=$force --skip-existing=$skip_existing)
+    if ($decisions | any {|d| $d.action == "refuse" }) {
+        let existing = ($decisions | where state != "new" | get path)
+        usage-error $"($dir): these files already exist: ($existing | str join ', '). Nothing was written; --force overwrites them and nothing else, --skip-existing keeps them and writes the rest."
     }
 
     mut written = []
-    for f in $plan {
+    for f in $decisions {
+        if $f.action == "skip" {
+            if not $quiet { print --stderr $"kept ($f.path): it already exists" }
+            continue
+        }
         let target = ($dir | path join $f.path)
         let failure = (try {
             mkdir ($target | path dirname)
@@ -184,10 +231,10 @@ export def "scaffold write" [
 # `init`'s own arguments. Parsed by hand because Nushell keeps only the last of a
 # repeated flag (--editor is repeatable) and exits 1, not with the usage code, on
 # an unknown one such as a cleanup run's --execute.
-# Returns {help, ci, editors, envs, only, force, dir}; ci and dir are empty when not
-# given.
+# Returns {help, ci, editors, envs, only, force, skip_existing, dir}; ci and dir are
+# empty when not given.
 export def "scaffold init-args" [args: list<string>]: nothing -> record {
-    mut options = {help: false, ci: "", editors: [], envs: [], only: [], force: false, dir: ""}
+    mut options = {help: false, ci: "", editors: [], envs: [], only: [], force: false, skip_existing: false, dir: ""}
     mut rest = $args
     while ($rest | is-not-empty) {
         let arg = ($rest | first)
@@ -209,10 +256,11 @@ export def "scaffold init-args" [args: list<string>]: nothing -> record {
                 }
             }
             "--force" if $split == null => { $options.force = true }
+            "--skip-existing" if $split == null => { $options.skip_existing = true }
             "--help" | "-h" => { $options.help = true }
             _ => {
                 if ($arg | str starts-with "-") {
-                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env, --only and --force"
+                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env, --only, --force and --skip-existing"
                 }
                 if ($options.dir | is-not-empty) {
                     usage-error $"init takes one target directory, not '($options.dir)' and '($arg)'"
@@ -232,7 +280,7 @@ by default: the pipeline, ci/run-configs.sh, configs/example.yaml, .editorconfig
 
 Usage:
   nexus-cleanup init --ci <system> [--editor <editor>]... [--env <tool>]... [--only <group>]...
-                     [--force] [DIR]
+                     [--force | --skip-existing] [DIR]
 
 Options:
   --ci <system>      required: (choices $CI_SYSTEMS)
@@ -243,6 +291,7 @@ Options:
                      repeatable. With --force, `example` replaces a real configuration kept in
                      configs/example.yaml and `env` replaces your own .gitignore
   --force            overwrite files init writes that already exist; nothing else is touched
+  --skip-existing    keep files that already exist and write the rest
   -h, --help         show this help
 "
 }
