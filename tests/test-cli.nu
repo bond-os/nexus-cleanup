@@ -562,3 +562,55 @@ run-suite "cli: upgrade" [
         assert equal $unset.exit_code 0 $unset.stderr
     } }
 ]
+
+# A repository `init --ci gitlab` wrote, with `edit` run on its pipeline, then `args` run
+# in it. Returns the result, the files left and the pipeline's text; removes the repository.
+def init-then [edit: closure, ...args: string]: nothing -> record {
+    let dir = (mktemp -d -t "init-XXXXXX")
+    cli-in $dir "init" "--ci" "gitlab" | ignore
+    let pipeline = ($dir | path join ".gitlab-ci.yml")
+    open --raw $pipeline | decode utf-8 | do $edit $in | save --force --raw $pipeline
+    let r = (cli-in $dir ...$args)
+    let files = (tree $dir)
+    let text = (open --raw $pipeline | decode utf-8)
+    rm -rf $dir
+    $r | insert files $files | insert pipeline $text
+}
+
+run-suite "cli: init --only" [
+    { name: "--only runner --force overwrites that file and leaves an edited pipeline", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        "mine\n" | save --force ($dir | path join ".gitlab-ci.yml")
+        "mine\n" | save --force ($dir | path join ".editorconfig")
+        "mine\n" | save --force ($dir | path join "ci" "run-configs.sh")
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--only" "runner" "--force")
+        let read = {|p| open --raw ($dir | path join $p) | decode utf-8 }
+        let pipeline = (do $read ".gitlab-ci.yml")
+        let base = (do $read ".editorconfig")
+        let runner = (do $read "ci/run-configs.sh")
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $pipeline "mine\n"
+        assert equal $base "mine\n"
+        assert ($runner | str starts-with "#!/bin/sh")
+        assert ($r.stderr | str contains "wrote ci/run-configs.sh")
+        assert not ($r.stderr | str contains "wrote .gitlab-ci.yml")
+    } }
+    { name: "a narrowed run refuses on its own files and does not list the others", run: {||
+        let r = (init-then {|t| $t } "init" "--ci" "gitlab" "--only" "base")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert ($r.stderr | str contains ".editorconfig")
+        assert not ($r.stderr | str contains ".gitlab-ci.yml")
+    } }
+    { name: "a group the selection leaves empty and an unknown group write nothing", run: {||
+        let empty = (init-in-empty "--ci" "gitlab" "--only" "editor")
+        assert equal $empty.exit_code $EXIT_USAGE
+        assert ($empty.stderr | str contains "selects no file")
+        assert equal $empty.files []
+        let unknown = (init-in-empty "--ci" "gitlab" "--only" "docs")
+        assert equal $unknown.exit_code $EXIT_USAGE
+        assert ($unknown.stderr | str contains "docs")
+        assert equal $unknown.files []
+    } }
+]
