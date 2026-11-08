@@ -690,7 +690,8 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   updater. That updater moves only the **first** X.Y.Z on each marked line, inline or inside a
   block, so a marked line — in an example or in the README — holds exactly one pin.
 - **The example configuration is a disabled reference, and it selects `replace-me`.** Operators
-  copy it rather than edit it, so it can stay beside real files. It selects a repository that cannot exist and sets a deletion cap, so a
+  copy it rather than edit it, so it can stay beside real files and `init --skip-existing` can
+  restore it without harm. It selects a repository that cannot exist and sets a deletion cap, so a
   copy that keeps the placeholder fails its dry run naming it (exit 3). A placeholder pattern would
   match nothing and exit 0, and without the cap `--require-cap` would stop it first with a usage
   error that does not say the file was never edited.
@@ -708,9 +709,16 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   commit here. Storing the template as `gitignore` and renaming it on write was rejected: it
   would break "a template is stored at the path it is written to" and give `init` and the
   renderer their first special case. Do not rename it.
+- **`--only` filters the selection; it never adds to it.** `--ci` stays required and the selection
+  flags keep describing the whole repository. One flag per group was rejected: a fresh
+  `init --ci gitlab` must still write the base files, so that model needs implied groups. A group
+  the selection leaves empty is a usage error, not a run that writes nothing and exits 0.
+- **Groups follow what is safe to overwrite, not what a file is about.** The pipeline is the one
+  file every operator edits, so `run-configs.sh` is the separate `runner` group even though the
+  pipeline calls it. Merging them would make refreshing the script overwrite the operator's URL.
 - **`init` and `upgrade` parse their own arguments** (`def --wrapped`, `scaffold init-args`,
-  `scaffold upgrade-args`). Nushell keeps only the last of a repeated flag, and `--editor` and
-  `--env` repeat; and it exits 1 on an unknown flag, where `init --execute` and
+  `scaffold upgrade-args`). Nushell keeps only the last of a repeated flag, and `--editor`, `--env`
+  and `--only` repeat; and it exits 1 on an unknown flag, where `init --execute` and
   `upgrade --execute` must exit with the usage code. Every failure of either, a filesystem error
   included, exits 2: each is the operator's arguments or environment, never Nexus.
 - **A repository named `init` or `upgrade` cannot be given positionally** — it selects the

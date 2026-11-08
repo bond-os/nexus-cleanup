@@ -22,8 +22,9 @@ def --wrapped "main init" [...args: string] {
         if $options.help {
             {help: true}
         } else {
-            let plan = (scaffold plan --ci $options.ci --editor $options.editors --env-tool $options.envs --version $VERSION)
-            scaffold write $plan (if ($options.dir | is-empty) { "." } else { $options.dir }) --force=$options.force
+            let plan = (scaffold plan --ci $options.ci --editor $options.editors --env-tool $options.envs --only $options.only --version $VERSION)
+            let dir = (if ($options.dir | is-empty) { "." } else { $options.dir })
+            scaffold write $plan $dir --force=$options.force
             {help: false}
         }
     } catch {|e| {err: ($e.msg? | default "init failed")} })

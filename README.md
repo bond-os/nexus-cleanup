@@ -163,6 +163,21 @@ variables, and lists every file it writes on stderr:
   it does not merge. If you already have a `.vscode/settings.json`, leave out `--editor vscode`
   and copy the `yaml.schemas` entry from
   [`examples/gitlab/.vscode/settings.json`](examples/gitlab/.vscode/settings.json) into yours.
+- **Acting on part of a repository.** `--only <group>`, repeatable, narrows the run to groups of the
+  files you selected, and the rules above apply to those files alone. So
+  `init --ci gitlab --only runner --force` refreshes `ci/run-configs.sh` and leaves your pipeline.
+  With `--force`, take care with `example`, which replaces a real configuration kept in
+  `configs/example.yaml`, and with `env`, which replaces your own `.gitignore`.
+
+  | Group | Files |
+  |---|---|
+  | `pipeline` | the selected CI system's file |
+  | `runner` | `ci/run-configs.sh` |
+  | `base` | `.editorconfig`, `.gitattributes` |
+  | `example` | `configs/example.yaml` |
+  | `editor` | the files of each `--editor` |
+  | `env` | the files of each `--env` |
+
 - **Commit `.idea/jsonSchemas.xml` explicitly.** `.idea/` is often in a global gitignore, which
   would keep the mapping from your colleagues: `git add -f .idea/jsonSchemas.xml`.
 
@@ -214,6 +229,13 @@ docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" ghcr.io/bond-os/nexus
 directory other than the working one, name it after `upgrade`. Under rootless Podman add
 `--userns=keep-id`; under rootless Docker use `--user 0:0` instead, as in [Who the container
 runs as](#who-the-container-runs-as). Read `git diff` before committing.
+
+`upgrade` moves pins and changes nothing else, so a corrected file in the release does not
+reach you through it. To pick those up, run `init` with the same `--ci`:
+
+- `init --ci <system> --only runner --force` refreshes `ci/run-configs.sh`.
+- `init --ci <system> --only example --force` replaces an older enabled `configs/example.yaml` with
+  the disabled reference. Move any real settings out of that file first.
 
 The alternative is the new image's `init --force` with the same options you first gave `init`:
 it rewrites every file `init` writes, your edits to them included, so read the diff before

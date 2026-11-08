@@ -536,3 +536,40 @@ run-suite "scaffold upgrade" [
         assert-usage (raised { scaffold upgrade-args ["a" "b"] }) "one directory"
     } }
 ]
+
+run-suite "scaffold groups" [
+    { name: "every planned file belongs to its group", run: {||
+        for ci in ($PIPELINES | columns) {
+            let plan = (scaffold plan --ci $ci --editor [vscode intellij] --env-tool [varlock] --version "0.3.0")
+            let expected = {
+                pipeline: [($PIPELINES | get $ci)]
+                runner: ["ci/run-configs.sh"]
+                base: [".editorconfig" ".gitattributes"]
+                example: ["configs/example.yaml"]
+                editor: [".idea/jsonSchemas.xml" ".vscode/extensions.json" ".vscode/settings.json"]
+                env: [".env.schema" ".gitignore"]
+            }
+            for group in ($expected | columns) {
+                assert equal ($plan | where group == $group | get path | sort) ($expected | get $group | sort) $"($ci) ($group)"
+            }
+            assert equal ($expected | columns | sort) ($GROUPS | sort)
+        }
+    } }
+    { name: "--only keeps the named groups of the selection", run: {||
+        assert equal (paths (scaffold plan --ci gitlab --only [runner] --version "0.3.0")) ["ci/run-configs.sh"]
+        assert equal (paths (scaffold plan --ci gitlab --only [runner base] --version "0.3.0")) [".editorconfig" ".gitattributes" "ci/run-configs.sh"]
+        assert equal (paths (scaffold plan --ci gitlab --editor [intellij] --only [editor] --version "0.3.0")) [".idea/jsonSchemas.xml"]
+    } }
+    { name: "--only never adds to the selection: a group it leaves empty is a usage error", run: {||
+        assert-usage (raised { scaffold plan --ci gitlab --only [editor] --version "0.3.0" }) "editor" "selects no file"
+        assert-usage (raised { scaffold plan --ci gitlab --only [base env] --version "0.3.0" }) "env" "selects no file"
+    } }
+    { name: "an unknown group is a usage error naming it and listing the groups", run: {||
+        assert-usage (raised { scaffold plan --ci gitlab --only [docs] --version "0.3.0" }) "docs" ...$GROUPS
+    } }
+    { name: "--only reaches init's arguments, in either spelling", run: {||
+        let o = (scaffold init-args ["--ci" "gitlab" "--only" "runner" "--only=base"])
+        assert equal $o.only ["runner" "base"]
+        assert-usage (raised { scaffold init-args ["--only"] }) "--only needs a value"
+    } }
+]

@@ -28,7 +28,17 @@ export const ENV_TOOLS = {
     varlock: [".env.schema" ".gitignore"]
 }
 
-const COMMON = ["ci/run-configs.sh" "configs/example.yaml" ".editorconfig" ".gitattributes"]
+const COMMON = [
+    {path: "ci/run-configs.sh", group: "runner"}
+    {path: "configs/example.yaml", group: "example"}
+    {path: ".editorconfig", group: "base"}
+    {path: ".gitattributes", group: "base"}
+]
+
+# What --only can name. Groups follow what is safe to overwrite, not what a file is
+# about: the pipeline holds the operator's edits, so run-configs.sh, which it calls,
+# is a group of its own.
+export const GROUPS = ["pipeline" "runner" "base" "example" "editor" "env"]
 
 const MARKER = "x-release-please-version"
 
@@ -75,8 +85,11 @@ def render [template: string, version: string]: nothing -> string {
     | str replace --all "{{version}}" $version
 }
 
-# The files `init` writes for these choices, as [{path, content}] with paths
+# The files `init` writes for these choices, as [{path, group, content}] with paths
 # relative to the target directory. Reads only the templates; writes nothing.
+#
+# --only narrows the choices to the named groups; it never adds to them, so a group
+# the choices leave empty is a usage error rather than a run that writes nothing.
 #
 # --release-markers is for tools/render-examples.nu alone: `init` never writes
 # markers, which mean nothing outside this repository.
@@ -84,9 +97,10 @@ export def "scaffold plan" [
     --ci: string                    # gitlab, forgejo, jenkins-docker or jenkins-sh
     --editor: list<string> = []     # vscode and/or intellij
     --env-tool: list<string> = []   # varlock
+    --only: list<string> = []       # keep only these groups; all of them when empty
     --version: string               # the version every pin names
     --release-markers               # mark pinned lines for release-please
-]: nothing -> list<record<path: string, content: string>> {
+]: nothing -> list<record<path: string, group: string, content: string>> {
     if ($ci | is-empty) {
         usage-error $"--ci is required: one of (choices $CI_SYSTEMS)"
     }
@@ -103,20 +117,31 @@ export def "scaffold plan" [
             usage-error $"unknown environment tool '($e)': choose from (choices $ENV_TOOLS)"
         }
     }
+    for g in $only {
+        if not ($g in $GROUPS) {
+            usage-error $"unknown group '($g)': choose from ($GROUPS | str join ', ')"
+        }
+    }
     if ($version | is-empty) {
         error make {msg: "scaffold plan: --version is required"}
     }
 
     let sources = (
-        [{area: $"ci/($ci)", path: ($CI_SYSTEMS | get $ci)}]
-        | append ($COMMON | each {|p| {area: "common", path: $p} })
-        | append ($editor | uniq | each {|e| $EDITORS | get $e | each {|p| {area: $"editors/($e)", path: $p} } } | flatten)
-        | append ($env_tool | uniq | each {|e| $ENV_TOOLS | get $e | each {|p| {area: $"env/($e)", path: $p} } } | flatten)
+        [{area: $"ci/($ci)", path: ($CI_SYSTEMS | get $ci), group: "pipeline"}]
+        | append ($COMMON | each {|c| {area: "common", path: $c.path, group: $c.group} })
+        | append ($editor | uniq | each {|e| $EDITORS | get $e | each {|p| {area: $"editors/($e)", path: $p, group: "editor"} } } | flatten)
+        | append ($env_tool | uniq | each {|e| $ENV_TOOLS | get $e | each {|p| {area: $"env/($e)", path: $p, group: "env"} } } | flatten)
     )
-    $sources | each {|s|
+    for g in $only {
+        if not ($g in ($sources | get group)) {
+            usage-error $"--only ($g) selects no file: choose what it should narrow with --($g)"
+        }
+    }
+    let selected = (if ($only | is-empty) { $sources } else { $sources | where {|s| $s.group in $only } })
+    $selected | each {|s|
         let template = (open --raw ($TEMPLATES | path join $s.area $s.path) | decode utf-8)
         let marked = (if $release_markers { add-markers $s.path $template } else { $template })
-        {path: $s.path, content: (render $marked $version)}
+        {path: $s.path, group: $s.group, content: (render $marked $version)}
     }
 }
 
@@ -127,7 +152,7 @@ export def "scaffold plan" [
 # --quiet; stdout stays empty. A failure part-way (disk full, permission denied)
 # stops and names what was already written, since there is no undoing it.
 export def "scaffold write" [
-    plan: list<record<path: string, content: string>>
+    plan: list<record<path: string, group: string, content: string>>
     dir: string
     --force                         # overwrite files that already exist
     --quiet                         # do not list written paths
@@ -159,9 +184,10 @@ export def "scaffold write" [
 # `init`'s own arguments. Parsed by hand because Nushell keeps only the last of a
 # repeated flag (--editor is repeatable) and exits 1, not with the usage code, on
 # an unknown one such as a cleanup run's --execute.
-# Returns {help, ci, editors, envs, force, dir}; ci and dir are empty when not given.
+# Returns {help, ci, editors, envs, only, force, dir}; ci and dir are empty when not
+# given.
 export def "scaffold init-args" [args: list<string>]: nothing -> record {
-    mut options = {help: false, ci: "", editors: [], envs: [], force: false, dir: ""}
+    mut options = {help: false, ci: "", editors: [], envs: [], only: [], force: false, dir: ""}
     mut rest = $args
     while ($rest | is-not-empty) {
         let arg = ($rest | first)
@@ -169,7 +195,7 @@ export def "scaffold init-args" [args: list<string>]: nothing -> record {
         let split = ($arg | parse --regex '^(?P<flag>--[a-z-]+)=(?P<value>.*)$' | get --optional 0)
         let flag = (if $split != null { $split.flag } else { $arg })
         match $flag {
-            "--ci" | "--editor" | "--env" => {
+            "--ci" | "--editor" | "--env" | "--only" => {
                 let value = (if $split != null { $split.value } else if ($rest | is-not-empty) { $rest | first } else { null })
                 if $value == null {
                     usage-error $"($flag) needs a value"
@@ -178,6 +204,7 @@ export def "scaffold init-args" [args: list<string>]: nothing -> record {
                 match $flag {
                     "--ci" => { $options.ci = $value }
                     "--editor" => { $options.editors = ($options.editors | append $value) }
+                    "--only" => { $options.only = ($options.only | append $value) }
                     _ => { $options.envs = ($options.envs | append $value) }
                 }
             }
@@ -185,7 +212,7 @@ export def "scaffold init-args" [args: list<string>]: nothing -> record {
             "--help" | "-h" => { $options.help = true }
             _ => {
                 if ($arg | str starts-with "-") {
-                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env and --force"
+                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env, --only and --force"
                 }
                 if ($options.dir | is-not-empty) {
                     usage-error $"init takes one target directory, not '($options.dir)' and '($arg)'"
@@ -204,13 +231,17 @@ by default: the pipeline, ci/run-configs.sh, configs/example.yaml, .editorconfig
 .gitattributes, with every version pinned to ($version). Needs no Nexus and no credentials.
 
 Usage:
-  nexus-cleanup init --ci <system> [--editor <editor>]... [--env <tool>]... [--force] [DIR]
+  nexus-cleanup init --ci <system> [--editor <editor>]... [--env <tool>]... [--only <group>]...
+                     [--force] [DIR]
 
 Options:
   --ci <system>      required: (choices $CI_SYSTEMS)
   --editor <editor>  also write schema settings for (choices $EDITORS); repeatable
   --env <tool>       also write files for running locally with (choices $ENV_TOOLS): its schema
                      of the NEXUS_* variables and a .gitignore for its value files; repeatable
+  --only <group>     act only on these groups of the files chosen above: ($GROUPS | str join ', ');
+                     repeatable. With --force, `example` replaces a real configuration kept in
+                     configs/example.yaml and `env` replaces your own .gitignore
   --force            overwrite files init writes that already exist; nothing else is touched
   -h, --help         show this help
 "

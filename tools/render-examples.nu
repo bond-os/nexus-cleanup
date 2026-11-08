@@ -13,7 +13,7 @@ use ../nexus-cleanup/scaffold.nu *
 use ../nexus-cleanup/version.nu [VERSION]
 
 # What examples/<ci>/ holds, as `scaffold plan` returns it.
-export def example-plan [ci: string]: nothing -> list<record<path: string, content: string>> {
+export def example-plan [ci: string]: nothing -> list<record<path: string, group: string, content: string>> {
     scaffold plan --ci $ci --editor [vscode intellij] --env-tool [varlock] --version $VERSION --release-markers
 }
 
