@@ -718,6 +718,8 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   pipeline calls it. Merging them would make refreshing the script overwrite the operator's URL.
 - **`--skip-existing` was chosen over an `extend` subcommand.** `extend` would mainly infer `--ci`,
   and both Jenkins variants write `Jenkinsfile`, so it cannot.
+- **`init` warns about stale pins and does not refuse.** Mixed pins work and `upgrade` fixes them in
+  one step. The warning reuses `upgrade`'s pin moving, so there is one definition of a pin.
 - **`init` and `upgrade` parse their own arguments** (`def --wrapped`, `scaffold init-args`,
   `scaffold upgrade-args`). Nushell keeps only the last of a repeated flag, and `--editor`, `--env`
   and `--only` repeat; and it exits 1 on an unknown flag, where `init --execute` and

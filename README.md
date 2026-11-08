@@ -181,6 +181,8 @@ variables, and lists every file it writes on stderr:
   | `editor` | the files of each `--editor` |
   | `env` | the files of each `--env` |
 
+- **A warning names older pins.** When `init` finds files around it that pin another version, it
+  says so and leaves them; run `upgrade` first to avoid that.
 - **Commit `.idea/jsonSchemas.xml` explicitly.** `.idea/` is often in a global gitignore, which
   would keep the mapping from your colleagues: `git add -f .idea/jsonSchemas.xml`.
 
@@ -234,7 +236,8 @@ directory other than the working one, name it after `upgrade`. Under rootless Po
 runs as](#who-the-container-runs-as). Read `git diff` before committing.
 
 `upgrade` moves pins and changes nothing else, so a new or corrected file in the release does not
-reach you through it. To pick those up, run `init` with the same `--ci`:
+reach you through it. To pick those up, run `upgrade` first, so that nothing is left pinned to
+another version, then `init` with the same `--ci`:
 
 - `init --ci <system> --skip-existing` adds the files you do not have yet.
 - `init --ci <system> --only runner --force` refreshes `ci/run-configs.sh`.

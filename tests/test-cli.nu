@@ -671,3 +671,49 @@ run-suite "cli: init --only" [
         assert equal $unknown.files []
     } }
 ]
+
+const STALE_DIGEST = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+run-suite "cli: init pin warning" [
+    { name: "a new file beside an older pipeline: the file is current, the pipeline named and unchanged", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        let p = ($dir | path join ".gitlab-ci.yml")
+        let old = (open --raw $p | decode utf-8 | str replace --all $VERSION "0.0.1")
+        $old | save --force --raw $p
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--editor" "intellij" "--skip-existing")
+        let mapping = (open --raw ($dir | path join ".idea" "jsonSchemas.xml") | decode utf-8)
+        let after = (open --raw $p | decode utf-8)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($mapping | str contains $"/v($VERSION)/schema/")
+        assert ($r.stderr | str contains "warning: .gitlab-ci.yml pins another version") $r.stderr
+        assert ($r.stderr | str contains "upgrade")
+        assert equal $after $old
+    } }
+    { name: "a configuration file on an older schema is named", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        "# yaml-language-server: $schema=https://raw.githubusercontent.com/bond-os/nexus-cleanup/v0.0.1/schema/config.schema.json\nrepositories: [prod]\n" | save ($dir | path join "configs" "prod.yaml")
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--only" "base" "--force")
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($r.stderr | str contains "warning: configs/prod.yaml pins another version") $r.stderr
+    } }
+    { name: "agreeing pins and an empty directory give no warning", run: {||
+        let agreeing = (init-then {|t| $t } "init" "--ci" "gitlab" "--skip-existing")
+        assert not ($agreeing.stderr | str contains "warning")
+        let empty = (init-in-empty "--ci" "gitlab")
+        assert not ($empty.stderr | str contains "warning")
+    } }
+    { name: "a digest on the running version is not stale, on an older one it is", run: {||
+        let current = (init-then {|t|
+            $t | str replace --all $"nexus-cleanup:($VERSION)" $"nexus-cleanup:($VERSION)@sha256:($STALE_DIGEST)"
+        } "init" "--ci" "gitlab" "--skip-existing")
+        assert not ($current.stderr | str contains "warning") $current.stderr
+        let older = (init-then {|t|
+            $t | str replace --all $"nexus-cleanup:($VERSION)" $"nexus-cleanup:0.0.1@sha256:($STALE_DIGEST)"
+        } "init" "--ci" "gitlab" "--skip-existing")
+        assert ($older.stderr | str contains "warning: .gitlab-ci.yml") $older.stderr
+    } }
+]
