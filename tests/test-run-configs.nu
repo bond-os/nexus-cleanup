@@ -161,11 +161,11 @@ run-suite "generated pipelines" [
 
 # Run the script with the real tool over the given files (name -> content), against an
 # unreachable Nexus, so a file that sends a request exits with the API code.
-def run-real [files: record]: nothing -> record {
+def run-real [files: record, --keep-example]: nothing -> record {
     let work = (mktemp -d -t "run-configs-real-XXXXXX")
     let root = ($env.FILE_PWD | path dirname)
     scaffold write (scaffold plan --ci gitlab --version $VERSION) $work --quiet
-    rm $"($work)/configs/example.yaml"
+    if not $keep_example { rm $"($work)/configs/example.yaml" }
     $files | items {|name, content| $content | save $"($work)/configs/($name).yaml" } | ignore
     let r = (with-env {NEXUS_CLEANUP: $"($nu.current-exe) ($root)/nexus-cleanup.nu", NEXUS_URL: "http://127.0.0.1:9", NEXUS_USERNAME: "", NEXUS_PASSWORD: ""} {
         cd $work
@@ -190,5 +190,21 @@ run-suite "run-configs.sh with the tool" [
         assert ($r.stderr | str contains "a-paused.yaml is disabled; nothing was done")
         assert ($r.stderr | str contains "b-active.yaml: exited 3")
         assert not ($r.stderr | str contains "a-paused.yaml: exited")
+    } }
+    { name: "the unedited example beside a real file does not change how the job ends", run: {||
+        let r = (run-real {
+            prod: "repositories: [r]\nmax-deletions: 10\nmax-attempts: 1\ntimeout: 2sec\n"
+        } --keep-example)
+        # The real file fails at the API; the example is skipped and leaves its report.
+        assert equal $r.exit_code 3 $r.stderr
+        assert ($r.stderr | str contains "example.yaml is disabled; nothing was done")
+        assert ($r.stderr | str contains "prod.yaml: exited 3")
+        assert not ($r.stderr | str contains "example.yaml: exited")
+        assert equal $r.summaries [{file: "example.dry-run.summary.json", disabled: true}]
+    } }
+    { name: "only the unedited example passes, doing nothing", run: {||
+        let r = (run-real {} --keep-example)
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $r.summaries [{file: "example.dry-run.summary.json", disabled: true}]
     } }
 ]
