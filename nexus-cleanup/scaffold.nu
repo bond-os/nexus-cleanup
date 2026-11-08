@@ -159,7 +159,7 @@ def file-state [dir: string, file: record]: nothing -> string {
 }
 
 # What this mode does with each planned file, as the plan's records with `state` and
-# `action` added: the one decision. Without
+# `action` added: the one decision, so that --check reports what a run does. Without
 # --force or --skip-existing one existing file refuses the whole plan, so every
 # action is then `refuse`, for the files that are new as well.
 def decide [
@@ -185,6 +185,21 @@ def decide [
         })
         $f | insert action $action
     }
+}
+
+# What `scaffold write` would do with a plan in `dir`, one line per file: state, action,
+# group and path. Reads the planned files that exist; writes and creates nothing.
+export def "scaffold check" [
+    plan: list<record<path: string, group: string, content: string>>
+    dir: string
+    --force                         # as `scaffold write`
+    --skip-existing                 # as `scaffold write`
+]: nothing -> string {
+    decide $plan $dir --force=$force --skip-existing=$skip_existing
+    | each {|d|
+        [($d.state | fill --width 9) ($d.action | fill --width 9) ($d.group | fill --width 8) $d.path] | str join " "
+    }
+    | str join "\n"
 }
 
 # Writes a plan into `dir`, creating it and any parent it lacks. Every path is
@@ -231,10 +246,10 @@ export def "scaffold write" [
 # `init`'s own arguments. Parsed by hand because Nushell keeps only the last of a
 # repeated flag (--editor is repeatable) and exits 1, not with the usage code, on
 # an unknown one such as a cleanup run's --execute.
-# Returns {help, ci, editors, envs, only, force, skip_existing, dir}; ci and dir are
-# empty when not given.
+# Returns {help, ci, editors, envs, only, force, skip_existing, check, dir}; ci and dir
+# are empty when not given.
 export def "scaffold init-args" [args: list<string>]: nothing -> record {
-    mut options = {help: false, ci: "", editors: [], envs: [], only: [], force: false, skip_existing: false, dir: ""}
+    mut options = {help: false, ci: "", editors: [], envs: [], only: [], force: false, skip_existing: false, check: false, dir: ""}
     mut rest = $args
     while ($rest | is-not-empty) {
         let arg = ($rest | first)
@@ -257,10 +272,11 @@ export def "scaffold init-args" [args: list<string>]: nothing -> record {
             }
             "--force" if $split == null => { $options.force = true }
             "--skip-existing" if $split == null => { $options.skip_existing = true }
+            "--check" if $split == null => { $options.check = true }
             "--help" | "-h" => { $options.help = true }
             _ => {
                 if ($arg | str starts-with "-") {
-                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env, --only, --force and --skip-existing"
+                    usage-error $"init does not take ($arg); its options are --ci, --editor, --env, --only, --force, --skip-existing and --check"
                 }
                 if ($options.dir | is-not-empty) {
                     usage-error $"init takes one target directory, not '($options.dir)' and '($arg)'"
@@ -280,7 +296,7 @@ by default: the pipeline, ci/run-configs.sh, configs/example.yaml, .editorconfig
 
 Usage:
   nexus-cleanup init --ci <system> [--editor <editor>]... [--env <tool>]... [--only <group>]...
-                     [--force | --skip-existing] [DIR]
+                     [--force | --skip-existing] [--check] [DIR]
 
 Options:
   --ci <system>      required: (choices $CI_SYSTEMS)
@@ -292,6 +308,7 @@ Options:
                      configs/example.yaml and `env` replaces your own .gitignore
   --force            overwrite files init writes that already exist; nothing else is touched
   --skip-existing    keep files that already exist and write the rest
+  --check            write nothing; print what this command would do with each file
   -h, --help         show this help
 "
 }
@@ -386,9 +403,12 @@ export def "scaffold stale-pins" [dir: string, --version: string]: nothing -> li
 # Nushell, copied from this release's own template unless the workflow installs another
 # binary than the template's. Writes only files that change and lists them on stderr
 # unless --quiet. Returns the changed paths. Reads no other file and makes no request.
+# With --check nothing is written: the warnings stand and the paths returned are those
+# it would change.
 export def "scaffold upgrade" [
     dir: string
     --version: string               # the version every pin names afterwards
+    --check                         # write nothing
     --quiet                         # do not list changed paths or warnings
 ]: nothing -> list<string> {
     if ($version | is-empty) {
@@ -409,15 +429,19 @@ export def "scaffold upgrade" [
         {path: $path, text: $moved, changed: ($moved != $text)}
     } | where changed)
 
-    for c in $changes {
-        try { $c.text | save --force --raw ($dir | path join $c.path) } catch {|e|
-            usage-error $"($dir): cannot write ($c.path): ($e.msg? | default 'write failed')"
+    if not $check {
+        for c in $changes {
+            try { $c.text | save --force --raw ($dir | path join $c.path) } catch {|e|
+                usage-error $"($dir): cannot write ($c.path): ($e.msg? | default 'write failed')"
+            }
+            do $note $"updated ($c.path)"
         }
-        do $note $"updated ($c.path)"
     }
     if ($changes | is-empty) {
         if ($candidates | is-empty) {
             do $note $"($dir): none of the files init writes is here; nothing to update"
+        } else if $check {
+            do $note $"nothing would change: every pin already names ($version)"
         } else {
             do $note $"nothing to update: every pin already names ($version)"
         }
@@ -426,14 +450,16 @@ export def "scaffold upgrade" [
 }
 
 # `upgrade`'s own arguments, parsed by hand for the same reasons as `init`'s.
-# Returns {help, dir}; dir is empty when not given.
+# Returns {help, check, dir}; dir is empty when not given.
 export def "scaffold upgrade-args" [args: list<string>]: nothing -> record {
-    mut options = {help: false, dir: ""}
+    mut options = {help: false, check: false, dir: ""}
     for arg in $args {
         if $arg in ["--help" "-h"] {
             $options.help = true
+        } else if $arg == "--check" {
+            $options.check = true
         } else if ($arg | str starts-with "-") {
-            usage-error $"upgrade does not take ($arg); its only option is --help"
+            usage-error $"upgrade does not take ($arg); its options are --check and --help"
         } else if ($options.dir | is-not-empty) {
             usage-error $"upgrade takes one directory, not '($options.dir)' and '($arg)'"
         } else {
@@ -452,9 +478,10 @@ Image pins keep their X.Y or X.Y.Z precision; a digest pin becomes the tag, with
 warning. Lists each file it changed. Needs no Nexus and no credentials.
 
 Usage:
-  nexus-cleanup upgrade [DIR]
+  nexus-cleanup upgrade [--check] [DIR]
 
 Options:
+  --check            write nothing; print each file this command would change
   -h, --help         show this help
 "
 }

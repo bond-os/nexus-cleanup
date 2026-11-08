@@ -549,7 +549,7 @@ run-suite "cli: upgrade" [
     { name: "upgrade --help names the version it upgrades to", run: {||
         let r = (cli "upgrade" "--help")
         assert equal $r.exit_code 0
-        assert ($r.stdout | str contains "nexus-cleanup upgrade [DIR]")
+        assert ($r.stdout | str contains "nexus-cleanup upgrade [--check] [DIR]")
         assert ($r.stdout | str contains $VERSION)
     } }
     { name: "upgrade ignores a placeholder or missing NEXUS_URL", run: {||
@@ -578,6 +578,14 @@ def init-then [edit: closure, ...args: string]: nothing -> record {
 }
 
 def edited []: string -> string { $in + "# mine\n" }
+
+# The lines of an `init --check` report, as records.
+def check-lines []: string -> list<record> {
+    lines | each {|l|
+        let c = ($l | split row --regex '\s+')
+        {state: $c.0, action: $c.1, group: $c.2, path: $c.3}
+    }
+}
 
 run-suite "cli: init --skip-existing" [
     { name: "writes what is missing, keeps what exists and says so", run: {||
@@ -628,7 +636,7 @@ run-suite "cli: init --skip-existing" [
     } }
     { name: "init --help describes the new options and the groups", run: {||
         let r = (init-in-empty "--help")
-        for word in ["--only" "--skip-existing" "pipeline" "runner" "base" "example" "editor" "env" ".gitignore"] {
+        for word in ["--only" "--skip-existing" "--check" "pipeline" "runner" "base" "example" "editor" "env" ".gitignore"] {
             assert ($r.stdout | str contains $word) $word
         }
     } }
@@ -715,5 +723,114 @@ run-suite "cli: init pin warning" [
             $t | str replace --all $"nexus-cleanup:($VERSION)" $"nexus-cleanup:0.0.1@sha256:($STALE_DIGEST)"
         } "init" "--ci" "gitlab" "--skip-existing")
         assert ($older.stderr | str contains "warning: .gitlab-ci.yml") $older.stderr
+    } }
+]
+
+run-suite "cli: --check" [
+    { name: "init --check reports state and action per file and writes nothing", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        "mine\n" | save --force ($dir | path join ".gitlab-ci.yml")
+        rm ($dir | path join "ci" "run-configs.sh")
+        let before = (tree $dir)
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--skip-existing" "--check")
+        let after = (tree $dir)
+        let pipeline = (open --raw ($dir | path join ".gitlab-ci.yml") | decode utf-8)
+        rm -rf $dir
+        let report = ($r.stdout | check-lines)
+        let at = {|p| $report | where path == $p | first }
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal (do $at ".editorconfig") {state: "identical", action: "skip", group: "base", path: ".editorconfig"}
+        assert equal (do $at ".gitlab-ci.yml") {state: "differs", action: "skip", group: "pipeline", path: ".gitlab-ci.yml"}
+        assert equal (do $at "ci/run-configs.sh") {state: "new", action: "write", group: "runner", path: "ci/run-configs.sh"}
+        assert equal $after $before
+        assert equal $pipeline "mine\n"
+    } }
+    { name: "a run that would be refused reports refuse for every file and exits 0", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        "mine\n" | save ($dir | path join ".gitlab-ci.yml")
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--check")
+        let after = (tree $dir)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($r.stdout | check-lines | all {|l| $l.action == "refuse" })
+        assert equal ($r.stdout | check-lines | length) ($GITLAB_TREE | length)
+        assert equal $after [".gitlab-ci.yml"]
+    } }
+    { name: "--only --force previews the one file as overwrite and leaves it", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        "mine\n" | save --force ($dir | path join "ci" "run-configs.sh")
+        let r = (cli-in $dir "init" "--ci" "gitlab" "--only" "runner" "--force" "--check")
+        let runner = (open --raw ($dir | path join "ci" "run-configs.sh") | decode utf-8)
+        rm -rf $dir
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stdout | check-lines) [{state: "differs", action: "overwrite", group: "runner", path: "ci/run-configs.sh"}]
+        assert equal $runner "mine\n"
+    } }
+    { name: "a target directory that does not exist is not created", run: {||
+        let base = (mktemp -d -t "init-XXXXXX")
+        let r = (cli-in $base "init" "--ci" "gitlab" "--check" "cleanup-repo")
+        let created = ($base | path join "cleanup-repo" | path exists)
+        rm -rf $base
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($r.stdout | check-lines | all {|l| $l.state == "new" and $l.action == "write" })
+        assert not $created
+    } }
+    { name: "init --check still reports usage errors", run: {||
+        let r = (init-in-empty "--check")
+        assert equal $r.exit_code $EXIT_USAGE
+        assert equal $r.stdout ""
+    } }
+    { name: "upgrade --check names the stale file and leaves it", run: {||
+        let r = (init-then {|t| $t | str replace --all $VERSION "0.0.1" } "upgrade" "--check")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal ($r.stdout | lines) [".gitlab-ci.yml"]
+        assert ($r.pipeline | str contains "nexus-cleanup:0.0.1")
+    } }
+    { name: "upgrade --check with nothing to change prints nothing and says so", run: {||
+        let r = (init-then {|t| $t } "upgrade" "--check")
+        assert equal $r.exit_code 0 $r.stderr
+        assert equal $r.stdout ""
+        assert ($r.stderr | str contains "nothing would change")
+    } }
+    { name: "upgrade --check gives the digest warning and leaves the pin", run: {||
+        let pinned = $"nexus-cleanup:0.0.1@sha256:($STALE_DIGEST)"
+        let r = (init-then {|t| $t | str replace --all $"nexus-cleanup:($VERSION)" $pinned } "upgrade" "--check")
+        assert equal $r.exit_code 0 $r.stderr
+        assert ($r.stderr | str contains "digest pin replaced") $r.stderr
+        assert ($r.pipeline | str contains $pinned)
+    } }
+    { name: "upgrade --help describes --check", run: {||
+        assert ((cli "upgrade" "--help").stdout | str contains "--check")
+    } }
+    { name: "from an older repository: check, upgrade, check, add an editor, and no edit is lost", run: {||
+        let dir = (mktemp -d -t "init-XXXXXX")
+        cli-in $dir "init" "--ci" "gitlab" | ignore
+        let p = ($dir | path join ".gitlab-ci.yml")
+        open --raw $p | decode utf-8 | str replace --all $VERSION "0.0.1" | edited | save --force --raw $p
+        let read_pipeline = {|| open --raw $p | decode utf-8 }
+
+        let first = (cli-in $dir "upgrade" "--check")
+        assert equal ($first.stdout | lines) [".gitlab-ci.yml"]
+        assert (do $read_pipeline | str contains "nexus-cleanup:0.0.1")
+
+        let moved = (cli-in $dir "upgrade")
+        assert equal $moved.exit_code 0 $moved.stderr
+        assert (do $read_pipeline | str contains $"nexus-cleanup:($VERSION)")
+
+        let second = (cli-in $dir "init" "--ci" "gitlab" "--skip-existing" "--check" "--editor" "intellij")
+        let report = ($second.stdout | check-lines)
+        assert equal ($report | where action == "write" | get path) [".idea/jsonSchemas.xml"]
+        assert equal ($report | where state == "differs" | get path) [".gitlab-ci.yml"]
+
+        let added = (cli-in $dir "init" "--ci" "gitlab" "--skip-existing" "--editor" "intellij")
+        let exists = ($dir | path join ".idea" "jsonSchemas.xml" | path exists)
+        let final = (do $read_pipeline)
+        rm -rf $dir
+        assert equal $added.exit_code 0 $added.stderr
+        assert not ($added.stderr | str contains "warning") $added.stderr
+        assert $exists
+        assert ($final | str ends-with "# mine\n")
     } }
 ]

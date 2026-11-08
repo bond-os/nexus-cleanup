@@ -529,8 +529,9 @@ run-suite "scaffold upgrade" [
         assert ($r.stderr | str contains "usage:")
     } }
     { name: "upgrade's arguments: one directory, --help, nothing else", run: {||
-        assert equal (scaffold upgrade-args []) {help: false, dir: ""}
-        assert equal (scaffold upgrade-args ["repo"]) {help: false, dir: "repo"}
+        assert equal (scaffold upgrade-args []) {help: false, check: false, dir: ""}
+        assert equal (scaffold upgrade-args ["repo"]) {help: false, check: false, dir: "repo"}
+        assert equal (scaffold upgrade-args ["--check" "repo"]) {help: false, check: true, dir: "repo"}
         assert equal (scaffold upgrade-args ["-h"] | get help) true
         assert-usage (raised { scaffold upgrade-args ["--execute"] }) "--execute"
         assert-usage (raised { scaffold upgrade-args ["a" "b"] }) "one directory"
@@ -568,9 +569,10 @@ run-suite "scaffold groups" [
         assert-usage (raised { scaffold plan --ci gitlab --only [docs] --version "0.3.0" }) "docs" ...$GROUPS
     } }
     { name: "--only and the write modes reach init's arguments, in either spelling", run: {||
-        let o = (scaffold init-args ["--ci" "gitlab" "--only" "runner" "--only=base" "--skip-existing"])
+        let o = (scaffold init-args ["--ci" "gitlab" "--only" "runner" "--only=base" "--skip-existing" "--check"])
         assert equal $o.only ["runner" "base"]
         assert equal $o.skip_existing true
+        assert equal $o.check true
         assert-usage (raised { scaffold init-args ["--only"] }) "--only needs a value"
         assert-usage (raised { scaffold init-args ["--skip-existing=yes"] }) "--skip-existing=yes"
     } }

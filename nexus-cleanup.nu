@@ -24,9 +24,13 @@ def --wrapped "main init" [...args: string] {
         } else {
             let plan = (scaffold plan --ci $options.ci --editor $options.editors --env-tool $options.envs --only $options.only --version $VERSION)
             let dir = (if ($options.dir | is-empty) { "." } else { $options.dir })
-            scaffold write $plan $dir --force=$options.force --skip-existing=$options.skip_existing
-            for path in (scaffold stale-pins $dir --version $VERSION) {
-                print --stderr $"warning: ($path) pins another version than ($VERSION); `upgrade` moves every pin to this release"
+            if $options.check {
+                print (scaffold check $plan $dir --force=$options.force --skip-existing=$options.skip_existing)
+            } else {
+                scaffold write $plan $dir --force=$options.force --skip-existing=$options.skip_existing
+                for path in (scaffold stale-pins $dir --version $VERSION) {
+                    print --stderr $"warning: ($path) pins another version than ($VERSION); `upgrade` moves every pin to this release"
+                }
             }
             {help: false}
         }
@@ -52,7 +56,10 @@ def --wrapped "main upgrade" [...args: string] {
         if $options.help {
             {help: true}
         } else {
-            scaffold upgrade (if ($options.dir | is-empty) { "." } else { $options.dir }) --version $VERSION | ignore
+            let changed = (scaffold upgrade (if ($options.dir | is-empty) { "." } else { $options.dir }) --version $VERSION --check=$options.check)
+            if $options.check {
+                for path in $changed { print $path }
+            }
             {help: false}
         }
     } catch {|e| {err: ($e.msg? | default "upgrade failed")} })
