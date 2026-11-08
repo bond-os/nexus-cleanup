@@ -125,8 +125,33 @@ def example-file []: nothing -> string {
     $path
 }
 
+# Run the rendered example, changed by `edit`, against a stub Nexus. Returns the run's
+# outcome or error and every request it sent.
+def run-example [edit: closure]: nothing -> record {
+    let path = (example-file)
+    open --raw $path | decode utf-8 | do $edit $in | save --force --raw $path
+    let log = (mktemp -t "requests-XXXXXX")
+    let fetch = {|req|
+        $"($req.method) ($req.url)\n" | save --append --raw $log
+        if ($req.url | str ends-with "/service/rest/v1/repositories") {
+            {status: 200, body: [{name: "yum-proxy", format: "yum", type: "proxy"}]}
+        } else {
+            {status: 200, body: {items: [], continuationToken: null}}
+        }
+    }
+    let config = (with-env {NEXUS_URL: "https://n.test"} {
+        config resolve {require_cap: true} --file (config load $path)
+    })
+    let outcome = (try {
+        {out: (cleanup run $config (api client "https://n.test" --backoff 0ms --fetch $fetch)), err: null}
+    } catch {|e| {out: null, err: $e} })
+    let requests = (open --raw $log | lines)
+    rm -f $path $log
+    $outcome | insert requests $requests
+}
+
 run-suite "scaffold example configuration" [
-    { name: "the rendered example is accepted by config load and by --require-cap", run: {||
+    { name: "the rendered example is accepted by config load and by --require-cap, and is disabled", run: {||
         let path = (example-file)
         let loaded = (config load $path)
         let resolved = (with-env {NEXUS_URL: "https://nexus.test"} {
@@ -134,33 +159,27 @@ run-suite "scaffold example configuration" [
         })
         rm -f $path
         assert equal $resolved.repositories ["replace-me"]
-        assert equal $resolved.disabled false
+        assert equal $resolved.disabled true
     } }
-    { name: "the example shows how to disable it, commented out", run: {||
+    { name: "the example says to copy it, name a real repository and remove the line", run: {||
         let content = (file (scaffold plan --ci gitlab --version "0.3.0") "configs/example.yaml")
-        assert ($content | lines | any {|l| $l == "# disabled: true" })
-        assert ($content | str contains "every run skips it")
+        assert ($content | lines | any {|l| $l == "disabled: true" })
+        assert ($content | str contains "copy this file to a new name")
+        assert ($content | str contains "name a real repository")
+        assert ($content | str contains "remove the copy's `disabled` line")
     } }
-    { name: "an unedited example fails naming replace-me before any component request", run: {||
-        let path = (example-file)
-        let log = (mktemp -t "requests-XXXXXX")
-        let fetch = {|req|
-            $"($req.method) ($req.url)\n" | save --append --raw $log
-            if ($req.url | str ends-with "/service/rest/v1/repositories") {
-                {status: 200, body: [{name: "yum-proxy", format: "yum", type: "proxy"}]}
-            } else {
-                {status: 200, body: {items: [], continuationToken: null}}
-            }
-        }
-        let config = (with-env {NEXUS_URL: "https://n.test"} {
-            config resolve {require_cap: true} --file (config load $path)
-        })
-        let err = (raised { cleanup run $config (api client "https://n.test" --backoff 0ms --fetch $fetch) })
-        let requests = (open --raw $log | lines)
-        rm -f $path $log
-        assert not equal $err null "the run succeeded"
-        assert ($err.msg | str contains "'replace-me' does not exist") $err.msg
-        assert equal $requests ["GET https://n.test/service/rest/v1/repositories"]
+    { name: "an unedited example sends no request and exits 0, saying it is disabled", run: {||
+        let r = (run-example {|text| $text })
+        assert equal $r.err null
+        assert equal $r.requests []
+        assert equal $r.out.exit_code 0
+        assert equal $r.out.report.summary.disabled true
+    } }
+    { name: "with its disabled line removed, it fails naming replace-me before any component request", run: {||
+        let r = (run-example {|text| $text | str replace "\ndisabled: true\n" "\n" })
+        assert not equal $r.err null "the run succeeded"
+        assert ($r.err.msg | str contains "'replace-me' does not exist") $r.err.msg
+        assert equal $r.requests ["GET https://n.test/service/rest/v1/repositories"]
     } }
 ]
 

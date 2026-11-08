@@ -138,7 +138,7 @@ variables, and lists every file it writes on stderr:
 |---|---|
 | `.gitlab-ci.yml`, `.forgejo/workflows/nexus-cleanup.yml` or `Jenkinsfile` | the pipeline for `--ci` |
 | `ci/run-configs.sh` | always: the loop the pipeline calls, one run per `configs/*.yaml` |
-| `configs/example.yaml` | always: a starting configuration, with the schema modeline |
+| `configs/example.yaml` | always: a disabled reference to copy, with the schema modeline |
 | `.editorconfig`, `.gitattributes` | always: UTF-8 and LF, so a Windows checkout cannot put CR into the pipeline's shell |
 | `.vscode/settings.json`, `.vscode/extensions.json` | with `--editor vscode` |
 | `.idea/jsonSchemas.xml` | with `--editor intellij` |
@@ -166,8 +166,11 @@ variables, and lists every file it writes on stderr:
 - **Commit `.idea/jsonSchemas.xml` explicitly.** `.idea/` is often in a global gitignore, which
   would keep the mapping from your colleagues: `git add -f .idea/jsonSchemas.xml`.
 
-Then edit `configs/example.yaml`. Until it names a real repository it selects `replace-me`, so
-the first pipeline run fails naming it rather than passing having cleaned nothing. Set the CI
+Then copy `configs/example.yaml` to a new name in `configs/`, name a real repository in the copy
+and remove the copy's `disabled` line. The example stays as it is: it is disabled, so every run
+skips it and it can stay beside your real files. **A repository holding only disabled files
+passes having cleaned nothing**, with the tool saying on stderr that each file is disabled. A copy
+that still selects `replace-me` fails naming it. Set the CI
 variables or credentials the pipeline's header lists, commit and push. The GitLab and Jenkins
 pipelines set `NEXUS_URL` to `https://nexus.example.com`, which you must replace with your
 Nexus: until you do, every run fails with exit 2 naming the placeholder, before any request.

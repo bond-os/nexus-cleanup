@@ -689,11 +689,16 @@ not a tool feature: one file stays one run, and the tool has no multi-run mode.
   emulation of the updater was checked once against release-please 17.11.2's own `Generic`
   updater. That updater moves only the **first** X.Y.Z on each marked line, inline or inside a
   block, so a marked line — in an example or in the README — holds exactly one pin.
-- **The example configuration selects `replace-me`**, a repository that cannot exist, and sets a
-  deletion cap. An unedited repository then fails its first dry run naming the placeholder
-  (exit 3). A placeholder pattern would match nothing and exit 0 — a green pipeline doing
-  nothing — and without the cap `--require-cap` would stop it first with a usage error that does
-  not say the file was never edited.
+- **The example configuration is a disabled reference, and it selects `replace-me`.** Operators
+  copy it rather than edit it, so it can stay beside real files. It selects a repository that cannot exist and sets a deletion cap, so a
+  copy that keeps the placeholder fails its dry run naming it (exit 3). A placeholder pattern would
+  match nothing and exit 0, and without the cap `--require-cap` would stop it first with a usage
+  error that does not say the file was never edited.
+- **`run-configs.sh` has no guard for a repository whose files are all disabled.** Such a repository
+  passes doing nothing, and the tool says so on stderr for each file. A guard would turn the
+  pipeline red whenever every file is paused, and pausing must stay simple. The first run still
+  fails on the placeholder or missing `NEXUS_URL`, because `config resolve` runs before the
+  disabled check. This trade was chosen, so do not add the guard as a fix.
 - **`init` writes no `AGENTS.md` or `README.md`.** The generated repository belongs to its
   operators; its pipeline header is its documentation. It never merges into an existing file
   either: `--force` overwrites exactly the files `init` writes and nothing else.
