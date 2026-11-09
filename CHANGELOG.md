@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.4.0](https://github.com/bond-os/nexus-cleanup/compare/v0.3.0...v0.4.0) (2026-11-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* a repository whose URL is set and whose only configuration is the unedited example now passes doing nothing, where it used to fail naming replace-me. Existing repositories keep their file until they replace it.
+
+### Features
+
+* add --check to init and upgrade ([7ed2bfb](https://github.com/bond-os/nexus-cleanup/commit/7ed2bfb3e47c46a9ea3f355bda0196d1db5d87a2))
+* add init --only to act on groups of files ([a0d0590](https://github.com/bond-os/nexus-cleanup/commit/a0d05906bad52ebff18405be662d64f0efea4498))
+* add init --skip-existing to keep existing files ([dd7bcfb](https://github.com/bond-os/nexus-cleanup/commit/dd7bcfbb900d25005dedbd33d47c8c56af112004))
+* ship the example configuration disabled ([418125a](https://github.com/bond-os/nexus-cleanup/commit/418125a8e18598ac3ea1fc30b3e83a248e589794))
+* warn when init finds files pinning another version ([fa1861a](https://github.com/bond-os/nexus-cleanup/commit/fa1861a883710a1348ff2ae68b508b2cc8b29800))
+
+
+### Bug Fixes
+
+* **deps:** update ghcr.io/nushell/nushell:0.116.1-alpine docker digest to 9e1440d ([a3a7bb6](https://github.com/bond-os/nexus-cleanup/commit/a3a7bb67ea34b8a27054ad7ec1b751a7a5394956))
+
 ## [0.3.0](https://github.com/bond-os/nexus-cleanup/compare/v0.2.1...v0.3.0) (2026-11-03)
 
 
