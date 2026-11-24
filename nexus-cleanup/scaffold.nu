@@ -381,7 +381,21 @@ def upgrade-candidates [dir: string]: nothing -> list<string> {
     let written = ($CI_SYSTEMS | values | append ($EDITORS | values | flatten) | uniq)
     let root = ($dir | path expand)
     let configs = (glob ($root | path join "configs" "*.{yaml,yml}") --no-dir | path relative-to $root)
-    $written | where {|p| ($dir | path join $p | path type) == "file" } | append $configs | uniq | sort
+    $written | where {|p| ($dir | path join $p | path type) in ["file" "symlink"] } | append $configs | uniq | sort
+}
+
+# A candidate path is unsafe when it or a directory below `dir` is a symlink.
+# The target directory itself is trusted, so operators may name a symlink to a repository.
+def unsafe-upgrade-path [dir: string, path: string]: nothing -> bool {
+    mut current = $dir
+    let components = ($path | path split)
+    for component in $components {
+        $current = ($current | path join $component)
+        if (try { $current | path type } catch { null }) == "symlink" {
+            return true
+        }
+    }
+    false
 }
 
 # One line with its pins moved to `version`; returns the line and whether a digest went.
@@ -431,7 +445,7 @@ def move-pins [path: string, text: string, version: string, nushell: record, not
 export def "scaffold stale-pins" [dir: string, --version: string]: nothing -> list<string> {
     let nushell = (forgejo-nushell)
     let candidates = (try { upgrade-candidates $dir } catch { [] })
-    $candidates | where {|path|
+    $candidates | where {|path| not (unsafe-upgrade-path $dir $path) } | where {|path|
         try {
             let text = (
                 open --raw ($dir | path join $path) | decode utf-8
@@ -467,6 +481,10 @@ export def "scaffold upgrade" [
     let note = {|text: string| if not $quiet { print --stderr $text } }
 
     let candidates = (upgrade-candidates $dir)
+    let unsafe = ($candidates | where {|path| unsafe-upgrade-path $dir $path })
+    if ($unsafe | is-not-empty) {
+        usage-error $"($dir): refusing to upgrade through symlinks at: ($unsafe | str join ', '). Nothing was read or written."
+    }
     let changes = ($candidates | each {|path|
         let text = (try { open --raw ($dir | path join $path) | decode utf-8 } catch {
             usage-error $"($dir): cannot read ($path)"

@@ -447,10 +447,11 @@ def pinned-files [dir: string]: nothing -> list<string> {
 }
 
 # Run `scaffold upgrade` on `dir` at VERSION in a child process, so its stderr can be read.
-def upgrade-in [dir: string]: nothing -> record {
+def upgrade-in [dir: string, --check]: nothing -> record {
     let module = ($env.FILE_PWD | path dirname | path join "nexus-cleanup" "scaffold.nu")
+    let check_flag = (if $check { "--check" } else { "" })
     ^$nu.current-exe -c $"use '($module)' *
-        try { scaffold upgrade '($dir)' --version '($VERSION)' | to nuon | print } catch {|e| print --stderr $e.msg; exit 2 }" | complete
+        try { scaffold upgrade '($dir)' --version '($VERSION)' ($check_flag) | to nuon | print } catch {|e| print --stderr $e.msg; exit 2 }" | complete
 }
 
 def drop-copy [dir: string] { rm -rf ($dir | path dirname) }
@@ -559,6 +560,57 @@ run-suite "scaffold upgrade" [
         let r = (upgrade-in "/nonexistent/nexus-cleanup-upgrade")
         assert equal $r.exit_code 2
         assert ($r.stderr | str contains "usage:")
+    } }
+    { name: "a candidate symlink is refused before any regular candidate is read", run: {||
+        let dir = (example-copy gitlab)
+        let pipeline = ($dir | path join ".gitlab-ci.yml")
+        let outside = ($dir | path dirname | path join "outside.yml")
+        open --raw $pipeline | str replace --all $VERSION "0.0.1" | save --force --raw $outside
+        rm $pipeline
+        ^ln -s $outside $pipeline
+        let ordinary = ($dir | path join ".vscode" "settings.json")
+        open --raw $ordinary | str replace --all $VERSION "0.0.1" | save --force --raw $ordinary
+        let ordinary_before = (open --raw $ordinary)
+        let outside_before = (open --raw $outside)
+        let r = (upgrade-in $dir)
+        let ordinary_after = (open --raw $ordinary)
+        let outside_after = (open --raw $outside)
+        drop-copy $dir
+        assert equal $r.exit_code 2
+        assert ($r.stderr | str contains "symlink") $r.stderr
+        assert ($r.stderr | str contains ".gitlab-ci.yml") $r.stderr
+        assert equal $ordinary_after $ordinary_before
+        assert equal $outside_after $outside_before
+    } }
+    { name: "a symlinked configs directory is refused in check mode without following it", run: {||
+        let dir = (example-copy gitlab)
+        let configs = ($dir | path join "configs")
+        let outside = ($dir | path dirname | path join "outside-configs")
+        mv $configs $outside
+        ^ln -s $outside $configs
+        let target = ($outside | path join "example.yaml")
+        open --raw $target | str replace --all $VERSION "0.0.1" | save --force --raw $target
+        let before = (open --raw $target)
+        let r = (upgrade-in $dir --check)
+        let after = (open --raw $target)
+        drop-copy $dir
+        assert equal $r.exit_code 2
+        assert ($r.stderr | str contains "configs/example.yaml") $r.stderr
+        assert equal $after $before
+    } }
+    { name: "stale-pin inspection skips candidate symlinks without reading the target", run: {||
+        let dir = (example-copy gitlab)
+        let config = ($dir | path join "configs" "example.yaml")
+        let outside = ($dir | path dirname | path join "outside.yaml")
+        open --raw $config | str replace --all $VERSION "0.0.1" | save --force --raw $outside
+        rm $config
+        ^ln -s $outside $config
+        let before = (open --raw $outside)
+        let stale = (scaffold stale-pins $dir --version $VERSION)
+        let after = (open --raw $outside)
+        drop-copy $dir
+        assert equal $stale []
+        assert equal $after $before
     } }
     { name: "upgrade's arguments: one directory, --help, nothing else", run: {||
         assert equal (scaffold upgrade-args []) {help: false, check: false, dir: ""}
