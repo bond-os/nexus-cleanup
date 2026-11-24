@@ -282,10 +282,15 @@ alternative; revisit it if the trust trade stops being acceptable.
 
 **Merging a Nushell update.** The Forgejo template pins the Nushell tarball by `NU_SHA256`, which
 Renovate cannot compute, so the `nushell-checksum` check fails on every version change and prints
-the actual checksum. Put it in `NU_SHA256` in the template and in `examples/forgejo/`, **amend**
-the Renovate commit rather than adding one, so the changelog gets one line, and push with
-`--force-with-lease`; Renovate then leaves the branch alone. If the suite fails in the new image,
-fix the code on that branch with `fix:` commits, or close the PR to stay where you are.
+the actual checksum. The trusted `repair-nushell-checksum` workflow runs after that failure only
+for the same-repository `renovate/nushell` pull request. It verifies the actor, branch, failed
+job, one-commit shape and Nushell-only changed-file allowlist; downloads and hashes the exact
+release asset; updates the template and `examples/forgejo/`; **amends** the existing commit; and
+pushes with an exact-HEAD `--force-with-lease` before dispatching the tests again. The workflow
+never merges or approves the PR, and the required checksum check remains the independent gate.
+If it refuses the PR or cannot push, perform those same steps manually as the fallback. If the
+suite fails in the new image, fix the code on that branch with `fix:` commits, or close the PR
+to stay where you are.
 
 **Checking `renovate.json` locally.** The npm proxy configured on development machines may lack
 Renovate's dependencies; use the published image instead. Renovate's local platform only sees
