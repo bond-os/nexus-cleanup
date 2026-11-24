@@ -148,14 +148,48 @@ export def "scaffold plan" [
 # Whether a planned file is absent, matches its plan or differs from it.
 def file-state [dir: string, file: record]: nothing -> string {
     let target = ($dir | path join $file.path)
-    # `path type`, not `path exists`: a dangling symlink is still something in the way.
-    # It raises when a parent is not a directory; the write then reports why.
-    if (try { $target | path type } catch { null }) == null {
+    if (has-symlink-parent $dir $file) {
         return "new"
     }
-    # A directory or an unreadable file in the way cannot match.
+    let kind = (try { $target | path type } catch { null })
+    # `path type`, not `path exists`: a dangling symlink is still something in the way.
+    # It raises when a parent is not a directory; the write then reports why.
+    if $kind == null {
+        return "new"
+    }
+    # A symlink, directory or unreadable file in the way cannot match.
+    if $kind == "symlink" {
+        return "differs"
+    }
     let same = (try { (open --raw $target | decode utf-8) == $file.content } catch { false })
     if $same { "identical" } else { "differs" }
+}
+
+# Whether the target directory or a directory below it is a symlink.
+def has-symlink-parent [dir: string, file: record]: nothing -> bool {
+    mut current = $dir
+    let parents = ($file.path | path split | drop)
+    if (try { $dir | path type } catch { null }) == "symlink" {
+        return true
+    }
+    for component in $parents {
+        $current = ($current | path join $component)
+        if (try { $current | path type } catch { null }) == "symlink" {
+            return true
+        }
+    }
+    false
+}
+
+# Whether a write to this planned path would follow a symlink. A terminal symlink
+# is included only for overwrite; skip-existing keeps terminal symlinks as it
+# always has. Parent symlinks are unsafe for every kind of write.
+def follows-symlink [dir: string, file: record, action: string]: nothing -> bool {
+    let target = ($dir | path join $file.path)
+    if (has-symlink-parent $dir $file) {
+        return true
+    }
+    $action == "overwrite" and ((try { $target | path type } catch { null }) == "symlink")
 }
 
 # What this mode does with each planned file, as the plan's records with `state` and
@@ -173,7 +207,7 @@ def decide [
     }
     let states = ($plan | each {|f| $f | insert state (file-state $dir $f) })
     let refused = (not $force) and (not $skip_existing) and ($states | any {|f| $f.state != "new" })
-    $states | each {|f|
+    let initial = ($states | each {|f|
         let action = (if $refused {
             "refuse"
         } else if $f.state == "new" {
@@ -184,6 +218,14 @@ def decide [
             "skip"
         })
         $f | insert action $action
+    })
+    let unsafe = ($initial | where {|f|
+        $f.action in ["write" "overwrite"] and (follows-symlink $dir $f $f.action)
+    } | get path)
+    $initial | each {|f|
+        $f
+        | upsert action (if ($unsafe | is-empty) { $f.action } else { "refuse" })
+        | insert unsafe ($f.path in $unsafe)
     }
 }
 
@@ -217,6 +259,10 @@ export def "scaffold write" [
     --quiet                         # do not list written or kept paths
 ]: nothing -> nothing {
     let decisions = (decide $plan $dir --force=$force --skip-existing=$skip_existing)
+    let unsafe = ($decisions | where unsafe | get path)
+    if ($unsafe | is-not-empty) {
+        usage-error $"($dir): refusing to write through symlinks at: ($unsafe | str join ', '). Nothing was written."
+    }
     if ($decisions | any {|d| $d.action == "refuse" }) {
         let existing = ($decisions | where state != "new" | get path)
         usage-error $"($dir): these files already exist: ($existing | str join ', '). Nothing was written; --force overwrites them and nothing else, --skip-existing keeps them and writes the rest."

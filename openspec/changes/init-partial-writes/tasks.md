@@ -43,6 +43,11 @@ pinned image before calling a group done.
 - [x] 6.1 In a temporary directory, write a repository with `init` at an older pinned version, then run `upgrade --check`, `upgrade`, `init --skip-existing --check` and `init --skip-existing --editor intellij`; verify each step's stdout, stderr and exit code, and that no operator edit is lost
 - [x] 6.2 Run `nu tests/run-tests.nu` in `ghcr.io/nushell/nushell:0.116.1-alpine`, verify it passes, and verify `nu -c 'use nexus-cleanup'` prints nothing
 
+## 7. Symlink safety
+
+- [x] 7.1 Refuse writes and overwrites that would follow a planned path's symlink or a symlink in one of its parent directories, while preserving skip-existing for existing terminal symlinks
+- [x] 7.2 Add tests for terminal symlinks, symlinked parents, check mode, and all-or-nothing behavior
+
 ## Workflow follow-up
 
 - Describe the new example flow in the release notes, because the `BREAKING` change is visible only to operators who refresh the file.
