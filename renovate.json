@@ -92,7 +92,7 @@
       "groupName": "Nushell",
       "semanticCommitType": "fix",
       "prBodyNotes": [
-        "**Before merging this Nushell update:**\n\n1. Check that every Nushell pin moved: `Containerfile` and the `test` job container (tag and digest), README.md, AGENTS.md (image and version floor), and `NU_VERSION` in the Forgejo template and `examples/forgejo/`.\n2. On a version change the `nushell-checksum` check fails and prints the actual checksum. Put it in `NU_SHA256` in the template and in `examples/forgejo/`, **amend** this commit rather than adding one, and push with `--force-with-lease`, so the changelog gets one line.\n3. If the suite fails in the new image, fix the code on this branch with `fix:` commits, or close this pull request to stay on the current version."
+        "**Before merging this Nushell update:**\n\n1. Check that every Nushell pin moved: `Containerfile` and the `test` job container (tag and digest), README.md, AGENTS.md (image and version floor), and `NU_VERSION` in the Forgejo template and `examples/forgejo/`.\n2. On a version change the `nushell-checksum` check fails and prints the actual checksum. The trusted `repair-nushell-checksum` workflow normally updates both `NU_SHA256` values, **amends** this commit and reruns tests; it never merges or approves the pull request. If the workflow refuses or fails, put the printed checksum in both files and perform the same amend and exact-head `--force-with-lease` push manually, so the changelog keeps one line.\n3. If the suite fails in the new image, fix the code on this branch with `fix:` commits, or close this pull request to stay on the current version."
       ]
     }
   ]
