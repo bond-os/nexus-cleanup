@@ -249,6 +249,38 @@ run-suite "scaffold write" [
         assert ($r.stderr | str contains ".gitattributes") $r.stderr
         assert equal $written [".gitattributes"]
     } }
+    { name: "--force refuses a terminal symlink without changing its target", run: {||
+        let dir = (mktemp -d -t "scaffold-write-XXXXXX")
+        let outside = ($dir | path join "outside.txt")
+        "mine\n" | save $outside
+        mkdir ($dir | path join "target" "ci")
+        ^ln -s $outside ($dir | path join "target" "ci" "run-configs.sh")
+        let plan = (scaffold plan --ci gitlab --only [runner] --version "0.3.0")
+        let err = (raised { scaffold write $plan ($dir | path join "target") --force })
+        let kept = (open --raw $outside | decode utf-8)
+        let checked = (scaffold check $plan ($dir | path join "target") --force)
+        rm -rf $dir
+        assert-usage $err "symlink" "ci/run-configs.sh" "Nothing was written"
+        assert equal $kept "mine\n"
+        assert ($checked | str contains "refuse")
+    } }
+    { name: "a symlinked parent cannot redirect a new file", run: {||
+        let base = (mktemp -d -t "scaffold-write-XXXXXX")
+        let target = ($base | path join "target")
+        let outside = ($base | path join "outside")
+        mkdir $target $outside
+        ^ln -s $outside ($target | path join "ci")
+        let plan = (scaffold plan --ci gitlab --version "0.3.0")
+        let err = (raised { scaffold write $plan $target --skip-existing })
+        let files = (ls $outside | length)
+        let checked = (scaffold check $plan $target --skip-existing)
+        let pipeline_written = ($target | path join ".gitlab-ci.yml" | path exists)
+        rm -rf $base
+        assert-usage $err "symlink" "ci/run-configs.sh" "Nothing was written"
+        assert equal $files 0
+        assert not $pipeline_written
+        assert ($checked | lines | all {|line| $line | str contains "refuse" })
+    } }
     { name: "--force overwrites what init writes and touches nothing else", run: {||
         let dir = (mktemp -d -t "scaffold-write-XXXXXX")
         mkdir ($dir | path join "configs")

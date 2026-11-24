@@ -194,6 +194,14 @@ them and write the rest. It SHALL never remove or modify any other file.
 - **THEN** `.gitlab-ci.yml` and `.editorconfig` are unchanged and every other `init` file is written
 - **AND** `configs/prod.yaml` is unchanged
 
+#### Scenario: Symlinks cannot redirect a write
+
+- **WHEN** a planned path or one of its parent directories below the target directory is a symlink
+- **AND** the command would write or overwrite that path
+- **THEN** the command writes nothing, fails with a usage error naming the affected path
+- **AND** the symlink target is unchanged
+- **AND** `--check` reports the operation as `refuse` without writing
+
 ### Requirement: Upgrade a configuration repository
 
 The tool SHALL provide an `upgrade` subcommand that moves every version pin `init` writes, in the
