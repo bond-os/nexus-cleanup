@@ -139,6 +139,7 @@ jobs:
         with:
           ref: ${{ env.RUN_HEAD_SHA }}
           path: pull-request
+          fetch-depth: 0
           persist-credentials: true
 
       - name: Repair, amend and rerun tests
@@ -147,6 +148,11 @@ jobs:
         env:
           PR_NUMBER: ${{ steps.validate.outputs.pr_number }}
         run: |
+          if ! original_parent=$(git rev-parse "$RUN_HEAD_SHA^"); then
+            echo "Refusing to amend: the verified pull request commit has no parent." >&2
+            exit 1
+          fi
+
           ../trusted/.github/scripts/repair-nushell-checksum.sh
 
           changed=$(
@@ -178,6 +184,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit --amend --no-edit
+          if [ "$(git rev-parse HEAD^)" != "$original_parent" ]; then
+            echo "Refusing to push: the amended commit did not retain its parent." >&2
+            exit 1
+          fi
           git push \
             --force-with-lease="refs/heads/renovate/nushell:$RUN_HEAD_SHA" \
             origin HEAD:refs/heads/renovate/nushell

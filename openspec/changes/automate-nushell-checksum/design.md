@@ -67,8 +67,10 @@ summary. Download and verification failures after eligibility exit as failures.
 
 The workflow first checks out the default branch and uses its pinned Actions dependencies and
 maintenance script. It then checks out the verified pull-request SHA into a second directory
-with credentials available for the later push. No script, workflow or shell command from the
-pull-request tree is invoked.
+with full history and credentials available for the later push. A shallow one-commit checkout
+is insufficient: Git treats the checked-out commit as a root, so amending it can remove its
+parent and make the repaired branch unrelated to the base. No script, workflow or shell command
+from the pull-request tree is invoked.
 
 A dedicated script owns parsing, download, checksum calculation and the exact replacement in
 the template and rendered example. It accepts explicit file paths and refuses malformed,
@@ -80,7 +82,8 @@ constructed from a strictly numeric dotted version and the fixed x86_64 musl ass
 The script reports no repair if the template's version and checksum already agree. A successful
 repair must leave the pull-request checkout with exactly the two intended checksum files
 modified. The workflow stages those paths explicitly and amends the current commit with
-`--no-edit`, preserving the `fix(deps)` message and the pull request's single-commit shape.
+`--no-edit`, preserving the `fix(deps)` message, its parent and the pull request's
+single-commit shape.
 
 The push uses an explicit `--force-with-lease` value tied to the `workflow_run` head SHA, so
 another update to the branch causes the push to fail instead of being overwritten. Only the
@@ -113,6 +116,8 @@ merge/approval operations. The real checksum script remains the end-to-end verif
   from the failed log.
 - [A push succeeds but workflow dispatch fails] → the repaired commit remains auditable and the
   automation reports the failure so tests can be dispatched again.
+- [A shallow checkout makes an amend orphan the Renovate commit] → fetch the verified
+  pull-request revision with full history before amending it.
 
 ## Migration Plan
 

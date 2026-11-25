@@ -42,6 +42,7 @@ second release-visible change, and it SHALL rerun rather than waive the required
 
 - **WHEN** eligible automation changes the stale checksum values
 - **THEN** it amends the existing dependency update commit without changing its message
+- **AND** the amended commit retains the original dependency update's parent
 - **AND** it force-pushes only the verified head revision of the established Renovate branch
 - **AND** it starts a fresh run of the complete tests workflow
 - **AND** it does not merge the pull request or approve the required checks
