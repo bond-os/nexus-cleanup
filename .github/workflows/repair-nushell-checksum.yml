@@ -81,8 +81,7 @@ jobs:
                   .head.ref == "renovate/nushell" and
                   .head.sha == $sha and
                   .head.repo.full_name == $repo and
-                  .base.ref == $base and
-                  .commits == 1
+                  .base.ref == $base
                 )
               ]'
           )
@@ -90,6 +89,25 @@ jobs:
             refuse "Refusing repair: expected one eligible open Renovate pull request."
           fi
           pr_number=$(printf '%s' "$pulls" | jq -r '.[0].number')
+
+          # The commit-associated pull request response is simplified and does not
+          # include the commit count. Recheck eligibility against the full PR
+          # representation so the one-commit invariant is actually enforced.
+          pr=$(gh api "repos/$REPOSITORY/pulls/$pr_number")
+          if ! printf '%s' "$pr" | jq -e \
+            --arg sha "$RUN_HEAD_SHA" \
+            --arg repo "$REPOSITORY" \
+            --arg base "$DEFAULT_BRANCH" '
+              .state == "open" and
+              .user.login == "renovate[bot]" and
+              .head.ref == "renovate/nushell" and
+              .head.sha == $sha and
+              .head.repo.full_name == $repo and
+              .base.ref == $base and
+              .commits == 1
+            ' >/dev/null; then
+            refuse "Refusing repair: pull request #$pr_number is no longer eligible."
+          fi
 
           files=$(
             gh api "repos/$REPOSITORY/pulls/$pr_number/files" --paginate \

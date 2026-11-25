@@ -26,7 +26,9 @@ run-suite "Nushell checksum repair workflow" [
         assert ($text | str contains '.user.login == "renovate[bot]"')
         assert ($text | str contains '.head.ref == "renovate/nushell"')
         assert ($text | str contains '.head.sha == $sha')
+        assert ($text | str contains 'pr=$(gh api "repos/$REPOSITORY/pulls/$pr_number")')
         assert ($text | str contains '.commits == 1')
+        assert ($text | str contains "pull request #$pr_number is no longer eligible")
         assert ($text | str contains 'select(.name == "nushell-checksum")')
         assert ($text | str contains '["failure"]')
     } }
