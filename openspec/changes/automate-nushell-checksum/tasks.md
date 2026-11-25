@@ -14,10 +14,10 @@
   `renovate/nushell` pull request, failed `nushell-checksum` job, author, exact head revision and
   changed-file allowlist; verify the workflow's trigger and eligibility guards with focused
   tests.
-- [x] 2.2 Run the repair script from a default-branch checkout while treating the pull-request
-  checkout as data, amend only the two checksum files, push with an exact-SHA
-  `--force-with-lease`, and dispatch `tests.yml`; verify staged-file, commit and concurrency
-  safeguards with focused tests.
+- [x] 2.2 Run the repair script from a default-branch checkout while treating a full-history
+  pull-request checkout as data, amend only the two checksum files without removing the
+  original parent, push with an exact-SHA `--force-with-lease`, and dispatch `tests.yml`; verify
+  staged-file, ancestry, commit and concurrency safeguards with focused tests.
 - [x] 2.3 Update `AGENTS.md` and the Nushell Renovate pull-request note to describe the automatic
   repair, its refusal behavior and the manual fallback; verify the rendered guidance names the
   preserved check and single-commit requirement.
