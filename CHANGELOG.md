@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.4.0](https://github.com/bond-os/nexus-cleanup/compare/v0.3.0...v0.4.0) (2026-11-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* a repository whose URL is set and whose only configuration is the unedited example now passes doing nothing, where it used to fail naming replace-me. Existing repositories keep their file until they replace it.
+
+### Features
+
+* add --check to init and upgrade ([7ed2bfb](https://github.com/bond-os/nexus-cleanup/commit/7ed2bfb3e47c46a9ea3f355bda0196d1db5d87a2))
+* add init --only to act on groups of files ([a0d0590](https://github.com/bond-os/nexus-cleanup/commit/a0d05906bad52ebff18405be662d64f0efea4498))
+* add init --skip-existing to keep existing files ([dd7bcfb](https://github.com/bond-os/nexus-cleanup/commit/dd7bcfbb900d25005dedbd33d47c8c56af112004))
+* ship the example configuration disabled ([418125a](https://github.com/bond-os/nexus-cleanup/commit/418125a8e18598ac3ea1fc30b3e83a248e589794))
+* warn when init finds files pinning another version ([fa1861a](https://github.com/bond-os/nexus-cleanup/commit/fa1861a883710a1348ff2ae68b508b2cc8b29800))
+
+
+### Bug Fixes
+
+* **ci:** preserve repaired commit ancestry ([455221e](https://github.com/bond-os/nexus-cleanup/commit/455221e059f953ba6605cfb0e16d731814ce7e60))
+* **ci:** validate full repair pull request ([be1abd0](https://github.com/bond-os/nexus-cleanup/commit/be1abd0cb4755e4eb65843d51b7cbef2a5d8e0dc))
+* **deps:** update ghcr.io/nushell/nushell docker tag to v0.117.0 ([7b8891c](https://github.com/bond-os/nexus-cleanup/commit/7b8891c0d14b373c2ca159d59791d32edf4b5fb5))
+* **deps:** update ghcr.io/nushell/nushell:0.116.1-alpine docker digest to 9e1440d ([a3a7bb6](https://github.com/bond-os/nexus-cleanup/commit/a3a7bb67ea34b8a27054ad7ec1b751a7a5394956))
+* refuse scaffold writes through symlinks ([0e015ed](https://github.com/bond-os/nexus-cleanup/commit/0e015ed26eecc94e53f3e302c7ac650fc5aa0df3))
+* refuse symlinked upgrade candidates ([d846ea8](https://github.com/bond-os/nexus-cleanup/commit/d846ea84841f4ff0fe15108d52286eb12f3e847d))
+
 ## [0.3.0](https://github.com/bond-os/nexus-cleanup/compare/v0.2.1...v0.3.0) (2026-11-03)
 
 
